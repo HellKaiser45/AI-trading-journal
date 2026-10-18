@@ -1,8 +1,14 @@
 digraph decision {
   rankdir=TB;
-  idea [label="idea"];
-  research [label="research"];
-  decide [label="trade?", shape=diamond];
+  // Every Jev answer is ONE node on ONE line with these attributes (finalize.py reads them):
+  //   gate=G1..G9   kind=choice|noul   answer=<OPTION or proposition_name>   p=<0..1>
+  // choice: answer = the selected option (UPPER_CASE), p = its probability.
+  // noul:   answer = the proposition name (lower_case), p = probability of yes.
+  // Example:  g1_a [gate=G1, kind=choice, answer=LONG, p=0.71];
+  // Other nodes (research findings, rejected alternatives) carry no gate attribute.
+  idea [label=idea];
+  research [label=research];
+  decide [label=trade, shape=diamond];
   idea -> research;
   research -> decide;
 }
