@@ -1,2 +1,2 @@
 #!/bin/sh
-python3 stats.py --check >/dev/null || { echo 'journal check failed: run python3 stats.py --check'; exit 1; }
+python3 scripts/stats.py --check >/dev/null || { echo 'journal check failed: run python3 scripts/stats.py --check'; exit 1; }

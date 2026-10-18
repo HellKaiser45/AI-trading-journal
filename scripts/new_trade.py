@@ -14,6 +14,7 @@ import shutil
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'trades'))
 SYMBOL_RE = re.compile(r'^[A-Z0-9]+$')
 
 
@@ -24,7 +25,7 @@ def die(msg, code=1):
 
 def main():
     ap = argparse.ArgumentParser(description='Create an IDEA trade folder from _template/.')
-    ap.add_argument('--root', default=HERE, help='journal root (default: script directory)')
+    ap.add_argument('--root', default=ROOT, help='journal root (default: trades/ next to scripts/)')
     ap.add_argument('symbol')
     args = ap.parse_args()
 

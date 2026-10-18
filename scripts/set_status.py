@@ -7,6 +7,7 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'trades'))
 STATUS_RE = re.compile(
     r"^(?:WIN\+\d+\.\d{2}%|LOSS-\d+\.\d{2}%|EXPIRED[+-]\d+\.\d{2}%|IDEA|REJECTED|PENDING|OPEN|EXPIRED)$"
 )
@@ -47,7 +48,7 @@ def entry_type(path):
 
 def main():
     ap = argparse.ArgumentParser(description="Rename a trade folder to a new status and log it.")
-    ap.add_argument("--root", default=HERE, help="journal root (default: script directory)")
+    ap.add_argument("--root", default=ROOT, help="journal root (default: trades/ next to scripts/)")
     ap.add_argument("folder", help="folder name (or path) of the trade")
     ap.add_argument("new_status", help="e.g. OPEN, WIN+5.32%%, LOSS-2.10%%, EXPIRED+0.00%%")
     ap.add_argument("--note", default=None, help="short note appended to the log line")

@@ -16,32 +16,32 @@ All scripts are stdlib-only Python (>= 3.8) and run from the repository root.
 
 ```sh
 # 1. Create an IDEA folder (no side or entry yet)
-python3 new_trade.py BTCUSDT
+python3 scripts/new_trade.py BTCUSDT
 
 # 2. Research and Jev gates (every Jev answer is a node in decision_tree.dot), then exactly one of:
-python3 finalize.py IDEA_2026-10-19T0900Z_BTCUSDT --side LONG --type LIMIT --price 60000 --tp 62000 --sl 58500 --expire-at 2026-10-20T21:00:00Z
-python3 finalize.py IDEA_2026-10-19T0900Z_BTCUSDT --reject 'setup_holds 0.54'
+python3 scripts/finalize.py IDEA_2026-10-19T0900Z_BTCUSDT --side LONG --type LIMIT --price 60000 --tp 62000 --sl 58500 --expire-at 2026-10-20T21:00:00Z
+python3 scripts/finalize.py IDEA_2026-10-19T0900Z_BTCUSDT --reject 'setup_holds 0.54'
 
 # 3. Settle PENDING/OPEN folders whose expire_at has passed
-python3 resolve_expired.py --list
+python3 scripts/resolve_expired.py --list
 #    save candles as <folder>/outcome_candles.csv (time,open,high,low,close), then:
-python3 resolve_expired.py PENDING_2026-10-19T0900Z_BTCUSDT
+python3 scripts/resolve_expired.py PENDING_2026-10-19T0900Z_BTCUSDT
 
 # 4. Manual transitions still work
-python3 set_status.py PENDING_2026-10-19T0900Z_BTCUSDT OPEN --note 'limit filled'
+python3 scripts/set_status.py PENDING_2026-10-19T0900Z_BTCUSDT OPEN --note 'limit filled'
 
 # 5. Summarise, and check the journal is consistent
-python3 stats.py
-python3 stats.py --check
+python3 scripts/stats.py
+python3 scripts/stats.py --check
 ```
 
-- `new_trade.py [--root ROOT] SYMBOL`
-- `finalize.py FOLDER (--reject REASON | --side S --type T [--price P] --tp X --sl Y --expire-at T)`
-- `resolve_expired.py [--root ROOT] (--list | FOLDER [--now T] [--dry-run])`
-- `set_status.py [--root ROOT] FOLDER NEW_STATUS [--note TEXT] [--force]`
-- `stats.py [--check] [ROOT]`
+- `scripts/new_trade.py [--root ROOT] SYMBOL`
+- `scripts/finalize.py FOLDER (--reject REASON | --side S --type T [--price P] --tp X --sl Y --expire-at T)`
+- `scripts/resolve_expired.py [--root ROOT] (--list | FOLDER [--now T] [--dry-run])`
+- `scripts/set_status.py [--root ROOT] FOLDER NEW_STATUS [--note TEXT] [--force]`
+- `scripts/stats.py [--check] [ROOT]`
 
-`ROOT` defaults to the directory containing the script.
+`ROOT` defaults to `trades/`, next to `scripts/`.
 
 ## Naming grammar
 
@@ -141,7 +141,7 @@ Field rules:
 
 ## Jev gates
 
-Before finalize.py will act, the run passes the Jev probability gates. Every Jev answer is one node in `decision_tree.dot` (format in `_template/decision_tree.dot`):
+Before finalize.py will act, the run passes the Jev probability gates. Every Jev answer is one node in `decision_tree.dot` (format in `trades/_template/decision_tree.dot`):
 
 - gates G1 to G9
 - at least 2 Jev nodes per gate

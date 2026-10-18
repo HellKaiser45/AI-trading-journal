@@ -18,6 +18,7 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'trades'))
 sys.path.insert(0, HERE)
 from set_status import FOLDER_RE  # noqa: E402
 from stats import TomlError, read_trade_toml, validate_trade  # noqa: E402
@@ -174,7 +175,7 @@ def write_review(path, final, res, candles, step, info):
 
 def main():
     ap = argparse.ArgumentParser(description='Settle expired PENDING/OPEN folders.')
-    ap.add_argument('--root', default=HERE)
+    ap.add_argument('--root', default=ROOT)
     ap.add_argument('folder', nargs='?')
     ap.add_argument('--list', action='store_true')
     ap.add_argument('--now')

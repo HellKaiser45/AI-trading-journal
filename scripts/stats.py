@@ -6,6 +6,7 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'trades'))
 FOLDER_RE = re.compile(
     r"^(?P<status>WIN\+\d+\.\d{2}%|LOSS-\d+\.\d{2}%|EXPIRED[+-]\d+\.\d{2}%|IDEA|REJECTED|PENDING|OPEN|EXPIRED)"
     r"_(?P<dt>\d{4}-\d{2}-\d{2}T\d{4}Z)_(?P<symbol>[A-Z0-9]+)(?:-\d+)?$"
@@ -121,7 +122,7 @@ def fmt_pct(v):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Summarise trade folders in the journal.")
-    ap.add_argument("root", nargs="?", default=HERE, help="journal root (default: script directory)")
+    ap.add_argument("root", nargs="?", default=ROOT, help="journal root (default: trades/ next to scripts/)")
     ap.add_argument("--check", action="store_true",
                     help="exit 1 if an IDEA folder remains, or a non-IDEA folder has no log.md")
     args = ap.parse_args(argv)
