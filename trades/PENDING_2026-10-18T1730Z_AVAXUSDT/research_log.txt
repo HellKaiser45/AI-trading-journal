@@ -1,0 +1,16 @@
+THESIS
+AVAXUSDT 1H downtrend lower-highs intact since 11.66 double-top Oct7. Path of least resistance is continued distribution toward 9.34 sweep. Setup: SHORT LIMIT fade into first supply 9.90-9.95 (today high 9.91 + dense 10.09-10.15 cluster) with invalidation above 10.28 (above 10.15 reclaim, below 10.52 next shelf). Target 9.35 (just above Oct15 swing low 9.337 verified Binance 9.337 daily low, shelf breakdown). RR 1.82 compensates weekend thin volume. Expiry Oct20 21Z avoids Oct21 unlock 3.58M AVAX. Invalidation: 4H close >10.28 or daily reclaim >10.15, or RSI 1H >55 with volume >1.2x avg.
+
+DATA CHECKED
+- news: Helicon ACP-285 Sep22 live (14d→48h staking), RWA $545M Treasuries 4x YoY (Goldman FTIXX Lynq, DIFC Oct14 on-chain), VanEck VAVX Jan26/Bitwise BAVA Apr26/Grayscale GAVA Mar26 ETF total +$37.4M AUM $56.3M Oct8 +$2.515M inflow, Binance Bitget hack Sep24 FUD à vérifier — no token-specific shock driving -20.6% drawdown from 12.008 Sep29 high
+- prices: Binance spot 9.52-9.54 reconciles chart 9.541, ticker 24h H9.91 L9.49 vol $10.8M today vs $48M avg (weekend), multi-TF RSI 47.0 1D/34.7 4H/30.8 1H ATR 0.7145 1D (7.5%) 0.218 4H 0.091 1H, ann vol 109%/98%/47%, 9 straight closes <10.25, 30d +16.1% 7d -13.2%
+- other assets: BTC <$80k flash macro CPI 3.7% hot, BTC dom 59.4%, ETH -17.43% crash context, AVAX/BTC correlation, funding -0.0077% Binance clamp -2bp…+1bp OI 9.9M AVAX $94M Binance / $507M all (-26% 30d) 62% long accounts below 67.8% avg, Fear&Greed 53 neutral (down from 74 Greed, was 78 Sep22 Extremegreed), Google Trends AVAX 0/100 apathy vs BTC 34 avg
+- forums: Reddit AVAX <0.7% chatter absent top5, social bearish titles 10 YouTube crash/$4/bottom clickbait 2 bull voices transcripts blocked 429, TVL $643M +36% vs +49% price lag $432K/mo revenue $4.4B mcap, dev FUD Solana795/Sui202/AVAX168 à vérifier
+- tokenomics: 720M cap docs.avax.network + support FAQ 2025-10-15 360M genesis, circulating ~443.57M 61.6%, inflation P-chain staking only burns offset 5.5% TTM 0.8% last month, staking 2000 AVAX validator 25 delegator 10.01% 48h→12% 1yr no slashing, ACP-285 10%→7.5% min consumption proposed not activated, no cliff before expiry — next unlock Oct21 3.58M 0.5% ~$34M 21st monthly cadence, Team fully vested Foundation linear to Sep2030 Helicon details verified build.avax.network
+
+LINKS
+- research-logs/20261018T173256Z_avax-tokenomics/REPORT_20261018T180000Z.md — supply/ACP-285/unlocks raw s-001…s-008
+- research-logs/20261018T173027Z_avax-hype-momentum/REPORT_20261018T174001Z.md — Trends0/ETF+$37.4M/funding-0.0077% /F&G53/RSI42.8-34.8-31.1/SR 9.49-9.54-9.34 ↔9.90-10.15-10.58
+- research-logs/20261018T173100Z_avax-multi-tf/REPORT_20261018T173500Z.md — Binance 1D/4H/1H JSON + ticker24h + stats.py RSI/ATR levels 9.90-9.91/10.09-10.15/10.52-10.61/11.65-11.73/12.008 vs 9.49-9.56/9.34 floor
+- research-logs/20261018T173124Z_avax-buzz/REPORT_20261018T174500Z.md — RWA headlines vs 3.7% CPI BTC <$80k transcripts blocked GDELT 429
+- Binance API spot 24h ticker 2026-10-18T17:30Z H9.91 L9.489 current 9.54, 1D klines high 12.008 Sep29 low 9.337 Oct15 high 11.65 Oct7 reconciles chart

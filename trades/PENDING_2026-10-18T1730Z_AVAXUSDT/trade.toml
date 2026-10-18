@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "AVAXUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "LIMIT"
+price    = 9.95
+
+[exit]
+tp       = 9.35
+sl       = 10.28
+
+[schedule]
+place_at  = 2026-10-18T17:30:00Z
+expire_at = 2026-10-20T21:00:00Z
