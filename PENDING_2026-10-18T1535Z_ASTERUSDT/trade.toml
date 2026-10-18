@@ -1,0 +1,15 @@
+# trade.toml — one per trade folder — JEV-validated LONG pullback
+symbol   = "ASTERUSDT"
+side     = "LONG"                # LONG | SHORT
+
+[entry]
+type     = "LIMIT"                # MARKET | LIMIT
+price    = 0.691                # LIMIT fills when candle low <= price (JEV long_pullback 0.99 conf)
+
+[exit]
+tp       = 0.721               # +4.34% from entry — upper edge 0.716-0.721 cluster 4x rejected (JEV TP 1.00 conf)
+sl       = 0.6735               # -2.53% from entry — 0.0014 below triple floor 0.6721 with ATR buffer, RR 1.71
+
+[schedule]
+place_at  = 2026-10-18T15:47:00Z
+expire_at = 2026-10-20T21:00:00Z

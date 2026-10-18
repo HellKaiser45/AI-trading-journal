@@ -1,0 +1,16 @@
+RAW EXCERPT — s-015
+URL: https://docs.asterdex.com/aster-chain/staking
+Retrieved: 2026-10-18T15:38:38Z (page "Last updated 3 months ago")
+
+"Dual Reward Structure ... Weekly Reward Pool:
+- Base APY | Validator transaction share and your delegation size | 150,000 $ASTER
+- Loyalty Rewards | Lock duration and trading activity | 300,000 $ASTER + Fee Buyback rewards (variable)
+
+The current maximum lock duration is 208 weeks (approximately 4 years).
+Epoch: reward settlement cycle (currently weekly).
+
+New as of June 17, 2026: Loyalty Rewards now include a variable component on top of the 300,000 $ASTER base. Each epoch, all $ASTER bought back from platform fees is added to the Loyalty Rewards pool and distributed to veASTER holders by lock weight.
+
+99% of daily platform fees flow into the buyback wallet (0xa0edBaBcb48034e368de286b49F9603C7AfA1b60); buybacks execute via TWAP across each day and settle on-chain. For every $ASTER bought back, an equal amount is burned from reserve — burns execute bi-weekly and continue until total supply reaches 3,000,000,000.
+
+Each permissionless Spot listing incurs a 50,000 USDT fee, which is also used to buy back $ASTER as additional staking rewards (listing fee wallet 0x39C473f4420e4ae9Ab3fe9e7ceDFc08F9684bB1a).

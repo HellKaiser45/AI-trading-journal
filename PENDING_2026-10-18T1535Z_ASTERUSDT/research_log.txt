@@ -1,0 +1,25 @@
+THESIS
+LONG ASTERUSDT pullback from 0.696 horizontal support (0.691-0.694 shelf) toward 0.721 resistance cluster — pure neutrality: path of least resistance is mean-reversion bounce inside descending range 0.672-0.721, not breakout.
+Entry 0.691 = inside support shelf, 0.7% below current 0.6961, fill when low <= limit (repository semantics). TP 0.721 = upper edge of 4x-rejected 0.716-0.721 zone (Oct10/11/16/18), +4.34% from entry. SL 0.6735 = 0.0014 below triple floor 0.6721 (Oct13 low) with ATR-buffer, -2.53% risk, RR 1.71. Expiry 2026-10-20T21:00Z avoids Oct28 unlock.
+Expect: price holds 0.691-0.694 then grinds to 0.716-0.721 before expiry; invalidation = daily close below 0.672-0.680 triple floor or volume spike breakdown on news; also TP invalid if buyback engine stalls further and market re-prices FDV gap.
+
+DATA CHECKED
+- news: StandX rival wind-down 15 Oct (reduce-only by 20 Oct), Aster buyback Stage-6 ~1.4M USDT (~100k/day since 15 Oct) via TWAP, 99% fees to stakers + 1:1 burn, latest biweekly 3.11M bought+burned (Sep21-Oct05) down from 4.17M; Hyperliquid 7x 30d volume ($204.8B vs $56-60B) share 10% vs 70% at TGE; DefiLlama delisted Aster perp volume Oct05 2025 (mirroring Binance perps allegation)
+- prices: Binance spot 0.6939-0.6949 live 18 Oct 15:36-15:43Z, 30d -9.2% range 0.6620-0.7920, daily σ 2.38% (~45% ann), ATR14 0.0331 (4.76%), 4h σ 1.24% (~58% ann), typical 1h 0.1-1.5% outliers ±2-4%; chart levels verified: 0.674 lows = 0.6721/0.6728/0.6795 triple + 0.6693 Oct08, 0.749 peak = 0.7493 (1h) /0.7560 daily Oct06, current 0.696 = 0.6934-0.6961; supports 0.691-0.694, 0.672-0.680, 0.6693, 0.6620; resistances 0.716-0.721 (4x), 0.746-0.756, 0.7815, 0.7920
+- other assets: BNB correlation (ASTER on BNB Chain), Hyperliquid HYPE as comp - Aster lost perp share, TVL $728M (mcap/TVL 2.59) vs $793M-$1.46B disputed; BTC/ETH not directly checked but no macro shock flagged
+- forums: YouTube TA last 2w: 8dx1iGR2O_I (support 0.68 breakout 0.82->0.90-1.00, worst 0.644), WWteUfx-39M (range 0.60->0.70 mid->0.80), 9wYdv8PtTTU (dilution skeptic, dated 2025 levels discarded); X/Telegram policy-blocked, Reddit /biz archive empty, StandX migration whisper unconfirmed; Hyperliquid-comparison FUD persistent
+- tokenomics: 8B max, 7.793B total after 207.37M burned (2.6%), 2.714B circulating (33.9%), ~5.08B locked ($3.5B overhang); allocations 53.5% airdrops, 30% ecosystem (vesting Oct25-Jan26 then staking ~450k/wk ~23M/yr, -97% cut), 7% treasury locked, 5% team locked cliff extended to 2027-09-17 (10M/mo x40), 4.5% liquidity; staking emissions ~0.3%/yr trivial, fee-funded deflation 99% buyback + burn targeting 3B (real 2.6% in 13mo); next unlock 2.25M Oct30 ($1.59M) after expiry, Oct17 44-57M ($32M) absorbed without dump; APY halved 6.41->4.43% in 2w
+
+LINKS
+- Chart source: 261018_17h29m53s_screenshot.png — 1H ASTERUSDT 0.6961 (-0.27%) 17:29:53 UTC+2
+- Binance klines: https://api.binance.com/api/v3/klines?symbol=ASTERUSDT&interval=1d&limit=31 (fetched 2026-10-18)
+- CoinGecko aster-2: https://api.coingecko.com/api/v3/coins/aster-2 (mcap $1.885B rank50 FDV $5.413B ATH $2.41 2025-09-24 ATL $0.0997 2025-09-17)
+- TradingView: https://www.tradingview.com/symbols/ASTERUSDT/ (ATH $3.00 2025-10-06 disputed)
+- DefiLlama TVL: https://api.llama.fi/tvl/aster (728.3M 2026-10-18)
+- docs.asterdex.com tokenomics: https://docs.asterdex.com/usdaster-token/tokenomics (allocations, cliffs, buyback/burn)
+- docs.asterdex.com staking: https://docs.asterdex.com/aster-chain/staking (emission params)
+- Tokenomist: https://tokenomist.ai/aster-2 (circ 2,713,596,421 FDV $5.57B) + deep dive 2025-12-23
+- Bitrue burn report 2026-10-06, Asterpedia 198% fee model, Messari profile 2026-07-27
+- YouTube: https://www.youtube.com/watch?v=8dx1iGR2O_I (break $0.86), https://www.youtube.com/watch?v=WWteUfx-39M (bounce from support), https://www.youtube.com/watch?v=9wYdv8PtTTU (too late to buy)
+- Airdrop vesting: cryptoticker.io/aster-vesting-claim-window (Stage6 Oct28-Nov28, after expiry)
+- Research artifacts: research-logs/20261018T153547Z_aster-buzz/REPORT_20261018T155230Z.md, research-logs/20261018T153549Z_aster-tokenomics/REPORT_20261018T154031Z.md, research-logs/20261018T153601Z_aster-multi-tf/REPORT_20261018T154349Z.md, research-logs/20261018T153604Z_aster-hype-momentum/REPORT_20261018T154230Z.md

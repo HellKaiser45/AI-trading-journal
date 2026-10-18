@@ -1,0 +1,154 @@
+{
+  "_meta": {
+    "schema": 2,
+    "seeded": "2026-10-07T00:00:00Z",
+    "updated": "2026-10-18T15:43:49Z by run 20261018T153601Z_aster-multi-tf (crypto data hosts appended at end)",
+    "read_only_note": "Working copy of assets/source-status.seed.json. Update only this copy.",
+    "statuses": ["open", "partial", "blocked", "login_wall", "captcha", "paywall", "soft_block", "rate_limited", "unreadable_format", "unknown"],
+    "policy_values": ["allow", "deny", "probe"]
+  },
+  "api.binance.com/api/v3": {
+    "status": "open",
+    "policy": "allow",
+    "checked": "2026-10-18T15:42:56Z",
+    "checked_precision": "second",
+    "ttl_days": 30,
+    "method": "probed from the agent's network (ccxt MCP + REST via ddg-fetch)",
+    "evidence": "s-002, s-022, s-024, s-025",
+    "route": "https://api.binance.com/api/v3/klines?symbol=ASTERUSDT&interval=<tf>&limit=<n>",
+    "notes": "Public klines JSON, no auth. ASTER/USDT spot live. ccxt MCP works for quotes but its timeframe param did not transmit in this harness (defaulted 1h x6); REST via ddg-fetch is reliable. Responses cap ~500 candles (oldest cut) / ~20KB via fetch."
+  },
+  "api.coingecko.com/api/v3": {
+    "status": "open",
+    "policy": "allow",
+    "checked": "2026-10-18T15:42:56Z",
+    "checked_precision": "second",
+    "ttl_days": 30,
+    "method": "probed from the agent's network (ddg-fetch)",
+    "evidence": "s-006, s-013, s-018, s-023",
+    "route": "https://api.coingecko.com/api/v3/coins/aster-2 ; /coins/aster-2/ohlc?vs_currency=usd&days=30 ; /coins/aster-2/market_chart?vs_currency=usd&days=30&interval=daily",
+    "notes": "Aster token id is aster-2 (rank 50); id 'aster' 404s. /ohlc 30d auto-granulates to 4h. Aggregate runs ~+2% vs Binance spot and smooths wicks (09-23 flash low 0.662 absent)."
+  },
+  "www.tradingview.com/symbols": {
+    "status": "open",
+    "policy": "allow",
+    "checked": "2026-10-18T15:42:56Z",
+    "checked_precision": "second",
+    "ttl_days": 30,
+    "method": "probed from the agent's network (ddg-fetch)",
+    "evidence": "s-007",
+    "route": "https://www.tradingview.com/symbols/ASTERUSDT/",
+    "notes": "Symbol page text readable without login. Stats cache-mixed (widget vs FAQ disagree, e.g. 24h +0.10% vs +1.37%). Community ideas embedded (treat as sentiment, not verified levels)."
+  },
+  "finance.yahoo.com (crypto, ASTER)": {
+    "status": "partial",
+    "policy": "allow",
+    "checked": "2026-10-18T15:42:56Z",
+    "checked_precision": "second",
+    "ttl_days": 30,
+    "method": "probed from the agent's network (yfinance MCP)",
+    "evidence": "s-001, s-004, s-005, s-015",
+    "route": "n/a for ASTER token",
+    "notes": "Yahoo reachable, but ASTER token not carried: ASTER-USD is a stub (quoteType NONE, tradeable false, empty 1mo history); only related listing is USDF35437-USD 'Aster USDF' stablecoin."
+  },
+  "_seed_entries_below": "source-status.seed.json content retained below unchanged",
+  "a.4cdn.org": {
+    "status": "open",
+    "checked": "2026-10-07T00:00:00Z",
+    "ttl_days": 30,
+    "method": "documentation/report review, not probed from the agent's network",
+    "evidence": "references/source-accessibility.md",
+    "route": "https://a.4cdn.org/<board>/catalog.json",
+    "notes": "No search on live boards: scan catalog sub/com. ~1 req/s per host; use If-Modified-Since.",
+    "checked_precision": "day",
+    "policy": "allow"
+  },
+  "hn.algolia.com/api": {
+    "status": "open",
+    "checked": "2026-10-07T00:00:00Z",
+    "ttl_days": 30,
+    "method": "documentation/report review, not probed from the agent's network",
+    "evidence": "references/source-accessibility.md",
+    "route": "https://hn.algolia.com/api/v1/search?query=X&tags=story",
+    "notes": "10,000 req/h/IP; 1,000-hit cap per query; 100 hits/page.",
+    "checked_precision": "day",
+    "policy": "allow"
+  },
+  "hacker-news.firebaseio.com": {
+    "status": "open",
+    "checked": "2026-10-07T00:00:00Z",
+    "ttl_days": 30,
+    "method": "documentation/report review, not probed from the agent's network",
+    "evidence": "references/source-accessibility.md",
+    "route": "https://hacker-news.firebaseio.com/v0/topstories.json",
+    "notes": "",
+    "checked_precision": "day",
+    "policy": "allow"
+  },
+  "lobste.rs (json feeds)": {
+    "status": "open",
+    "checked": "2026-10-07T00:00:00Z",
+    "ttl_days": 30,
+    "method": "documentation/report review, not probed from the agent's network",
+    "evidence": "references/source-accessibility.md",
+    "route": "https://lobste.rs/hottest.json",
+    "notes": "Search page and per-story json not verified.",
+    "checked_precision": "day",
+    "policy": "allow"
+  },
+  "reddit.com (direct: www, api, .json, search.json)": {
+    "status": "blocked",
+    "checked": "2026-10-07T00:00:00Z",
+    "ttl_days": 30,
+    "method": "documentation/report review, not probed from the agent's network",
+    "evidence": "references/source-accessibility.md",
+    "route": "",
+    "notes": "Unauthenticated .json deprecated 2026-05-28; datacenter IPs blocked. Use Arctic Shift/PullPush.",
+    "checked_precision": "day",
+    "policy": "deny"
+  },
+  "reuters.com": {
+    "status": "blocked",
+    "checked": "2026-10-07T00:00:00Z",
+    "ttl_days": 30,
+    "method": "documentation/report review, not probed from the agent's network",
+    "evidence": "references/source-accessibility.md",
+    "route": "",
+    "notes": "Reported default AI-bot blocking since May 2026. Probe once; headlines as leads only.",
+    "checked_precision": "day",
+    "policy": "deny"
+  },
+  "paywalled outlets (bloomberg, wsj, ft, economist, nytimes, washingtonpost, barrons, theinformation, time, theatlantic, newyorker, wired, businessinsider, hbr, thetimes, nikkei)": {
+    "status": "paywall",
+    "policy": "deny",
+    "checked": "2026-10-07T00:00:00Z",
+    "checked_precision": "day",
+    "ttl_days": 30,
+    "method": "documentation/report review",
+    "evidence": "references/source-accessibility.md",
+    "route": "",
+    "notes": "Consolidated seed entries; see seed for per-domain details."
+  },
+  "image-first / login-walled social (instagram, pinterest, tiktok, flickr, snapchat, imgur, 9gag, deviantart, giphy, tumblr, twitch, facebook, x.com, twitter, linkedin, threads, quora, discord, slack, whatsapp, telegram private)": {
+    "status": "login_wall",
+    "policy": "deny",
+    "checked": "2026-10-07T00:00:00Z",
+    "checked_precision": "day",
+    "ttl_days": 30,
+    "method": "documentation/report review",
+    "evidence": "references/venue-policy.md section 4",
+    "route": "",
+    "notes": "Policy ban: agent cannot see image content or is login-walled."
+  },
+  "any .pdf / .docx / .xlsx / .pptx": {
+    "status": "unreadable_format",
+    "checked": "2026-10-07T00:00:00Z",
+    "ttl_days": 30,
+    "method": "documentation/report review",
+    "evidence": "references/source-accessibility.md",
+    "route": "",
+    "notes": "Agent cannot read these. Find an HTML equivalent.",
+    "checked_precision": "day",
+    "policy": "allow"
+  }
+}

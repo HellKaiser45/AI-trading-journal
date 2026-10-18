@@ -1,0 +1,46 @@
+digraph decision {
+  rankdir=TB;
+  bgcolor="#0a0a0c";
+  node [shape=box, style=rounded, fontname="Helvetica", fontsize=10, fillcolor="#1a1a1f", color="#3a3a45", fontcolor="#d0d0d8"];
+  edge [color="#5a5a6a", fontcolor="#8a8a9a", fontsize=9, fontname="Helvetica"];
+
+  idea [label="IDEA 2026-10-18T1535Z ASTERUSDT\n1H chart 0.6961 (-0.27%)\nPeak 0.7496 day7, flash lows 0.674/0.676,\nSupport 0.696 dotted line", shape=ellipse, fillcolor="#1e1e2e", color="#6c5ce7", style="rounded,filled"];
+  research_init [label="JEV Decide #1: Research Strategy\nparallel_all vs sequential vs minimal\n→ parallel_all 1.00 confidence\nRequirement: cover all domains", fillcolor="#222a3a", color="#3b82f6"];
+
+  subgraph cluster_research {
+    label="Parallel Deep Searches (4 agents)";
+    style=filled; color="#2a2a35"; fillcolor="#111119"; fontcolor="#9aa0a6";
+    hype [label="Agent: hype/momentum\nCoinGecko $0.6933 -71% ATH\nBuyback 99% fees stall\nUnlock Oct17 absorbed\nRSI ~50 neutral", fillcolor="#1e2a1e"];
+    tokenomics [label="Agent: tokenomics\n8B max, 2.714B circ 33.9%\n5.08B locked FDV gap\nCliff 2027-09-17\n97% emission cut", fillcolor="#2a1e1e"];
+    mtf [label="Agent: multi-TF price\nBinance 0.6939-0.6949\n30d -9.2% ATR 0.0331\nSupports 0.691/0.672\nResist 0.721/0.749", fillcolor="#1e241e"];
+    buzz [label="Agent: buzz/YouTube\n0.68 support held\nBreak 0.82→0.90-1.00\nStage6 airdrop Oct28\nStandX wind-down", fillcolor="#1e1e2a"];
+  }
+
+  decide_side [label="JEV Decide #2: Side Selection\nlong_pullback_0.691 vs short_fade vs market vs no_trade\n→ LONG LIMIT 0.691 0.99 confidence\nPure neutrality: support cluster RR 1.59", shape=diamond, fillcolor="#2a2410", color="#f59e0b", fontcolor="#ffec99"];
+  noul [label="JEV Noul (4 propositions)\nBounce 0.691 shelf P=0.54 uncertain\nBreak 0.721→0.746 P=0.74\nNo unlock before expiry P=0.77\nThinning vol protects P=0.52", shape=hexagon, fillcolor="#1a2530", color="#0ea5e9"];
+  decide_exits [label="JEV Decide #3: TP/SL Refinement\nTP0.721 SL0.6735 vs 0.718/0.682 vs 0.749/0.668\n→ TP0.721 SL0.6735 1.00 confidence\nRR 1.71 TP +4.34% SL -2.53% ATR-buffer", shape=diamond, fillcolor="#2a2410", color="#f59e0b", fontcolor="#ffec99"];
+  geometry [label="Chart Geometry Mapping\nTriple floor 0.672-0.680 (Oct12/13/15)\nFlash wicks 0.674 & 0.676 V-recoveries\nBreakdown 0.710→0.696 = mean-reversion setup\nLimit semantics: LONG fill low<=0.691", fillcolor="#111111", color="#6c5ce7"];
+  craft [label="Craft Trade\nSymbol ASTERUSDT LONG LIMIT 0.691\nTP 0.721 SL 0.6735\nplace_at 2026-10-18T15:47Z\nexpire_at 2026-10-20T21:00Z", shape=parallelogram, fillcolor="#0f2815", color="#22c55e", fontcolor="#bbf7d0"];
+  jev_gate [label="JEV Gate Audit\nClaims: levels respect S/R & ATR\nEvidence: Binance klines, CoinGecko,\n tokenomics docs, YouTube transcripts\nStatus: auto (pending verification)", shape=doubleoctagon, fillcolor="#1a1a2e", color="#a78bfa"];
+  terminal [label="IDEA → PENDING (place limit)\nPending order at support shelf\nFill model: all-or-nothing touch\nPessimistic: TP&SL candle = SL", shape=ellipse, fillcolor="#1e1e2e", color="#22c55e"];
+
+  idea -> research_init [label="pure neutrality directive"];
+  research_init -> hype [label="parallel"];
+  research_init -> tokenomics [label="parallel"];
+  research_init -> mtf [label="parallel"];
+  research_init -> buzz [label="parallel"];
+  hype -> decide_side;
+  tokenomics -> decide_side;
+  mtf -> decide_side;
+  buzz -> decide_side;
+  decide_side -> noul [label="validate"];
+  noul -> decide_exits [label="enrich RR"];
+  decide_exits -> geometry [label="map"];
+  geometry -> craft [label="encode TOML"];
+  craft -> jev_gate [label="verify claims"];
+  jev_gate -> terminal [label="JEV approved"];
+
+  // alt paths dashed
+  decide_side -> craft [style=dashed, label="rejected: short_fade\ncontradicted req 0,1", color="#ef4444"];
+  decide_exits -> craft [style=dashed, label="rejected TP0.718/0.749\nsl inside noise / beyond range", color="#ef4444"];
+}
