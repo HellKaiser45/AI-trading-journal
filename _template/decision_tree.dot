@@ -1,0 +1,8 @@
+digraph decision {
+  rankdir=TB;
+  idea [label="idea"];
+  research [label="research"];
+  decide [label="trade?", shape=diamond];
+  idea -> research;
+  research -> decide;
+}

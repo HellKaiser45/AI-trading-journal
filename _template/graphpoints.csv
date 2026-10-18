@@ -1,0 +1,3 @@
+# candles.csv — reference candle window (UTC)
+# fetched_at: __FETCHED_AT__
+timestamp,close price

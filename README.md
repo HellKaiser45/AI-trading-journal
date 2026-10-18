@@ -1,0 +1,162 @@
+# trading-journal
+
+A personal, git-tracked journal of futures trade ideas. Each idea is one folder. The journal is manual: `trade.toml` documents intent, nothing is ever submitted to an exchange.
+
+Backtest-only semantics: every trade risks one identical stake; the amount is deliberately never recorded — that is why everything is a percentage. No leverage, no fees, funding, slippage or partial fills.
+
+The repository is the single source of truth:
+
+- folder names encode the **current status**
+- `trade.toml` encodes **intent**
+- `candles.csv`, `chart.svg`, logs and reviews encode **evidence**
+
+## Quick start
+
+All scripts are stdlib-only Python (>= 3.8) and run from the repository root.
+
+```sh
+# 1. Create an IDEA folder with a LIMIT long (writes trade.toml from _template/)
+python3 new_trade.py BTCUSDT LONG LIMIT --price 60000
+
+# 2. Place the limit order (renames the folder, appends log.md)
+python3 set_status.py IDEA_2026-10-19T0900Z_BTCUSDT PENDING --note "order placed"
+
+# 3. It fills, then resolves at the stop (renames again, appends log.md)
+python3 set_status.py PENDING_2026-10-19T0900Z_BTCUSDT OPEN --note "limit filled"
+python3 set_status.py OPEN_2026-10-19T0900Z_BTCUSDT LOSS-2.10% --note "sl hit"
+
+# 4. Summarise everything
+python3 stats.py
+```
+
+- `new_trade.py [--root ROOT] SYMBOL SIDE (MARKET|LIMIT) [--price P]`
+- `set_status.py [--root ROOT] FOLDER NEW_STATUS [--note TEXT] [--force]`
+- `stats.py [ROOT]`
+
+`ROOT` defaults to the directory containing the script.
+
+## Naming grammar
+
+Pattern: `STATUS_YYYY-MM-DDTHHMMZ_SYMBOL`
+
+Examples:
+
+- `IDEA_2026-10-19T0900Z_BTCUSDT`
+- `PENDING_2026-10-19T0900Z_BTCUSDT`
+- `WIN+5.32%_2026-10-19T0900Z_BTCUSDT`
+- `EXPIRED-1.20%_2026-10-19T0900Z_BTCUSDT`
+
+Rules:
+
+- status is uppercase
+- date-time is UTC, and is the **first evaluation moment**; it never changes across renames
+- no colons, brackets or spaces in names
+- `%` values always have two decimals and an explicit sign for `WIN`, `LOSS` and `EXPIRED±` statuses
+- if a rename would collide with an existing folder, append `-2`, `-3`, ...
+
+## Statuses & state machine
+
+Exact status tokens:
+
+| Status | Meaning |
+|---|---|
+| `IDEA` | researching, no order decided yet |
+| `REJECTED` | after research, decided NOT to trade (reason in `log.md`); no `trade.toml` |
+| `PENDING` | order placed, not filled (LIMIT entries only) |
+| `OPEN` | position live (MARKET entries go straight here) |
+| `WIN+X.XX%` | TP hit |
+| `LOSS-X.XX%` | SL hit |
+| `EXPIRED` | pending order never filled by `expire_at` (never carries a %) |
+| `EXPIRED+X.XX%` / `EXPIRED-X.XX%` | position still open at `expire_at`, resolved at the expiry price; `+0.00%` at exact breakeven (never bare `EXPIRED` for a filled position) |
+
+Transitions:
+
+```
+IDEA    -> REJECTED
+IDEA    -> PENDING -> EXPIRED
+PENDING -> OPEN    -> WIN+x% | LOSS-x% | EXPIRED±x%
+IDEA    -> OPEN            (MARKET entries fill at placement)
+```
+
+Terminal statuses (`WIN*`, `LOSS*`, `EXPIRED*`, `REJECTED`) freeze the folder: no edits to plan files. Post-trade notes go in `review.md`.
+
+`set_status.py` enforces this lightly: an out-of-machine transition prints a warning on stderr and is still applied, unless `--force` is given, which silences the warning.
+
+## Folder contents
+
+| File | Purpose |
+|---|---|
+| `trade.toml` | intent; added when the order is decided; absent while `IDEA`; never present in `REJECTED` |
+| `candles.csv` | reference candle window |
+| `chart.svg` | chart snapshot |
+| `research_log.txt` | thesis, data checked (news / prices / other assets / forums / tokenomics), links |
+| `log.md` | append-only state changes |
+| `decision_tree.dot` | thought process (Graphviz) |
+| `review.md` | written when the trade reaches a terminal status |
+
+`log.md` line format:
+
+```
+2026-10-20T14:32Z OPEN → LOSS-2.10% — sl hit
+```
+
+A follow-up idea about an existing trade is a **new folder**. Link it by naming the target folder on the first line of the new folder's `log.md`.
+
+## trade.toml schema
+
+```toml
+# trade.toml — one per trade folder
+symbol   = "BTCUSDT"
+side     = "LONG"                # LONG | SHORT
+
+[entry]
+type     = "LIMIT"               # MARKET | LIMIT
+price    = 60000.0               # LIMIT only; MARKET fills at the CSV's last close
+
+[exit]
+tp       = 62000.0               # optional — omit to ride to expiry
+sl       = 58500.0               # optional — expiry closes it
+
+[schedule]
+place_at  = 2026-10-19T09:00:00Z
+expire_at = 2026-10-20T21:00:00Z
+```
+
+Field rules:
+
+- `side` ∈ {`LONG`, `SHORT`}
+- `entry.type` ∈ {`MARKET`, `LIMIT`}
+- `price` is required iff `type = LIMIT`; the line is removed entirely for MARKET
+- `tp` and `sl` are optional; omit the key when unused (no `tp` = ride to expiry; no `sl` = exit on tp or expiry)
+- datetimes are unquoted TOML offset datetimes with the `Z` suffix
+
+## Fill model
+
+Assumptions: all-or-nothing; no fees, funding, slippage or partial fills; one identical stake per trade (amount unrecorded); nothing is submitted anywhere.
+
+- **Entry LIMIT:** fills AT the limit price when price touches it (candle low <= price for LONG; candle high >= price for SHORT).
+- **Entry MARKET:** fills at the LAST ROW's close of `candles.csv` at placement. The CSV must cover the placement moment; if placing later than the window, append the fresh candle first.
+- **Exit TP / SL:** fill at the level on touch (same touch semantics as LIMIT entry).
+- **Exit at expiry:** the price at `expire_at`, read off the chart at review time; recorded once as the % in the folder name.
+- **Determinism rule:** if a single candle's range touches BOTH tp and sl, resolve pessimistically as SL.
+
+## Metrics
+
+- Per-trade %: price move on 1 unit. LONG `(exit - entry) / entry * 100`; SHORT `(entry - exit) / entry * 100`. No leverage anywhere.
+- Aggregate: **arithmetic sum** of all terminal % (`WIN*`, `LOSS*`, `EXPIRED±*`). No compounding, no reinvestment. The sum reads as "% of one stake".
+- Win rate = WIN count / (WIN + LOSS). `EXPIRED±%` is counted separately. `REJECTED` is excluded from all metrics.
+
+## Conventions
+
+- UTC everywhere (folder names, `log.md`, `trade.toml`, `candles.csv` fetch stamps).
+- The date-time in a folder name is frozen at first evaluation and never changes.
+- Terminal folders are frozen; post-trade notes go in `review.md`.
+- Follow-up ideas are new folders, linked from the first line of `log.md`.
+- Percentages always have two decimals.
+
+## Deliberately out of scope
+
+- Breakout entries. A `LIMIT` entry gets you in when price comes *down* to your level (LONG pullback: candle low <= price). A breakout entry — get in when price pushes *up* through your level — is the opposite touch direction, and `MARKET` or `LIMIT` cannot express it; it would need a `STOP` entry type. Out of scope until you trade breakouts. If that day comes: one enum value in `trade.toml` and `new_trade.py`, one line in the fill model — nothing else in the repo changes.
+- Trailing stops.
+- Compounding and reinvestment.
+- Fees and funding.

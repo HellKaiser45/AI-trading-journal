@@ -1,0 +1,12 @@
+THESIS
+(what you expect, why, and what would invalidate it)
+
+DATA CHECKED
+- news:
+- prices:
+- other assets:
+- forums:
+- tokenomics:
+
+LINKS
+-
