@@ -36,6 +36,14 @@ def kind_of(status):
         return "EXPIRED_PCT"
     return status
 
+def entry_type(path):
+    try:
+        with open(os.path.join(path, 'trade.toml'), encoding='utf-8') as fh:
+            m = re.search(r'^[ ]*type[ ]*=[ ]*.(MARKET|LIMIT)', fh.read(), re.M)
+    except OSError:
+        return None
+    return m.group(1) if m else None
+
 
 def main():
     ap = argparse.ArgumentParser(description="Rename a trade folder to a new status and log it.")
@@ -71,8 +79,17 @@ def main():
 
     old_kind, new_kind = kind_of(old_status), kind_of(new_status)
     if not args.force and new_kind not in ALLOWED.get(old_kind, set()):
-        print("warning: transition %s -> %s is not in the state machine" % (old_status, new_status),
-              file=sys.stderr)
+        die('transition %s -> %s is not in the state machine (--force to override)' % (old_status, new_status))
+    if old_status == 'IDEA' and new_status in ('PENDING', 'OPEN'):
+        etype = entry_type(path)
+        if etype is None:
+            die('no valid trade.toml: use finalize.py, not set_status.py, to leave IDEA')
+        if new_status == 'PENDING' and etype != 'LIMIT':
+            die('PENDING needs entry.type = LIMIT (MARKET goes straight to OPEN)')
+        if new_status == 'OPEN' and etype != 'MARKET':
+            die('IDEA -> OPEN needs entry.type = MARKET (LIMIT goes to PENDING)')
+    if new_status == 'REJECTED' and os.path.exists(os.path.join(path, 'trade.toml')):
+        die('REJECTED folders must not contain trade.toml')
 
     base = "%s_%s_%s" % (new_status, dt, symbol)
     candidate = base
