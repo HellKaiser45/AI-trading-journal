@@ -122,6 +122,8 @@ def fmt_pct(v):
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Summarise trade folders in the journal.")
     ap.add_argument("root", nargs="?", default=HERE, help="journal root (default: script directory)")
+    ap.add_argument("--check", action="store_true",
+                    help="exit 1 if an IDEA folder remains, or a non-IDEA folder has no log.md")
     args = ap.parse_args(argv)
 
     root = args.root
@@ -188,7 +190,7 @@ def main(argv=None):
     expired_pct = sum(1 for r in rows if r["kind"] == "EXPIRED_PCT")
     print("Metrics:")
     print("  Arithmetic sum of terminal %%: %s" % fmt_pct(total if terminal else None) if terminal else
-          "  Arithmetic sum of terminal %: 0.00%")
+          "  Arithmetic sum of terminal %:  0.00%")
     print("  Expired-with-pct count:       %d" % expired_pct)
     if wins or losses:
         print("  Win rate (WIN/(WIN+LOSS)):    %.1f%%" % (100.0 * len(wins) / (len(wins) + len(losses))))
@@ -206,6 +208,19 @@ def main(argv=None):
         print("Per-symbol subtotals (terminal %):")
         for sym in sorted(per_symbol):
             print("  %-12s %s" % (sym, fmt_pct(per_symbol[sym])))
+
+    if args.check:
+        problems = []
+        for r in rows:
+            if r["kind"] == "IDEA":
+                problems.append("%s: still IDEA" % r["folder"])
+            elif not os.path.exists(os.path.join(root, r["folder"], "log.md")):
+                problems.append("%s: no log.md (renamed by hand?)" % r["folder"])
+            if r["kind"] in ("PENDING", "OPEN") and r["side"] == "-":
+                problems.append("%s: no trade.toml" % r["folder"])
+        for p in problems:
+            warn(p)
+        return 1 if problems else 0
     return 0
 
 
