@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "ZECUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "LIMIT"
+price    = 1151.0
+
+[exit]
+tp       = 1105.0
+sl       = 1172.0
+
+[schedule]
+place_at  = 2026-10-19T12:26:18Z
+expire_at = 2026-10-20T12:00:00Z

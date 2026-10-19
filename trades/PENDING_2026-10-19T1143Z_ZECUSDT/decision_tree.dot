@@ -1,0 +1,69 @@
+digraph decision_tree {
+  rankdir=TB;
+  bgcolor="#0d0e12";
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, fillcolor="#181a20", color="#343846", fontcolor="#e2e8f0"];
+  edge [color="#64748b", fontcolor="#94a3b8", fontsize=9, fontname="Helvetica"];
+
+  // 1. Chart Extraction & Structure Node
+  chart_extract [
+    label="1. Chart Extraction (261019_13h41m35s_screenshot.png)\nZECUSDT · 15m · Aster · Close 1132.74 (2026-10-19T11:41:34Z)\n189 points extracted (2026-10-17T12:30Z to 2026-10-19T11:30Z)\n• Left lower highs: 1174.09 → 1160.99 → 1153.30 → 1138.20 → 1132.75\n• 6-touch horizontal support band: 1120.32–1127.56\n• Oct 18 breakdown → V-bottom low 1052.50 (19:30Z)\n• V-reversal impulse: +133.88 USD (+12.72%) in 6.5h to 1186.38 (02:00Z)\n• Upper distribution shelf: 1186.38 → 1175.07 → 1167.58 → 1170.65\n• Broken neckline 1158.77–1160.27 at 10:00Z (-38.29 USD to 1132.36)\n• Fibs (1052.50→1186.38): 0.236=1154.78, 0.382=1135.24, 0.500=1119.44, 0.618=1103.64\n• Chart RSI-14: 15m=30.13 (oversold), 1H=46.80",
+    fillcolor="#1e293b", color="#3b82f6"
+  ];
+
+  // 2. Scenario Generation & Ranking Loop
+  scenario_loop [
+    label="2. Scenario Generation & Jev Exhaustion Loop\n• Initial S1–S4 → Jev noul another_plausible p=0.80\n• Added S5 → Jev noul another_plausible p=0.68\n• Added S6, S7 → Jev noul another_plausible p=0.61\n• Added S8 → Jev noul another_plausible p=0.44 (<0.60 → STOP)\n\nJev Rerank (Chart + Research, 8 Scenarios):\n1. S1_short_pullback_1145_to_1105 (score=0.95) [SELECTED]\n2. S2_long_support_1122_to_1158 (score=0.92)\n3. S4_range_chop_1120_1158 (score=0.91)\n4. S8_bull_trap_above_1160_then_drop (score=0.91)\n5. S6_long_trend_breakout_1186 (score=0.90)\n6. S5_long_deep_0618_retrace_1104 (score=0.88)\n7. S7_short_full_roundtrip_1052 (score=0.72)\n8. S3_short_immediate_breakdown (score=0.66)",
+    fillcolor="#1e1b4b", color="#8b5cf6"
+  ];
+
+  // 3. Multi-Round Research
+  research_rounds [
+    label="3. Multi-Round Research & Exchange API Verification\n• Jev noul: research_could_change_decision p=0.88, check_1132_feed p=0.82\n• Round 1 (agent_RESEARCH: 10 searches, 18 web + 15 API fetches):\n  - Resolved 1132.74 as 11:15Z-11:30Z close; live bounced to 1142.64–1151.08\n  - 30d trend -25.73% (-26.64% vs BTC) from 1698.00 peak; 50d MA = 1163.29\n  - Binance OI fell -3.4% (474,608→457,633 ZEC) on V-bounce (short-covering)\n  - Oct 20 NU7 ZIP-259 activation-height decision; Oct 18 Sprout freeze (22,309 ZEC)\n• Round 2 & 3 (Binance & Aster klines, depth, taker & L/S ratios):\n  - True ATR-14: 15m=8.89, 1H=18.01, 4H=42.54, 1D=113.01 USD\n  - 15m breakdown (10:00Z-11:00Z): 2.8x vol (1,872.1 ZEC/bar), 61.7% taker sell\n  - 3h hourly taker buy/sell ratio < 1.0 (0.9812, 0.8346, 0.9173)\n  - Aster perp depth: 322.013 ZEC ask wall at 1153.26; funding +0.01%/8h\n  - 48h 1H ZEC-BTC correlation = 0.829 (beta 3.80x)",
+    fillcolor="#14261c", color="#22c55e"
+  ];
+
+  // 4. Jev Probability Curves & Structural Propositions
+  prob_curves [
+    label="4. Jev Noul Probability Curves & Structural Checks\n• Resistance encountered in 1142.50–1160.00 zone: p=0.83\n• Clean breakout above 1163.29 (50d MA) & 1175.07: p=0.12 (unlikely)\n• 24h reject below 1158.77–1163.29 & revisit <=1120.32: p=0.76\n• 24h hold >1118.00 & reclaim 1167.58 (opposite): p=0.22\n• SHORT LIMIT edge (1143–1155 → 1110–1120.50): p=0.72\n• LONG LIMIT edge (1120.50–1126 → 1154–1158): p=0.50\n• SHORT LIMIT superior to SHORT MARKET at 1132.74: p=0.66 (opposite p=0.20)\n• SHORT LIMIT @ 1151.00 fills & rejects before SL 1172.00: p=0.65 (vs @ 1148.00 p=0.54)\n• SL @ 1172.00 (>1158.77 neckline, 50d MA 1163.29, 1170.65 high): p=0.73\n• TP @ 1105.00 (above 0.618 Fib 1103.64) vs 1085.00: p=0.81 (vs 1112.00 p=0.56)",
+    fillcolor="#1f242d", color="#38bdf8"
+  ];
+
+  // 5. Parameter Selection (Entry, TP, SL, Expiry)
+  param_select [
+    label="5. Jev Parameter Selection (jev_decide & jev_find)\n• jev_decide (6 candidates): short_lim_1151_tp1105_sl1172 top (p=0.57, +1148 variant 0.26 = 0.83)\n  - All 3 requirements supported for short_lim_1151_tp1105_sl1172\n• jev_find Entry (1142.50 vs 1151.00 vs 1160.00): 1151.00 p=1.00 (exists=0.80)\n• jev_find TP (1122.00 vs 1105.00 vs 1082.00): 1105.00 p=1.00 (exists=0.85)\n• jev_find SL (1162.00 vs 1172.00 vs 1188.00): 1172.00 p=1.00 (exists=0.97)\n• jev_find Expiry (00:00Z vs 12:00Z vs 16:00Z vs 21:00Z): 2026-10-20T12:00:00Z p=0.66 (exists=0.90)\n\nFinal Selected Levels:\nSHORT LIMIT @ 1151.00 | TP 1105.00 (+4.00%) | SL 1172.00 (-1.82%) | RR 2.19 | Expire 2026-10-20T12:00:00Z",
+    shape=box, fillcolor="#272015", color="#eab308"
+  ];
+
+  // 6. Direction Gate (3+ Parallel Shuffled-Order Calls)
+  dir_gate [
+    label="6. Direction Gate — Parallel Shuffled Calls {LONG, SHORT, NO_TRADE}\nBatch A (Multi-TF State):\n• dir_sym_1 {LONG, SHORT, NO_TRADE}: SHORT p=0.65 (NO_TRADE 0.31, LONG 0.04)\n• dir_sym_2 {SHORT, NO_TRADE, LONG}: SHORT p=0.70 (NO_TRADE 0.28, LONG 0.02)\n• dir_sym_3 {NO_TRADE, LONG, SHORT}: SHORT p=0.64 (NO_TRADE 0.31, LONG 0.05)\nBatch B (Full Round 1-3 State + Symmetric Candidate Setups):\n• dir_final_1 {LONG, SHORT, NO_TRADE}: SHORT p=0.80 (NO_TRADE 0.14, LONG 0.06)\n• dir_final_2 {SHORT, NO_TRADE, LONG}: SHORT p=0.85 (NO_TRADE 0.13, LONG 0.02)\n• dir_final_3 {NO_TRADE, LONG, SHORT}: SHORT p=0.74 (NO_TRADE 0.23, LONG 0.03)\n→ 100% agreement on SHORT with all p >= 0.60",
+    shape=diamond, fillcolor="#2d1b24", color="#f43f5e"
+  ];
+
+  // 7. Final Execution Gate (3 Parallel Shuffled-Order Calls + setup_holds + jev_verify)
+  final_gate [
+    label="7. Final Decision Gate — Parallel Shuffled Calls {GO_LIMIT, GO_MARKET, REJECT}\n• final_call_1 {GO_LIMIT, GO_MARKET, REJECT}: GO_LIMIT p=0.95 (REJECT 0.05, GO_MARKET 0.00)\n• final_call_2 {GO_MARKET, REJECT, GO_LIMIT}: GO_LIMIT p=0.98 (REJECT 0.02, GO_MARKET 0.00)\n• final_call_3 {REJECT, GO_LIMIT, GO_MARKET}: GO_LIMIT p=0.90 (REJECT 0.10, GO_MARKET 0.00)\n• setup_holds ('The chart setup is not contradicted by the research'): p=0.76 (opposite p=0.21)\n• valid_level_ordering_and_fill_semantics: p=0.87\n• jev_verify (4 completion claims against script & API evidence): 4/4 verified (p=1.00, 0.98, 1.00, 1.00)",
+    shape=doubleoctagon, fillcolor="#142922", color="#10b981"
+  ];
+
+  // 8. Rejected Alternatives
+  rejected_alts [
+    label="Rejected Alternatives\n• LONG LIMIT @ 1122.00 (TP 1158, SL 1102): rejected (jev_noul p=0.32; 30d downtrend & 61.7% taker-sell breakdown)\n• SHORT MARKET @ 1132.74 (TP 1085, SL 1161): rejected (jev_noul p=0.20; oversold 15m RSI 30.13 & RR 1.69)\n• SHORT LIMIT @ 1142.50 / 1160.00: rejected in favor of 1151.00 (front-running 322 ZEC ask wall at 1153.26)\n• Expiry 2026-10-20T00:00Z (too tight, p=0.00) & 21:00Z (exposed to Oct 20 NU7 height announcement, p=0.00)",
+    fillcolor="#2a1818", color="#ef4444"
+  ];
+
+  // 9. Final Terminal Action
+  terminal [
+    label="FINAL DECISION: GO_LIMIT (PENDING)\nZECUSDT SHORT LIMIT @ 1151.00\nTP 1105.00 (+4.00%) | SL 1172.00 (-1.82%) | RR 2.19\nExpire: 2026-10-20T12:00:00Z\nFolder: PENDING_2026-10-19T1143Z_ZECUSDT",
+    shape=ellipse, fillcolor="#1e293b", color="#eab308", fontcolor="#fef08a"
+  ];
+
+  chart_extract -> scenario_loop;
+  scenario_loop -> research_rounds;
+  research_rounds -> prob_curves;
+  prob_curves -> param_select;
+  param_select -> dir_gate;
+  param_select -> rejected_alts [style=dashed, color="#ef4444"];
+  dir_gate -> final_gate;
+  final_gate -> terminal;
+}

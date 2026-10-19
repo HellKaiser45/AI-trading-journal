@@ -1,0 +1,87 @@
+{
+  "_meta": {
+    "schema": 2,
+    "seeded": "2026-10-19T11:51:04Z",
+    "updated": "2026-10-19T11:51:04Z by run 20261019T115104Z_zec-market-facts",
+    "read_only_note": "Working copy for this run. Crypto API entries carried over from ledger of run 20261018T153601Z_aster-multi-tf (accessibility TTL 30d still valid; market data TTL 0 always refetched). News/z.cash entries are hypotheses until first probe.",
+    "statuses": ["open", "partial", "blocked", "login_wall", "captcha", "paywall", "soft_block", "rate_limited", "unreadable_format", "unknown"],
+    "policy_values": ["allow", "deny", "probe"]
+  },
+  "api.binance.com/api/v3": {
+    "status": "open",
+    "policy": "allow",
+    "checked": "2026-10-18T15:42:56Z",
+    "checked_precision": "second",
+    "ttl_days": 30,
+    "method": "probed (evidence s-002, s-022, s-024, s-025 of run 20261018T153601Z_aster-multi-tf)",
+    "evidence": "carried over from Aster run ledger",
+    "route": "https://api.binance.com/api/v3/klines?symbol=ZECUSDT&interval=<tf>&limit=<n>",
+    "notes": "Public klines JSON, no auth; REST via ddg-fetch reliable; ccxt MCP ok for quotes."
+  },
+  "fapi.binance.com": {
+    "status": "unknown",
+    "policy": "probe",
+    "checked": null,
+    "ttl_days": 30,
+    "method": "not yet probed",
+    "evidence": null,
+    "route": "https://fapi.binance.com/fapi/v1/premiumIndex?symbol=ZECUSDT ; /fapi/v1/fundingRate ; /futures/data/openInterestHist",
+    "notes": "Binance USD-M futures API: funding rate, mark price, OI history. Probe once."
+  },
+  "api.coingecko.com/api/v3": {
+    "status": "open",
+    "policy": "allow",
+    "checked": "2026-10-18T15:42:56Z",
+    "checked_precision": "second",
+    "ttl_days": 30,
+    "method": "probed (evidence s-006, s-013, s-018, s-023 of run 20261018T153601Z_aster-multi-tf)",
+    "evidence": "carried over from Aster run ledger",
+    "route": "https://api.coingecko.com/api/v3/coins/zcash",
+    "notes": "Zcash token id is 'zcash' (lowercase). Aggregate price runs ~+2% vs Binance spot."
+  },
+  "api.alternative.me": {
+    "status": "unknown",
+    "policy": "probe",
+    "checked": null,
+    "ttl_days": 30,
+    "method": "not yet probed",
+    "evidence": null,
+    "route": "https://api.alternative.me/fng/",
+    "notes": "Fear & Greed Index JSON, dataset owner. Probe once."
+  },
+  "z.cash": {
+    "status": "unknown",
+    "policy": "probe",
+    "checked": null,
+    "ttl_days": 30,
+    "method": "not yet probed",
+    "evidence": null,
+    "route": "https://z.cash/ (blog, docs)",
+    "notes": "Primary source for protocol upgrades (NU6, Halo, Tachyon, dev fund). Probe once."
+  },
+  "electriccoin.co": {
+    "status": "unknown",
+    "policy": "probe",
+    "checked": null,
+    "ttl_days": 30,
+    "method": "not yet probed",
+    "evidence": null,
+    "route": "https://electriccoin.co/blog/",
+    "notes": "Electric Coin Co primary blog. Probe once."
+  },
+  "www.tradingview.com/symbols": {
+    "status": "open",
+    "policy": "allow",
+    "checked": "2026-10-18T15:42:56Z",
+    "checked_precision": "second",
+    "ttl_days": 30,
+    "method": "probed (evidence s-007 of run 20261018T153601Z_aster-multi-tf)",
+    "evidence": "carried over from Aster run ledger",
+    "route": "https://www.tradingview.com/symbols/ZECUSDT/",
+    "notes": "Readable without login; stats cache-mixed; useful for cross-checking the 1132.74 level."
+  },
+  "reuters.com": { "status": "blocked", "policy": "deny", "checked": "2026-10-07T00:00:00Z", "checked_precision": "day", "ttl_days": 30, "method": "seed", "evidence": "references/source-accessibility.md", "route": "", "notes": "Headlines as leads only." },
+  "paywalled outlets (bloomberg, wsj, ft, economist, nytimes, washingtonpost, barrons, theinformation, time, theatlantic, newyorker, wired, businessinsider, hbr, thetimes, nikkei)": { "status": "paywall", "policy": "deny", "checked": "2026-10-07T00:00:00Z", "checked_precision": "day", "ttl_days": 30, "method": "seed", "evidence": "references/source-accessibility.md", "route": "", "notes": "Tier A/B exclusions apply." },
+  "image-first / login-walled social (instagram, pinterest, tiktok, flickr, snapchat, imgur, 9gag, deviantart, giphy, tumblr, twitch, facebook, x.com, twitter, linkedin, threads, quora, discord, slack, whatsapp, telegram private)": { "status": "login_wall", "policy": "deny", "checked": "2026-10-07T00:00:00Z", "checked_precision": "day", "ttl_days": 30, "method": "seed", "evidence": "references/venue-policy.md section 4", "route": "", "notes": "Policy ban." },
+  "reddit.com (direct: www, api, .json, search.json)": { "status": "blocked", "policy": "deny", "checked": "2026-10-07T00:00:00Z", "checked_precision": "day", "ttl_days": 30, "method": "seed", "evidence": "references/source-accessibility.md", "route": "", "notes": "Use Arctic Shift/PullPush if community voice needed." }
+}

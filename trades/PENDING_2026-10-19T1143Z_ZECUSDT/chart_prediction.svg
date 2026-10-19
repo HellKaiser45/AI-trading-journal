@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820">
+<rect width="100%" height="100%" fill="#0f1015"/>
+<!-- Grid lines -->
+<g stroke="#1c1e26" stroke-width="1">
+  <line x1="70" y1="755.00" x2="1505" y2="755.00"/>
+  <line x1="70" y1="711.25" x2="1505" y2="711.25"/>
+  <line x1="70" y1="667.50" x2="1505" y2="667.50"/>
+  <line x1="70" y1="623.75" x2="1505" y2="623.75"/>
+  <line x1="70" y1="580.00" x2="1505" y2="580.00"/>
+  <line x1="70" y1="536.25" x2="1505" y2="536.25"/>
+  <line x1="70" y1="492.50" x2="1505" y2="492.50"/>
+  <line x1="70" y1="448.75" x2="1505" y2="448.75"/>
+  <line x1="70" y1="405.00" x2="1505" y2="405.00"/>
+  <line x1="70" y1="361.25" x2="1505" y2="361.25"/>
+  <line x1="70" y1="317.50" x2="1505" y2="317.50"/>
+  <line x1="70" y1="273.75" x2="1505" y2="273.75"/>
+  <line x1="70" y1="230.00" x2="1505" y2="230.00"/>
+  <line x1="70" y1="186.25" x2="1505" y2="186.25"/>
+  <line x1="70" y1="142.50" x2="1505" y2="142.50"/>
+  <line x1="70" y1="98.75" x2="1505" y2="98.75"/>
+  <line x1="70" y1="55.00" x2="1505" y2="55.00"/>
+  <line x1="79.73" y1="55" x2="79.73" y2="755"/>
+  <line x1="196.47" y1="55" x2="196.47" y2="755"/>
+  <line x1="313.22" y1="55" x2="313.22" y2="755"/>
+  <line x1="429.97" y1="55" x2="429.97" y2="755"/>
+  <line x1="546.71" y1="55" x2="546.71" y2="755"/>
+  <line x1="663.46" y1="55" x2="663.46" y2="755"/>
+  <line x1="780.20" y1="55" x2="780.20" y2="755"/>
+  <line x1="896.95" y1="55" x2="896.95" y2="755"/>
+  <line x1="984.51" y1="55" x2="984.51" y2="755"/>
+  <line x1="1110.98" y1="55" x2="1110.98" y2="755"/>
+  <line x1="1227.73" y1="55" x2="1227.73" y2="755"/>
+  <line x1="1344.47" y1="55" x2="1344.47" y2="755"/>
+  <line x1="1461.22" y1="55" x2="1461.22" y2="755"/>
+</g>
+<rect x="70" y="371.93" width="1435" height="35.52" fill="#22c55e" fill-opacity="0.11" stroke="#22c55e" stroke-opacity="0.3" stroke-width="0.8"/>
+<text x="78" y="384.93" font-family="Inter,Helvetica,Arial,sans-serif" font-size="10" fill="#86efac" opacity="0.9">Support Band 1119.44–1127.56 (6-Touch Floor + 0.500 Fib)</text>
+<rect x="70" y="470.62" width="1435" height="34.56" fill="#22c55e" fill-opacity="0.13" stroke="#22c55e" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="78" y="500.19" font-family="Inter,Helvetica,Arial,sans-serif" font-size="10" fill="#86efac" opacity="0.9">Support Target Zone 1097.10–1105.00 (0.618 Fib 1103.64)</text>
+<rect x="70" y="247.24" width="1435" height="33.69" fill="#ef4444" fill-opacity="0.13" stroke="#ef4444" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="78" y="260.24" font-family="Inter,Helvetica,Arial,sans-serif" font-size="10" fill="#fca5a5" opacity="0.9">Resistance Band 1148.36–1156.06 (Breakdown Ledge + 322 ZEC Ask Wall 1153.26 + 0.236 Fib 1154.78)</text>
+<rect x="70" y="183.41" width="1435" height="51.98" fill="#ef4444" fill-opacity="0.11" stroke="#ef4444" stroke-opacity="0.3" stroke-width="0.8"/>
+<text x="78" y="196.41" font-family="Inter,Helvetica,Arial,sans-serif" font-size="10" fill="#fca5a5" opacity="0.9">Upper Supply / Broken Neckline 1158.77–1170.65 (Daily 50d MA 1163.29)</text>
+<line x1="113.78" y1="168.36" x2="536.98" y2="349.22" stroke="#a855f7" stroke-width="1.6" stroke-dasharray="5,4" opacity="0.85"/>
+<line x1="682.92" y1="700.31" x2="809.39" y2="114.59" stroke="#a855f7" stroke-width="1.6" stroke-dasharray="4,4" opacity="0.85"/>
+<line x1="809.39" y1="114.59" x2="1091.53" y2="252.31" stroke="#a855f7" stroke-width="1.8" stroke-dasharray="6,3" opacity="0.9"/>
+<line x1="872.63" y1="232.19" x2="969.92" y2="232.19" stroke="#a855f7" stroke-width="2.0" opacity="0.9"/>
+<line x1="809.39" y1="183.41" x2="1461.22" y2="183.41" stroke="#9ca3af" stroke-width="1.4" stroke-dasharray="6,4" opacity="0.85"/>
+<text x="956.46" y="178.41" font-family="Inter,Helvetica,Arial,sans-serif" font-size="10" fill="#9ca3af">Structural Invalidation 1170.65</text>
+<line x1="984.51" y1="55" x2="984.51" y2="755" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="4,4"/>
+<text x="989.51" y="69" font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#e2e8f0">NOW 2026-10-19T11:43Z (1132.74)</text>
+<line x1="1461.22" y1="55" x2="1461.22" y2="755" stroke="#cbd5e1" stroke-width="1.8" stroke-dasharray="2,4"/>
+<text x="1455.22" y="69" font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#cbd5e1" text-anchor="end">EXPIRY 2026-10-20T12:00:00Z</text>
+<line x1="984.51" y1="269.38" x2="1461.22" y2="269.38" stroke="#eab308" stroke-width="2.0"/>
+<rect x="1507" y="259.38" width="88" height="20" rx="3" fill="#eab308"/>
+<text x="1551" y="273.38" font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#0f1015" text-anchor="middle">ENTRY 1151</text>
+<text x="992.51" y="263.38" font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#fde047">SHORT LIMIT 1151</text>
+<line x1="984.51" y1="470.62" x2="1461.22" y2="470.62" stroke="#22c55e" stroke-width="2.0"/>
+<rect x="1507" y="460.62" width="88" height="20" rx="3" fill="#22c55e"/>
+<text x="1551" y="474.62" font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#0f1015" text-anchor="middle">TP 1105</text>
+<text x="992.51" y="464.62" font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#4ade80">TAKE PROFIT 1105 (+4.00%)</text>
+<line x1="984.51" y1="177.50" x2="1461.22" y2="177.50" stroke="#ef4444" stroke-width="2.0"/>
+<rect x="1507" y="167.50" width="88" height="20" rx="3" fill="#ef4444"/>
+<text x="1551" y="181.50" font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">SL 1172</text>
+<text x="992.51" y="171.50" font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#f87171">STOP LOSS 1172 (-1.82%)</text>
+<path d="M 70.00 214.69 L 74.86 239.36 L 79.73 245.44 L 84.59 225.36 L 89.46 229.39 L 94.32 209.88 L 99.19 198.89 L 104.05 168.36 L 108.92 202.92 L 113.78 217.79 L 118.64 223.87 L 123.51 272.92 L 128.37 285.12 L 133.24 310.37 L 138.10 311.33 L 142.97 311.77 L 147.83 340.64 L 152.69 371.79 L 157.56 392.09 L 162.42 385.93 L 167.29 388.11 L 172.15 372.76 L 177.02 353.24 L 181.88 323.67 L 186.75 298.86 L 191.61 299.30 L 196.47 272.22 L 201.34 286.26 L 206.20 269.38 L 211.07 257.21 L 215.93 245.44 L 220.80 239.63 L 225.66 225.67 L 230.53 233.54 L 235.39 247.24 L 240.25 391.35 L 245.12 403.60 L 249.98 391.74 L 254.85 385.53 L 259.71 401.28 L 264.58 382.91 L 269.44 387.98 L 274.31 390.12 L 279.17 387.63 L 284.03 376.82 L 288.90 374.07 L 293.76 379.01 L 298.63 393.19 L 303.49 393.98 L 308.36 381.73 L 313.22 349.13 L 318.08 333.69 L 322.95 291.29 L 327.81 339.90 L 332.68 331.50 L 337.54 301.88 L 342.41 307.74 L 347.27 282.33 L 352.14 259.31 L 357.00 293.74 L 361.86 279.44 L 366.73 268.19 L 371.59 288.01 L 376.46 292.39 L 381.32 318.77 L 386.19 328.13 L 391.05 334.56 L 395.92 363.57 L 400.78 371.93 L 405.64 367.07 L 410.51 357.14 L 415.37 338.72 L 420.24 325.37 L 425.10 327.82 L 429.97 350.49 L 434.83 359.32 L 439.69 374.81 L 444.56 374.77 L 449.42 387.37 L 454.29 392.14 L 459.15 392.53 L 464.02 380.94 L 468.88 348.08 L 473.75 348.39 L 478.61 328.61 L 483.47 338.94 L 488.34 328.57 L 493.20 337.76 L 498.07 331.72 L 502.93 358.63 L 507.80 369.43 L 512.66 365.36 L 517.53 381.46 L 522.39 362.43 L 527.25 349.22 L 532.12 356.79 L 536.98 379.19 L 541.85 376.78 L 546.71 405.74 L 551.58 430.33 L 556.44 436.15 L 561.31 425.30 L 566.17 456.32 L 571.03 448.36 L 575.90 511.31 L 580.76 501.34 L 585.63 502.82 L 590.49 525.27 L 595.36 573.61 L 600.22 556.37 L 605.08 569.85 L 609.95 568.32 L 614.81 560.79 L 619.68 552.18 L 624.54 505.19 L 629.41 538.00 L 634.27 535.24 L 639.14 546.66 L 644.00 551.17 L 648.86 559.31 L 653.73 552.96 L 658.59 561.89 L 663.46 589.06 L 668.32 646.63 L 673.19 700.31 L 678.05 686.62 L 682.92 665.97 L 687.78 660.81 L 692.64 680.06 L 697.51 653.63 L 702.37 630.62 L 707.24 638.98 L 712.10 603.54 L 716.97 568.36 L 721.83 481.65 L 726.69 456.58 L 731.56 420.53 L 736.42 404.26 L 741.29 403.69 L 746.15 342.70 L 751.02 357.40 L 755.88 361.60 L 760.75 347.25 L 765.61 329.18 L 770.47 275.50 L 775.34 298.99 L 780.20 252.14 L 785.07 237.61 L 789.93 194.30 L 794.80 190.28 L 799.66 114.59 L 804.53 167.66 L 809.39 129.59 L 814.25 153.79 L 819.12 158.86 L 823.98 178.33 L 828.85 169.54 L 833.71 166.21 L 838.58 188.79 L 843.44 198.54 L 848.31 164.07 L 853.17 185.11 L 858.03 221.47 L 862.90 230.39 L 867.76 220.51 L 872.63 202.44 L 877.49 225.41 L 882.36 235.38 L 887.22 215.08 L 892.08 214.12 L 896.95 213.86 L 901.81 196.84 L 906.68 200.12 L 911.54 228.82 L 916.41 221.69 L 921.27 205.81 L 926.14 200.08 L 931.00 202.61 L 935.86 198.89 L 940.73 183.41 L 945.59 195.74 L 950.46 203.75 L 955.32 216.13 L 960.19 283.99 L 965.05 306.52 L 969.92 307.18 L 974.78 350.93 L 979.64 338.89 L 984.51 349.26" fill="none" stroke="#3b82f6" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 984.51 349.26 L 989.37 325.20 L 994.24 296.15 L 999.10 267.62 L 1003.97 260.19 L 1008.83 265.96 L 1013.69 278.56 L 1018.56 271.61 L 1023.42 264.12 L 1028.29 272.22 L 1033.15 290.37 L 1038.02 295.62 L 1042.88 301.75 L 1047.75 308.31 L 1052.61 319.56 L 1057.47 321.88 L 1062.34 333.25 L 1067.20 348.52 L 1072.07 358.80 L 1076.93 358.98 L 1081.80 367.51 L 1086.66 383.47 L 1091.53 391.44 L 1096.39 382.03 L 1101.25 383.34 L 1106.12 383.17 L 1110.98 370.44 L 1115.85 358.45 L 1120.71 359.19 L 1125.58 356.88 L 1130.44 349.00 L 1135.31 356.70 L 1140.17 372.32 L 1145.03 376.52 L 1149.90 375.51 L 1154.76 386.76 L 1159.63 398.87 L 1164.49 395.68 L 1169.36 389.16 L 1174.22 391.79 L 1179.08 384.00 L 1183.95 386.67 L 1188.81 392.22 L 1193.68 408.54 L 1198.54 417.51 L 1203.41 419.39 L 1208.27 428.63 L 1213.14 430.73 L 1218.00 420.75 L 1222.86 411.39 L 1227.73 415.46 L 1232.59 418.69 L 1237.46 409.81 L 1242.32 411.82 L 1247.19 421.06 L 1252.05 422.85 L 1256.92 418.43 L 1261.78 425.39 L 1266.64 438.82 L 1271.51 440.88 L 1276.37 440.88 L 1281.24 439.34 L 1286.10 439.96 L 1290.97 430.94 L 1295.83 427.27 L 1300.69 435.06 L 1305.56 429.50 L 1310.42 432.69 L 1315.29 435.62 L 1320.15 445.25 L 1325.02 446.52 L 1329.88 445.69 L 1334.75 456.89 L 1339.61 468.66 L 1344.47 465.37 L 1349.34 464.81 L 1354.20 473.69 L 1359.07 472.11 L 1363.93 463.01 L 1368.80 461.88 L 1373.66 467.87 L 1378.53 462.84 L 1383.39 454.88 L 1388.25 454.13 L 1393.12 462.62 L 1397.98 461.96 L 1402.85 462.14 L 1407.71 472.73 L 1412.58 471.50 L 1417.44 466.86 L 1422.31 460.69 L 1427.17 465.42 L 1432.03 464.37 L 1436.90 457.15 L 1441.76 457.94 L 1446.63 466.60 L 1451.49 462.01 L 1456.36 455.57 L 1461.22 464.50" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="999.10" cy="267.62" r="5" fill="#eab308" stroke="#0f1015" stroke-width="1.5"/>
+<circle cx="1354.20" cy="473.69" r="5" fill="#22c55e" stroke="#0f1015" stroke-width="1.5"/>
+<g font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" fill="#94a3b8">
+  <text x="1513" y="759.00">1040.00</text>
+  <text x="1513" y="715.25">1050.00</text>
+  <text x="1513" y="671.50">1060.00</text>
+  <text x="1513" y="627.75">1070.00</text>
+  <text x="1513" y="584.00">1080.00</text>
+  <text x="1513" y="540.25">1090.00</text>
+  <text x="1513" y="496.50">1100.00</text>
+  <text x="1513" y="452.75">1110.00</text>
+  <text x="1513" y="409.00">1120.00</text>
+  <text x="1513" y="365.25">1130.00</text>
+  <text x="1513" y="321.50">1140.00</text>
+  <text x="1513" y="234.00">1160.00</text>
+  <text x="1513" y="146.50">1180.00</text>
+  <text x="1513" y="102.75">1190.00</text>
+  <text x="1513" y="59.00">1200.00</text>
+</g>
+<g font-family="Inter,Helvetica,Arial,sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">
+  <text x="79.73" y="777">Oct17 13Z</text>
+  <text x="196.47" y="777">19Z</text>
+  <text x="313.22" y="777">Oct18 01Z</text>
+  <text x="429.97" y="777">07Z</text>
+  <text x="546.71" y="777">13Z</text>
+  <text x="663.46" y="777">19Z</text>
+  <text x="780.20" y="777">Oct19 01Z</text>
+  <text x="896.95" y="777">07Z</text>
+  <text x="984.51" y="777">NOW 11:30Z</text>
+  <text x="1110.98" y="777">18Z</text>
+  <text x="1227.73" y="777">Oct20 00Z</text>
+  <text x="1344.47" y="777">06Z</text>
+  <text x="1461.22" y="777">EXP 12:00Z</text>
+</g>
+<g font-family="Inter,Helvetica,Arial,sans-serif">
+  <text x="70" y="30" font-size="16" font-weight="700" fill="#f8fafc">ZECUSDT · 15m · SHORT LIMIT @ 1151 · TP 1105 · SL 1172 · RR 2.19</text>
+  <rect x="70" y="784" width="1420" height="26" rx="4" fill="#181a20" stroke="#2d313e"/>
+  <line x1="82" y1="797" x2="106" y2="797" stroke="#3b82f6" stroke-width="2.5"/>
+  <text x="112" y="801" font-size="11" fill="#cbd5e1">History (Blue)</text>
+  <line x1="205" y1="797" x2="229" y2="797" stroke="#f97316" stroke-width="2.5"/>
+  <text x="235" y="801" font-size="11" fill="#cbd5e1">Forecast Path (Orange)</text>
+  <line x1="375" y1="797" x2="399" y2="797" stroke="#eab308" stroke-width="2.5"/>
+  <text x="405" y="801" font-size="11" fill="#fde047">Entry 1151 (Yellow)</text>
+  <line x1="530" y1="797" x2="554" y2="797" stroke="#22c55e" stroke-width="2.5"/>
+  <text x="560" y="801" font-size="11" fill="#4ade80">TP 1105 (Green)</text>
+  <line x1="670" y1="797" x2="694" y2="797" stroke="#ef4444" stroke-width="2.5"/>
+  <text x="700" y="801" font-size="11" fill="#f87171">SL 1172 (Red)</text>
+  <rect x="800" y="791" width="16" height="12" fill="#22c55e" fill-opacity="0.25" stroke="#22c55e"/>
+  <text x="822" y="801" font-size="11" fill="#86efac">Support Bands</text>
+  <rect x="920" y="791" width="16" height="12" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444"/>
+  <text x="942" y="801" font-size="11" fill="#fca5a5">Resistance Bands</text>
+  <line x1="1055" y1="797" x2="1079" y2="797" stroke="#9ca3af" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <text x="1085" y="801" font-size="11" fill="#9ca3af">Invalidation (1170.65)</text>
+  <line x1="1220" y1="797" x2="1244" y2="797" stroke="#a855f7" stroke-width="2.0" stroke-dasharray="5,3"/>
+  <text x="1250" y="801" font-size="11" fill="#d8b4fe">Trendlines/Neckline (Purple)</text>
+  <line x1="1415" y1="797" x2="1439" y2="797" stroke="#cbd5e1" stroke-width="1.8" stroke-dasharray="2,3"/>
+  <text x="1445" y="801" font-size="11" fill="#cbd5e1">Expiry</text>
+</g>
+</svg>
