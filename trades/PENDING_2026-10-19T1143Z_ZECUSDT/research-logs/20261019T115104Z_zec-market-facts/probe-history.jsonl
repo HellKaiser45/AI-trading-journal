@@ -1,2 +1,0 @@
-{"ts":"2026-10-19T11:59:00Z","target":"z.cash/blog","status":"blocked","http_status":403,"method":"GET via ddg-fetch","evidence_id":"s-019","run_id":"20261019T115104Z_zec-market-facts"}
-{"ts":"2026-10-19T11:59:15Z","target":"electriccoin.co/blog","status":"partial","http_status":200,"method":"GET via ddg-fetch","evidence_id":"s-034","run_id":"20261019T115104Z_zec-market-facts","note":"redirects to Zodl landing page, not a blog listing"}

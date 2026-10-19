@@ -1,0 +1,6 @@
+# research agent run folders: local only, never committed
+research-logs/
+
+# python
+__pycache__/
+*.pyc
