@@ -1,3 +1,4 @@
-# candles.csv — reference candle window (UTC)
+# graphpoints.csv: UTC points of the chart, one row per point
+# Rows up to the folder time are extracted from the chart image(s); rows after it are the forecast, up to expire_at
 # fetched_at: __FETCHED_AT__
 timestamp,close price

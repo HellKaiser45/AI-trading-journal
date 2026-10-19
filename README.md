@@ -8,7 +8,7 @@ The repository is the single source of truth:
 
 - folder names encode the **current status**
 - `trade.toml` encodes **intent**
-- `graphpoints.csv`, `chart.svg`, logs and reviews encode **evidence**
+- `graphpoints.csv`, `chart.svg`, `chart_prediction.svg`, research notes and reviews encode **evidence**
 
 ## Quick start
 
@@ -18,7 +18,7 @@ All scripts are stdlib-only Python (>= 3.8) and run from the repository root.
 # 1. Create an IDEA folder (no side or entry yet)
 python3 scripts/new_trade.py BTCUSDT
 
-# 2. Research and Jev gates (every Jev answer is a node in decision_tree.dot), then exactly one of:
+# 2. Chart, research, forecast and Jev decisions (reasoning recorded in decision_tree.dot), then exactly one of:
 python3 scripts/finalize.py IDEA_2026-10-19T0900Z_BTCUSDT --side LONG --type LIMIT --price 60000 --tp 62000 --sl 58500 --expire-at 2026-10-20T21:00:00Z
 python3 scripts/finalize.py IDEA_2026-10-19T0900Z_BTCUSDT --reject 'setup_holds 0.54'
 
@@ -69,7 +69,7 @@ Exact status tokens:
 | Status | Meaning |
 |---|---|
 | `IDEA` | exists only while a run is in progress. A run always ends in PENDING, OPEN or REJECTED, via finalize.py |
-| `REJECTED` | after research, decided NOT to trade (reason in `log.md`); no `trade.toml` |
+| `REJECTED` | after research, decided NOT to trade (reason is given to finalize.py and printed in its brief); no `trade.toml` |
 | `PENDING` | order placed, not filled (LIMIT entries only) |
 | `OPEN` | position live (MARKET entries go straight here) |
 | `WIN+X.XX%` | TP hit |
@@ -95,21 +95,13 @@ Terminal statuses (`WIN*`, `LOSS*`, `EXPIRED*`, `REJECTED`) freeze the folder: n
 | File | Purpose |
 |---|---|
 | `trade.toml` | intent; written by finalize.py, never by hand; absent while `IDEA` and in `REJECTED` |
-| `graphpoints.csv` | reference candle window |
-| `chart.svg` | chart snapshot |
+| `graphpoints.csv` | chart points, `timestamp,close price`: rows up to the folder time are extracted from the chart image(s), rows after it are the forecast up to `expire_at` |
+| `chart.svg` | SVG replica of the chart (original series in blue) |
+| `chart_prediction.svg` | the chart completed with the forecast: history blue, prediction orange, entry yellow, TP green, SL red, expiry marked |
 | `research_log.txt` | thesis, data checked (news / prices / other assets / forums / tokenomics), links |
-| `log.md` | append-only state changes |
-| `decision_tree.dot` | thought process (Graphviz); every Jev answer is a node with `gate`, `kind`, `answer` and `p` attributes, read by finalize.py |
+| `decision_tree.dot` | thought process (Graphviz), free-form record of the reasoning; not read by any script |
 | `outcome_candles.csv` | market candles for the settlement check (header `time,open,high,low,close`; UTC) |
 | `review.md` | written when the trade reaches a terminal status; resolve_expired.py writes it |
-
-`log.md` line format:
-
-```
-2026-10-20T14:32Z OPEN → LOSS-2.10% — sl hit
-```
-
-A follow-up idea about an existing trade is a **new folder**. Link it by naming the target folder on the first line of the new folder's `log.md`.
 
 ## trade.toml schema
 
@@ -139,15 +131,11 @@ Field rules:
 - `tp` and `sl` are optional; omit the key when unused (no `tp` = ride to expiry; no `sl` = exit on tp or expiry)
 - datetimes are unquoted TOML offset datetimes with the `Z` suffix
 
-## Jev gates
+## Decisions and forecast
 
-Before finalize.py will act, the run passes the Jev probability gates. Every Jev answer is one node in `decision_tree.dot` (format in `trades/_template/decision_tree.dot`):
+The AI makes the decision (Jev, the probability engine, is its decision tool) and passes it to finalize.py as parameters. No script reads `decision_tree.dot`, `graphpoints.csv` or `chart_prediction.svg`: they are the evidence and the reasoning record, kept for review. finalize.py only checks that the numbers are coherent (TP and SL on the right sides of each other and of the entry, datetimes valid, expiry after placement) and then writes `trade.toml` and renames the folder.
 
-- gates G1 to G9
-- at least 2 Jev nodes per gate
-- at least 3 parallel choice nodes at G1 and at G9
-- threshold: an answer only counts at `p >= 0.60`
-- finalize.py refuses to act when the dot file is thin (fewer nodes than above) or when the final G1 / G9 answers disagree.
+Every folder, rejected ones included, carries the forecast: `graphpoints.csv` rows after the folder's date-time are the predicted path (up to `expire_at`), and `chart_prediction.svg` draws it on the chart.
 
 ## Fill model
 
@@ -167,7 +155,7 @@ Assumptions: all-or-nothing; no fees, funding, slippage or partial fills; one id
 - LIMIT fills at the limit price on the first candle that touches it (low <= price for LONG, high >= price for SHORT). Never touched: PENDING becomes EXPIRED. MARKET fills at the open of the first candle.
 - After the fill, TP and SL fill at their level on touch. A candle that touches both is a LOSS. In the candle where a LIMIT fills, only SL counts: the order of events inside one candle is unknown, so a TP touch there is ignored.
 - If neither is touched, the result is `EXPIRED+x.xx%` or `EXPIRED-x.xx%` at the close of the last candle before `expire_at`.
-- A filled PENDING folder is renamed twice (PENDING to OPEN, then OPEN to the result), so `log.md` shows the whole path.
+- A filled PENDING folder is renamed twice (PENDING to OPEN, then OPEN to the result); git history shows the path.
 
 The search agents only fetch the candles (`outcome_candles.csv`); the script decides the outcome with the fill model above, so the result is deterministic and Jev is not involved. Use `--now 2026-10-25T00:00:00Z` to test against an old folder and `--dry-run` to preview the new name. The script refuses to resolve when the candles do not cover the whole window or have holes longer than 4 steps, because a partial series would wrongly give EXPIRED. Prefer 1m or 5m candles: coarse candles produce more candles that touch both TP and SL, and those count as a LOSS.
 
@@ -179,10 +167,10 @@ The search agents only fetch the candles (`outcome_candles.csv`); the script dec
 
 ## Conventions
 
-- UTC everywhere (folder names, `log.md`, `trade.toml`, `graphpoints.csv` fetch stamps).
+- UTC everywhere (folder names, `trade.toml`, `graphpoints.csv`).
 - The date-time in a folder name is frozen at first evaluation and never changes.
 - Terminal folders are frozen; post-trade notes go in `review.md`.
-- Follow-up ideas are new folders, linked from the first line of `log.md`.
+- Follow-up ideas are new folders; mention the target folder in `research_log.txt`.
 - Percentages always have two decimals.
 
 ## Deliberately out of scope

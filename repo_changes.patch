@@ -1,0 +1,332 @@
+diff --git a/README.md b/README.md
+index 7c8276e..e5ab71b 100644
+--- a/README.md
++++ b/README.md
+@@ -8,7 +8,7 @@ The repository is the single source of truth:
+ 
+ - folder names encode the **current status**
+ - `trade.toml` encodes **intent**
+-- `graphpoints.csv`, `chart.svg`, logs and reviews encode **evidence**
++- `graphpoints.csv`, `chart.svg`, `chart_prediction.svg`, research notes and reviews encode **evidence**
+ 
+ ## Quick start
+ 
+@@ -18,7 +18,7 @@ All scripts are stdlib-only Python (>= 3.8) and run from the repository root.
+ # 1. Create an IDEA folder (no side or entry yet)
+ python3 scripts/new_trade.py BTCUSDT
+ 
+-# 2. Research and Jev gates (every Jev answer is a node in decision_tree.dot), then exactly one of:
++# 2. Chart, research, forecast and Jev decisions (reasoning recorded in decision_tree.dot), then exactly one of:
+ python3 scripts/finalize.py IDEA_2026-10-19T0900Z_BTCUSDT --side LONG --type LIMIT --price 60000 --tp 62000 --sl 58500 --expire-at 2026-10-20T21:00:00Z
+ python3 scripts/finalize.py IDEA_2026-10-19T0900Z_BTCUSDT --reject 'setup_holds 0.54'
+ 
+@@ -69,7 +69,7 @@ Exact status tokens:
+ | Status | Meaning |
+ |---|---|
+ | `IDEA` | exists only while a run is in progress. A run always ends in PENDING, OPEN or REJECTED, via finalize.py |
+-| `REJECTED` | after research, decided NOT to trade (reason in `log.md`); no `trade.toml` |
++| `REJECTED` | after research, decided NOT to trade (reason is given to finalize.py and printed in its brief); no `trade.toml` |
+ | `PENDING` | order placed, not filled (LIMIT entries only) |
+ | `OPEN` | position live (MARKET entries go straight here) |
+ | `WIN+X.XX%` | TP hit |
+@@ -95,22 +95,14 @@ Terminal statuses (`WIN*`, `LOSS*`, `EXPIRED*`, `REJECTED`) freeze the folder: n
+ | File | Purpose |
+ |---|---|
+ | `trade.toml` | intent; written by finalize.py, never by hand; absent while `IDEA` and in `REJECTED` |
+-| `graphpoints.csv` | reference candle window |
+-| `chart.svg` | chart snapshot |
++| `graphpoints.csv` | chart points, `timestamp,close price`: rows up to the folder time are extracted from the chart image(s), rows after it are the forecast up to `expire_at` |
++| `chart.svg` | SVG replica of the chart (original series in blue) |
++| `chart_prediction.svg` | the chart completed with the forecast: history blue, prediction orange, entry yellow, TP green, SL red, expiry marked |
+ | `research_log.txt` | thesis, data checked (news / prices / other assets / forums / tokenomics), links |
+-| `log.md` | append-only state changes |
+-| `decision_tree.dot` | thought process (Graphviz); every Jev answer is a node with `gate`, `kind`, `answer` and `p` attributes, read by finalize.py |
++| `decision_tree.dot` | thought process (Graphviz), free-form record of the reasoning; not read by any script |
+ | `outcome_candles.csv` | market candles for the settlement check (header `time,open,high,low,close`; UTC) |
+ | `review.md` | written when the trade reaches a terminal status; resolve_expired.py writes it |
+ 
+-`log.md` line format:
+-
+-```
+-2026-10-20T14:32Z OPEN → LOSS-2.10% — sl hit
+-```
+-
+-A follow-up idea about an existing trade is a **new folder**. Link it by naming the target folder on the first line of the new folder's `log.md`.
+-
+ ## trade.toml schema
+ 
+ ```toml
+@@ -139,15 +131,11 @@ Field rules:
+ - `tp` and `sl` are optional; omit the key when unused (no `tp` = ride to expiry; no `sl` = exit on tp or expiry)
+ - datetimes are unquoted TOML offset datetimes with the `Z` suffix
+ 
+-## Jev gates
++## Decisions and forecast
+ 
+-Before finalize.py will act, the run passes the Jev probability gates. Every Jev answer is one node in `decision_tree.dot` (format in `trades/_template/decision_tree.dot`):
++The AI makes the decision (Jev, the probability engine, is its decision tool) and passes it to finalize.py as parameters. No script reads `decision_tree.dot`, `graphpoints.csv` or `chart_prediction.svg`: they are the evidence and the reasoning record, kept for review. finalize.py only checks that the numbers are coherent (TP and SL on the right sides of each other and of the entry, datetimes valid, expiry after placement) and then writes `trade.toml` and renames the folder.
+ 
+-- gates G1 to G9
+-- at least 2 Jev nodes per gate
+-- at least 3 parallel choice nodes at G1 and at G9
+-- threshold: an answer only counts at `p >= 0.60`
+-- finalize.py refuses to act when the dot file is thin (fewer nodes than above) or when the final G1 / G9 answers disagree.
++Every folder, rejected ones included, carries the forecast: `graphpoints.csv` rows after the folder's date-time are the predicted path (up to `expire_at`), and `chart_prediction.svg` draws it on the chart.
+ 
+ ## Fill model
+ 
+@@ -167,7 +155,7 @@ Assumptions: all-or-nothing; no fees, funding, slippage or partial fills; one id
+ - LIMIT fills at the limit price on the first candle that touches it (low <= price for LONG, high >= price for SHORT). Never touched: PENDING becomes EXPIRED. MARKET fills at the open of the first candle.
+ - After the fill, TP and SL fill at their level on touch. A candle that touches both is a LOSS. In the candle where a LIMIT fills, only SL counts: the order of events inside one candle is unknown, so a TP touch there is ignored.
+ - If neither is touched, the result is `EXPIRED+x.xx%` or `EXPIRED-x.xx%` at the close of the last candle before `expire_at`.
+-- A filled PENDING folder is renamed twice (PENDING to OPEN, then OPEN to the result), so `log.md` shows the whole path.
++- A filled PENDING folder is renamed twice (PENDING to OPEN, then OPEN to the result); git history shows the path.
+ 
+ The search agents only fetch the candles (`outcome_candles.csv`); the script decides the outcome with the fill model above, so the result is deterministic and Jev is not involved. Use `--now 2026-10-25T00:00:00Z` to test against an old folder and `--dry-run` to preview the new name. The script refuses to resolve when the candles do not cover the whole window or have holes longer than 4 steps, because a partial series would wrongly give EXPIRED. Prefer 1m or 5m candles: coarse candles produce more candles that touch both TP and SL, and those count as a LOSS.
+ 
+@@ -179,10 +167,10 @@ The search agents only fetch the candles (`outcome_candles.csv`); the script dec
+ 
+ ## Conventions
+ 
+-- UTC everywhere (folder names, `log.md`, `trade.toml`, `graphpoints.csv` fetch stamps).
++- UTC everywhere (folder names, `trade.toml`, `graphpoints.csv`).
+ - The date-time in a folder name is frozen at first evaluation and never changes.
+ - Terminal folders are frozen; post-trade notes go in `review.md`.
+-- Follow-up ideas are new folders, linked from the first line of `log.md`.
++- Follow-up ideas are new folders; mention the target folder in `research_log.txt`.
+ - Percentages always have two decimals.
+ 
+ ## Deliberately out of scope
+diff --git a/scripts/finalize.py b/scripts/finalize.py
+index 2c57d8a..fe666d0 100644
+--- a/scripts/finalize.py
++++ b/scripts/finalize.py
+@@ -4,13 +4,9 @@
+   finalize.py FOLDER --side LONG|SHORT --type MARKET|LIMIT [--price P] --tp X --sl Y --expire-at T [--place-at T]
+   finalize.py FOLDER --reject 'reason'
+ 
+-Reads the Jev answers recorded as nodes in FOLDER/decision_tree.dot, writes trade.toml (none for a
+-rejection), then calls set_status.py so the folder becomes PENDING (LIMIT), OPEN (MARKET) or
+-REJECTED. Prints the BRIEF block.
+-
+-A Jev node is ONE line of the dot file with these attributes:
+-  g1_a [gate=G1, kind=choice, answer=LONG, p=0.71];
+-  g9_h [gate=G9, kind=noul, answer=setup_holds, p=0.82];
++Pure convenience: takes the decision as parameters (the AI decides, this script does not read or judge
++any file), checks the numbers are coherent, writes trade.toml (none for a rejection), then calls
++set_status.py so the folder becomes PENDING (LIMIT), OPEN (MARKET) or REJECTED. Prints the BRIEF block.
+ '''
+ import argparse
+ import datetime
+@@ -26,12 +22,6 @@ from set_status import FOLDER_RE  # noqa: E402
+ from stats import TomlError, read_trade_toml, validate_trade  # noqa: E402
+ 
+ NL = chr(10)
+-GATES = ['G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9']
+-MIN_NODES = 2      # Jev nodes needed in every gate
+-MIN_CHOICE = 3     # parallel choice answers needed at G1 and at G9
+-P_MIN = 0.60       # minimum probability for a decision
+-AGREE = 1.0        # share of G1 / G9 choice answers that must agree
+-ATTR_RE = re.compile(r'([a-z_]+)=(?:"([^"]*)"|([^, ]+))')
+ DT_RE = re.compile(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$')
+ 
+ 
+@@ -53,14 +43,6 @@ def pct(a, b):
+     return (a - b) / b * 100.0
+ 
+ 
+-def share(answers):
+-    return max(answers.count(x) for x in set(answers)) / float(len(answers))
+-
+-
+-def majority(answers):
+-    return max(set(answers), key=answers.count)
+-
+-
+ def resolve(root, folder):
+     path = folder if os.path.isdir(folder) else os.path.join(root, folder)
+     if not os.path.isdir(path):
+@@ -72,65 +54,6 @@ def resolve(root, folder):
+     return os.path.normpath(path), name, m.group('symbol')
+ 
+ 
+-def read_jev(folder):
+-    path = os.path.join(folder, 'decision_tree.dot')
+-    if not os.path.isfile(path):
+-        die('decision_tree.dot is missing')
+-    with open(path, encoding='utf-8') as fh:
+-        text = fh.read()
+-    if text.count('{') != text.count('}'):
+-        die('decision_tree.dot has unbalanced braces')
+-    out = []
+-    for raw in text.splitlines():
+-        s = raw.strip().rstrip(';').strip()
+-        if s.startswith('//') or '[' not in s or not s.endswith(']'):
+-            continue
+-        ident, _, rest = s.partition('[')
+-        at = dict((k, qv or bv) for k, qv, bv in ATTR_RE.findall(rest[:-1]))
+-        if 'gate' not in at:
+-            continue
+-        try:
+-            p = float(at.get('p', ''))
+-        except ValueError:
+-            p = -1.0
+-        g, kind, ans = at['gate'], at.get('kind'), at.get('answer')
+-        if g not in GATES or kind not in ('choice', 'noul') or not ans or not 0.0 <= p <= 1.0:
+-            die('node %s: a Jev node needs gate=G1..G9, kind=choice|noul, answer=..., p=0..1' % ident.strip())
+-        out.append((g, kind, ans, p))
+-    return out
+-
+-
+-def check_jev(folder, reject, side, etype):
+-    nodes = read_jev(folder)
+-    for g in (['G1'] if reject else GATES):
+-        n = len([x for x in nodes if x[0] == g])
+-        if n < MIN_NODES:
+-            die('gate %s has %d Jev nodes in decision_tree.dot, needs %d' % (g, n, MIN_NODES))
+-    g1 = [(a, p) for g, k, a, p in nodes if g == 'G1' and k == 'choice']
+-    if len(g1) < MIN_CHOICE:
+-        die('G1 needs %d choice nodes (parallel calls, shuffled order), found %d' % (MIN_CHOICE, len(g1)))
+-    if reject:
+-        return
+-    a1 = [a for a, p in g1]
+-    if share(a1) < AGREE:
+-        die('G1 answers disagree %s: uncertain, use --reject' % a1)
+-    if majority(a1) != side:
+-        die('G1 says %s but --side is %s' % (majority(a1), side))
+-    g9 = [(a, p) for g, k, a, p in nodes if g == 'G9' and k == 'choice']
+-    if len(g9) < MIN_CHOICE:
+-        die('G9 needs %d choice nodes (parallel calls, shuffled order), found %d' % (MIN_CHOICE, len(g9)))
+-    a9 = [a for a, p in g9]
+-    want = 'GO_' + etype
+-    if share(a9) < AGREE or majority(a9) != want:
+-        die('G9 choice nodes must agree on %s, got %s' % (want, a9))
+-    low = [p for a, p in g9 if a == want and p < P_MIN]
+-    if low:
+-        die('G9 %s has answers below %.2f: %s' % (want, P_MIN, low))
+-    holds = [p for g, k, a, p in nodes if g == 'G9' and k == 'noul' and a == 'setup_holds']
+-    if not holds or min(holds) < P_MIN:
+-        die('G9 noul setup_holds is missing or below %.2f' % P_MIN)
+-
+-
+ def main():
+     ap = argparse.ArgumentParser(description='Finish an IDEA folder: PENDING, OPEN or REJECTED.')
+     ap.add_argument('--root', default=ROOT)
+@@ -150,7 +73,6 @@ def main():
+     toml_path = os.path.join(path, 'trade.toml')
+ 
+     if a.reject:
+-        check_jev(path, True, None, None)
+         if os.path.exists(toml_path):
+             os.remove(toml_path)
+         status, note = 'REJECTED', a.reject
+@@ -174,7 +96,6 @@ def main():
+             die('tp and sl are on the wrong sides of each other for a ' + a.side)
+         if a.price is not None and not ((a.sl < a.price < a.tp) if up else (a.tp < a.price < a.sl)):
+             die('entry price must sit between sl and tp')
+-        check_jev(path, False, a.side, a.etype)
+         lines = ['# trade.toml: written by finalize.py, do not edit by hand',
+                  'symbol   = ' + q(symbol), 'side     = ' + q(a.side), '',
+                  '[entry]', 'type     = ' + q(a.etype)]
+diff --git a/scripts/set_status.py b/scripts/set_status.py
+index 8c9dab3..bca8e1e 100644
+--- a/scripts/set_status.py
++++ b/scripts/set_status.py
+@@ -1,7 +1,6 @@
+ #!/usr/bin/env python3
+-"""set_status.py — rename a trade folder to a new status and log the transition (stdlib only)."""
++"""set_status.py — rename a trade folder to a new status (stdlib only). The folder name is the record."""
+ import argparse
+-import datetime
+ import os
+ import re
+ import sys
+@@ -47,11 +46,11 @@ def entry_type(path):
+ 
+ 
+ def main():
+-    ap = argparse.ArgumentParser(description="Rename a trade folder to a new status and log it.")
++    ap = argparse.ArgumentParser(description="Rename a trade folder to a new status.")
+     ap.add_argument("--root", default=ROOT, help="journal root (default: trades/ next to scripts/)")
+     ap.add_argument("folder", help="folder name (or path) of the trade")
+     ap.add_argument("new_status", help="e.g. OPEN, WIN+5.32%%, LOSS-2.10%%, EXPIRED+0.00%%")
+-    ap.add_argument("--note", default=None, help="short note appended to the log line")
++    ap.add_argument("--note", default=None, help="accepted for compatibility; not recorded")
+     ap.add_argument("--force", action="store_true", help="suppress the state-machine warning")
+     args = ap.parse_args()
+ 
+@@ -107,20 +106,6 @@ def main():
+ 
+     os.rename(path, newpath)
+ 
+-    ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+-    line = "%s %s → %s" % (ts, old_status, new_status)
+-    if args.note:
+-        line += " — %s" % args.note
+-    log_path = os.path.join(newpath, "log.md")
+-    prefix = ""
+-    if os.path.exists(log_path) and os.path.getsize(log_path) > 0:
+-        with open(log_path, "rb") as fh:
+-            fh.seek(-1, os.SEEK_END)
+-            if fh.read(1) != b"\n":
+-                prefix = "\n"
+-    with open(log_path, "a", encoding="utf-8") as fh:
+-        fh.write(prefix + line + "\n")
+-
+     print("%s -> %s" % (name, newname))
+ 
+ 
+diff --git a/scripts/stats.py b/scripts/stats.py
+index fabdb95..b4a3b05 100644
+--- a/scripts/stats.py
++++ b/scripts/stats.py
+@@ -124,7 +124,7 @@ def main(argv=None):
+     ap = argparse.ArgumentParser(description="Summarise trade folders in the journal.")
+     ap.add_argument("root", nargs="?", default=ROOT, help="journal root (default: trades/ next to scripts/)")
+     ap.add_argument("--check", action="store_true",
+-                    help="exit 1 if an IDEA folder remains, or a non-IDEA folder has no log.md")
++                    help="exit 1 if an IDEA folder remains, or a PENDING/OPEN folder has no trade.toml")
+     args = ap.parse_args(argv)
+ 
+     root = args.root
+@@ -215,8 +215,6 @@ def main(argv=None):
+         for r in rows:
+             if r["kind"] == "IDEA":
+                 problems.append("%s: still IDEA" % r["folder"])
+-            elif not os.path.exists(os.path.join(root, r["folder"], "log.md")):
+-                problems.append("%s: no log.md (renamed by hand?)" % r["folder"])
+             if r["kind"] in ("PENDING", "OPEN") and r["side"] == "-":
+                 problems.append("%s: no trade.toml" % r["folder"])
+         for p in problems:
+diff --git a/trades/_template/decision_tree.dot b/trades/_template/decision_tree.dot
+index c3814ae..b0d04f3 100644
+--- a/trades/_template/decision_tree.dot
++++ b/trades/_template/decision_tree.dot
+@@ -1,14 +1,8 @@
+ digraph decision {
+   rankdir=TB;
+-  // Every Jev answer is ONE node on ONE line with these attributes (finalize.py reads them):
+-  //   gate=G1..G9   kind=choice|noul   answer=<OPTION or proposition_name>   p=<0..1>
+-  // choice: answer = the selected option (UPPER_CASE), p = its probability.
+-  // noul:   answer = the proposition name (lower_case), p = probability of yes.
+-  // Example:  g1_a [gate=G1, kind=choice, answer=LONG, p=0.71];
+-  // Other nodes (research findings, rejected alternatives) carry no gate attribute.
++  // Free-form record of the reasoning (findings, scenarios, Jev answers, rejected alternatives).
++  // No script reads this file.
+   idea [label=idea];
+-  research [label=research];
+   decide [label=trade, shape=diamond];
+-  idea -> research;
+-  research -> decide;
++  idea -> decide;
+ }
+diff --git a/trades/_template/graphpoints.csv b/trades/_template/graphpoints.csv
+index 8f97aeb..16d4e01 100644
+--- a/trades/_template/graphpoints.csv
++++ b/trades/_template/graphpoints.csv
+@@ -1,3 +1,4 @@
+-# candles.csv — reference candle window (UTC)
++# graphpoints.csv: UTC points of the chart, one row per point
++# Rows up to the folder time are extracted from the chart image(s); rows after it are the forecast, up to expire_at
+ # fetched_at: __FETCHED_AT__
+ timestamp,close price

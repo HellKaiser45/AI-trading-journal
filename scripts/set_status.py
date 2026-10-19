@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-"""set_status.py — rename a trade folder to a new status and log the transition (stdlib only)."""
+"""set_status.py — rename a trade folder to a new status (stdlib only). The folder name is the record."""
 import argparse
-import datetime
 import os
 import re
 import sys
@@ -47,11 +46,11 @@ def entry_type(path):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Rename a trade folder to a new status and log it.")
+    ap = argparse.ArgumentParser(description="Rename a trade folder to a new status.")
     ap.add_argument("--root", default=ROOT, help="journal root (default: trades/ next to scripts/)")
     ap.add_argument("folder", help="folder name (or path) of the trade")
     ap.add_argument("new_status", help="e.g. OPEN, WIN+5.32%%, LOSS-2.10%%, EXPIRED+0.00%%")
-    ap.add_argument("--note", default=None, help="short note appended to the log line")
+    ap.add_argument("--note", default=None, help="accepted for compatibility; not recorded")
     ap.add_argument("--force", action="store_true", help="suppress the state-machine warning")
     args = ap.parse_args()
 
@@ -106,20 +105,6 @@ def main():
         die("internal error: date/symbol tokens would change; refusing rename")
 
     os.rename(path, newpath)
-
-    ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
-    line = "%s %s → %s" % (ts, old_status, new_status)
-    if args.note:
-        line += " — %s" % args.note
-    log_path = os.path.join(newpath, "log.md")
-    prefix = ""
-    if os.path.exists(log_path) and os.path.getsize(log_path) > 0:
-        with open(log_path, "rb") as fh:
-            fh.seek(-1, os.SEEK_END)
-            if fh.read(1) != b"\n":
-                prefix = "\n"
-    with open(log_path, "a", encoding="utf-8") as fh:
-        fh.write(prefix + line + "\n")
 
     print("%s -> %s" % (name, newname))
 

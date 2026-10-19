@@ -124,7 +124,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="Summarise trade folders in the journal.")
     ap.add_argument("root", nargs="?", default=ROOT, help="journal root (default: trades/ next to scripts/)")
     ap.add_argument("--check", action="store_true",
-                    help="exit 1 if an IDEA folder remains, or a non-IDEA folder has no log.md")
+                    help="exit 1 if an IDEA folder remains, or a PENDING/OPEN folder has no trade.toml")
     args = ap.parse_args(argv)
 
     root = args.root
@@ -215,8 +215,6 @@ def main(argv=None):
         for r in rows:
             if r["kind"] == "IDEA":
                 problems.append("%s: still IDEA" % r["folder"])
-            elif not os.path.exists(os.path.join(root, r["folder"], "log.md")):
-                problems.append("%s: no log.md (renamed by hand?)" % r["folder"])
             if r["kind"] in ("PENDING", "OPEN") and r["side"] == "-":
                 problems.append("%s: no trade.toml" % r["folder"])
         for p in problems:
