@@ -1,0 +1,69 @@
+digraph decision_tree {
+  rankdir=TB;
+  bgcolor="#0d0e12";
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, fillcolor="#181a20", color="#343846", fontcolor="#e2e8f0"];
+  edge [color="#64748b", fontcolor="#94a3b8", fontsize=9, fontname="Helvetica"];
+
+  // 1. Chart Extraction & Structure Node
+  chart_extract [
+    label="1. Chart Extraction (261019_17h33m07s_screenshot.png)\nXRPUSDT · 1H · Aster · O1.3049 H1.3107 L1.3011 C1.3016 (2026-10-19T15:33:07Z)\n164 hourly candles extracted (2026-10-12T20:00Z to 2026-10-19T15:00Z)\n• Macro Lower Highs: 1.3860 (Oct 14) → 1.3530 (Oct 16) → 1.3120 (Oct 17) → 1.3212 (Oct 19 07:00Z)\n• Macro Lower Lows: 1.3108 (Oct 13) → 1.2832 (Oct 15) → 1.2691 (Oct 17) → 1.2551 (Oct 18 19:00Z)\n• V-bounce 1.2551 → 1.3212 (+5.27%) stalled at 0.500 macro Fib (1.3205) & Oct 16 shelf (1.3231)\n• Oct 19 9h upper shelf (1.3082–1.3169) broke down at 10:00Z to 1.2987\n• 4 lower-high rejections under broken shelf: 1.3120 (12:00Z) → 1.3146 (13:00Z) → 1.3133 (14:00Z) → 1.3107 (15:00Z)\n• Bounce Fibs (1.2551→1.3212): 0.236=1.3056, 0.382=1.2959, 0.500=1.2881, 0.618=1.2804, 0.786=1.2692\n• 1H Wilder ATR-14 = 0.0100 (0.76%), RSI-14 = 49.85, SMA-20 = 1.3040, SMA-50 = 1.2958, SMA-100 = 1.3082",
+    fillcolor="#1e293b", color="#3b82f6"
+  ];
+
+  // 2. Scenario Generation & Exhaustion Loop
+  scenario_loop [
+    label="2. Scenario Generation & Jev Exhaustion Loop\n• Initial S1–S5 → Jev noul another_plausible p=0.64 (>=0.60, opposite p=0.39) → CONTINUE\n• Added S6 (bull trap 1.3320–1.3360) & S7 (bear trap 1.2691–1.2804) → Jev noul another_plausible p=0.57 (<0.60, opposite p=0.43) → STOP\n\nJev Rerank (7 Scenarios across Chart + Research):\n1. S1_short_bounce_1308_1314_to_1282 (relevance=0.97) [SELECTED]\n2. S4_range_chop_1288_1316_no_trade (relevance=0.96)\n3. S2_long_pullback_1288_1295_to_1321 (relevance=0.95)\n4. S6_bull_trap_sweep_1321_1336_then_drop (relevance=0.95)\n5. S3_short_immediate_breakdown_to_1269_1255 (relevance=0.94)\n6. S7_deep_sweep_1269_1280_then_bounce (relevance=0.94)\n7. S5_long_immediate_breakout_to_1345_1353 (relevance=0.92)",
+    fillcolor="#1e1b4b", color="#8b5cf6"
+  ];
+
+  // 3. Multi-Round Research (3 Rounds)
+  research_rounds [
+    label="3. Three-Round Research & Exchange API Verification\n• Pre-check Jev noul: multi-TF/depth p=0.90, derivatives p=0.84, news/ETF/unlocks p=0.84, corr p=0.74 (no research needed p=0.10)\n• Round 1 (agent_RESEARCH + fetch_market_data.py): Spot ETF -$1.84M weekly outflow (broke 13w streak),\n  1.669B XRP 30d Binance whale deposits, Oct 1 escrow 700M/1B re-locked, Oct 23 XRPL fixCleanup3_4_0;\n  Aster 361k ask wall at 1.3066; 9h perp taker selling (0.77–0.93). Sufficiency p=0.47 → Round 2\n• Round 2 (fetch_round2.py): Daily 20d=1.4039, 50d=1.4144, 100d=1.2790, 200d=1.2799; XRPBTC 30d -8.97%;\n  7d 1H VPVR #1 POC = 1.3050–1.3100 (74.55M XRP, 52.5% taker sell) & LVN 1.2750–1.2880. Sufficiency p=0.57 → Round 3\n• Round 3 (fetch_round3.py): 5m Aster/Binance microstructure (15:25Z H=1.3107 → 15:55Z 1.2968),\n  Top Trader Account L/S = 3.0323 (75.2% L), Position L/S = 2.1752 (68.5% L), Global L/S = 2.5971 (72.2% L)",
+    fillcolor="#14261c", color="#22c55e"
+  ];
+
+  // 4. Jev Probability Curves & Structural Propositions
+  prob_curves [
+    label="4. Jev Noul Probability Curves & Structural Checks\n• Trade down to 1.2790–1.2881 vs break >1.3212 (24–36h): p=0.78 (opposite p=0.15)\n• Intraday bounce faces strong resistance in 1.3050–1.3146 without breaking 1.3212: p=0.82\n• SHORT setup edge (1.3016–1.3085 → 1.2810–1.2850, SL >1.3212): p=0.77 (LONG edge p=0.24, NO_TRADE p=0.20)\n• SHORT LIMIT (1.3050–1.3085) superior to SHORT MARKET (1.3016): p=0.78 (opposite p=0.20)\n• SHORT LIMIT @ 1.3065 fills before 1.2810: p=0.66 (vs @ 1.3080 p=0.63, @ 1.3115 p=0.23)\n• TP @ 1.2810 reached before SL 1.3235 and before 2026-10-20T21:00:00Z: p=0.63\n• SL @ 1.3235 stronger structural protection than tight SL @ 1.3165: p=0.80\n• TP @ 1.2810 higher probability within 29h than deeper TP @ 1.2710: p=0.74",
+    fillcolor="#1f242d", color="#38bdf8"
+  ];
+
+  // 5. Parameter Selection (Entry, TP, SL, Expiry)
+  param_select [
+    label="5. Jev Parameter Selection (jev_decide & jev_find)\n• jev_decide (6 candidates): short_limit_13065_tp12810_sl13235 selected (p=0.88, conf=0.87, 3/3 reqs supported;\n  runner-up short_limit_13080 p=0.11; combined SHORT LIMIT p=0.99)\n• jev_find Entry (1.3050 vs 1.3065 vs 1.3080 vs 1.3115): 1.3065 p=0.93 (exists=0.81)\n• jev_find TP (1.2885 vs 1.2810 vs 1.2710): 1.2810 p=0.95 (exists=0.89)\n• jev_find SL (1.3165 vs 1.3235 vs 1.3265): 1.3235 p=0.81 (exists=0.64)\n• jev_find Expiry (08:00Z vs 21:00Z vs Oct 21 12:00Z vs Oct 23 08:00Z): 2026-10-20T21:00:00Z p=1.00 (exists=0.96)\n\nFinal Selected Levels:\nSHORT LIMIT @ 1.3065 | TP 1.2810 (+1.95%) | SL 1.3235 (-1.30%) | RR 1.50 | Expire 2026-10-20T21:00:00Z",
+    shape=box, fillcolor="#272015", color="#eab308"
+  ];
+
+  // 6. Direction Gate (3 Parallel Shuffled-Order Calls, 6 Items)
+  dir_gate [
+    label="6. Direction Gate — 3 Parallel Shuffled Calls {LONG, SHORT, NO_TRADE}\n• Call 1 {LONG, SHORT, NO_TRADE}: Chart+Research SHORT p=0.89 (NO_TRADE 0.07, LONG 0.04) | Chart-Only SHORT p=0.99\n• Call 2 {SHORT, NO_TRADE, LONG}: Chart+Research SHORT p=0.96 (NO_TRADE 0.03, LONG 0.01) | Chart-Only SHORT p=1.00\n• Call 3 {NO_TRADE, LONG, SHORT}: Chart+Research SHORT p=0.86 (NO_TRADE 0.08, LONG 0.06) | Chart-Only SHORT p=0.99\n→ 6/6 items = SHORT with all p >= 0.86 (threshold 0.60)",
+    shape=diamond, fillcolor="#2d1b24", color="#f43f5e"
+  ];
+
+  // 7. Final Execution Gate (3 Parallel Shuffled-Order Calls + setup_holds + jev_verify)
+  final_gate [
+    label="7. Final Execution Gate — 3 Parallel Shuffled Calls {GO_LIMIT, GO_MARKET, REJECT}\n• Call 1 {GO_LIMIT, GO_MARKET, REJECT}: GO_LIMIT p=0.99 (REJECT 0.01, GO_MARKET 0.00)\n• Call 2 {GO_MARKET, REJECT, GO_LIMIT}: GO_LIMIT p=1.00 (REJECT 0.00, GO_MARKET 0.00)\n• Call 3 {REJECT, GO_LIMIT, GO_MARKET}: GO_LIMIT p=0.98 (REJECT 0.02, GO_MARKET 0.00)\n• setup_holds ('The chart setup is not contradicted by the research'): p=0.80 (opposite p=0.16)\n• jev_verify (4 factual & arithmetic claims against script/API evidence): 4/4 verified (conf=1.00, 1.00, 1.00, 0.95)",
+    shape=doubleoctagon, fillcolor="#142922", color="#10b981"
+  ];
+
+  // 8. Rejected Alternatives
+  rejected_alts [
+    label="Rejected Alternatives\n• LONG LIMIT @ 1.2935 / LONG MARKET @ 1.3016: rejected (jev_noul p=0.24, jev_decide p=0.00; counter-trend to 7d/30d structure, -$1.84M ETF outflows & 75.2% crowded longs)\n• SHORT MARKET @ 1.3016: rejected (jev_noul p=0.20, jev_decide p=0.00; poor RR=0.94 to 1.2810/1.3235)\n• SHORT LIMIT @ 1.3115: rejected (jev_noul fill p=0.23; requires clearing 361k ask wall at 1.3066 & 140k ask wall at 1.3089)\n• Tight SL @ 1.3165: rejected (jev_find p=0.19; vulnerable to upper-shelf wick below 1.3212 peak)\n• Deep TP @ 1.2710: rejected (jev_find p=0.00; requires breaking Daily 100d/200d MAs at 1.2790–1.2799)",
+    fillcolor="#2a1818", color="#ef4444"
+  ];
+
+  // 9. Terminal Action
+  terminal [
+    label="FINAL DECISION: GO_LIMIT (PENDING)\nXRPUSDT SHORT LIMIT @ 1.3065\nTP 1.2810 (+1.95%) | SL 1.3235 (-1.30%) | RR 1.50\nExpire: 2026-10-20T21:00:00Z\nFolder: PENDING_2026-10-19T1533Z_XRPUSDT",
+    shape=ellipse, fillcolor="#1e293b", color="#eab308", fontcolor="#fef08a"
+  ];
+
+  chart_extract -> scenario_loop;
+  scenario_loop -> research_rounds;
+  research_rounds -> prob_curves;
+  prob_curves -> param_select;
+  param_select -> dir_gate;
+  param_select -> rejected_alts [style=dashed, color="#ef4444"];
+  dir_gate -> final_gate;
+  final_gate -> terminal;
+}
