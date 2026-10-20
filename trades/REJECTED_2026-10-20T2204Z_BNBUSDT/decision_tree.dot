@@ -1,0 +1,25 @@
+digraph BNBUSDT_1h_Decision {
+  rankdir=TB;
+  node [shape=box, fontname="monospace", fontsize=10, style="rounded,filled", fillcolor="#1e1e24", fontcolor="#e5e7eb", color="#4b5563"];
+  edge [fontname="monospace", fontsize=9, color="#9ca3af", fontcolor="#d1d5db"];
+
+  start [label="BNBUSDT 1h Chart (Aster)\nCaptured: 2026-10-20T22:03:47Z | Eval: 22:04:14Z\n220 Candles (2026-10-11 19:00Z .. 2026-10-20 22:00Z)\nRange: 706.24 .. 758.54 | Last: 742.41 | ATR(14): 3.52 (0.47%)", fillcolor="#172554", color="#3b82f6"];
+
+  structure [label="Chart Structure:\n- 51h V-recovery (+5.12%) from 706.24 low\n- Staircase HLs: 723.72 -> 725.43 -> 727.33 -> 731.47 -> 736.91\n- Retesting Oct 20 14:00Z spike high (742.49)\n- Below Oct 13-14 breakdown shelf (746.82-748.92)"];
+
+  research [label="Filtered Research Findings (Jev Noul >= 0.85):\n- F1 (P=0.91): Binance Spot 742.43 (742.38 @ 22:21Z), 15,779 BNB spike hour vs 1.6k-6k/h grind\n- F2 (P=0.94): Heavy 743-748 Ask Walls (~6,285 BNB Perp + ~4,536 BNB Spot)\n  vs Strong 736-742 Bid Walls (Spot 736 = 1,593 BNB; Perp 739-741 = 4,945 BNB)\n- F3 (P=0.88): Funding 0.0000%, 24h OI flat (-0.13% at $409.5M), Retail 72.1% Long\n- F7 (P=0.91): Top Trader Position L/S neutral (1.1133), Perp Taker B/S 0.83-0.88 vs Spot 4h Taker Buy 62%\n- F8 (P=0.93): 3-day 1D V-reversal into 746.82-748.92 supply on tapering 4h vol (33.8k -> 13.9k -> 4.8k)"];
+
+  regime [label="Regime Choice (2 Shuffled Calls):\n- Range Consolidation: 0.70 / 0.82\n- Bearish Reversal: 0.29 / 0.18\n- Bullish Continuation: 0.01 / 0.00", fillcolor="#312e81", color="#818cf8"];
+
+  scenarios [label="5-Scenario Probabilities (Contested & Order-Sensitive):\n- S4 (Bull-Trap Sweep 743.5-747.5 -> Reversal): 0.37 (fwd) / 0.53 (rev) / 0.02 (no-res)\n- S2 (Pullback 736-738.5 -> Bounce): 0.45 (fwd) / 0.24 (rev) / 0.95 (no-res)\n- S5 (736.90-744.00 Range Consolidation): 0.18 (fwd) / 0.22 (rev) / 0.02 (no-res)\n- S1 (Immediate Breakout): 0.00 (fwd) / 0.00 (rev) / 0.01 (no-res)\n- S3 (Direct Double-Top Breakdown): 0.00 (fwd) / 0.01 (rev) / 0.00 (no-res)", fillcolor="#3f3f46", color="#fbbf24"];
+
+  candidates [label="Candidate Trade Win Probabilities (Jev Noul P(TP before SL)):\n- L_MKT_1 (742.41 -> TP 748.50 / SL 736.50, RR 1.03): P=0.23 (Loss/Exp P=0.82)\n- L_MKT_2 (742.41 -> TP 755.00 / SL 736.00, RR 1.96): P=0.14\n- L_LIM_1 (737.50 -> TP 746.80 / SL 731.00, RR 1.43): P=0.31\n- L_LIM_2 (736.20 -> TP 746.50 / SL 730.50, RR 1.81): P=0.33\n- L_LIM_3 (733.50 -> TP 744.50 / SL 727.00, RR 1.69): P=0.34\n- S_MKT_1 (742.41 -> TP 733.50 / SL 747.80, RR 1.65): P=0.50 (Loss/Exp P=0.65)\n- S_MKT_2 (742.41 -> TP 736.50 / SL 746.00, RR 1.65): P=0.51\n- S_LIM_1 (744.80 -> TP 736.20 / SL 749.50, RR 1.83): P=0.44\n- S_LIM_2 (746.80 -> TP 736.50 / SL 751.50, RR 2.19): P=0.48"];
+
+  expiry [label="Expiry Selection (Jev Decide):\n- 2026-10-21T16:00:00Z (18h): P=0.93 [SELECTED]\n- 2026-10-21T22:00:00Z (24h): P=0.06\n- 2026-10-21T08:00:00Z (10h): P=0.01"];
+
+  gate [label="Final Decision Gate (3 Shuffled Calls Each + Noul Checks):\n- Direction 1 (L/S/NT): NO_TRADE=0.75, SHORT=0.25, LONG=0.00\n- Direction 2 (S/NT/L): NO_TRADE=0.69, SHORT=0.31, LONG=0.00\n- Direction 3 (NT/L/S): NO_TRADE=0.83, SHORT=0.17, LONG=0.00\n- Final 1 (GL/GM/REJ): REJECT=0.95, GO_LIMIT=0.04, GO_MARKET=0.01\n- Final 2 (GM/REJ/GL): REJECT=0.94, GO_LIMIT=0.06, GO_MARKET=0.00\n- Final 3 (REJ/GL/GM): REJECT=0.94, GO_LIMIT=0.06, GO_MARKET=0.00\n- setup_holds(bullish)=0.10 | setup_holds(bearish)=0.13 | setup_contradicted=0.85 | freshness_valid=0.06", shape=diamond, fillcolor="#450a0a", color="#ef4444"];
+
+  final_reject [label="FINAL OUTCOME: REJECTED\nFolder: REJECTED_2026-10-20T2204Z_BNBUSDT\nForecast Path Plotted to 2026-10-21T16:00:00Z", fillcolor="#7f1d1d", color="#f87171"];
+
+  start -> structure -> research -> regime -> scenarios -> candidates -> expiry -> gate -> final_reject;
+}

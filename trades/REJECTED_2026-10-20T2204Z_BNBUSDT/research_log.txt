@@ -1,0 +1,60 @@
+# BNBUSDT 1h Research & Forecast Log
+Evaluation Start: 2026-10-20T22:04:14Z
+Chart Capture Time: 2026-10-20T22:03:47Z (00:03:47 UTC+2 on Aster)
+Freshness Check Time: 2026-10-20T22:21:40Z
+Horizon / Expiry: 18 hours -> 2026-10-21T16:00:00Z (selected by Jev with P=0.93 over 10h [0.01] and 24h [0.06])
+Current Market State: Trending bullish 51-hour V-bottom recovery (+5.12% from 706.24 low on Oct 18 19:00Z to 742.41 on chart / 742.38 live Binance spot), retesting the Oct 20 14:00Z spike high (742.49) directly beneath the Oct 13-14 breakdown supply shelf (746.82-748.92) on tapering 4h volume. ATR(14) = 3.52 (0.47%), ATR(24) = 3.17 (0.43%).
+
+## THESIS & DECISION SUMMARY
+Decision: REJECT (NO_TRADE: 0.75, 0.69, 0.83 across 3 shuffled calls; REJECT: 0.95, 0.94, 0.94 across 3 shuffled calls; setup_holds bullish = 0.10, setup_holds bearish = 0.13, setup_contradicted = 0.85, freshness_valid = 0.06).
+While pure chart geometry initially favored a shallow pullback and continuation (S2 = 0.95 without research), live orderbook, volume, and derivatives evidence splits the probability distribution across three competing scenarios:
+- S4 (Bull-Trap Liquidity Sweep of 743.50-747.50 then Bearish Reversal): P = 0.37 to 0.53 (order-dependent)
+- S2 (Shallow Pullback to 736.00-738.50 Support then Bullish Bounce): P = 0.24 to 0.45 (order-dependent)
+- S5 (High-Level Range Consolidation between 736.90 and 744.00): P = 0.18 to 0.22 (Regime Range Consolidation P = 0.70 to 0.82)
+- S1 (Immediate Breakout): P = 0.00
+- S3 (Direct Double-Top Breakdown): P = 0.00 to 0.01
+
+Every candidate LONG and SHORT trade (market and limit) achieved <= 0.51 probability of reaching TP before SL within the 18h horizon (L_MKT_1=0.23, L_MKT_2=0.14, L_LIM_1=0.31, L_LIM_2=0.33, L_LIM_3=0.34, S_MKT_1=0.50 [loss/expiry=0.65], S_MKT_2=0.51, S_LIM_1=0.44, S_LIM_2=0.48). Because the scenario distribution is contested and order-dependent and no trade holds across the plausible paths, the setup is rejected.
+
+## DATED FINDINGS (FILTERED BY JEV FOR HORIZON RELEVANCE >= 0.85)
+
+1. [2026-10-20 22:11-22:21 UTC] Live Multi-Venue Spot/Perp Price Discovery & Tapering Volume (Jev relevance P = 0.91)
+   - At 22:11 UTC, Binance Spot traded at 742.43 (24h high/low 742.66 / 725.00, 24h volume 91,174 BNB = $66.84M across 459k trades, +1.389%), Bybit Spot at 742.42 ($1.98M vol), Bybit Perp at 741.98 ($22.07M vol), and Aster Perp at 742.87 ($4.10M vol).
+   - At the 22:21:40 UTC freshness check, Binance Spot was 742.38, Binance Perp 742.77, and Aster Perp 742.88.
+   - The initial push into the 742 zone printed on the highest 1h volume of the day (15,779 BNB on Binance Spot, ~5x the ~3k BNB/h average), followed by a rejection to 731.47 and a lower-volume grind (1.6k-6k BNB/h) back to 742.43-742.66.
+   - Sources: https://api.binance.com/api/v3/ticker/24hr?symbol=BNBUSDT , https://fapi.binance.com/fapi/v1/ticker/price?symbol=BNBUSDT , https://api.bybit.com/v5/market/tickers?category=linear&symbol=BNBUSDT , https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=BNBUSDT
+
+2. [2026-10-20 22:12 UTC] Binance Spot & Perp Orderbook Depth Walls (730-755) (Jev relevance P = 0.94)
+   - Heavy resting ask liquidity sits immediately above current price at 743-748, directly fronting the Oct 13-14 chart supply shelf (746.82-748.92):
+     * Binance Perp top $1-bucket asks (732.21-753.60 range): 745 (2,302 BNB), 744 (1,767 BNB), 748 (1,246 BNB), 747 (1,168 BNB), 743 (1,048 BNB), 751 (941 BNB), 750 (939 BNB), 746 (853 BNB) -> ~6,285 BNB (~$4.67M) stacked between 743 and 748.
+     * Binance Spot top $1-bucket asks (728.77-754.20 range): 747 (1,074 BNB), 744 (1,002 BNB), 745 (901 BNB), 749 (876 BNB), 743 (683 BNB), 750 (508 BNB), 751 (504 BNB).
+   - Strong resting bid walls sit underneath between 736 and 742, opposing an immediate breakdown:
+     * Binance Perp top $1-bucket bids: 741 (2,046 BNB), 739 (1,625 BNB), 742 (1,550 BNB), 740 (1,274 BNB), 737 (1,117 BNB), 738 (1,002 BNB).
+     * Binance Spot top $1-bucket bids: 736 (1,593 BNB standout wall), 741 (893 BNB), 738 (774 BNB), 737 (689 BNB), 740 (640 BNB), 742 (564 BNB).
+   - Sources: https://api.binance.com/api/v3/depth?symbol=BNBUSDT&limit=1000 , https://fapi.binance.com/fapi/v1/depth?symbol=BNBUSDT&limit=1000
+
+3. [2026-10-20 22:11 UTC] Derivatives Positioning: Neutral Funding, Flat Open Interest, Crowded Retail Longs (Jev relevance P = 0.88)
+   - Funding Rates: Binance Perp last settled funding rate is 0.00000000 (all settlements <= +0.0082%/8h since Oct 19; next settlement 2026-10-21T00:00:00Z). Bybit Perp current funding rate is +0.00008716 (+0.0087%/8h).
+   - Open Interest: Binance Perp OI is 552,368 BNB ($409.5M), down -0.13% over 24h and -0.7% over 48h. Bybit Perp OI is 140,450 BNB ($104.2M), flat over 48h (140.0k-141.8k BNB). No net new leveraged positions entered during the +1.39% recovery.
+   - Retail Long/Short Ratio: Binance global account L/S ratio is 2.58 (72.1% long accounts, easing from 2.67 at the spike hour); Bybit account ratio is also 72.1% long.
+   - Sources: https://fapi.binance.com/fapi/v1/premiumIndex?symbol=BNBUSDT , https://fapi.binance.com/fapi/v1/openInterest?symbol=BNBUSDT , https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=BNBUSDT&period=1h
+
+4. [2026-10-20 22:16 UTC] Top Trader vs Retail Divergence & Spot vs Perp Taker Flow (Jev relevance P = 0.91)
+   - Binance Top Trader Position L/S Ratio over the last 6 hours is nearly flat/neutral at 1.1133 (52.68% long vs 47.32% short), diverging from retail accounts (72.1% long, ratio 2.5894).
+   - Binance Perp Taker Buy/Sell Volume Ratio dropped below 1.0 in 3 of the last 4 hours: 0.7806 (3,710 buy / 4,753 sell), 1.0534 (3,853 buy / 3,658 sell), 0.8811 (4,492 buy / 5,098 sell), and 0.8281 (4,551 buy / 5,495 sell), showing perpetual taker selling into the 740-742 grind.
+   - Conversely, Binance Spot 4h klines show 62.0% taker buy volume in the current 4h bar (2,962.7 of 4,780.9 BNB), confirming spot buyers pushing into perp sellers and resting ask walls on tapering 4h volume (33,842.9 BNB -> 13,910.7 BNB -> 4,780.9 BNB).
+   - Sources: https://fapi.binance.com/futures/data/topLongShortPositionRatio?symbol=BNBUSDT&period=1h&limit=6 , https://fapi.binance.com/futures/data/takerlongshortRatio?symbol=BNBUSDT&period=1h&limit=6 , https://api.binance.com/api/v3/klines?symbol=BNBUSDT&interval=4h&limit=12
+
+5. [2026-10-20 22:16 UTC] Higher-Timeframe 1D & 4H V-Reversal into Breakdown Base (Jev relevance P = 0.93)
+   - On the 1D timeframe, BNBUSDT has printed 3 consecutive green recovery days from the 705.86 low (Oct 18 close 723.36, Oct 19 close 732.13, Oct 20 current 742.65 on 87,322 BNB volume), running directly into the Oct 13-14 breakdown base (746.82-748.92) without a multi-bar consolidation or volume expansion.
+   - Sources: https://api.binance.com/api/v3/klines?symbol=BNBUSDT&interval=1d&limit=10
+
+## EXPIRY REASONING (2026-10-21T16:00:00Z — 18 HOURS)
+- On the 1h chart, prior impulse and consolidation legs lasted 13 to 19 hours (Oct 18 19:00Z low 706.24 to Oct 19 14:00Z high 731.14 = 19h; consolidation to Oct 20 09:00Z low 727.33 = 19h; impulse to 742.49 and V-retest at 22:00Z = 13h).
+- With ATR(14) = 3.52 (0.47%/h), structural resolution between the 743-748 ask wall cluster and the 736-739 bid support shelf requires 12-18 candles.
+- An 18-hour horizon (2026-10-21T16:00:00Z) spans three 8h perp funding settlements (00:00Z, 08:00Z, 16:00Z), the 08:00 UTC Oct 21 Deribit daily BTC/ETH options expiry, and the 14:30 UTC US macro / EIA window. Jev selected 2026-10-21T16:00:00Z with 0.93 probability over 2026-10-21T08:00:00Z (0.01) and 2026-10-21T22:00:00Z (0.06).
+
+## WHAT COULD NOT BE FOUND / DROPPED ITEMS
+- Coinalyze / CoinGlass / Hyblock exact liquidation heatmap clusters between 730-750 could not be fetched directly (Coinalyze API returned HTTP 401 key required; CoinGlass/Hyblock require interactive login), though resting Binance Spot and Perp orderbook depth (1000 levels per side) provided exact resting liquidity walls across 728.77-754.20.
+- Deribit lists no BNB options (`get_instruments?currency=BNB&kind=option` returned empty).
+- Findings with Jev horizon-relevance below 0.85 (Oct 19 37th BNB burn / Oct 20 morning NewL1 recap [0.81], BTC/ETH Deribit max pain at $82k/$2,400 [0.74-0.78], 15m light-volume CVD turn & BSC DEX volume [0.46], and EPIC/QUICK Simple Earn removal [0.09]) were excluded from the primary decision evidence per protocol.
