@@ -1,0 +1,59 @@
+# Research Log — ETHUSDT 1h (IDEA_2026-10-20T2104Z_ETHUSDT)
+
+- **Symbol**: ETHUSDT
+- **Timeframe**: 1h (243 candles extracted from `2026-10-10T19:00:00Z` to `2026-10-20T21:00:00Z`; screenshot captured at `2026-10-20 21:03:02 UTC` / `23:03:02 UTC+2`)
+- **Setup Horizon**: 12 to 24 hours (window: `2026-10-20T21:00:00Z` to `2026-10-21T21:00:00Z`; selected expiry `2026-10-21T15:00:00Z` / 18h)
+- **Market State**: Post-impulse 1h flag consolidation at `2448.44` (live `2452.58–2454.59`) after surging `+99.91 USDT` (`+4.20%`) from `2376.70` (`09:00Z`) to `2476.61` (`14:00Z`, right below the `0.618` macro Fib at `2477.61` and Oct 16 close `2476.28`) and pulling back to `2424.51–2426.16` (`0.50` impulse Fib `2426.65`, `1h EMA20=2424.66`, closing every bar above `4h SMA50=2436.59` and `1h EMA200=2435.20`). 1h `ATR(14)=20.40` (`0.83%`), `ATR(24)=17.99` (`0.73%`), `RSI(14)=60.85`.
+
+## Verified Findings Passing Jev Horizon Filter (`jev_noul` >= 0.80)
+
+1. **[2026-10-20 UTC] Impulse vs Flag Volume Profile & Higher-Timeframe MAs (`jev_noul` = 0.95 — likely, auto)**
+   - **Finding**: Direct Binance UTC klines confirm the `2026-10-20T14:00:00Z` breakout candle traded `45,650 ETH` (`5.16x` the subsequent 6-hour `15:00Z–20:00Z` flag average of `8,851 ETH/h`, which decayed monotonically: `23,903 -> 10,037 -> 6,754 -> 4,325 -> 4,347 -> 3,738 ETH`). On higher timeframes, the flag pullback bounced directly off the `4h SMA50` (`2436.59`) and holds above the `4h SMA20` (`2409.97`), while the `1d SMA20` (`2534.24`), `1d SMA50` (`2551.12`), and `4h SMA200` (`2592.08`) sit overhead.
+   - **Impact on Forecast**: Confirms textbook volume decay during the flag pullback, validating `2414.87–2436.59` as structural support while capping 12–24h upside below the daily moving averages.
+   - **Source**: Binance Spot/Perp REST API (`https://api.binance.com/api/v3/klines`), retrieved `2026-10-20 UTC`.
+
+2. **[2026-10-20 UTC] ETH 24h OI Delta & Short-Squeeze Liquidation Exhaustion (`jev_noul` = 0.95 — likely, auto)**
+   - **Finding**: Aggregate ETH perpetual open interest across all venues is `$24.57B` and declined `-1.05%` over 24h (Binance ETH OI is `2.2845M ETH` / `$5.59B`, `-0.16%` 24h and `-1.09%` 12h). Realized 12h liquidations across venues totaled `$103.79M` with `77%` shorts (`$79.64M` short vs `$24.15M` long; 24h total `$123.53M` with `$85.12M` short), before dropping to `$2.97M` over the last 4h and `$0.66M` over the last 1h.
+   - **Impact on Forecast**: Demonstrates that the `14:00Z` surge to `2476.61` was driven by short covering (`-1.05%` OI delta, `$79.64M` shorts liquidated) rather than fresh leveraged long inflows, and that squeeze momentum has now subsided.
+   - **Sources**: https://bitcoinliquidityheatmap.com/coin/ETH and Binance Futures API (`https://fapi.binance.com/futures/data/openInterestHist`), retrieved `2026-10-20 UTC`.
+
+3. **[2026-10-20 UTC] Live Deep-Market Prices & BTC Correlation (`jev_noul` = 0.94 — likely, auto)**
+   - **Finding**: Live ETHUSDT trades at `2452.58–2454.59` on Binance (24h range `2372.62–2478.00`, 24h volume `208,463 ETH`), `2452.60` on Bybit, `2452.48` on OKX, and `2452.32` on Coinbase (`+0.17%` to `+0.21%` above the `2448.44` chart close). BTCUSDT trades at `82,900.28` (24h range `81,200–83,439`), having led the breakout with a `2,310 BTC` hourly volume spike while ETH followed with `1.5–2x` beta (`ETH/BTC` steady at `0.02959`).
+   - **Impact on Forecast**: Confirms the chart is current and that ETH's move was confirmed by BTC without ETH/BTC downside divergence.
+   - **Sources**: Live exchange feeds (Binance, Bybit, OKX, Coinbase) and https://www.finanzen.ch/nachrichten/devisen/aktueller-marktbericht-zu-bitcoin-&-co--1036644346 (published `2026-10-20`).
+
+4. **[2026-10-20 UTC] Deribit 2026-10-21T08:00:00Z Daily Options Expiry Inside Horizon (`jev_noul` = 0.94 — likely, auto)**
+   - **Finding**: Deribit's daily ETH options expiry at `2026-10-21T08:00:00Z` (11h into the horizon) has `21,192 ETH` call OI vs `15,636 ETH` put OI (`PCR = 0.738`) and **max pain at `$2,420`** (`~1.3%` below spot), with a dense call OI wall directly overhead at `$2,460` (`3,904 ETH`), `$2,480` (`3,765 ETH`), and `$2,500` (`3,119 ETH`). BTC's `08:00Z` expiry has `1,900.7 BTC` call OI vs `1,818.2 BTC` put OI (`PCR = 0.957`) and max pain at `$82,000`.
+   - **Impact on Forecast**: Creates overhead gamma resistance at `$2,460–$2,480` and a gravitational pull toward `$2,420` max pain into `2026-10-21T08:00:00Z` (reinforcing Scenario S2 pullback-and-bounce and Scenario S4 range compression).
+   - **Source**: https://www.deribit.com/api/v2/public/get_book_summary_by_currency (retrieved `2026-10-20 UTC`).
+
+5. **[2026-10-20 UTC] Live Spot & Perpetual Orderbook Bid/Ask Walls (`jev_noul` = 0.93 — likely, auto)**
+   - **Finding**: Binance USDT-M perp and spot orderbooks show a `$28.22M` bid shelf at `$2,450` (`$24.64M` perp + `$3.58M` spot) and `$17.47M` at `$2,445`, directly opposing a `$33.25M` ask wall at `$2,460` (`$29.50M` perp + `$3.75M` spot, aligned with the `3,904 ETH` `2460-C` Deribit call strike) and `$22.77M` at `$2,455`.
+   - **Impact on Forecast**: Explains the immediate pinning between `2445` and `2460` and creates a high hurdle for an immediate market breakout without first testing lower support.
+   - **Source**: Binance Spot & USDT-M Futures depth APIs (`https://fapi.binance.com/fapi/v1/depth`, `https://api.binance.com/api/v3/depth`), retrieved `2026-10-20 UTC`.
+
+6. **[2026-10-20 UTC] Perpetual Funding & Retail Long Account Crowding (`jev_noul` = 0.92 — likely, auto)**
+   - **Finding**: Perpetual funding is positive across all 25 tracked venues (Binance `+0.0064%/8h` or `+6.95%/yr`, Bybit `+9.17%/yr`, OKX `+8.96%/yr`, Hyperliquid `+10.95%/yr`), and retail account long/short ratios are heavily skewed long (`73%` long on Binance, `72%` on Bybit, `66%` on OKX, `77%` on Bitget) inside a `-2.6%` 7-day trend.
+   - **Impact on Forecast**: Crowded retail long positioning increases the probability of a pullback toward `2415–2426` to flush late longs before any sustainable advance.
+   - **Source**: https://perpfinder.com/asset/ETH (stamped `2026-10-20 21:10 UTC`).
+
+7. **[2026-10-20 UTC] Pre-FOMC Blackout & Macro Schedule (`jev_noul` = 0.88 — likely, auto)**
+   - **Finding**: No top-tier US macro economic releases or Federal Reserve speaker events fall inside `2026-10-20T21:00:00Z` to `2026-10-21T21:00:00Z` (FOMC is Oct 27, US GDP/PCE are Oct 29; Fed remains in pre-FOMC blackout).
+   - **Impact on Forecast**: Lowers the likelihood of a macro shock driving an outsized breakout beyond the `2415–2480` structure.
+   - **Source**: https://truflation.com/economic-calendar (updated `2026-10-20`).
+
+8. **[2026-10-20 UTC] Spot ETH ETF Outflows (`jev_noul` = 0.80)**
+   - **Finding**: US Spot ETH ETFs recorded persistent net outflows heading into Oct 20 (`-$103.3M` on Oct 19, `-$69.7M` on Oct 16, `-$60.3M` on Oct 15, `-$129.5M` on Oct 14; Oct 20 print not yet published at T+0).
+   - **Impact on Forecast**: Confirms that institutional ETF inflows were not the driver of the `14:00Z` bounce, tempering uncontested breakout expectations.
+   - **Source**: https://farside.co.uk/eth/ (retrieved `2026-10-20 UTC`).
+
+## Filtered Out / Not Found
+- **Filtered out (`jev_noul` = 0.05 — unlikely, auto)**: Generic corporate press releases (Bitmine treasury / Deutsche Bank custody PR) with no tie to the 1h setup. Dropped per Jev filter.
+- **Not found**: Resting orderbook depth outside `2431.68–2470.04` (beyond the 1000-level public API book window) and Oct 20 T+0 US spot ETF flow print (published after US settlement).
+
+## Expiry Reasoning (`2026-10-21T15:00:00Z`)
+- Candidate expiry horizons computed by script from 1h chart swing durations (`14h–24h`) and scheduled market events:
+  1. `2026-10-21T08:00:00Z` (11h horizon — exact timestamp of Deribit daily ETH+BTC options expiry at `$2,420` max pain)
+  2. `2026-10-21T15:00:00Z` (18h horizon — matches the typical `14h–22h` 1h swing duration on this chart and captures both the `08:00Z` Deribit expiry unpin and the Oct 21 US cash/ETF market open at `13:30Z–15:00Z`)
+  3. `2026-10-21T21:00:00Z` (24h horizon — full daily cycle)
+- Jev selected `2026-10-21T15:00:00Z` (`jev_decide` probability = `0.78`, confidence = `0.67`; `jev_noul` validation = `0.81`).
