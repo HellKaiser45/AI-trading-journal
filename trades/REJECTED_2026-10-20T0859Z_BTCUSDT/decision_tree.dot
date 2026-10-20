@@ -1,0 +1,23 @@
+digraph DecisionTree {
+    rankdir=TB;
+    node [shape=box, fontname="monospace", fontsize=10];
+    edge [fontname="monospace", fontsize=9];
+
+    start [label="IDEA_2026-10-20T0859Z_BTCUSDT\nSymbol: BTCUSDT | TF: 1h (195 candles)\nLast Chart Close: 81570.3 (08:00Z)\nATR(14)=325.7 (0.40%) | ATR(24)=390.0 (0.48%)\nEMA20=81875.3 | EMA50=81906.4 | RSI(14)=40.2"];
+
+    structure [label="Key Geometry & Structure\n- Multi-day Lower Highs: 84315.2 -> 84123.0 -> 82918.5 -> 83130.7\n- Local Lower Highs: 83130.7 -> 82235.9 -> 82224.4\n- Resistance: 81800-82050 (EMA20/50 + shelf), 82224.4-82591.5\n- Support: 81335.7, 81157.5 (double local low), 80647.0-80928.1 (Oct 16-18 demand)"];
+
+    research [label="Verified Research (Horizon: 12-24h, to 2026-10-21T08:00Z)\n- F1 (p=0.93): Live price 81463-81542 (-0.12% since chart), 24h range 81184-83098\n- F6 (p=0.91): Perp OI flat (+0.04% at $46.19B), funding +0.0046%, 84-94% long liqs ($47.86M)\n- F4 (p=0.90): Deribit daily expiry 2026-10-21T08:00Z (2K BTC OI, max pain $81,500, P/C 1.68)\n- F3/F2 (p=0.80/0.76): Fed in FOMC blackout; US Housing Starts 12:30Z & Pending Home Sales 14:00Z\n- F5 (p=0.39 -> DROPPED): Unverified ETF headline"];
+
+    scenarios [label="Scenario Distribution (jev_decide Order A / Order B)\n- S4 (Sweep 81157.5 into 80950 demand & bounce to 81900): p=0.46 / 0.57 (Contested Top)\n- S5 (Range chop 81157.5-82224.4 pinned near $81,500): p=0.31 / 0.30\n- S1 (Retest 81800-82050 then drop to 80750): p=0.20 / 0.10\n- S2 (Direct breakdown below 81157.5 to 80750): p=0.03 / 0.03\n- S3 (Bullish breakout above 82235.9): p=0.00 / 0.00\n- S6 (Upside trap above 82235.9 then drop): p=0.00 / 0.00"];
+
+    trade_eval [label="Candidate Trade Evaluation Across All Plausible Scenarios (jev_noul)\n- SHORT MARKET (~81500, TP 80850, SL 82300, RR 0.95): P(TP before SL)=0.56 (Weak RR & S4/S5 risk)\n- SHORT LIMIT (@ 81880, TP 80950, SL 82350, RR 1.98): P(fill & TP)=0.33, P(no fill or stall)=0.54\n- LONG LIMIT (@ 80950, TP 81880, SL 80500, RR 2.07): P(fill & TP)=0.51, P(no fill or stall)=0.50\n- LONG MARKET (~81500, TP 82200, SL 81050, RR 1.30): P(TP before SL)=0.39"];
+
+    dir_calls [label="Direction Calls (3x Shuffled jev_decide: LONG, SHORT, NO_TRADE)\n- Call 1 (LONG, SHORT, NO_TRADE): NO_TRADE=0.70, SHORT=0.25, LONG=0.05\n- Call 2 (SHORT, NO_TRADE, LONG): NO_TRADE=0.73, SHORT=0.25, LONG=0.02\n- Call 3 (NO_TRADE, LONG, SHORT): NO_TRADE=0.74, SHORT=0.20, LONG=0.06"];
+
+    final_calls [label="Final Decision Calls (3x Shuffled jev_decide + setup_holds jev_noul)\n- Final Call 1 (GO_LIMIT, GO_MARKET, REJECT): REJECT=1.00\n- Final Call 2 (GO_MARKET, REJECT, GO_LIMIT): REJECT=1.00\n- Final Call 3 (REJECT, GO_LIMIT, GO_MARKET): REJECT=1.00\n- setup_holds (directional trade supported): p=0.14 (unlikely, auto)\n- expiry choice: 2026-10-21T08:00:00Z (p=1.00 decide, p=0.89 noul)\n- freshness_valid: p=0.87 (likely, auto)"];
+
+    outcome [label="FINAL OUTCOME: REJECTED\nReason: Contested mid-range regime near $81,500 options max pain\n(S4 sweep-and-bounce p=0.46-0.57 vs S5 range chop p=0.30-0.31 vs S1/S2 drop p=0.13-0.23);\nJev unanimously selected NO_TRADE (0.70-0.74) and REJECT (1.00).", style=filled, fillcolor="#fee2e2"];
+
+    start -> structure -> research -> scenarios -> trade_eval -> dir_calls -> final_calls -> outcome;
+}

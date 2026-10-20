@@ -1,0 +1,39 @@
+# Research Log — BTCUSDT 1h (IDEA_2026-10-20T0859Z_BTCUSDT)
+
+- **Symbol**: BTCUSDT
+- **Timeframe**: 1h (195 candles extracted from 2026-10-12T06:00:00Z to 2026-10-20T08:00:00Z; screenshot captured at 2026-10-20 08:26:43 UTC / 10:26:43 UTC+2)
+- **Setup Horizon**: 12 to 24 hours (window: `2026-10-20T08:00:00Z` to `2026-10-21T08:00:00Z`)
+- **Market State**: Range-bound / corrective bearish drift after rejecting `83130.7` on `2026-10-19T07:00:00Z`; price at `81570.3` sits below 1h SMA20 (`81880.2`), SMA50 (`81926.9`), EMA20 (`81875.3`), EMA50 (`81906.4`), with 1h ATR(14) = `325.7` (`0.40%`), ATR(24) = `390.0` (`0.48%`), and RSI(14) = `40.2`.
+
+## Verified Findings Passing Jev Horizon Filter (`jev_noul` >= 0.76)
+
+1. **[2026-10-20 UTC] Live Deep-Market Price & Candle Verification (`jev_noul` = 0.93 — likely, auto)**
+   - **Finding**: Live orderbooks and 1h/15m klines across Binance (`81,471.5`), Bybit (`81,463.4`), OKX (`81,466.1`), and Coinbase (`81,539.9` USDT) confirm the extracted 1h candle sequence (with Aster perp tracking Binance within a ~$35–45 basis) and show BTCUSDT continuing a low-momentum drift inside the `81,335.7–81,623.2` intraday band (`-1.57%` 24h, 24h range `81,183.9–83,097.9`).
+   - **Impact on Forecast**: Confirms the chart is current and that price remains mid-range just above the `81,157.5` local swing low and `80,647.0–80,928.1` multi-day demand zone.
+   - **Source**: Live exchange APIs (Binance, Bybit, OKX, Coinbase) retrieved `2026-10-20 UTC`.
+
+2. **[2026-10-20 UTC] Perpetual Positioning, Open Interest & Liquidations (`jev_noul` = 0.91 — likely, auto)**
+   - **Finding**: Aggregate BTC perpetual open interest is flat over 24h (`+0.04%` at `$46.19B`: CME `$9.16B`, Binance `$7.75B`, Bybit `$4.94B`, Gate `$4.49B`, OKX `$2.48B`). Blended funding rate is near-neutral at `+0.0046%` (Binance `+0.0054%/8h`, OKX `+0.0031%/8h`, Bybit `-0.0065%/8h`). Total 24h liquidations are `$47.86M` (`84%` longs: `$40.2M` long vs `$7.6M` short; `94%` longs over the last 12h at `$26.2M`).
+   - **Impact on Forecast**: Shows the move down from `83,130.7` is driven by long-liquidation unwinding rather than aggressive new leveraged shorting, favoring either a liquidity sweep into `80,950–81,157` followed by mean reversion (Scenario S4) or range chop (Scenario S5) rather than a high-momentum breakdown cascade.
+   - **Source**: https://bitcoinliquidityheatmap.com/coin/BTC (retrieved `2026-10-20 UTC`).
+
+3. **[2026-10-20 UTC] Deribit Daily BTC Options Expiry Inside Horizon (`jev_noul` = 0.90 — likely, auto)**
+   - **Finding**: The Deribit daily BTC options expiry on `2026-10-21T08:00:00Z` falls inside the 24h window with `2,000 BTC` open interest, a put/call ratio of `1.68`, and **max pain at `$81,500`** (right at the current price of `81,570.3`). Larger weekly (`2026-10-23`, `15K BTC`) and monthly (`2026-10-30`, `149K BTC`, max pain `$78K`) expiries lie outside the setup horizon.
+   - **Impact on Forecast**: Acts as a gravitational pin near `$81,500` through `2026-10-21T08:00:00Z`, reinforcing range-bound mean reversion and opposing sustained directional breakouts inside the 24h window.
+   - **Source**: https://xoomar.com/markets/options (as of `2026-10-20T09:00:00Z`).
+
+4. **[2026-10-20 UTC] Federal Reserve Blackout Period & US Macro Calendar (`jev_noul` = 0.80 / 0.76)**
+   - **Finding**: The Federal Reserve is in its pre-FOMC communications blackout period (ahead of the Oct 27–28 FOMC meeting), so no Fed speaker headlines are scheduled in the window (only a routine closed Board meeting at `14:00Z`). The only US macro releases inside the window are September Housing Starts & Building Permits at `2026-10-20T12:30:00Z` and Pending Home Sales at `2026-10-20T14:00:00Z` (medium impact; no top-tier US releases before `2026-10-21T09:00:00Z`).
+   - **Impact on Forecast**: Absence of top-tier macro catalysts or Fed speakers reduces the probability of an exogenous volatility shock breaking the `80,647–82,236` structure.
+   - **Sources**: https://www.federalreserve.gov/monetarypolicy/files/fomc-blackout-period-calendar.pdf, https://www.federalreserve.gov/aboutthefed/boardmeetings/2026-boardmeeting.htm, https://forex.tradingcharts.com/economic_calendar/2026-10-20.html?code=USD (retrieved `2026-10-20 UTC`).
+
+## Filtered Out / Not Found
+- **Filtered out (`jev_noul` = 0.39)**: Unverified single-source headline regarding BlackRock IBIT ETF flows (`+$665M`), which conflicted with published flow tracker tables ending Oct 16 (`-$82.4M` daily, `-$228.6M` weekly). Dropped per Jev filter.
+- **Not found**: Exact numerical price-band liquidation cluster sizes between `80,500` and `82,600` (heatmap providers render price-level clusters as raster images only; only aggregate liquidation totals were text-accessible).
+
+## Expiry Reasoning (`2026-10-21T08:00:00Z`)
+- Candidate expiry horizons evaluated by script from chart swing durations (recent 1h swings lasted 11h to 18h) and scheduled market events:
+  1. `2026-10-20T21:00:00Z` (12h horizon, end of US session)
+  2. `2026-10-21T04:00:00Z` (19h horizon, mid-Asian session)
+  3. `2026-10-21T08:00:00Z` (24h after the last 1h chart candle `2026-10-20T08:00:00Z`, coinciding with the Deribit daily options expiry at `$81,500` max pain)
+- Jev selected `2026-10-21T08:00:00Z` (`jev_decide` probability = `1.00`, confidence = `1.00`; `jev_noul` validation = `0.89`, likely, auto).
