@@ -1,0 +1,32 @@
+# Research Log - ZECUSDT 1h (IDEA_2026-10-23T1147Z_ZECUSDT)
+
+- Symbol: ZECUSDT (Aster chart; price discovery Binance perp/spot within ~0.1%)
+- Timeframe: 1h; 134 candles extracted 2026-10-17T22:00Z..2026-10-23T11:00Z (visual extraction cross-checked candle-by-candle against Binance 1h klines; tail calibrated to exact kline values: sweep low 1198.62, forming candle O1208.10 H1234.64 L1198.62, header C1226.38 at snapshot 11:44:31Z)
+- Snapshot: 2026-10-23T11:44:31Z (chart clock 13:44:31 UTC+2); folder time 11:47Z; evaluation 11:52-12:45Z
+- Horizon: 12-24h; Jev-selected expiry +18h = 2026-10-24T06:00Z (jev_decide 0.92 after validation: +12h too tight 0.62, +24h weekend fakeout tail 0.58)
+- Market state: box 1187.5-1245.0 aged ~21h (since Oct22 16:00-18:00Z flush -13.2% from wick 1368.4). Wall rejection 1 at 1245.0 (Oct23 01:00Z, close 1217.6). Oct23 11:00Z: sweep of internal lows to 1198.62 (held above box low 1187.5) then V-reversal; 12:00Z candle H1236.40 pressing ask wall. 1h ATR14 = 22.22 (1.80%). Book 12:00Z: bid cluster 1212-1220 = 6,895 ZEC (815 @1215.1), ask cluster 1231-1234 = 4,535 ZEC + 1235-1240 = 806 ZEC. OI flat ~447-453k ZEC since Oct22 22:00Z; funding +0.0035%/8h neutral; taker ratio 0.71 at 10:00Z (sell-dominated sweep hour).
+
+## Findings passing the Jev horizon filter (jev_noul "bears on forecast/decision within horizon"; kept >0.5, F6 dropped at 0.41)
+
+1. [2026-10-23 12:00-12:15Z, p=0.78] NO ZEC-specific news 08:00-12:00Z explains the sweep: it printed on Binance spot/perp and Kraken simultaneously with ~2x volume while BTC moved +0.04% in the same hour; 4h liquidations only $88K (no cascade); Hyperliquid ZEC funding -0.00073%/h (shorts paying, not a crowded-long flush); the 1198 sweep tagged the 9-day MA (1199.81). Idiosyncratic stop-run into thin bids -> supports box-low demand. Links: buildix.trade/hyperliquid/ZEC ; gate.com/crypto-market-data/funds/liquidation/zec ; crypto.news/why-is-zcash-price-down-today-zec-prediction/
+2. [12:16Z, p=0.77] Priced move around US flash PMI (13:45Z) is SMALL: Deribit 24OCT26 ATM IV BTC 30.9% -> +/-1.46% to Oct24 08:00Z; ETH 40.2% -> +/-1.90%; IBIT same-day expiry +/-1.16% with max pain $46.50 pinning slightly above last close; DVOL 37.11 and FALLING into the print (vol sold, not bid); skew downside-heavy (BTC 77k wing 60.8% vs 85.5k 47.8%). Links: deribit.com API ; cboe.com/us/options/market_statistics/ ; xoomar.com/markets/options
+3. [12:16Z, p=0.69] BTC 81.4-81.7k sits just ABOVE the $80K zero-gamma level (bykaranteli chain capture 00:25Z Oct23); a PMI/UMich-driven break of 80k flips dealer hedging from dampening to amplifying - the main adverse tail for a 3.8-beta alt. Link: bykaranteli.com/options
+4. [12:16Z, p=0.81] Empirical ZEC flash-PMI-day ranges (own calc, Binance 1h, last 7 prints): 3h range median ~3.7% (2.25-6.18%) - both box edges (1203 dip, 1245 tag) reachable within hours of the 13:45Z print; makes the limit fill plausible inside +18h.
+5. [12:16Z, p=0.68] In-window calendar: UMich final 14:00Z (consensus 46.3 vs 48.1), Baker Hughes 17:00Z (immaterial), CFTC COT 19:30Z, IBIT weekly expiry ~20:00Z; Sat Oct 24 NO US data, thin books; Deribit dailies Oct24 08:00Z tiny OI (2,450 BTC); FOMC blackout until Oct 29 (no Fed speakers). Fed context: Sep 16 2026 HIKE to 3.75-4.00%, Oct 28 priced 93.5% hold -> PMI matters via price/inflation subindices. Links: pmi.spglobal.com/Public/Release/ReleaseDates ; cftc.gov release schedule ; polymarket.com/event/bitcoin-price-on-october-24-2026
+- Dropped (p=0.41): ZCSH +$14.23M Oct 22 (3rd inflow; T+1, no new print possible today) - background only.
+
+## Tape / freshness checks (own pulls)
+- 11:50Z: Binance spot last 1233.36 (24h H1262.84 L1187.50); 11:59Z perp book best 1229.34/1229.35; 12:39Z spot bookTicker 1235.76/1235.77, 12:00Z candle O1229.76 H1236.40 L1220.98 C1235.81 - price rotated back to the ask wall after the snapshot; box unchanged; setup re-anchored and re-confirmed coherent at 1235.8 (jev_noul 0.79/0.80).
+- OI hist 1h: 452.3k (22nd 22Z) -> 447.6k (23rd 11Z): no fresh positioning behind the V-reversal (short-covering/spot-led).
+- Not found: ZEC options (none listed on Deribit); analyst published expected-move for Oct23-24 (computed from Deribit/CBOE IVs instead); flash-PMI consensus single-sourced (unverified); GDELT unusable (429/empty).
+
+## Expiry reasoning (2026-10-24T06:00Z)
+Candidates computed by script: +12h (Oct24 00:00Z), +18h (06:00Z), +24h (12:00Z), +30h, +36h from box age ~21h, 1h ATR 22.22 (box width 57.5 = 2.6 ATR ~ 10-20h rotation), PMI/UMich reaction window 13:45-17:00Z today, IBIT expiry 20:00Z, Saturday no-US-data thin books, Deribit dailies Oct24 08:00Z. Jev: first pass h12 0.63; validation said +12h too tight for fill+rotation (0.62) and +24h weekend tail weakly dominant (0.58); re-run with that evidence chose h18 = 2026-10-24T06:00Z at 0.92: covers PMI/UMich reaction, US session, IBIT expiry and early Saturday, exits before the second thin weekend session.
+
+## Decision summary
+- Scenarios (5 shuffled jev_decide): chop 0.56-0.72, up_fail_return 0.21-0.24, whipsaw 0.17-0.27, up_accept 0.01-0.04, down_break 0.01-0.02.
+- Direction battery (3 shuffled): long_limit 0.91-0.92 / short_limit 0.01 / no_trade 0.05-0.07.
+- Candidate outcomes (jev_noul): L1203/1242/1185 fill 0.44-0.61, P(TP before SL & expiry | fill) 0.49-0.66 (pooled ~0.57); L1212 fill 0.63 win 0.51; S1245/1205/1262 fill 0.52 win 0.39; S1245/1258 win 0.38; market short 0.32; market long 0.16.
+- Expectancy (script, zero fees): L1203: R 18 (1.496%), G 39 (3.242%), RR 2.17, p_BE = 18/57 = 0.316, +5pp bar 0.366; pooled P 0.57 clears by +21pp (lower shuffle 0.49 clears by +12pp). EV|fill = +1.23%; x P(fill) 0.52 = +0.64% per stake. Short limit clears its bar too but with half the margin and against the intraday reversal momentum; market entries fail their bars.
+- Final battery (3 shuffled): GO_LIMIT 1.00 / 0.91 / 0.85. setup_holds: not contradicted 0.90 (auto), contradicted 0.10 (auto).
+- DECISION: LONG LIMIT 1203.0, TP 1242.0, SL 1185.0, expire 2026-10-24T06:00:00Z.

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="760" viewBox="0 0 1500 760">
+<rect width="1500" height="760" fill="#101418"/>
+<text x="12" y="22" fill="#eee" font-family="monospace" font-size="15">ZECUSDT 1h | LONG LIMIT 1203.0 | TP 1242.0 | SL 1185.0 | RR 2.17 | expiry 2026-10-24T06:00Z | scenario: box rotation (chop 0.63 / up_fail 0.22 / whipsaw 0.21)</text>
+<line x1="60" y1="714.0" x2="1420" y2="714.0" stroke="#242b33" stroke-width="1"/>
+<text x="1426" y="718.0" fill="#889" font-family="monospace" font-size="11">1150</text>
+<line x1="60" y1="579.2" x2="1420" y2="579.2" stroke="#242b33" stroke-width="1"/>
+<text x="1426" y="583.2" fill="#889" font-family="monospace" font-size="11">1175</text>
+<line x1="60" y1="444.4" x2="1420" y2="444.4" stroke="#242b33" stroke-width="1"/>
+<text x="1426" y="448.4" fill="#889" font-family="monospace" font-size="11">1200</text>
+<line x1="60" y1="309.6" x2="1420" y2="309.6" stroke="#242b33" stroke-width="1"/>
+<text x="1426" y="313.6" fill="#889" font-family="monospace" font-size="11">1225</text>
+<line x1="60" y1="174.8" x2="1420" y2="174.8" stroke="#242b33" stroke-width="1"/>
+<text x="1426" y="178.8" fill="#889" font-family="monospace" font-size="11">1250</text>
+<line x1="60" y1="40.0" x2="1420" y2="40.0" stroke="#242b33" stroke-width="1"/>
+<text x="1426" y="44.0" fill="#889" font-family="monospace" font-size="11">1275</text>
+<text x="60.0" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-17T22:00</text>
+<text x="167.4" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-18T10:00</text>
+<text x="274.7" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-18T22:00</text>
+<text x="382.1" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-19T10:00</text>
+<text x="489.5" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-19T22:00</text>
+<text x="596.8" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-20T10:00</text>
+<text x="704.2" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-20T22:00</text>
+<text x="811.6" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-21T10:00</text>
+<text x="918.9" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-21T22:00</text>
+<text x="1026.3" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-22T10:00</text>
+<text x="1133.7" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-22T22:00</text>
+<text x="1241.1" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-23T10:00</text>
+<text x="1348.4" y="746" fill="#889" font-family="monospace" font-size="10" text-anchor="middle">10-23T22:00</text>
+<rect x="60" y="336.6" width="1360" height="118.6" fill="#90ee90" opacity="0.13"/>
+<rect x="60" y="201.8" width="1360" height="53.9" fill="#ff7f7f" opacity="0.13"/>
+<text x="66" y="348.6" fill="#9f9" font-family="monospace" font-size="10">support 1198-1220 (sweep zone + bid cluster)</text>
+<text x="66" y="213.8" fill="#f99" font-family="monospace" font-size="10">resistance 1235-1245 (ask wall + rejection 1)</text>
+<line x1="60" y1="201.8" x2="1420" y2="201.8" stroke="#b57edc" stroke-width="1.4"/>
+<line x1="60" y1="511.8" x2="1420" y2="511.8" stroke="#b57edc" stroke-width="1.4"/>
+<line x1="60" y1="511.8" x2="1420" y2="511.8" stroke="#999" stroke-width="1.3" stroke-dasharray="7,5"/>
+<text x="66" y="507.8" fill="#aaa" font-family="monospace" font-size="10">invalidation 1187.5 (box low)</text>
+<polyline points="60.0,850.6 68.9,836.2 77.9,848.8 86.8,792.7 95.8,721.8 104.7,701.2 113.7,776.4 122.6,831.0 131.6,775.6 140.5,832.4 149.5,849.5 158.4,794.8 167.4,820.6 176.3,821.8 185.3,838.4 194.2,898.2 203.2,995.9 212.1,1060.9 221.1,1062.4 230.0,1053.0 238.9,1063.2 247.9,1220.1 256.8,1184.2 265.8,1090.7 274.7,869.8 283.7,817.6 292.6,747.9 301.6,617.5 310.5,560.5 319.5,580.7 328.4,601.3 337.4,628.1 346.3,641.7 355.3,659.6 364.2,623.7 373.2,633.1 382.1,740.0 391.1,777.4 400.0,760.2 408.9,815.2 417.9,797.6 426.8,844.4 435.8,776.8 444.7,858.5 453.7,822.3 462.6,855.3 471.6,855.2 480.5,756.5 489.5,711.4 498.4,701.9 507.4,753.9 516.3,742.5 525.3,737.5 534.2,718.9 543.2,714.4 552.1,767.1 561.1,775.6 570.0,801.0 578.9,816.9 587.9,813.2 596.8,760.5 605.8,779.4 614.7,706.3 623.7,534.8 632.6,321.4 641.6,489.0 650.5,393.4 659.5,321.5 668.4,410.5 677.4,393.1 686.3,210.6 695.3,89.4 704.2,102.7 713.2,136.1 722.1,16.9 731.1,86.4 740.0,70.2 748.9,117.6 757.9,125.2 766.8,155.1 775.8,101.5 784.7,61.0 793.7,83.5 802.6,80.4 811.6,11.7 820.5,-21.0 829.5,-81.3 838.4,-166.8 847.4,-235.3 856.3,-318.4 865.3,-283.2 874.2,-434.5 883.2,-315.5 892.1,-402.3 901.1,-349.8 910.0,-395.7 918.9,-325.7 927.9,-179.7 936.8,-229.2 945.8,-126.6 954.7,-113.7 963.7,-67.2 972.6,-57.6 981.6,62.4 990.5,71.2 999.5,18.4 1008.4,230.0 1017.4,155.1 1026.3,121.7 1035.3,170.2 1044.2,168.7 1053.2,148.0 1062.1,222.6 1071.1,256.0 1080.0,389.4 1088.9,460.1 1097.9,340.5 1106.8,353.7 1115.8,380.4 1124.7,357.6 1133.7,396.7 1142.6,340.9 1151.6,306.7 1160.5,349.3 1169.5,273.6 1178.4,301.6 1187.4,351.7 1196.3,320.9 1205.3,264.1 1214.2,336.1 1223.2,272.5 1232.1,330.0 1241.1,400.8 1250.0,302.2" fill="none" stroke="#1e90ff" stroke-width="1.8"/>
+<polyline points="1250.0,302.2 1258.9,247.6 1267.9,277.2 1276.8,339.3 1285.8,434.7 1294.7,395.9 1303.7,355.4 1312.6,315.0 1321.6,285.3 1330.5,261.1 1339.5,236.8 1348.4,220.6 1357.4,215.8 1366.3,239.5 1375.3,263.8 1384.2,250.3 1393.2,274.6 1402.1,261.1 1411.1,279.9 1420.0,271.9" fill="none" stroke="#ff8c00" stroke-width="2.0"/>
+<line x1="1250.0" y1="40" x2="1250.0" y2="714" stroke="#ffffff" stroke-width="1.2"/>
+<text x="1250.0" y="34" fill="#fff" font-family="monospace" font-size="10" text-anchor="middle">now 2026-10-23T11:47Z</text>
+<line x1="60" y1="428.2" x2="1420" y2="428.2" stroke="#ffd700" stroke-width="1.6"/>
+<text x="64" y="424.2" fill="#ffd700" font-family="monospace" font-size="11">ENTRY 1203.0 (LIMIT)</text>
+<line x1="60" y1="217.9" x2="1420" y2="217.9" stroke="#00c853" stroke-width="1.6"/>
+<text x="64" y="213.9" fill="#00c853" font-family="monospace" font-size="11">TP 1242.0</text>
+<line x1="60" y1="525.3" x2="1420" y2="525.3" stroke="#ff1744" stroke-width="1.6"/>
+<text x="64" y="521.3" fill="#ff1744" font-family="monospace" font-size="11">SL 1185.0</text>
+<line x1="1420.0" y1="40" x2="1420.0" y2="714" stroke="#ccc" stroke-width="1.2" stroke-dasharray="2,4"/>
+<text x="1416.0" y="52" fill="#ccc" font-family="monospace" font-size="10" text-anchor="end">expiry 2026-10-24T06:00Z</text>
+<rect x="60" y="728" width="14" height="3" fill="#1e90ff"/><text x="78" y="732" fill="#bbb" font-family="monospace" font-size="10">history</text>
+<rect x="150" y="728" width="14" height="3" fill="#ff8c00"/><text x="168" y="732" fill="#bbb" font-family="monospace" font-size="10">forecast</text>
+<rect x="250" y="728" width="14" height="3" fill="#ffd700"/><text x="268" y="732" fill="#bbb" font-family="monospace" font-size="10">entry</text>
+<rect x="330" y="728" width="14" height="3" fill="#00c853"/><text x="348" y="732" fill="#bbb" font-family="monospace" font-size="10">TP</text>
+<rect x="380" y="728" width="14" height="3" fill="#ff1744"/><text x="398" y="732" fill="#bbb" font-family="monospace" font-size="10">SL</text>
+<rect x="430" y="728" width="14" height="3" fill="#b57edc"/><text x="448" y="732" fill="#bbb" font-family="monospace" font-size="10">box edges</text>
+<rect x="530" y="728" width="14" height="3" fill="#999"/><text x="548" y="732" fill="#bbb" font-family="monospace" font-size="10">invalidation</text>
+</svg>

@@ -1,0 +1,28 @@
+digraph decision {
+  rankdir=TB; node [shape=box, fontname="monospace", fontsize=10];
+  chart [label="ZECUSDT 1h Aster snapshot 2026-10-23T11:44:31Z\nbox 1187.5-1245.0 aged ~21h after -13.2% flush from 1368.4\nwall rejection 1 @1245.0 (Oct23 01:00Z)\nOct23 11:00Z sweep 1198.62 -> V-reversal, now pressing 1235-1245 ask wall\n1h ATR14 22.22 (1.80%)"];
+  extract [label="extraction: 134 1h closes 10-17T22Z..10-23T11Z\nvisual read cross-checked vs Binance 1h klines\ncalibrated: sweep L1198.62, header C1226.38 @11:44Z"];
+  chart -> extract;
+  scen [label="scenarios (5 shuffled jev_decide)\nchop 0.56-0.72 | up_fail_return 0.21-0.24\nwhipsaw 0.17-0.27 | up_accept 0.01-0.04 | down_break 0.01-0.02\ncompleteness: 5th path probe 0.67 -> added up_fail_return, mix stable"];
+  extract -> scen;
+  agenda [label="research agenda filters (jev_noul)\nbook/wall state 0.92 auto | positioning since 08:35Z 0.86 auto\nnews behind sweep 0.72 | BTC pin/ETF 0.83 | PMI vol 0.77 -> searched\nbook+OI+funding+taker resolved by own tape pulls"];
+  scen -> agenda;
+  res [label="round 1 findings (all pass horizon filter except F6 0.41)\nF1 0.78 sweep = idiosyncratic stop-run, $88K 4h liqs, HL funding neg\nF2 0.77 PMI priced small BTC +/-1.46%, DVOL 37 falling, skew down\nF3 0.69 BTC zero-gamma 80k just below spot (adverse tail)\nF4 0.81 ZEC PMI-day 3h range median 3.7% -> both edges reachable\nF5 0.68 UMich 14:00Z, IBIT expiry 20:00Z, Sat no US data"];
+  agenda -> res;
+  cands [label="candidates (script RR/p_BE, jev_noul outcomes @+24h then @+18h)\nL1203/1242/1185 RR2.17 pBE .316 fill .44-.61 win .49-.66  <= CHOSEN\nL1212/1242/1193 RR1.58 pBE .388 fill .63 win .51 (thin margin)\nL1207 interp RR1.77 (0.18 in level choice)\nS1245/1205/1262 RR2.35 pBE .298 fill .52 win .39 (vs momentum)\nS1245/1205/1258 win .38 | MktShort .32 fail | MktLong .16 fail"];
+  scen -> cands; res -> cands;
+  dir [label="direction battery x3 shuffled\nlong_limit 0.92 / 0.91 / 0.92\nshort_limit 0.01 | no_trade 0.05-0.07"];
+  cands -> dir;
+  expire [label="expiry: jev choose h12 0.63 -> validation\n(+12h enough 0.38 / too tight 0.62 / +24h weekend tail 0.58)\nre-run -> h18 = 2026-10-24T06:00Z at 0.92"];
+  cands -> expire;
+  thresh [label="expectancy gate (zero fees): p_BE = R/(G+R) = 18/57 = 0.316\nbar = p_BE + 5pp = 0.366\npooled P(TP before SL & expiry | fill) = 0.57 (shuffles 0.49/0.66)\nclears by +12..+21pp; EV|fill +1.23%, xP(fill) 0.52 = +0.64%/stake"];
+  cands -> thresh;
+  fresh [label="freshness 12:39Z: spot 1235.76/1235.77 at ask wall\n(box unchanged, 12:00Z candle H1236.40 L1220.98)\nsetup coherent at 1235.8: jev_noul 0.79/0.80\nsetup NOT contradicted 0.90 auto | contradicted 0.10 auto"];
+  res -> fresh;
+  final [label="final battery x3 shuffled: GO_LIMIT 1.00 / 0.91 / 0.85\nDECISION: LONG LIMIT 1203.0 TP 1242.0 SL 1185.0\nexpire 2026-10-24T06:00:00Z (PENDING)"];
+  dir -> final; thresh -> final; expire -> final; fresh -> final;
+  rejected [label="rejected alternatives\nmarket long/short (fail p_BE bar: 0.16 / 0.32)\nshort limit fade (clears bar but 0.01 in direction battery, against\nsweep-and-reclaim momentum; wall already pressed twice)\nL1212 (margin thin vs whipsaw 0.21)\nNO_TRADE (0.05-0.07; edge exists per expectancy gate)"];
+  cands -> rejected;
+  forecast [label="forecast path (chop-with-pullback, contested by whipsaw 0.21):\nwall fade pre-PMI -> dip tags 1203 ~15:00Z (fill) ->\nrotation to TP 1242 ~23:00Z -> box chop to expiry 1232"];
+  final -> forecast;
+}
