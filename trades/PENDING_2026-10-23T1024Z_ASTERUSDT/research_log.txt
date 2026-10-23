@@ -1,0 +1,36 @@
+Research log - ASTERUSDT 1h - IDEA_2026-10-23T1024Z_ASTERUSDT
+Horizon: 36-48h (24-48 hourly candles). Chart captured 2026-10-23T10:19:57Z; run start 2026-10-23T10:24:21Z.
+
+[2026-10-23T10:34Z] Freshness / price-alignment check (Jev-approved: P(freshness could change decision)=0.82).
+  Source: Binance public REST API, https://api.binance.com/api/v3/ticker/price?symbol=ASTERUSDT and
+  https://api.binance.com/api/v3/klines?symbol=ASTERUSDT&interval=1h&limit=12
+  Finding: live last price 0.7075 vs chart capture 0.7057 (+0.26%, bounce still in progress). Live 1h candles
+  confirm chart structure: wick low 0.6900 printed 2026-10-22T22:00-23:00Z, then 12 consecutive higher closes
+  (0.6937 -> 0.7075). Forecast re-anchored to live 0.7075; graphpoints.csv tail hours 2026-10-22T23:00Z..2026-10-23T09:00Z
+  spliced to live closes where image digitization timing drifted. Jev: setup still valid at live price 0.91 (auto);
+  P(structure changed since capture)=0.04 (auto).
+
+[2026-10-23T10:34Z] Higher-timeframe context (Jev-approved: P(HTF context could change scenario probs)=0.70).
+  Source: https://api.binance.com/api/v3/klines?symbol=ASTERUSDT&interval=1d&limit=15 and interval=4h&limit=12
+  Finding: daily candles Oct 9-23 close between 0.6853 and 0.7172 inside a 0.6721-0.7278 range; no directional daily
+  trend; 4h shows the same down-leg-then-bounce as the 1h. Confirms two-sided range read; no HTF contradiction of the
+  long-side range fade (Jev: P(daily/4h downtrend invalidates long fades)=0.05, auto).
+
+[2026-10-23T10:33Z] Dated-catalyst check - NOT SEARCHED, by Jev gate.
+  Jev P(a scheduled ASTER unlock/emission/listing/governance event inside 2026-10-23..2026-10-25)=0.17 and
+  P(an external dated fact would materially change the forecast)=0.33 -> below the pass bar, so no web search was run.
+  Recorded as: catalyst calendar not found / not searched (failed Jev relevance gate).
+
+[2026-10-23T10:36Z] Expiry derivation.
+  Facts: thesis cycle = bounce tags 0.7080-0.7140 (~6-18h), fades to retest 0.6920-0.6950 (~12-30h), rebound to TP
+  (+6-12h after fill) => full cycle 20-42h; ATR14h 0.0037; chop mass 0.35 delays fills. Candidates computed: 24h, 30h,
+  36h, 42h, 48h. Jev yes/no P(fill and TP-first): 24h 0.37, 30h 0.43, 48h 0.52; Jev choice over {36h,42h,48h}: 48h 0.74.
+  Chosen expiry 2026-10-25T10:00Z (48h): covers the fill-then-rebound cycle; beyond it the retest thesis is stale.
+
+[2026-10-23T10:37Z] Decision evidence summary.
+  Limit LONG 0.6950 / SL 0.6880 / TP 0.7060: P(fill by expiry) 0.45-0.52; P(fill and TP-before-SL-before-expiry) 0.43;
+  break-even p_BE=(R+C)/(G+R)=(0.0070+0.0009)/0.0180=0.439, threshold 0.489; conditional P(TP-first|fill)~0.83-0.90 -> clears.
+  Expectancy per placed order +0.0033..+0.0040 price units even with pessimistic 0.10-0.15 post-fill loss mass;
+  Jev P(positive expectancy)=0.92 (auto). Rejected: market entries both sides (P 0.27-0.40 vs need 0.51-0.61),
+  short limit 0.7120 (conditional 0.48 vs need 0.393 - clears but thinner margin and loses in 0.18 upside-push mass),
+  TP 0.7090/0.7120 variants (Jev chose 0.7060 at 0.67).
