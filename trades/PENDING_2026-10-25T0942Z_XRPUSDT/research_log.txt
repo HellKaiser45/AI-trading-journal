@@ -1,0 +1,117 @@
+THESIS
+XRPUSDT 1H (Aster perp), snapshot 2026-10-25T09:42Z at 1.2905 (fresh re-check 09:56Z: Aster 1.2940 / Binance perp 1.2942).
+302 hourly candles were measured from the chart image (2026-10-12T20:00Z to 2026-10-25T09:00Z) by pixel extraction
+(y-calibration anchored on the three labelled price tags 1.3985 / 1.2905 / 1.2540; linear fit; 1 px = 0.000181 USD).
+Accuracy check against Aster 1h klines for the 200 overlapping bars: mean absolute error 0.00012 on open, 0.00006 on high,
+0.00015 on low, 0.00015 on close; the current bar reproduced O1.29552 H1.29661 L1.28881 C1.29044 against the chart header
+O1.2956 H1.2966 L1.2886 C1.2905.
+
+Measured structure: swing high 1.3985 at 2026-10-21T18:00Z -> 69-hour decline to 1.2544 at 2026-10-24T15:00Z (-10.3%)
+-> 13-hour stair-step bounce to 1.3149 (Aster) / 1.3154 (Binance) at 2026-10-25T04:00Z (+4.8%, 42% retracement of the drop,
+80% of the last leg 1.3298->1.2544) -> six hours of chop between 1.2886 and 1.3136 (hourly highs 1.3136/1.3024/1.3042/1.3026/
+1.2966, closes 1.3133/1.2999/1.2942/1.3013/1.2955). Lower highs 1.3985 -> 1.3298 -> 1.3149; lower lows 1.2950 -> 1.2812 -> 1.2544.
+Indicators from the measured series and verified klines: 1h ATR14 0.00889 (0.69%), RSI14 45.4, SMA20 1.2934, SMA50 1.2969,
+SMA100 1.3187; 4h ATR14 1.50%, RSI 43.7, SMA20 1.3043, SMA50 1.3108; daily ATR 4.56%, RSI 38.7-39.0, SMA20 1.3491,
+SMA50 1.4048, SMA100 1.2919, SMA200 1.2788; performance 1d -0.66%, 7d -1.24%, 30d -17.7%.
+
+The bounce stalled in the 1.3130-1.3154 zone (below the 1.3187 1h SMA100 and the 1.3211-1.3238 Oct 19/23 supply) and has spent
+six hours failing to hold above 1.3050 while the last bar closed below its open at 1.2955. That is distribution inside a
+lower-high sequence, not a reclaim, so the higher-probability path is a retest of the 1.3026-1.3043 intraday shelf and then
+a roll-over toward the 1.2810-1.2827 Oct 23-24 shelf. Trade chosen: SHORT LIMIT 1.3040, TP 1.2810, SL 1.3245, expiry
+2026-10-26T21:00Z.
+
+LEVEL RATIONALE
+- Entry 1.3040: the measured intraday highs of the current chop (1.3024 / 1.3042 / 1.3026) and just below the 4h SMA20 (1.3043);
+  it is a pullback/retest entry, so it is expressible as a LIMIT (this journal has no STOP entries).
+- TP 1.2810: top of the Oct 23-24 shelf (Oct 23 22:00Z low 1.2812, Oct 24 lows 1.2827/1.2794/1.2734/1.2755) and just above
+  the daily SMA200 at 1.2788. Jev: this target is a realistic first objective (p=0.87) and is more likely than a deeper 1.2727
+  target (p=0.94).
+- SL 1.3245: above the measured 1.3238 intraday high of 2026-10-23T14:00Z and above the Oct 19 high 1.3211, so a routine sweep
+  of the 1.3150-1.3154 session high does not stop the trade out (Jev: p=0.07 that such a sweep reaches 1.3245).
+- Expiry 2026-10-26T21:00Z (36h from placement): the chart's measured impulse legs run 11-32 hours (mean ~23h), the window
+  covers the whole of Sunday plus Monday's US cash session (open 13:30Z Oct 26) and ends before the Ripple Swell conference
+  (2026-10-27/29) and the FOMC meeting (2026-10-28). Jev judged a 48h expiry no better than 36h (p=0.33, repeated 0.37).
+
+ECONOMICS (script, arithmetic only; this journal models no fees, funding, slippage or partial fills, and an unfilled
+LIMIT order has no payoff): gross target (1.3040-1.2810)/1.3040 = +1.7640%; gross stop (1.3245-1.3040)/1.3040 = -1.5725%;
+RR = 1.12; break-even win probability = 1.5725/(1.7640+1.5725) = 0.4712.
+Recorded Jev probabilities: P(fill at 1.3040 within 36h) = 0.71; P(target 1.2810 before stop 1.3245 | 1.3040 touched) = 0.69;
+P(<=1.2810 before >=1.3170 within 36h) = 0.61 (mirror wording gave 0.29 for the opposite order).
+Expected net per fill = 0.69*1.7640 - 0.31*1.5725 = +0.730%. Expected net per placed order = 0.71*0.730 = +0.518%
+(the remaining 0.29 of placements are un-filled and pay nothing). Both exceed zero; the stop-side risk is treated as a full
+loss, so the estimate is conservative because some non-TP outcomes would expire only part-way against the position.
+
+DATA CHECKED
+- news:
+  * Window 2026-10-25T09:42Z -> 2026-10-27T09:00Z is macro-empty: no US data release, no central-bank action, no XRP protocol
+    event and no token unlock. Scheduled: US equity cash open 2026-10-26T13:30Z, US 2-year auction 2026-10-26T17:00Z,
+    FOMC communications blackout (no Fed speakers), crypto ETF flow prints ~2026-10-27T05:47Z.
+  * Just outside the window but relevant as pre-positioning: Ripple Swell 2026 in New York 2026-10-27 to 10-29 (first sessions
+    ~13:00Z Oct 27), FOMC decision 2026-10-28T18:00Z, Sep durable goods 2026-10-27T12:30Z, Q3 GDP + Sep PCE 2026-10-29T12:30Z.
+  * Structural, outside window: next Ripple escrow release 1,000,000,000 XRP on 2026-11-01T00:00Z (last 12 releases re-locked
+    ~70%, net ~300M/month); XRPL fixCleanup3_4_0 activation moved to 2026-11-04T14:46Z.
+  * No XRP-specific announcement found for 2026-10-25/26. Freshest items: Franklin Templeton ~$150M sgBENJI addition to XRPL
+    (2026-10-24) and Ripple-Arf RLUSD settlement partnership (2026-10-22).
+- prices:
+  * Chart capture 1.2905; 09:56Z Aster perp 1.2940 (24h H1.3150 L1.2540 +1.44%), Binance perp 1.2942 (24h H1.3154 L1.2535 +1.45%).
+  * Last 1h close at or below 1.2810 was 2026-10-24T17:00Z (1.2683); 15 hourly closes at or below 1.2810 in the last 7 days.
+  * Last 1h high at or above 1.3170 was 2026-10-23T14:00Z; the 2026-10-25 bounce topped 1.3154 (Binance) / 1.3150 (Aster).
+- derivatives:
+  * Funding +0.0100%/8h on Binance and Aster (next settles 10-25T16:00Z, 10-26T00:00Z/08:00Z/16:00Z), +0.0074% OKX,
+    +0.0092% Bybit, +0.0064% Bitget. Negative during the Oct 24 flush (-0.00115% at 08:00Z, -0.00299% at 16:00Z).
+  * Binance open interest 301.77M XRP / $390.9M, -4.0% in contracts and -5.7% in USD over ~47h (314.32M / $414.6M on Oct 23 10:00Z).
+    Other venues: Bybit $271.3M (209.94M XRP), OKX $88.5M, Aster ~$33.4M.
+  * Binance global account long/short 3.0552 (75.3% long); top-trader accounts 3.6598, top-trader positions 1.9100 (65.6% long);
+    1h taker buy/sell 0.9314 (sell-skewed).
+  * Liquidations 2026-10-24: $2.89M total, longs $2.84M, shorts $41.5K (Gate aggregate); $5.22M/24h across Binance+Bybit+OKX
+    with 88.7% longs (CoinStats aggregate).
+- flows / ETF:
+  * Spot XRP ETF net flows: Oct 19 $0, Oct 20 $0, Oct 21 +$709K, Oct 22 +$3.5M, Oct 23 $0 (ByKaranteli / cryptoetf.today);
+    a second tracker prints Oct 23 at -$2.31M including BITW. Net assets $1.48B, aggregate holdings ~1.19B XRP, average
+    holder cost $1.72 (about -25% unrealised).
+  * On-chain exchange-flow evidence conflicts between providers (CryptoQuant: record 30d deposits/whale inflows to Binance;
+    Santiment/WalletInvestor: record withdrawals). Left unresolved and given no weight.
+  * One large transfer found in the last 7 days: 82,314,668 XRP (~$106.6M) unknown -> unknown wallet, 2026-10-20T00:30Z, no impact.
+- other assets:
+  * BTC 80,260 (-0.32% 24h, range 79,178.6-80,999.9), below daily SMA20 82,311 and SMA50 81,817, six lower daily closes.
+  * XRP +1.36% over the same 24h while ETH fell 1.48%. XRP-BTC 1h correlation 0.856, beta 1.42 over 199 hours
+    (1.2810 corresponds to roughly BTC -0.65%, 1.3170 to BTC +1.31%).
+  * Perp vs spot turnover on Binance: $597.7M vs $103.7M, i.e. price discovery is 5.8x leveraged.
+- base-rate study (XRP 1h, 1,463 hourly starts 2026-08-23 to 2026-10-25): with barriers at -0.93% and +1.86% (the 1.2810 and
+  1.3170 levels from the live 1.2929), the lower barrier was touched first in 67.8% of 36h windows, but a symmetric-barrier
+  control gave 51.3% at +/-0.86% and 51.2% at +/-1.93%, so that asymmetry - not a directional edge - drives the number.
+  94% of 36h windows had a high-low range of at least 2.79% (median 6.02%), i.e. both levels are likely to trade and only the
+  order is in question.
+- what could not be found:
+  * Exchange-level liquidation series or heatmaps (CoinGlass pages are JS/image-only; Binance allForceOrders is no longer
+    public). Liquidation figures above are third-party aggregates.
+  * XRP options positioning (no accessible OI/strike distribution for CME XRP options, no Deribit XRP market).
+  * Any order-book, options or flow evidence of a specific defence of 1.2810 or 1.3170.
+  * Large-transfer alerts for 2026-10-22 to 10-25 (the last verifiable alert is 2026-10-20T00:30Z), so exchange-bound
+    transfers inside the last 72 hours can be neither confirmed nor excluded.
+  * Agreement between ETF-flow trackers on the sign of 2026-10-23 ($0 versus -$2.31M).
+
+RESEARCH EFFECT ON THE DECISION
+Jev put p=0.94 on external evidence being able to change whether 1.2810 or 1.3170 is reached first, so the pass was run. After
+it, Jev put p=0.23 on "the research contradicts the chart-based bearish-continuation reading" and p=0.29 on "the research changes
+the side or the levels". The findings that actually shaped the ticket: (a) the window is macro-empty, so there is no scheduled
+catalyst to justify a 48h expiry - hence 36h; (b) funding is near neutral and open interest is falling 4%, so there is no
+crowded-short fuel for a squeeze, but also no fresh short positioning driving a breakdown; (c) 75.3% of retail accounts are long
+and Oct 24 liquidations were 98% longs, which is consistent with the retest-then-roll-over path rather than an immediate squeeze;
+(d) BTC sits below its daily SMA20/50 while XRP outperformed over 24h, so a BTC-led bounce is the main upside risk to the stop.
+
+LINKS (read 2026-10-25T09:48-09:52Z unless dated otherwise)
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=XRPUSDT&interval=1h&limit=200 ; /ticker/24hr ; /premiumIndex ; /openInterest
+- https://api.binance.com/api/v3/ticker/24hr?symbol=XRPUSDT
+- https://fapi.binance.com/fapi/v1/fundingRate?symbol=XRPUSDT ; /futures/data/openInterestHist ; /futures/data/takerlongshortRatio
+- https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=XRPUSDT ; /topLongShortPositionRatio
+- https://www.okx.com/api/v5/public/funding-rate?instId=XRP-USDT-SWAP ; https://api.bybit.com/v5/market/tickers?category=linear
+- https://bykaranteli.com/etf/xrp (refreshed 2026-10-25T09:09Z)
+- https://cryptoetf.today/en (data for Fri 2026-10-23, published 2026-10-24T05:47Z)
+- https://xrp-insights.com/ (ETF holdings, data to 2026-10-23 close) ; https://xrp-insights.com/xrp-radar/escrow
+- https://coinstats.app/ai/a/latest-news-for-ripple (2026-10-25T00:24Z)
+- https://www.gate.com/crypto-market-data/funds/liquidation-data/xrp (2026-10-24)
+- https://swell.ripple.com/faq ; https://ripple.com/insights/the-swell-2026-lineup-is-here/ (2026-10-27 to 10-29)
+- https://xoomar.com/markets/calendar (as of 2026-10-25T09:30Z)
+- https://coinalertnews.com/news/2026/10/20/xrp-whale-exchange-deposits (2026-10-20)
+- https://news.bitcoin.com/crypto-news/xrp-whale-moves-82-million-xrp-new-wallet/ (2026-10-20)

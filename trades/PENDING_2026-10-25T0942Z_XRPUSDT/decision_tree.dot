@@ -1,0 +1,71 @@
+digraph decision_tree {
+  rankdir=TB;
+  bgcolor="#0d0e12";
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, fillcolor="#181a20", color="#343846", fontcolor="#e2e8f0"];
+  edge [color="#64748b", fontcolor="#94a3b8", fontsize=9, fontname="Helvetica"];
+
+  // 1. Prior-journal learning pass
+  history [
+    label="1. Prior-journal learning pass (python3 scripts/stats.py)\nTerminal: EXPIRED+1.14% ZECUSDT (SHORT), EXPIRED+3.95% ASTERUSDT (LONG), EXPIRED AVAXUSDT (unfilled),\nLOSS-1.08% ETHUSDT, LOSS-1.30% XRPUSDT. Arithmetic sum +2.71%; win rate 0/2; avg loss -1.19%. PENDING ZEC + ASTER untouched.\n\nLessons relevant to this case (each from a settled folder, checked against its review.md + trade.toml + outcome candles):\n• LOSS-1.30%_2026-10-19T1533Z_XRPUSDT (same symbol): SHORT LIMIT 1.3065 filled 2026-10-19T22:05Z, stop 1.3235 hit\n  2026-10-20T14:05Z for -1.30% while price then ran to 1.3985. Audit: the level was sound but the stop sat just above a\n  fresh supply band and inside the reach of a squeeze; the forecast also assumed continuation in a market that was still rising.\n  Applied here: stop moved beyond the measured 1.3238 Oct-23 high (1.3245), and the bearish case is only taken after the\n  squeeze has already happened and produced a lower high (1.3149).\n• EXPIRED_2026-10-18T1730Z_AVAXUSDT: LIMIT never touched -> expired with no position. Applied here: fill probability is\n  asked of Jev and priced separately from the outcome conditional on a fill.\n• EXPIRED+1.14%_2026-10-19T1143Z_ZECUSDT: filled, target not reached, expired at +1.14%. Applied here: non-target outcomes\n  are not all full losses, so treating every non-TP outcome as -1.5725% is a conservative bound on the EV.\n• LOSS-1.08%_2026-10-18T1703Z_ETHUSDT: filled 23:25Z, stopped 02:45Z within 3.3h. Applied here: a stop placed less than\n  ~1.5x hourly ATR away is inside ordinary noise; the 1.3170 variant was rejected for exactly that reason.\nSample is tiny (5 settled trades); no aggregate win-rate inference is used for the side.",
+    fillcolor="#1e293b", color="#3b82f6"
+  ];
+
+  // 2. Chart extraction
+  chart_extract [
+    label="2. Chart extraction and measurement (done from the image, not from an API download)\nImage 261025_10h38m08s_screenshot.png = XRPUSDT 1h Aster, header O1.2956 H1.2966 L1.2886 C1.2905 (-0.36%), clock 10:38:07 UTC+1\n-> 2026-10-25T09:38Z. Regex-free pipeline: stdlib PNG inflate -> candle colour mask (green 30,124,87 / red 173,69,70)\n-> vertical-run filter (>=2 px) to delete the dotted price lines -> 302 bar columns (period 5.253 px/hour).\nPrice calibration from the three labelled tags 1.3985 (y137), 1.2905 (y733), 1.2540 (y934): slope 0.000181305 USD/px,\nlinear (no log scale): price(1.3985 tag)=1.3985, price(1.2905 tag)=1.29055, price(1.2540 tag)=1.25402.\nTime calibration: day gridlines at x=69,194,...,1834 -> x=69 is 2026-10-12T23:00Z; bar index 301 = 2026-10-25T09:00Z.\nVALIDATION: 200 overlapping bars vs Aster 1h klines -> mean abs error open 0.00012, high 0.00006, low 0.00015, close 0.00015;\ncurrent bar O1.29552 H1.29661 L1.28881 C1.29044 vs header O1.2956 H1.2966 L1.2886 C1.2905. Independent cross-check of the\nlevel list against the 2026-10-19 journal entry (1.3860 Oct14, 1.2832 Oct15, 1.3120 Oct17, 1.2553 Oct18, 1.3212 Oct19) matches.\n\nMeasured structure: 1.3985 (2026-10-21T18:00Z) -> 1.2544 (2026-10-24T15:00Z) -10.3% -> bounce 1.3149/1.3154\n(2026-10-25T04:00Z) +4.8% = 42% of the drop, 80% of the last leg -> 6h chop 1.2886-1.3136.\nLower highs 1.3985/1.3298/1.3149; lower lows 1.2950/1.2812/1.2544.\n1h ATR14 0.00889 (0.69%), RSI14 45.4, SMA20 1.2934, SMA50 1.2969, SMA100 1.3187. 4h ATR 1.50%, RSI 43.7, SMA20 1.3043,\nSMA50 1.3108. Daily ATR 4.56%, RSI 38.7-39.0, SMA20 1.3491, SMA50 1.4048, SMA100 1.2919, SMA200 1.2788. 7d -1.24%, 30d -17.7%.",
+    fillcolor="#0f2a43", color="#38bdf8"
+  ];
+
+  // 3. Scenarios
+  scenarios [
+    label="3. Scenarios developed from the measured chart (not a fixed menu)\nS1 range: 1.2810-1.3150 contains the next 36h.\nS2 retest-and-roll: retest 1.3026-1.3043 (chop highs + 4h SMA20 1.3043), fail, break 1.2810 toward 1.2727-1.2760.\nS3 reclaim: hold above 1.3150, extend to 1.3220-1.3298 (1h SMA100 1.3187, Oct-19/23 supply).\nS4 sweep-and-recover: wick below 1.2810 then back above 1.3000 (Oct 24 pattern repeated).\nS5 deep flush: below 1.2544 toward 1.2300.\nJev check on completeness: 'a materially different scenario still plausible' p=0.71 with S1-S4 listed, then p=0.41 after S5\nwas added -> set treated as adequate; no further branch added because new candidates were only variants.\n\nRecorded Jev probabilities on this exact state (each a separate proposition, not a mutually exclusive distribution):\n• S1 range holds 36h: 0.42\n• break to <=1.2727 before >=1.3155: 0.37 | >=1.3220 before <=1.2800: 0.26 | sweep below 1.2810 then >1.3000: 0.33\n• flush <1.2544 before >=1.3150 (48h): 0.12\n• <=1.2810 before >=1.3170 in 36h: 0.61 (mirror wording '>=1.3170 first': 0.29)\n• >=1.3070 before <=1.2745 in 36h: 0.57 | next 1.5% swing is down: 0.62\n• chop is a pause before continuation lower: 0.67 | 'distribution after a failed bounce': 0.62\n• intermediate downtrend intact, sell rallies favored: 0.68 | supply above 1.3050 not a coiling base: 0.72\n• 1.2886 + daily SMA100 hold as support on next test: 0.41 (i.e. test more likely to fail than hold)\n• 1.2886-1.2890 breaks down within 12h: 0.54 | touch 1.3150 before 1.2820: 0.40\n=> mild, consistently-held downside tilt, but no dominant scenario: the chart alone is a contested mid-range picture.",
+    fillcolor="#1e1b4b", color="#8b5cf6"
+  ];
+
+  // 4. Research
+  research [
+    label="4. Research (Jev-defined need, one pass, fresh 2026-10-25T09:48-09:52Z)\nJev: external information could change whether 1.2810 breaks before 1.3150 is reclaimed p=0.94; a research pass would materially\nchange side/entry/stop p=0.49. Question sent verbatim: will XRPUSDT trade at or below 1.2810 before at or above 1.3170 in\n2026-10-25T09:42Z -> 2026-10-26T21:00Z, and what could push it through either level?\nFindings (dated, in research_log.txt): window macro-empty; funding +0.010%/8h; Binance OI -4.0% contracts in 47h;\n75.3% of retail accounts long; 1h taker buy/sell 0.9314; Oct 24 liquidations $2.89M of which $2.84M longs; spot ETF flows\n$0/$0/+$709K/+$3.5M/$0 for Oct 19-23; BTC below daily SMA20/50; XRP +1.36% 24h vs BTC -0.32%; Swell 2026-10-27/29 and\nFOMC 2026-10-28 outside the window; base-rate study lower-barrier-first 67.8% but symmetric control 51.3% (no directional edge).\nJev on the findings: 'research contradicts the bearish read' p=0.23; 'research changes side or levels' p=0.29;\n'squeeze above 1.3200 ahead of Swell more likely than the chart suggests' p=0.22.\nUsed in the ticket: macro-empty window -> 36h expiry not 48h; neutral funding + falling OI -> no crowded-short squeeze fuel;\n75% retail long -> retest-then-roll-over rather than immediate squeeze; BTC below its SMAs -> main upside risk to the stop.\nCould not be found: exchange-level liquidation series, XRP options positioning, any evidence of a specific defence at 1.2810/1.3170,\ntransfer alerts for the last 72h, and agreement on the sign of the Oct 23 ETF flow. These limits are recorded, not papered over.",
+    fillcolor="#14261c", color="#22c55e"
+  ];
+
+  // 5. Candidate construction
+  candidates [
+    label="5. Candidate construction (LONG and SHORT both evaluated; no preset distances)\nEntry/stop/target all taken from measured swing points, shelves or moving averages.\nFill probability, post-fill outcome and no-fill are kept separate; no fees, funding or slippage exist in this journal's model, so\nnone were added, and an unfilled LIMIT pays nothing.\n\nLONG LIMIT 1.2825 / TP 1.3070 / SL 1.2745: fill 0.66, P(TP before SL | fill) 0.39, gross +1.910% / -0.624%, break-even 0.2462,\n  EV/fill +0.365%, EV/order +0.241%. Jev: less favourable than the short alternative p=0.75. Rejected: it needs a 1.91% rally out of\na shelf whose next test Jev expects to fail (support-holds p=0.41), and the chart's lower-high sequence argues against it.\nSHORT MARKET 1.2905 / TP 1.2810 / SL 1.3245: gross +0.736% / -2.635%, break-even 0.781 -> negative EV for any realistic win rate.\n  Jev 'LIMIT above market better than MARKET at 1.2905' p=0.74. Rejected.\nSHORT LIMIT 1.3130 / TP 1.2820 / SL 1.3245 (36h): fill 0.73, P(TP before SL | fill) 0.59, gross +2.361% / -0.876%, break-even\n  0.271, EV/fill +1.034%, EV/order +0.755%. Jev: '1.3130 stop too tight for 36h noise' p=0.66, '1.3040 is the better structural\n  entry' p=0.69 (reverse wording 0.44). Runner-up; rejected on stop survivability in a final head-to-head (p 0.65 vs 0.23).\nSHORT LIMIT 1.3040 / TP 1.2810 / SL 1.3170 (36h): fill 0.71, P(TP before SL | fill) 0.59, break-even 0.361. Jev bundle comparison\n  marked the stop 'contradicted' (too close to the 1.3150-1.3154 session high). Stop moved to 1.3245 instead.\nSHORT LIMIT 1.3040 / TP 1.2810 / SL 1.3235: replaced by 1.3245 because the measured Oct-23 high is 1.3238, i.e. 1.3235 sits\n  inside structure (Jev: 1.3245 better than 1.3235 p=0.76).\n\nSELECTED: SHORT LIMIT 1.3040 / TP 1.2810 / SL 1.3245 / expire 2026-10-26T21:00Z",
+    fillcolor="#272015", color="#eab308"
+  ];
+
+  // 6. Selected-ticket arithmetic and conditioning
+  math [
+    label="6. Selected-ticket economics (arithmetic by script, not by Jev)\nEntry 1.3040 (measured chop highs 1.3024/1.3042/1.3026 and just under the 4h SMA20 1.3043)\nTP 1.2810 (top of the Oct 23-24 shelf; daily SMA200 1.2788 below it)  SL 1.3245 (above the measured Oct-23 high 1.3238)\nGross target = (1.3040-1.2810)/1.3040 = +1.7640%   Gross stop = (1.3245-1.3040)/1.3040 = -1.5725%\nRR = 1.12   Break-even win probability = 1.5725/(1.7640+1.5725) = 0.4712\n\nProbabilities actually asked and used (proposition wording preserved in section 3/7):\n  P(fill = touch 1.3040 within 36h) = 0.71          [asked: 'between 2026-10-25T09:42Z and 2026-10-26T21:00Z trades >= 1.3040']\n  P(TP before SL | fill) = 0.69                     [asked: 'if it first trades >= 1.3040 within 36h, then <= 1.2810 before >= 1.3245']\n  P(no fill) = 0.29 with payoff 0\nEV per fill = 0.69*1.7640 - 0.31*1.5725 = +0.730%\nEV per placed order = 0.71*0.730 = +0.518%\nSanity: win probability 0.69 vs break-even 0.4712 -> margin +0.22; the 0.31 complement is charged as a full stop even though\nsome of it would expire part-way through the trade, so the bound is conservative. Non-binary outcomes (no fill, expiry) are\ncarried explicitly in the order-level number instead of being folded into a TP/SL split.",
+    fillcolor="#1f242d", color="#38bdf8"
+  ];
+
+  // 7. Forecast (independent of the ticket)
+  forecast [
+    label="7. Independent forecast (built before the ticket, contested)\nMost-supported hourly close path from 2026-10-25T10:00Z to 2026-10-26T21:00Z: drift up 1.2955 -> 1.3040 into 14:00Z\n(a retest of the chop highs / 4h SMA20), reject, then a staircase decline through 1.2900 -> 1.2810 around 2026-10-26T04:00Z,\nthen stabilisation in the 1.2758-1.2790 band into expiry (Oct 24 congestion lows 1.2734/1.2755 cap the downside).\nAnchors: P(<=1.2810 before >=1.3170)=0.61, P(>=1.3070 before <=1.2745)=0.57, P(next 1.5% swing down)=0.62,\nP(4h/1h ATR 1.50%/0.69%) caps the per-theme step sizes, and the leg-length study (11-32h legs, mean ~23h) fixes the 36h horizon.\nMarked contested: S3 (reclaim 1.3150) keeps p=0.26 and S1 (pure range) p=0.42, so the path is not a dominant scenario.\nThe forecast does pass through the entry and the target; that was not engineered - S2 is the modal path independently of the ticket.",
+    fillcolor="#2a2338", color="#c084fc"
+  ];
+
+  // 8. Robustness / contradictions checked
+  checks [
+    label="8. Contradictions and robustness checks (why they did not block the trade)\n• Jev answered the mirror-worded 1.2810/1.3170 order question 0.61 and 0.29 -> same side, ~0.3 width of uncertainty, so the\n  downside tilt is real but modest; it is handled by small size (one identical stake) and by a stop beyond structure, not by\n  pretending the edge is large.\n• Jev's first bundle ranking preferred no_trade (0.37 vs 0.22) but explicitly marked the 1.3170 stop 'contradicted' (too close to\n  the 1.3150-1.3154 session high) and accepted a 1.3245/1.3235 stop. The contradiction was a stop-placement defect, not a\n  rejection of the setup, so it was fixed by re-pricing the stop rather than by abandoning the trade.\n• Jev '1.3130 entry better' 0.44 while '1.3040 entry better' 0.69 -> order-insensitive agreement for the 1.3040 entry.\n• Jev 'a 1.3130 touch mostly comes from the advance that reaches 1.3245' 0.19 vs '1.3130 stop too tight for 36h noise' 0.66 ->\n  genuine tension; resolved by the final head-to-head in which the 1.3040 bundle won 0.65 vs 0.23 with every requirement supported.\n• Jev 'setup still valid at the live 1.2940' 0.75 after the price had drifted +0.24% from the 1.2905 capture -> re-anchored, no material change.\n• 48h expiry rejected (p=0.33 / 0.37 that it is better than 36h) although it would add fill opportunities; a longer window would carry\n  the position into Swell/FOMC pre-positioning.",
+    fillcolor="#2d1b24", color="#f43f5e"
+  ];
+
+  // 9. Terminal
+  terminal [
+    label="FINAL DECISION: GO_LIMIT (PENDING)\nXRPUSDT SHORT LIMIT 1.3040 | TP 1.2810 (+1.764%) | SL 1.3245 (-1.572%) | RR 1.12\nP(fill) 0.71 | P(TP before SL | fill) 0.69 | break-even 0.4712 | EV +0.730% per fill, +0.518% per order\nExpire 2026-10-26T21:00Z\nFolder: PENDING_2026-10-25T0942Z_XRPUSDT",
+    shape=ellipse, fillcolor="#1e293b", color="#eab308", fontcolor="#fef08a"
+  ];
+
+  history -> chart_extract;
+  chart_extract -> scenarios;
+  scenarios -> research;
+  research -> candidates;
+  candidates -> math;
+  scenarios -> forecast;
+  math -> checks;
+  forecast -> checks;
+  candidates -> checks [style=dashed, color="#ef4444", label="rejected alternatives"];
+  checks -> terminal;
+}
