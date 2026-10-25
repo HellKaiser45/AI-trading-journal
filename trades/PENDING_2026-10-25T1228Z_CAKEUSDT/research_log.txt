@@ -1,0 +1,50 @@
+CAKEUSDT — research log (UTC). Chart: 1D Aster screenshot captured 2026-10-25T12:18Z (clock in frame: 13:18:37 UTC+1).
+Decision horizon: 2026-10-25T12:28Z (folder time) -> 2026-11-04T12:30Z (expiry of the selected ticket).
+
+WHAT WAS ASKED AND WHY
+Jev was asked what unresolved question could materially change the forecast or the candidate evaluation inside the horizon.
+Recorded answers (probabilities, same state): external information could materially change the 10-day direction forecast 0.94 (auto); a focused research pass would materially change the trade taken today 0.82; after round 1, "another research pass is still needed" 0.33.
+Research agenda chosen by Jev (jev_decide over five agenda options, 2026-10-25T12:35Z): "dated catalyst calendar inside the window" 0.59, "derivatives positioning/crowding" 0.34, spot flows 0.02, beta/sector 0.02.
+Round-2 question was sent only after Jev judged (0.82) that the unresolved closing date of the PancakeSwap governance vote could change the decision.
+
+ROUND 1 (searched 2026-10-25T12:31Z-12:50Z) — dated catalyst calendar 2026-10-25 -> 2026-11-08
+Question asked verbatim: does anything on the dated calendar inside the window make CAKE trading at or below 1.95 rather than at or above 2.26 first more likely?
+- No bearish CAKE-specific dated event found inside the window. The only CAKE-native item was a governance vote ("The Flip") reported as opened 2026-10-21T08:16Z (snippet-only read; coinbase.com/price/pancakeswap returned 403 on the full page).
+- Macro calendar inside the window (primary sources):
+  * FOMC decision 2026-10-28T18:00Z, press conference 18:30Z, no SEP — https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+  * Q3 GDP advance + September Personal Income & Outlays (PCE) 2026-10-29T12:30Z — https://www.bea.gov/news/schedule
+  * Employment Cost Index Q3 2026-10-30T12:30Z; JOLTS September 2026-11-02T15:00Z; Productivity & Costs preliminary 2026-11-05T13:30Z; Employment Situation (NFP) October 2026-11-06T13:30Z — https://www.bls.gov/schedule/2026/11_sched.htm
+  * US International Trade 2026-11-04T13:30Z — https://www.bea.gov/news/schedule
+- Outside the window (deliberately not treated as in-window risk): October CPI 2026-11-10T13:30Z, October PPI 2026-11-13, FOMC minutes 2026-11-18, next FOMC 2026-12-08/09.
+- Decline attribution: CAKE -27.2% vs BTC -5.0% from the 2026-09-27 close -> idiosyncratic, not beta. No hack/exploit/delisting/lawful/unlock/whale-selling item found, but the news pipeline was partly degraded, so absence is weak evidence (recorded limitation, not papered over).
+- Positioning: Binance USDT-M CAKEUSDT funding lastFundingRate -0.00000689 (-0.000689%/8h), next funding 2026-10-25T16:00Z; open interest 4,370,816 CAKE (~$9.0M) at 2026-10-25T12:31:46Z — https://fapi.binance.com/fapi/v1/premiumIndex?symbol=CAKEUSDT and https://fapi.binance.com/fapi/v1/openInterest?symbol=CAKEUSDT. Flat funding, small OI: no crowding signal in either direction. Aster perp funding/OI not reachable with the available tooling.
+
+ROUND 2 (searched 2026-10-25T12:38Z-12:55Z) — closing date of the governance vote
+- "The Flip" vote CLOSED 2026-10-24T08:07:22Z; start 2026-10-21T08:07:22Z (72h), proposal created 2026-10-21T07:52:22Z. Read in full from the Snapshot Hub GraphQL proposal object in the space cakevote.eth (pancakeswap.eth does not exist there: 404). State: closed. That is before the decision window, so it is not an in-window catalyst.
+- Result: For 3,037,343.96 (70.9%) / Against 1,245,165.03 (29.1%), 43 votes. A single address 0xA38E0dDBF8307C5949bf795Ba7F3F710Af956c82 cast 3,010,422.78 of the For votes at 2026-10-23T07:22:40Z — 99.1% of the For side; without it the proposal fails roughly 98/2. A forum post of 2026-10-23T17:16:38Z alleges that address traces to an old PancakeSwap treasury wallet (bscscan links given); the allegation is unverified and unrefuted, with no official reply as of the last post.
+- Content correction against round 1: the proposal is an 88/12 LP fee split, emissions cut from 22,500 to 7,000 CAKE/day routed to a growth fund (not burned), and a 12% protocol fee to Treasury. It is not a "buyback from non-stablecoin fees" plan. The team's own forum reply of 2026-10-15T09:12:46Z concedes "weekly net burn would be lower under The Flip" and calls lower Treasury income "a deliberate short-term sacrifice". Implementation is said to begin in November 2026 "within 2 weeks of the proposal passing", i.e. on or before about 2026-11-07, with no announced date.
+- Timing check: the -4.83% day was 2026-10-22, i.e. before the decisive vote block on 2026-10-23T07:22Z and before the close, so the drop cannot be attributed to the vote outcome. The live residual is the unresolved governance-manipulation allegation.
+- No other cakevote.eth proposal open or scheduled; no new forum topic after 2026-10-23T17:16Z. Blog-posted activation dates could not be verified (blog paths unreachable) — recorded gap.
+
+FRESHNESS / DATA VALIDATION (2026-10-25T12:46:18Z)
+- Spot CAKE/USDT 2.0640 (bid 2.0640 / ask 2.0650) — https://api.binance.com/api/v3/ticker/24hr?symbol=CAKEUSDT; perp mark 2.0608, index 2.06289 — https://fapi.binance.com/fapi/v1/premiumIndex?symbol=CAKEUSDT.
+- 2026-10-25 daily candle (in progress): O2.0800 H2.0990 L2.0460, last 2.0640; 2026-10-24 completed: O2.1330 H2.1340 L2.0040 C2.0800.
+- Rolling 24h: high 2.104, low 2.004, -1.81% — https://api.binance.com/api/v3/klines?symbol=CAKEUSDT&interval=1d&limit=3 and interval=1h.
+- Validation of my own pixel extraction (from the screenshot, not from an API): Binance 1d klines 2026-10-19..2026-10-25 against the extracted bars — open 2.190/2.199/2.226/2.236/2.128/2.133 vs extracted 2.1913/2.1935/2.2326/2.2348/2.1283/2.1196; closes 2.197/2.227/2.236/2.128/2.134/2.080 vs 2.1957/2.2217/2.2391/2.1239/2.1326/2.0761; largest single-field deviation about 0.35% (2026-10-23 low: extracted 2.0739 vs Binance 2.104, a 1.4% wick difference that is plausibly venue-specific since the frame is an Aster chart). The frame's own tags 2.8606, 2.0715 and 1.1271 reproduce within 1.5 px, and the last bar reproduces the frame header O2.0800 H2.0928 L2.0455 C2.0715 within 1.5 px.
+
+EFFECT OF THE FINDINGS ON THE DECISION (Jev, recorded in decision_tree.dot)
+- "These research findings contradict the bearish continuation read" 0.12 (round 1: 0.14). Research did not overturn the chart.
+- "The governance-manipulation allegation is a live reputational risk that, if it gains traction, pushes CAKE toward 1.95 rather than 2.26" 0.78.
+- "The emissions cut routed to a growth fund (not burned) plus lower Treasury income is a mild net negative for CAKE over the next two weeks" 0.70.
+- "The research findings change side/entry/stop/target versus the chart-only read" 0.59 — used to keep the short-fade bias and to justify a wide 2.34 stop instead of 2.285 (the 2026-10-28 FOMC was judged not on its own to warrant a shorter expiry, 0.31; extending past the 2026-11-10 CPI would substantially improve the outcome only at 0.18).
+
+CALCULATION AND EXPIRY RATIONALE (arithmetic done by script, /tmp)
+Selected ticket: SHORT LIMIT 2.19, TP 1.96, SL 2.34, place 2026-10-25T12:28Z, expire 2026-11-04T12:30Z.
+- Gross target (2.19-1.96)/2.19 = +10.502%; gross stop (2.34-2.19)/2.19 = -6.849%; RR 1.534.
+- Break-even win probability for a filled trade, no fees in this journal's model: 6.849/(10.502+6.849) = 0.3948.
+- P(fill = touch 2.19 by 2026-11-04T12:35Z) 0.62, by 2026-11-08 0.58 (recorded range 0.58-0.62; 0.58 used in the headline economics).
+- P(TP 1.96 before SL 2.34 | fill), asked for the exact ticket: 0.55.
+- Expected net outcome per fill = 0.55*10.502 - 0.45*6.849 = +2.694%; per placed order = 0.58*2.694 = +1.563%; unfilled orders pay nothing.
+- Sensitivity per fill: 0.50 -> +1.827%; 0.45 -> +0.959%; 0.40 -> +0.091%; 0.35 -> -0.777%. So the trade stays positive for any post-fill win probability above the 0.395 break-even, which brackets the Jev range (0.39-0.67) with margin at the central estimate.
+- Expiry chosen among 2026-11-01 / 2026-11-04 / 2026-11-08 (jev_decide: 0.01 / 0.97 / 0.02). 2026-11-04T12:30Z keeps the highest measured fill probability (0.62), leaves the filled position time for a 10.5% decline at a 5% daily ATR, and closes before the 2026-11-06 NFP release. Jev put 0.32 on "the expiry cuts off the part of the decline where 1.96 would most likely be reached".
+- No fees, funding or slippage are added: the journal model excludes them, so none were invented.

@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "CAKEUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "LIMIT"
+price    = 2.19
+
+[exit]
+tp       = 1.96
+sl       = 2.34
+
+[schedule]
+place_at  = 2026-10-25T12:51:31Z
+expire_at = 2026-11-04T12:30:00Z
