@@ -1,0 +1,79 @@
+RESEARCH LOG - UNIUSDT 1H - decision window from 2026-10-26T09:00Z (folder IDEA 2026-10-26T0903Z)
+Chart captured 2026-10-26T08:56Z (screenshot 261026_09h56m43s, clock 09:56 UTC+1). Horizon 24h.
+
+AGENDA (set by Jev, not by the analyst)
+Round 1 question chosen by jev_decide (confidence 0.87, market_beta 0.80 vs uni_catalyst 0.02,
+derivatives_state 0.00, htf_levels 0.16): "Is the early-morning UNIUSDT move part of a broader crypto
+market move, or is it UNI-specific?"
+Round 2 question chosen by jev_decide (squeeze_fuel 0.89 vs event_risk 0.05, htf_resistance 0.03,
+seller_flow 0.02): "UNI perpetual positioning - remaining squeeze fuel or crowded longs?"
+After round 2: jev_noul "another research round is still needed" 0.15 -> research closed.
+
+ROUND 1 FINDINGS (retrieved 2026-10-26T09:05-09:08Z)
+- Binance spot 1H (ccxt) + CoinGecko cross-check: UNI +5.73% over 24h and +2.07% between 06:00Z and
+  09:00Z, while BTC was +0.13% and ETH +0.15% in the same window; over 24h BTC -0.21%, ETH -0.42%.
+  From the 2026-10-24T17:00Z low UNI is +8.47% vs BTC +1.28% and ETH +1.89%.
+  => direction partly shared beta, magnitude UNI-specific (jev_noul: UNI-specific 0.95).
+- CoinDesk (Shaurya Malwa, 2026-10-26, "Bitcoin slips under $80,000 as traders de-risk ahead of Fed
+  meeting") https://www.coindesk.com/ : broad de-risking before the 2026-10-28 FOMC; ETH ~-3% to just
+  above $2,300, XRP -3%, SOL -2% near $100; drivers named: record oil (~$114 Brent), US-Iran, Asia AI
+  selloff. Reconciles with own 1H data as peak-to-trough (BTC 80,951->79,369 = -1.96%).
+- alternative.me Fear & Greed API 2026-10-26T09:08Z: 50 (10-25), 54 (10-24), 51 (10-23) = neutral, not panic.
+- No UNI-specific news dated 2026-10-25/26 was found. Freshest items: 2026-10-22 Uniswap v4
+  "Aggregator Hooks" live (blog.uniswap.org/aggregator-hooks-are-now-live, fee base -> burn);
+  2026-10-24 Arthur Hayes exited 323,000 UNI (~$2.24M, ~$6.93 avg) per Lookonchain, already absorbed.
+  DefiLlama unlocks (2026-10-18): 100% unlocked, no scheduled unlock (rules out an unlock driver).
+  The Defiant 2026-10-24: UNI down ~29% in four weeks - today's strength is a rebound inside a monthly
+  downtrend, not a trend change.
+- Volume: the 08:00-09:00Z UNI bar traded 328,392 UNI = 2.53x the 24h hourly mean.
+- Re-anchor data (2026-10-26T09:16Z, Binance REST): spot 7.007 (bid 7.006/ask 7.007), perp mark 7.002,
+  CoinGecko 7.00 at 09:15:20Z. 1H candles: 03:00 6.824/6.900/6.780/6.828; 04:00 6.829/6.926/6.822/6.925;
+  05:00 6.925/7.003/6.913/6.988; 06:00 6.989/7.002/6.930/6.983; 07:00 6.982/7.004/6.920/6.947;
+  08:00 6.948/7.117/6.903/7.068; in-progress 09:00Z open 7.067 high 7.071 low 7.005, last 7.007.
+  The 08:00Z exchange bar matches the chart-extracted last candle (O6.934 H7.118 L6.905 C7.071) within
+  0.014, so the extraction is anchored to live data rather than to pixel guessing.
+
+ROUND 2 FINDINGS (primary exchange APIs, retrieved 2026-10-26T09:10-09:13Z)
+- Funding: Binance +0.004132%/8h (below its own 0.01% neutral baseline), Bybit +0.0100%, OKX +0.007840%
+  (formula-clamped, premium -0.0543%). 48h funding sums +0.011% to +0.025%. Perp marks BELOW index on all
+  three venues (basis -0.054% to -0.068%): no premium being paid to be long.
+- Open interest (coins): Binance 21.77M, Bybit 8.14M, OKX 5.37M (~35.3M UNI ~$247M). OI -1.10% (Binance)
+  and -2.27% (Bybit) over 48h; +0.06% / +0.50% during the impulse hour; flat through the whole
+  6.5201 -> 7.1182 rally. The rally was not built on expanding leverage.
+- Long/short: Binance global accounts 1.5478 (60.75% long), rose from 1.4213 at 2026-10-25T00:00Z;
+  Binance top-trader positions 3.9251 (79.7% long) flat all session and slightly lower during the impulse;
+  OKX accounts fell 2.35 -> 2.15; Bybit 1.816 flat.
+- Liquidations (only OKX publishes prints): 24h ~14,471 UNI (~$102k), 65% shorts. The short pocket at
+  6.996-7.110 was consumed 08:27:22Z-08:49:44Z (1,000 UNI @7.053, 950 UNI @7.104). Not a cascade; ~0.01%
+  of aggregate OI, and that inventory is now gone.
+- Not verifiable: Binance allForceOrders (404), Bybit has no public liquidation feed, Coinglass API (500),
+  Hyperliquid (POST-only). No primary cross-venue 24h liquidation total exists - no such figure is used.
+
+WHAT COULD NOT BE FOUND
+- Any UNI-specific news dated 2026-10-25/26; any live governance vote in the window (only a
+  low-confidence aggregator said none); verified cross-venue liquidation totals; Hyperliquid/dYdX UNI
+  derivatives; the body of The Defiant article (paywalled). One downstream note: the ccxt OHLCV helper
+  in this environment labels bars +1h (its "10:00" row = the exchange 09:00Z bar); exchange REST epoch
+  timestamps were used instead.
+
+HOW THE RESEARCH CHANGED THE FORECAST (jev_noul, recorded verbatim in decision_tree.dot)
+- risk-off macro makes a sustained rally above 7.13 less likely 0.75
+- no fresh catalyst => positioning squeeze rather than a new trend leg 0.72
+- spot-led/short-covering rather than new leveraged longs 0.88
+- little squeeze fuel left above 7.13 0.83
+- consolidation/retrace more likely than extension above 7.19 0.87
+- 6.90 reached within 24h 0.42 (was 0.57 pre-research)
+- 7.19 reached within 24h 0.38 (was 0.46 pre-research)
+
+EXPIRY RATIONALE
+24h (expire 2026-10-27T09:30Z). jev_noul "a 36-hour expiry would improve the short's expected outcome"
+0.43 -> stay at 24h. The 2026-10-28 FOMC and the Thursday macro event sit outside the window, so the
+trade is not carried into a scheduled binary. 1H ATR-14 is 1.34%, so a 24h window is long enough for the
+2.32% target (jev_noul "24h enough for a 2.5% move" 0.69) without holding through the Fed.
+
+CALCULATION (reproduced in econ.py, results copied into decision_tree.dot)
+SHORT LIMIT 7.125 / TP 6.96 / SL 7.225: gross gain 2.3158%, gross loss 1.4035%, RR 1.650,
+p_BE = 1.4035/(2.3158+1.4035) = 0.3774. Conditional on fill (TP-first 0.66 / SL-first 0.15 /
+neither 0.19, neither-branch +1.002%): E|fill = +1.508%, E per placed order at P(fill)=0.41 = +0.618%.
+Break-even P(TP first | fill) = 0.2545, i.e. Jev's 0.66 has to be overstated by 2.6x before the order is
+not worth placing. No fees exist in this journal's model, so no cost term is applied.
