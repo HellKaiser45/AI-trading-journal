@@ -1,0 +1,71 @@
+ASTERUSDT 1h — research log — idea opened 2026-10-27T09:19Z (sandbox clock), real UTC at capture ~10:25Z
+=============================================================================================
+
+QUESTION ASKED (defined by Jev, not by the analyst)
+Jev decide "must any outside research be gathered before a 36h forecast / candidate?" ->
+  events-window 0.90 (confidence 0.88); no-research 0.02; positioning 0.05; beta 0.02.
+So the agenda was: (1) ASTER-specific scheduled events / announcements / exchange or protocol
+actions inside 2026-10-27T09:19Z -> 2026-10-28T21:00Z, and (2) live spot price plus the latest
+1-hour candles at decision time. Nothing else was searched.
+
+FINDINGS (retrieved 2026-10-27T09:22-09:24Z by the research agent)
+1. No CONFIRMED ASTER-specific event inside the window.
+   - Unconfirmed / contested: Stage 6 "100% Vested" claim window possibly opening 2026-10-28
+     12:00Z (inside the window, ~26h ahead). Media: cryptoticker.io/en/aster-vesting-claim-window
+     (2026-10-18), cryptoticker.io/en/most-profitable-crypto-airdrops-week-44-2026 (2026-10-26),
+     boxmining.com/aster-dex-airdrop-guide, airdrops.io/aster.
+   - The official allocation page (https://www.asterdex.com/en/airdrop/allocation, fetched twice
+     2026-10-27) instead states "100% Vested Claim: 12:00 UTC, 4 Nov - 12:00 UTC, 4 Dec 2026",
+     agreeing with cdropfi.com/airdrop-guide/aster (2026-09-15) and
+     coinhubnetwork.com/airdrops/aster-stage-6-vested-claim (2026-09-24). Unresolved conflict.
+   - Size conflict: 64M ASTER (official page, boxmining, cdropfi, bydfi) vs 200M (cryptoticker).
+     Primary source = 64M (~2.5% of 2.508B circulating).
+   - Stage-6 immediate-claim tranche already closed, so the vested claim is a supply-side (mild
+     bearish) event, not a listing.
+2. Next CONFIRMED unlock: 2026-10-30T01:23Z cliff, 2.25M ASTER (~$1.6M, 0.09% of float),
+   "Ecosystem & Community" tranche 17/57 (https://defillama.com/unlocks/aster, read 2026-10-27).
+   OUTSIDE the 36h horizon.
+3. Recurring, no binary date in window: bi-weekly buyback+burn, last 2026-10-19T07:00Z
+   (2,721,732.41 ASTER bought and burned, 99% of daily fees; cumulative 210,088,876.51 since
+   2026-06-17). Next update ~2026-11-02 -> outside window.
+   (docs.asterdex.com/usdaster-token/tokenomics; coinmarketcap.com/top-stories/...)
+   WLFI grid-rewards pool live since 2026-10-26 (already priced); USD1 RWA Boost to 2026-12-31;
+   Blackboard x Aster competition to 2026-11-10 — marketing, no dated catalyst.
+4. NOT FOUND: exchange listing/delisting notices for Oct 27-29 on any venue; no mainnet/upgrade
+   scheduled (Aster Chain L1 shipped 2026-03-17); no partnership/regulatory item dated in window.
+5. FAILED SOURCES: asterdex.com/en/announcement/333 is JS-only ("Loading..."), so the official
+   announcement feed could not be read — the main blind spot. DefiLlama unlock chart renders
+   client-side. X/@Aster_DEX not fetchable.
+
+LIVE PRICE / CANDLES (source: Binance klines via CCXT, plus Bybit and MEXC spot quotes)
+- Spot at retrieval: Binance 0.7113, Bybit 0.7110, MEXC 0.7113 (bid 0.7112 / ask 0.7113).
+  vs 0.7108 at chart capture = +0.05%. No displacement.
+- Highest print since 09:00Z: 0.7129; lowest 0.7027 (Oct 27 05:00 wick, reclaimed same hour).
+  0.7178 not touched since the 2026-10-26 19:00 candle (high 0.7181, close 0.7126 - failed
+  breakout that gave back the whole move within the hour). 0.7030 not breached since 05:00Z.
+- MEXC 24h high 0.7180 / low 0.7028 — matches the range extracted from the screenshot.
+
+CLOCK-OFFSET CORRECTION (important for every timestamp in this folder)
+The screenshot/platform clock and the sandbox clock both read ~1 hour behind real UTC (the chart
+footer showed "10:14:07 UTC+1" = 09:14Z while the Binance feed was already printing a forming
+10:00Z candle). Aligning extracted bars with the live Binance klines matched 5 consecutive bars
+at exactly +1h, e.g. extracted 0.70362/0.70631/0.70356/0.70541 = Binance 2026-10-27T06:00
+0.70370/0.70650/0.70360/0.70550; extracted 0.71022/0.71250/0.71022/0.71091 = Binance
+2026-10-27T09:00 0.71050/0.71290/0.71030/0.71100. All history timestamps in graphpoints.csv
+are therefore shifted +1h to real UTC, and place_at/expire_at are given in real UTC.
+
+EXPIRY RATIONALE (Jev, exact propositions)
+- P(expiry 2026-10-29T10:30Z / 48h would improve the outcome vs 36h) = 0.43 -> do not extend.
+- P(expiry 2026-10-28T11:00Z / 24h is too short to fill and reach target) = 0.14 -> 24h would be
+  adequate in principle, but P(0.7060 reached within 12h OF THE FILL) = 0.38, so the extra hours
+  materially help a late fill.
+- P(swing from the 0.7140-0.7155 zone back to 0.7060 completes within 36h if price gets there)
+  = 0.82. Expiry 2026-10-28T22:30Z = 35h45m after placement: long enough for one full rotation,
+  short enough to avoid the second day's breakout tail and to end before the 2026-10-30 unlock.
+
+WHAT THE RESEARCH CHANGED
+Nothing in the level geometry. It confirmed (a) price had not displaced before placement, so the
+chart read was still valid at the live price (Jev: structure still valid 0.91, setup broken 0.07),
+and (b) no confirmed catalyst inside the horizon, with one unresolved mild-bearish supply risk
+(Stage 6 claim, Jev: net selling pressure if it occurs 0.74) that supports fading rallies rather
+than chasing a long into the range top.

@@ -1,0 +1,40 @@
+digraph decision {
+  rankdir=TB; node [shape=box, fontname="monospace", fontsize=10];
+
+  history [label="PRIOR-JOURNAL LESSONS APPLIED (7 settled trades, 0 wins, sum +0.20%; small sample, no directional bias inferred)\n1) LOSS-1.01%_2026-10-23T1024Z_ASTERUSDT (ASTER LONG limit 0.695 / TP 0.706 / SL 0.688):\n   stop 1.75 ATR below entry sat inside the rotational band, was swept; price then ran to 0.715, above the TP.\n   -> today the short stop sits outside the whole 48h overshoot envelope (0.7200 vs max 0.71784).\n2) EXPIRED+3.95%_2026-10-18T1535Z_ASTERUSDT (ASTER LONG limit 0.691 / TP 0.721, justified at 'JEV TP 1.00 conf'):\n   max excursion 0.7190, expired +3.95% untargeted; nothing above 0.719 printed for the next 6 days.\n   -> targets are placed INSIDE the measured range now, not at a range extreme.\n3) LOSS-1.50%_2026-10-23T1147Z_ZECUSDT filled and stopped inside the same 5-minute candle; LOSS-1.30%_2026-10-19T1533Z_XRPUSDT stopped then reversed.\n   -> this journal's fill-candle rule (only SL can trigger in the fill candle) was checked against measured ASTER data, not assumed."];
+
+  chart [label="CHART FACTS (extracted by pixel analysis of the screenshot; 183 hourly bars; verified vs Binance klines to +/-0.0003)\nASTERUSDT 1h, real UTC at capture 2026-10-27T10:25Z, last 0.7108-0.7113\n8-day range 0.68507 (24 Oct) - 0.72714 (21 Oct); last 24h 0.70270-0.71810; last 48h 0.69749-0.71810\nhigher lows 0.68507 -> 0.69749 -> 0.70270; lower highs last 24h 0.71810 -> 0.71460\nresistance 0.7140-0.7152 (4 of last 48 hourly highs, 6-7 tags in 72h); 0.71784 single spike, given back in the same hour; nothing >=0.7230 in 120h\nsupport 0.7060 (27 of last 48 hourly lows), 0.7030 (17 of 48), 0.69749 (1 of 48), 0.69003/0.68507\nATR14h 0.43% / ATR24h 0.50%; median hourly range 0.0038; 45% of hours range >=0.0040, 19% >=0.0060\nempirics for the fill-candle rule: of the 7 bars in the last 48h that reached 0.7140, none exceeded 0.7195 (max overshoot above 0.7155 = +0.0024); of the 5 bars that reached <=0.7055, none reached 0.6995"];
+
+  clock [label="CLOCK OFFSET: platform and sandbox clocks read ~1h behind real UTC (chart footer 10:14:07 UTC+1 = 09:14Z while Binance already had a forming 10:00Z candle).\n5 consecutive bars aligned at exactly +1h -> all CSV timestamps shifted +1h; place_at/expire_at in real UTC."];
+
+  scen [label="SCENARIOS for the 36h window (Jev, separate yes/no judgments - approximately exclusive, NOT normalised; 0.12 residual)\nS1 rotation, no break (no hourly close outside 0.7030-0.7178): 0.42\nS2 upside break (hourly close > 0.7200): 0.14\nS3 downside break (trade <= 0.6975): 0.32\n   asymmetry: P(downside break more likely than upside break) = 0.94; P(rotational range rather than trend) = 0.86\nordering: P(0.7140 touched before 0.7030) = 0.63; P(0.7030 before 0.7155) = 0.33 -> up-probe first\nendpoint: P(inside 0.7060-0.7150 at 2026-10-28T22:00Z) = 0.65; P(higher than 0.7108 in 36h) = 0.50\nP(dip below 0.7060 then back above 0.7100 within 36h) = 0.66"];
+
+  lev [label="LEVEL TOUCH PROBABILITIES (36h unless stated)\n>=0.7140: 0.68 | >=0.7150: 0.64 | >=0.7155: 0.50 | >=0.7178: 0.43 | hourly close >0.7200: 0.14\n<=0.7055: 0.79 | <=0.7030: 0.67 | <=0.6975: 0.32\n24h: >=0.7155 0.49, <=0.7055 0.63"];
+
+  freshness [label="FRESHNESS / RE-ANCHOR 2026-10-27T10:25Z at 0.7113 (+0.05% vs capture; research-agent Binance/Bybit/MEXC quotes)\nstructure still valid 0.91 (auto) | 'setup has broken down, do not trade this chart' 0.07 -> re-anchor OK, no look-ahead needed"];
+
+  research [label="RESEARCH (Jev-defined agenda: ASTER events in window + live price/candles; events-window 0.90)\nno confirmed ASTER event inside the horizon. Unconfirmed Stage 6 vested claim 2026-10-28T12:00Z (media) vs 2026-11-04 (official page) - unresolved; would be mild supply (Jev: net selling pressure if it occurs 0.74). Next confirmed unlock 2026-10-30T01:23Z = 0.09% of float, outside horizon. Buyback/burn next ~2026-11-02, outside. No listing/delisting news. Official announcement feed unreadable (blind spot)."];
+
+  candS [label="CAND S (placed): SHORT LIMIT 0.7150, TP 0.7060, SL 0.7200, expire 2026-10-28T22:30Z\nP(fill >=0.7150 in 36h) 0.64 | G 0.0090 (+1.26%) L 0.0050 (-0.70%) RR 1.80 pBE 0.357\nconditional: P(TP first) 0.77 (0.7155 variant) / 0.765 used; P(SL first) 0.13; P(neither) 0.105, expiry +0.0038\nEV/fill +0.93% ; EV/order 0.64 x 0.93% = +0.59% ; haircut -0.15 on p_TP -> +0.41% ; pessimistic (0.55/0.33) -> +0.32%\nstructural checks: entry at respected supply 0.88; entry structurally meaningful 0.77; stop 0.0022 above the 0.71784 regime extreme;\nstop 'far enough to survive a retest' only 0.45 -> widening to 0.7210 or 0.7220 lifts pBE to 0.40/0.42 faster than it lifts survival, so 0.7200 kept"];
+
+  candS2 [label="CAND S' (rejected on fill probability): SHORT LIMIT 0.7155, TP 0.7060, SL 0.7200\nP(fill) 0.50 vs 0.64; EV/order +0.49% vs +0.59% -> same idea, worse fill odds, kept as fallback only"];
+
+  candL [label="CAND L (rejected): LONG LIMIT 0.7055, TP 0.7140, SL 0.6995, 36h\nP(fill) 0.79 | G 0.0085 L 0.0060 RR 1.42 pBE 0.414 (0.48 with a 0.13% cost)\nJev P(TP before SL) 0.81 and 0.84 for the sequenced variant - but P(reach 0.7140 within 36h) is only 0.68 UNCONDITIONALLY,\nthe entry zone is a high-traffic rotation centre rather than defended support (0.79), and the conditional answers exceed the unconditional one -> internally inconsistent, discounted to 0.55-0.65\nEV/order at p_TP 0.58: +0.39%; at Jev's 0.81: +0.54% -> close to CAND S on numbers, weaker structurally (entry meaningfulness 0.66 vs 0.77; RR 1.42 vs 1.80)"];
+
+  candL2 [label="CAND L2 (rejected): LONG LIMIT 0.7040, TP 0.7130, SL 0.6975 - stop sits exactly ON the Oct 26 swing low (Jev decide: requirement 'stop beyond a respected level' contradicted)"];
+
+  mkt [label="MARKET ENTRIES (rejected by robustness, not by preference)\nLONG at 0.7113 TP 0.7140 SL 0.7035: P(target first) 0.77 vs pBE 0.695 -> EV +0.11% central, NEGATIVE at -0.15 haircut\nSHORT at 0.7113 TP 0.7040 SL 0.7185: 0.68 vs pBE 0.531 -> +0.30% central, ~0 at haircut\nno structural anchor mid-band -> LIMIT pullback/fade is the only robust expression"];
+
+  dircheck [label="DIRECTION SANITY (not a vote count; used only to test for a preloaded bias)\nround-4 Jev decide distribution: short-7155 0.42, long-7055 0.23, short-7150 0.22, long-7040 0.03, reject 0.06 (confidence 0.34)\nBOTH sides cleared their own break-even in the arithmetic; the short won on structure (supply band 0.88, entry meaningfulness 0.77 vs 0.66) and on a conditional probability that is coherent with its unconditional base rate"];
+
+  forecast [label="INDEPENDENT FORECAST (contested; drawn in chart_prediction.svg, not bent to the order)\nprobe 0.7140-0.7152 by 27T17:00-18:00Z (peak 0.7150) -> fade through 0.7060 on 28T02:00-03:00Z -> test 0.7030 shelf 28T07:00Z ->\nrecover to ~0.7100-0.7104 by 28T22:00Z. Ends 0.7104 vs 0.7108 now, consistent with P(higher in 36h)=0.50.\nContested because: endpoint is a coin flip, and the rotation-vs-break split is 0.42/0.14/0.32 with a 0.12 residual."];
+
+  exec [label="EXECUTION: LIMIT is the only honest expression (breakout entries are out of scope in this journal; a MARKET entry mid-band fails robustness).\nLimit semantics used: fills when the hourly low/high touches 0.7150; in the fill candle only SL can trigger."];
+
+  go [label="GO: SHORT LIMIT 0.7150, TP 0.7060, SL 0.7200, place 2026-10-27T10:45Z, expire 2026-10-28T22:30Z\nno fees/funding/slippage in this journal model (stated limitation, not double counted)", shape=box, style=bold];
+
+  history -> chart; clock -> chart; chart -> scen -> lev -> freshness -> research -> candS;
+  lev -> candS2; lev -> candL; lev -> candL2; lev -> mkt;
+  candS -> dircheck; candL -> dircheck; candS2 -> dircheck; mkt -> dircheck;
+  dircheck -> forecast -> exec -> go;
+}

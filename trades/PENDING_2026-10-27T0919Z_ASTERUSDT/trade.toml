@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "ASTERUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "LIMIT"
+price    = 0.715
+
+[exit]
+tp       = 0.706
+sl       = 0.72
+
+[schedule]
+place_at  = 2026-10-27T10:45:00Z
+expire_at = 2026-10-28T22:30:00Z
