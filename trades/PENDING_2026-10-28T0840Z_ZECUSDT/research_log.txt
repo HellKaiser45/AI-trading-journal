@@ -1,0 +1,98 @@
+# Research Log - ZECUSDT 1h (IDEA_2026-10-28T0840Z_ZECUSDT)
+
+- Symbol: ZECUSDT, chart venue Aster; price discovery Binance/Bybit/Hyperliquid perps + spot
+- Timeframe: 1h. 201 candles extracted from the screenshot for 2026-10-20T00:00Z..2026-10-28T08:00Z
+- Capture: 2026-10-28T08:35Z (chart clock 09:35 UTC+1); folder time 08:40Z; live 1320.06 at capture
+- Horizon: 18h. Jev chose h18 = expiry 2026-10-29T02:40Z (jev_decide: h18 0.82, h24 0.12, h12 0.03, h30 0.00)
+- Re-anchor before the decision: 2026-10-28T08:56Z, Binance perp 1317.30 / Aster perp 1316.54 / spot 1317.45 (-0.21% vs capture)
+
+## Extraction and calibration (own measurement, script)
+- PNG decoded with a pure-Python decoder; plot area isolated; horizontal gridlines at y=65..994 (30 lines) mapped to 1390..1100,
+  fit price(y) = -0.312046*y + 1410.27 (y=65 -> 1389.99, y=289 -> 1320.09, y=994 -> 1100.10).
+- Vertical day gridlines at x=246/437/629/820/1011/1210/1402/1593/1784 -> 192.25 px/day; candle centres on an 8.0 px/h grid.
+- Time anchor: axis day labels 20..29 with the chart clock at 09:35 UTC+1; day-28 local boundary (x=1593) = 2026-10-27T23:00Z,
+  last candle = 2026-10-28T08:00Z forming hour.
+- Price cross-check: header candle O1309.70 H1323.00 L1309.14 C1320.06 vs extracted O1309.79 H1322.90 L1309.48 C1319.15;
+  header change +9.33 implies the previous close 1310.73 = extracted 07:00Z close 1310.73 (exact).
+- Cross-check against exchange klines (pulled 08:54-08:56Z): Binance perp 04:00Z high 1329.75 vs Aster chart 1329.45;
+  01:00Z low 1290.16 (Binance) vs 1292.94 (Aster); 07:00Z close 1310.50 vs 1310.73; 06:00Z close 1305.70 vs 1304.80.
+  Candle-by-candle agreement confirms both the price mapping and the hour alignment.
+
+## Chart facts used
+- Window low 1119.13 (Oct20 02Z); peak 1367.21 (Oct21 18Z, close 1361.90); correction low 1136.61 (Oct24 16Z).
+- Advance of +16.9% from that low to 1329.45 (Oct28 04Z); higher lows 1178.11 / 1191.84 / 1211.50 / 1213.37 / 1286.08 /
+  1290.76 / 1291.07 / 1292.94; higher highs 1242.70 / 1267.98 / 1316.97 / 1325.39 / 1329.45.
+- Last 9 hours inside 1292.94-1329.45; last 6 hours inside 1302.61-1329.45; 1h ATR14 14.93 (1.13%), ATR7 12.66.
+- 24h change +6.15%; price at the 78.6% retracement (1317.9) of the 1367.21->1136.61 drop.
+- Overhead supply 1325-1330, 1343.49 (Oct22 00Z), 1345.99, 1358.47, 1367.21. Support 1291-1296, 1286.08, 1277.96, 1257-1263, 1245.
+
+## Round 1 - answers to the Jev-selected questions (pulled 2026-10-28T08:44-08:48Z)
+1. Scheduled event inside the window: FOMC statement 2026-10-28T18:00Z and press conference 18:30Z. Priced 95% hold
+   (Kalshi/Polymarket 4.5c on a hike), 76% hike for Dec 9. No US data in the window: Q3 GDP advance + Sep PCE are
+   2026-10-29T12:30Z, after every candidate expiry. Deribit BTC 29 Oct 08:00Z expiry small (3,449 BTC), monthly 30 Oct (135,466 BTC).
+   Links: federalreserve.gov/monetarypolicy/fomccalendars.htm ; defirate.com/odds/fed-decision ; bea.gov/news/schedule ;
+   deribit.com/api/v2/public/get_book_summary_by_currency?currency=BTC&kind=option
+2. Driver of the +16.9%: governance headline (Sean Bowe draft ZIP 2026-10-26 stripping the 8% block subsidy from Community Grants,
+   ~91,453 ZEC) plus a 2026-10-28 tenth-anniversary / NU7 narrative (~2026-11-05 activation) plus ETF flow. ZCSH took +$41.1M over
+   Oct 19-23, then only +$1.96M (Oct 26) and +$3.45M (Oct 27, latest settled); AUM $754.87M synced 04:34Z - still positive but
+   decelerating sharply. Binance funding decayed from 0.0071%/8h (Oct 27 00:00Z) to -0.0003% / +0.00003% at the Oct 28 00:00Z / 08:00Z settlements.
+   Links: coinstats.app/ai/a/latest-news-for-zcash ; zeczcash.com/etf/zcsh ; fapi.binance.com/fapi/v1/fundingRate?symbol=ZECUSDT&limit=12
+3. Positioning (08:44-08:48Z): funding Binance 0.0028%/8h, Bybit 0.0092%, OKX 0.0068%, Aster 0.0072%, Hyperliquid 0.00125%/h;
+   aggregate OI ~1.28M ZEC (~$1.69B, ~7.6% of a $22.3B cap), +6.6% on 24h but -1.0% off the 04:00Z peak; retail accounts 0.632
+   long/short, top traders 1.233 net long; 94% of 24h liquidations were shorts ($7.35M of $7.86M). Crowded SHORT, not long.
+   Links: fapi.binance.com/futures/data/globalLongShortAccountRatio ; coingabbar.com/en/zcash-price-prediction-fomc-shock-zec-soaring-or-crashing
+4. Liquidity: Aster 500-level book - asks 1,648 ZEC at 1320 (~$2.2M), 1,127 at 1310, 513 at 1330, then near-empty to ~1390
+   (~49 ZEC at 1390); bids 1,734 ZEC at 1300, 1,143 at 1310, 534 at 1290. Binance perp 1,000-level book - bids 5,627 vs asks 5,423;
+   largest bid bucket 2,959 ZEC at 1310, ask buckets 2,210 at 1320 and 1,950 at 1325.
+   Links: fapi.asterdex.com/fapi/v1/depth?symbol=ZECUSDT&limit=500 ; fapi.binance.com/fapi/v1/depth?symbol=ZECUSDT&limit=1000
+5. BTC: 81,547 at 08:46Z, +2.15% 24h, -2.0% on 7d; realized vol 24h 23.7%, 7d 27.0%, 30d 31.2% vs DVOL 37.3 (falling from 39.9).
+   29 Oct 08:00Z max pain 80,500 (3,449 BTC); 30 Oct monthly max pain 85,000 (135,466 BTC). Two-sided pinning toward 80-82k,
+   not a directional impulse. Alt breadth positive but narrow (ETH +2.7%, SOL +3.0%, XMR +4.8%, ZEC +6.1%).
+   Links: deribit.com/api/v2/public/get_volatility_index_data ; xoomar.com/markets/options
+6. Spot vs perp: trailing 24h Binance spot $163.4M vs perp $1,531.9M = 9.4x perp/spot; taker buy/sell spot 1.076, perp 1.074,
+   last completed hour 0.979; basis slightly negative (Binance mark -0.9 bps, Bybit -4.7 bps). Short-covering on thin spot,
+   not fresh leveraged accumulation. Aster 24h volume only $20.0M, its 24h high 1329.50 matches the chart.
+   Links: fapi.binance.com/futures/data/takerlongshortRatio?symbol=ZECUSDT&period=1h
+- Not found: liquidation-cluster levels by price (Coinglass blocked); exchange-wallet ZEC net flow for 24h; CME FedWatch exact
+  probabilities (JS-gated, substituted Kalshi/Polymarket); ZEC options market (none listed on Deribit).
+
+## Round 2 - freshness check (pulled 2026-10-28T08:54-08:56Z)
+- Binance perp 1317.23 -> 1317.30, Aster perp 1318.24 -> 1316.54, spot 1317.45. 24h high 1329.75 (Aster 1329.50), low 1234.55.
+- Last completed 1h candles (Binance): 00:00Z H1308.90 L1295.36 C1300.00; 01:00Z H1313.75 L1290.16 C1310.15;
+  02:00Z H1319.75 L1305.74 C1312.25; 03:00Z H1327.15 L1308.00 C1321.89; 04:00Z H1329.75 L1310.38 C1314.12;
+  05:00Z H1317.59 L1309.91 C1310.98; 06:00Z H1318.45 L1304.41 C1305.70; 07:00Z H1310.95 L1302.07 C1310.50;
+  08:00Z forming H1327.22 L1308.95.
+- No print at or above 1332.00 and no print at or below 1292.94 in the last hour. The 08:35Z tag of 1327.22 was rejected
+  within ten minutes to 1312.62 and price sits at 1317.30 - a probe that failed, consistent with the sweep-and-fail path.
+
+## Relevant lessons from settled journal trades (retrospective audit lenses, not votes)
+- LOSS-1.50%_2026-10-23T1147Z_ZECUSDT: the LONG LIMIT 1203 filled at 22:30Z inside a down-leg and stopped at 1185 five minutes later;
+  price then fell another 2.3% to 1158.22 (outcome_candles.csv), so the stop was right and the level was wrong. Applied here: no
+  limit buy of a fall-through; the selected candidate only sells a push ABOVE the range, and the long alternatives scored low with Jev.
+- LOSS-1.01%_2026-10-23T1024Z_ASTERUSDT: a stop about 1.9x ATR below the entry was still swept to 0.685 and price later reached the
+  0.715 window high that would have been TP. Applied here: the stop is placed beyond the 1343.49 supply print, not just above the 1329.45 high.
+- EXPIRED+1.14%_2026-10-19T1143Z_ZECUSDT and WIN+1.76%_2026-10-25T0942Z_XRPUSDT: both LIMIT fades of a swing high filled on a
+  retrace and finished positive; the one MARKET-free, level-anchored entry among recent fills (XRP) was the best percentage result.
+  Small sample (n=2), so this informed the entry type only marginally; the bracket choice was made on the measured probabilities below.
+- Aggregate is one W, four L, three +/-EXPIRED (win rate 20%); no side bias is inferred from that, and today's side comes from the
+  scenario/level work below.
+
+## Candidate arithmetic (script, zero fees: this journal charges no fees, funding or slippage)
+Chosen: SHORT LIMIT 1332.00, TP 1310.00, SL 1348.00, place 2026-10-28T09:00Z, expire 2026-10-29T02:40Z.
+- G = 22.00 points (+1.6517%); L = 16.00 points (-1.2012%); RR 1.375; binary break-even L/(G+L) = 0.4211.
+- Jev E[expiry-branch close] from the 5-bucket choice (+18/+10/+3/-4/-12 at 0.14/0.34/0.41/0.10/0.01) = +6.63 points (+0.498%).
+- Probability sets used (conditional on a fill): decide-1 normalised 0.916/0.024/0.060; decide-2 0.860/0.040/0.100;
+  direct-noul blend 0.790/0.140/0.070; conservative 0.700/0.200/0.100 (win/loss/expire).
+- EV|fill = +20.16 / +18.94 / +15.60 / +12.86 points (+1.51% / +1.42% / +1.17% / +0.97%).
+- P(fill) 0.45 base (Jev 0.50 for a touch of 1332 before the re-anchor, and 0.70 that the failed 1327.22 probe lowered it):
+  order-level EV +3.9% .. +0.9% ... precisely +0.435% (conservative) to +0.681% (decide-1) per stake, and still +0.29% if
+  P(fill) falls to 0.30. No-fill payoff is zero, so the order EV is P(fill) x EV|fill.
+- Rejected alternatives: LONG LIMIT 1300 TP 1330 SL 1278 (fill 0.76, conditional win 0.50, EV|fill +0.31%, order +0.23%);
+  LONG LIMIT 1294 TP 1330 SL 1278 (fill 0.65, win 0.47, order +0.42%); MARKET SHORT 1320.06 TP 1300 SL 1340
+  (win 0.73, order +0.70%, but mid-range entry contradicted requirements 0 and 1 in the bracket decision);
+  SHORT LIMIT 1336 TP 1312 SL 1356 (fill 0.26, order +0.30%); SHORT LIMIT 1330 TP 1305 SL 1345 (stop inside the thin zone, contradicted).
+
+## Expiry rationale (2026-10-29T02:40Z)
+Needs (a) a 0.9% push to 1332 and (b) a 1.65% rotation to 1310 inside the window. Jev chose 18h over 12h (too short for fill plus
+rotation: 0.03), 24h (0.12) and 30h (would add the 2026-10-29T12:30Z GDP/PCE window for no benefit: 0.00). 18h covers the FOMC
+statement 18:00Z, the press conference 18:30Z and the US close, and ends before the 08:00Z BTC options expiry and the 12:30Z data.

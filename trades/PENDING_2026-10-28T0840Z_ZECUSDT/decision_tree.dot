@@ -1,0 +1,58 @@
+digraph decision {
+  rankdir=TB; node [shape=box, fontname="monospace", fontsize=10];
+
+  chart [label="ZECUSDT 1h Aster, capture 2026-10-28T08:35Z, live 1320.06\n201 candles 10-20T00Z..10-28T08Z extracted from the PNG (pure-python decoder)\nprice(y)=-0.312046y+1410.27 (y65=1389.99, y289=1320.09); 8.0 px/h; day-28 boundary x=1593 = 10-27T23:00Z\nwindow low 1119.13 (Oct20 02Z) | peak 1367.21 (Oct21 18Z) | low 1136.61 (Oct24 16Z)\n+16.9% advance to 1329.45 (Oct28 04Z); last 9h inside 1292.94-1329.45\nhigher lows 1286.08/1290.76/1291.07/1292.94; higher highs 1316.97/1325.39/1329.45\n1h ATR14 14.93 (1.13%); 24h +6.15%; price at the 78.6% retrace (1317.9) of 1367.21->1136.61"];
+
+  extract [label="extraction validation\nheader candle O1309.70 H1323.00 L1309.14 C1320.06 vs extracted O1309.79 H1322.90 L1309.48 C1319.15\nheader +9.33 implies prior close 1310.73 = extracted 07:00Z close (exact)\nBinance klines 08:54Z: 04:00Z H1329.75 vs Aster 1329.45; 01:00Z L1290.16 vs 1292.94; 07:00Z C1310.50 vs 1310.73"];
+  chart -> extract;
+
+  scen [label="scenario Choice (jev_decide, 2 shuffled runs)\nrange_chop 0.64 / 0.59 | pullback_then_up 0.27 / 0.34\ncont_up 0.05 / 0.03 | reject_down 0.02 / 0.02"];
+  extract -> scen;
+
+  complete [label="completeness probe (jev_noul)\nfour scenarios cover the plausible 18h paths = 0.41 -> NOT covered, investigate"];
+  scen -> complete;
+  missing [label="missing-path Choice (jev_decide)\nsweep_fail (spike above 1329.45 into 1335-1355, traps buyers, returns below 1320) 0.82\nslow_bleed 0.10 | none_missing 0.06 | event_impulse 0.01"];
+  complete -> missing;
+
+  touches [label="level-touch nouls, 08:40Z-02:40Z (18h)\nP(high>=1330) 0.56 | P(high>=1331) 0.54 | P(high>=1332) 0.50 | P(high>=1336) 0.26\nP(high>=1343.49) 0.24 (18h) / 0.28-0.30 (24h)\nP(low<=1300) 0.68 then 0.76 | P(low<=1294) 0.65 | P(low<=1291) 0.53 | P(low<=1277.96) 0.22\nP(1330 touched before 1291) 0.51 | P(hourly close >1329.45) 0.35\nP(neither 1300 nor 1340 touched) 0.07 | P(close <1336 after a 1336 fill) 0.78"];
+  missing -> touches;
+
+  agenda [label="research agenda (jev_noul materiality, >0.5 kept)\ncoin flow behind the +16.9% 0.80 | funding/OI positioning 0.87 | liquidity clusters 0.86\nBTC state/gamma 0.90 | macro event in window 0.70 | spot vs perp 0.76\nany off-chart fact that matters 0.96 | prior central-bank-day behaviour 0.39 -> dropped"];
+  touches -> agenda;
+
+  res [label="round 1 findings (08:44-08:48Z)\nFOMC statement 18:00Z + presser 18:30Z today, 95% hold priced; GDP/PCE 10-29 12:30Z after all expiries\nETF ZCSH +41.1M Oct19-23 then +1.96M/+3.45M; funding flat (Binance 0.0028%/8h); OI +6.6% on 24h but off the 04:00Z peak\n94% of 24h liquidations were shorts ($7.35M/$7.86M); retail 0.632 long/short; basis -0.9/-4.7 bps; 9.4x perp/spot\nAster book: asks 1,648 ZEC @1320, 513 @1330, near-empty 1330-1390; bids 1,734 @1300, 1,143 @1310\nBTC 81,547, DVOL 37.3, 29 Oct max pain 80,500, 30 Oct 85,000"];
+  agenda -> res;
+
+  lessons [label="lessons from settled trades (applied)\nLOSS-1.50%_2026-10-23T1147Z_ZECUSDT: LONG LIMIT 1203 filled inside a down-leg, SL 1185 in 5 min, price then 1158.22\n  -> do not buy a fall-through; sell the push ABOVE the range instead\nLOSS-1.01%_2026-10-23T1024Z_ASTERUSDT: ~1.9x ATR stop swept to 0.685, price later reached the 0.715 TP\n  -> place the stop beyond 1343.49 supply, not just above 1329.45\nEXPIRED+1.14%_2026-10-19T1143Z_ZECUSDT / WIN+1.76%_2026-10-25T0942Z_XRPUSDT: level-anchored LIMIT fades filled and finished + (n=2, weak)"];
+  res -> lessons;
+
+  cands [label="candidate battery (jev_noul, conditional on a fill)\nL1300/TP1330/SL1278: fill 0.76, win 0.50, G30 L22 -> order EV +0.23%\nL1294/TP1330/SL1278: fill 0.65, win 0.47, G36 L16 -> order EV +0.42%\nS1331/TP1305/SL1349: fill 0.54, win 0.34, G26 L18 -> below p_BE 0.41, rejected\nS1336/TP1312/SL1356: fill 0.26, win 0.80, SL-first 0.11 -> order EV +0.30%\nS1332/TP1310/SL1348: fill 0.50, win 0.79, SL-first 0.14 -> CHOSEN\nMKT LONG 1320.06: TP1343.5 before SL1300 = 0.14 (fail)\nMKT SHORT 1320.06: TP1300 before SL1340 = 0.73, neither 0.07 -> high binary EV but mid-range entry"];
+  lessons -> cands;
+
+  bracket [label="bracket Choice (jev_decide, 5 options, requirement checks)\nb1332 (S1332/TP1310/SL1348) 0.86, all 3 requirements supported\nb1336 0.06 | b1332t 0.03 | market 0.02 | b1330 0.00 (stop inside the thin zone: contradicted)\nrequirements: entry >= 1329.45 range high | stop beyond 1343.49 supply | target reachable in 18h"];
+  cands -> bracket;
+
+  dircheck [label="direction sanity (market entries measured separately)\nmarket LONG fails on probabilities (0.14 vs p_BE ~0.46): no long breakout edge at 1320\nshort side is the only one with a measured edge, and only from ABOVE the range\nLONG LIMIT remains a valid idea but pays 0.23-0.42% order EV vs 0.44-0.68% for the chosen short"];
+  bracket -> dircheck;
+
+  expire [label="expiry Choice (jev_decide)\nh18 = 2026-10-29T02:40Z 0.82 | h24 0.12 | h12 0.03 | h30 0.00\ncovers FOMC 18:00Z + presser 18:30Z + US close; ends before the 08:00Z BTC expiry and the 12:30Z GDP/PCE"];
+  bracket -> expire;
+
+  outcomes [label="complete outcome distribution, conditional on fill (jev_decide)\nrun1 (escape hatches on): win 0.76 | loss 0.02 | expire 0.05 | unassigned 0.17 (renormalised 0.916/0.024/0.060)\nrun2 (shuffled, no escape hatches): win 0.86 | expire 0.10 | loss 0.04\ndirect nouls: TP-first 0.79 | SL-first 0.14 | still inside brackets at expiry 0.35 (overlapping, not additive)\nexpiry-close buckets (no bracket touch): 1310-1318 0.14 | 1318-1326 0.34 | 1326-1332 0.41 | 1332-1340 0.10 | 1340-1348 0.01\n-> E[expiry P&L] = 0.14*18 + 0.34*10 + 0.41*3 - 0.10*4 - 0.01*12 = +6.63 pts (+0.498%)"];
+  expire -> outcomes;
+
+  math [label="arithmetic (script)\nG = 1332-1310 = 22.00 (+1.6517%); L = 1348-1332 = 16.00 (-1.2012%); RR 1.375\np_BE = L/(G+L) = 0.4211; zero fees/funding/slippage, no cost term\nEV|fill: 0.916/0.024/0.060 -> +20.16 (+1.513%) | 0.860/0.040/0.100 -> +18.94 (+1.422%)\n        0.790/0.140/0.070 -> +15.60 (+1.171%) | 0.700/0.200/0.100 -> +12.86 (+0.966%)\nP(fill) 0.45 base (0.40-0.50 tested): order EV +0.435% .. +0.681% per stake; still +0.29% at P(fill)=0.30\nno-fill payoff 0 (PENDING -> EXPIRED), counted once; modelled costs are zero"];
+  outcomes -> math;
+
+  fresh [label="freshness 08:56Z (Binance perp 1317.30 / Aster 1316.54, -0.21% vs capture)\n08:00Z hour H1327.22 rejected to 1312.62 within 10 min\njev_noul: setup coherent at the live price 0.91 | invalidated 0.05\nfailed probe lowers the chance of reaching 1332 0.70 | strengthens the fade 0.85"];
+  math -> fresh;
+
+  final [label="DECISION: SHORT LIMIT 1332.00, TP 1310.00, SL 1348.00\nplace 2026-10-28T09:00Z, expire 2026-10-29T02:40Z -> PENDING\nforecast (independent, contested by range 0.59-0.64): chop 1315-1320, probe 1334 at 17:00Z,\nreject into the FOMC, drift to 1312-1313 by the 02:00Z close - reaches the entry, not TP or SL", shape=box, style=bold, color="#22c55e"];
+  fresh -> final;
+
+  rejected [label="rejected alternatives\nmarket long/short (mid-range entry, contradicted requirements 0-1; long fails on probabilities)\nS1331/1305/1349 (win 0.34 < p_BE 0.41)\nS1330/1305/1345 (stop inside the 1330-1390 thin zone)\nL1300 and L1294 limits (positive but 2-3x smaller order EV, and limit fills in a down-leg were the failure mode of the 10-23 ZEC trade)\nNO_TRADE (masked by the measured edge above; not justified by direction ambiguity alone)"];
+  cands -> rejected;
+
+  uncer [label="unresolved uncertainty\nseparate yes/no answers overlap (win 0.79 + loss 0.14 + expire 0.35 > 1): treated as ranges, not summed\nP(fill) sensitive to the failed 1327.22 probe (0.30-0.50); EV stays positive across that range\nexpiry-branch value rests on a Jev bucket estimate (+6.63), not on market data\nliquidation clusters could not be measured; the 1330-1390 thin book is Aster-specific\nFOMC 18:00Z tone is the main two-sided risk inside the window"];
+  final -> uncer;
+}
