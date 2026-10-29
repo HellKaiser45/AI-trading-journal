@@ -1,0 +1,56 @@
+digraph decision_tree {
+  rankdir=TB;
+  bgcolor="#0d0e12";
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, fillcolor="#181a20", color="#343846", fontcolor="#e2e8f0"];
+  edge [color="#64748b", fontcolor="#94a3b8", fontsize=9, fontname="Helvetica"];
+
+  history [
+    label="1. Prior-journal learning pass (python3 scripts/stats.py, 2026-10-29T11:50Z)\nSettled: EXPIRED+1.14% ZEC, EXPIRED+1.73% UNI, EXPIRED+3.95% ASTER, EXPIRED AVAX (never filled),\nLOSS-1.01% ASTER, LOSS-1.08% ETH, LOSS-1.30% XRP, LOSS-1.50% ZEC, WIN+1.76% XRP. Sum +3.69%, WR 20%.\nLessons used here (each checked against that folder's review.md/trade.toml/decision_tree.dot):\n- LOSS-1.50%_ZECUSDT + LOSS-1.01%_ASTERUSDT: stops <~1x 1h ATR or inside structure get tagged by noise\n  (ZEC stopped 5 min after fill). Applied: SL 80880 = 580 pts (~1.15x est. 1h ATR 500) and BEHIND the\n  80550-80850 crash-origin congestion, not above the 80374 rebound cap.\n- LOSS-1.30%_XRPUSDT: fading before the squeeze produced a lower high lost; stop sat inside squeeze\n  reach. Applied: short entry placed AT the resting ask wall (80250/80300) after two printed caps\n  (80345/80374), and research confirms short-squeeze fuel only from 82500.\n- EXPIRED_2026-10-18T1730Z_AVAXUSDT: limit never touched -> fill probability priced separately\n  (P(fill) 0.70 carried explicitly; no-fill = EXPIRED, payoff 0).\n- EXPIRED+1.14%_ZECUSDT / EXPIRED+1.73%_UNIUSDT / EXPIRED+3.95%_ASTERUSDT: non-TP exits are often\n  partial gains -> expiry outcomes carried explicitly (here bounded at 0 in base EV, upper bound shown).\n- EXPIRED+1.73%_UNIUSDT: condition outcomes ON the fill (adverse selection at limit fills); done for\n  every candidate (cond TP-first / SL-first / neither asked separately).\nSample n=9 settled, mixed setups: no directional inference taken from aggregates.",
+    fillcolor="#1e293b", color="#3b82f6"
+  ];
+
+  extract [
+    label="2. Chart extraction (image 261029_12h41m16s_screenshot.png, BTCUSDT 1h Aster, clock 12:41:15 UTC+1\n= 2026-10-29T11:41Z; header O? H80287.7 L80081.8 C80120.1 -0.17%)\n136 hourly closes hand-extracted (pixel-calibrated: 100 USD = 28 px, 1h = 13.17 px, axis UTC+1 ->\nUTC shift -1h, anchored from the right: in-progress candle = 11:00Z) into graphpoints.csv;\nlast 6 closes then REPLACED with real Binance 1h closes from the research pull (05Z 80234.14,\n06Z 79968.94, 07Z 79861.89, 08Z 80070.01, 09Z 80207.40 H80345, 10Z 80285.00 H80374.42).\nMeasured structure: week range 79200 (Oct24 wick) - 81790 (Oct28 07Z wick); rally Oct27 04Z 79600 ->\nOct28 20Z 81500; crash Oct28 23Z 81320 -> 02Z close 80019.6, wick 79710 (03Z); post-crash double\nbottom 79710/79764/79830/79852; rebound caps 80345/80374; ask walls 80250 (263 BTC)/80300 (317 BTC);\ncrash-origin congestion 80550-80850; Oct26-27 demand 79450-79650; ascending swing lows\n79200->79450->79550->79710. Est 1h ATR14 ~500 (0.62%).",
+    fillcolor="#0f2a43", color="#38bdf8"
+  ];
+
+  scenarios [
+    label="3. Scenarios (Jev noul, overlapping yes/no on window 2026-10-29T12:00Z..2026-10-30T12:00Z unless noted)\nS1 range-hold 79700-80450: neither edge traded p=0.55; structure still governing at Oct30 12Z p=0.57\nS2 downside first: <=79700 before >=80450 p=0.26; <=79450 at all p=0.23\nS3 upside first: >=80450 before <=79700 p=0.24; >=80700 at all p=0.23\nS4 sweep-then-V (<=79550 then >=80250, repeats Oct24/26/27 pattern) p=0.18\nS5 both-edge whipsaw p=0.15 (unlikely, auto)\nRetest of caps >=80250 by Oct30 00Z p=0.52\nCompleteness probe: 'a materially different scenario remains besides S1-S3' p=0.88 -> S4,S5 added;\nafter adding them new candidates were only variants -> set closed.\nRead: contested mid-range picture with a mild downside tilt; no dominant scenario; the ticket is a\nfade of the cap, not a directional bet on S2 alone (it also profits in S1 via expiry below entry).",
+    fillcolor="#1e1b4b", color="#8b5cf6"
+  ];
+
+  research [
+    label="4. Research (Jev-defined agenda, jev_decide: positioning_squeeze 0.59 vs event_window 0.28,\nedge_drivers 0.11, no_research 0.01; prior noul 'off-chart info could materially change forecast or\nevaluation' p=0.92). One agent pass, snapshots 2026-10-29 11:43-11:59Z, full log in research_log.txt.\nKey dated findings: funding +0.0053..+0.0089%/8h, NEVER negative through the crash; OI +1.4%/24h while\nprice -1.4% with retail accounts 2.2113 and top-trader positions 2.0757 long (longs re-loaded into the\nlow); 79970-80000 long liqs ($32.6M/24h) already swept; forward long-liq clusters $44-52M per $50 band\nat 78450-78800; bid-wall block 1308 BTC at 79000/79150/79200; gamma flip 79468; 0DTE flip 80319;\nshort-liq clusters only from 82500-82700 -> 80450 is an ask wall not a squeeze trigger; resting asks\n80250/80300 = entry zone; US PCE+GDP+claims 2026-10-29T12:30Z; monthly options expiry 2026-10-30T08:00Z\n(153958 BTC, 34.4% of OI, max pain 79000, expected move +/-1.4%).\nJev post-research: cond TP-first for the short ticket rose to 0.74 (20h) / 0.56 (24h) vs chart-only\nP(<=79450) 0.23 pre-research -> research materially raised downside reachability and disarmed the\nupside squeeze; long side became clearly negative (cond TP-first 0.34 vs SL-first 0.58).",
+    fillcolor="#14261c", color="#22c55e"
+  ];
+
+  candidates [
+    label="5. Candidates (LONG and SHORT evaluated independently; levels from structure only; journal model:\nno fees/funding/slippage, LIMIT fills on touch, TP ignored in fill candle, both-touch = LOSS)\nA) SHORT LIMIT 80300 / TP 79250 / SL 80880 / expire 2026-10-30T08:00Z  <= SELECTED\n   P(fill) 0.70 | cond TP-first 0.74 | cond SL-first 0.16 | neither 0.10 (expiry<entry 0.73)\n   G +1.30760% L -0.72229% RR 1.810 p_BE 0.3558 | EV/fill +0.85205% | EV/order +0.59644%\nB) same ticket with expire 2026-10-30T12:00Z: P(fill) 0.72, cond TP-first 0.56, SL-first 0.24 ->\n   EV/order +0.40241%. REJECTED: dominated by (A); Jev '12Z better than 08Z' only 0.30; post-expiry\n   segment adds ECI/event noise after the max-pain drift has completed.\nC) LONG LIMIT 79850 / TP 80350 / SL 79400: P(fill) 0.62, cond TP-first 0.34, SL-first 0.58,\n   G +0.6262% L -0.5636% p_BE 0.4737 -> EV/fill -0.114% NEGATIVE. REJECTED (crowded longs re-loaded,\n   max pain below, gamma flip 79468 inside the stop zone).\nD) SHORT MARKET ~80169 / TP 79250 / SL 80880: P(win path) 0.51 vs p_BE 0.4362 -> EV/order ~+0.24%,\n   fills immediately mid-range with no structural entry edge. REJECTED vs A (0.596% > 0.24%).\nE) NO_TRADE: battery share 0.05. REJECTED: A clears every requirement with margin.\nDeeper long 79550/SL79150 and higher short 80750/SL81350 considered and dropped before Jev: the first\nneeds a double-bottom break against re-loaded longs with RR 0.71 after a structure stop; the second\nneeds a full crash-origin reclaim (P>=80700 in 24h only 0.23) to fill.",
+    fillcolor="#272015", color="#eab308"
+  ];
+
+  math [
+    label="6. Selected-ticket arithmetic (script, exact)\nentry 80300 (resting ask wall 317 BTC + printed caps 80345/80374 just above)\nTP 79250 (top of the 1308-BTC bid-wall block 79000/79150/79200, above the 78450-78800 liq clusters)\nSL 80880 (above crash-origin congestion 80550-80850; ~1.15x est 1h ATR 500; short-squeeze fuel only\nfrom 82500 so the stop is not inside a squeeze path)\nG = (80300-79250)/80300 = +1.30760%   L = (80880-80300)/80300 = -0.72229%   RR 1.810\np_BE = L/(G+L) = 0.3558   vs P(TP first | fill) = 0.74 -> margin +0.3842\nEV/fill = 0.74*1.30760 - 0.16*0.72229 = +0.85205% (expiry payoff of the 0.10 neither-case bounded at 0;\nupper bound with full-TP expiry credit <= +0.94751%/fill)\nEV/order = P(fill)*EV/fill = 0.70*0.85205 = +0.59644%;  P(no fill) = 0.30 pays 0 (EXPIRED)\nSensitivity: cond TP-first 0.60/SL 0.25 -> EV/order +0.42279%; 0.50/0.30 -> +0.30598%; P(fill) 0.55 ->\n+0.46863%. Positive across all tested assumptions; no arbitrary buffer added to p_BE.",
+    fillcolor="#1f242d", color="#38bdf8"
+  ];
+
+  forecast [
+    label="7. Independent forecast (built before the ticket, contested; graphpoints.csv rows 12Z..08Z, chart_prediction.svg)\nModal path: PCE two-sided spike 12:30Z -> retest of the ask wall 80280-80340 around 13-14Z (fills the\nlimit), rejection, afternoon chop 79950-80180, overnight drift lower with the max-pain gravitation:\n23Z 79720 -> 30th 02Z 79520 -> 05Z 79300 -> tags 79210-79240 at 06-07Z (TP zone) -> 79300 at expiry.\nDissent carried: S1 range-hold (0.55) would expire the ticket around 79800-80100 (still a gain at\nexpiry); S3 (0.24) hits SL 80880 on a dovish PCE reclaim; S4 sweep-then-V (0.18) stops the ticket\nbefore the V. Forecast reaches entry first and TP late; that ordering was not engineered - it is the\nmax-pain drift path, and the EV does not depend on TP being reached (expiry credit dominates S1).",
+    fillcolor="#2a2338", color="#c084fc"
+  ];
+
+  checks [
+    label="8. Contradictions and robustness\n- Pre-research unconditional P(<=79450 in 24h) 0.23 vs post-research cond TP-first 0.74|fill:\n  resolved by ordering - the 0.23 was asked on chart-only state BEFORE the options-expiry/max-pain and\n  liquidation-cluster evidence; the conditional set is the operative one and the sensitivity table\n  (w=0.50 still +0.31%/order) covers the gap. Recorded, not hidden.\n- Mirror/overlap sanity: down-first 0.26 + up-first 0.24 + neither 0.55 = 1.05 (overlapping wording,\n  not normalised or summed anywhere in the math).\n- Jev expiry preference (08Z over 12Z p=0.70) agreed with the script EV comparison (+0.596 vs +0.402).\n- Re-anchor: live spot 80168.88 @11:56Z vs chart 80120.1 @11:41Z (+0.06%); Jev 'ticket coherent at live\n  price, no level needs to move' p=0.78 -> levels kept.\n- Final battery (jev_decide): short_limit_80300 0.93, no_trade 0.05, market_short 0.01, long 0.00;\n  all three requirements 'supported' for the winner, none contradicted.\n- PCE 12:30Z two-sided spike is the main risk to the fill-then-stop sequence; it is inside cond\n  SL-first 0.16 and capped at -0.72229%.\n- Heatmap reliability limit (vendor rank corr 0.43) means cluster levels are used only as zone\n  confirmation for TP/SL placement, never as precise triggers.",
+    fillcolor="#2d1b24", color="#f43f5e"
+  ];
+
+  terminal [
+    label="FINAL DECISION: GO_LIMIT (PENDING)\nBTCUSDT SHORT LIMIT 80300 | TP 79250 (+1.30760%) | SL 80880 (-0.72229%) | RR 1.81\nP(fill) 0.70 | P(TP before SL | fill) 0.74 | p_BE 0.3558 | EV/fill +0.85205% | EV/order +0.59644%\nExpire 2026-10-30T08:00:00Z (monthly options expiry, max pain 79000)\nFolder: PENDING_2026-10-29T1149Z_BTCUSDT",
+    shape=ellipse, fillcolor="#1e293b", color="#eab308", fontcolor="#fef08a"
+  ];
+
+  history -> extract; extract -> scenarios; scenarios -> research; research -> candidates;
+  candidates -> math; scenarios -> forecast; math -> checks; forecast -> checks;
+  candidates -> checks [style=dashed, color="#ef4444", label="rejected B,C,D,E"];
+  checks -> terminal;
+}

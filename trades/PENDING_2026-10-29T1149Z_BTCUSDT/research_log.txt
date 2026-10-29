@@ -1,0 +1,69 @@
+Research log - IDEA_2026-10-29T1149Z_BTCUSDT (BTCUSDT 1h Aster)
+Analysis now: 2026-10-29T11:41Z (chart clock 12:41:15 UTC+1); folder created 11:49Z; decisions 11:50-12:05Z.
+Horizon: 2026-10-29T12:00Z -> 2026-10-30T08:00Z (20h, ends at monthly options expiry).
+
+Agenda: defined by Jev (jev_decide over agenda candidates, 2026-10-29T11:52Z): selected
+"positioning_squeeze" p=0.59 (event_window 0.28, edge_drivers 0.11, no_research 0.01):
+"As of 2026-10-29T12:00Z what are BTC perp funding, open-interest trend and liquidation-cluster
+placement near 79700 and 80450, and which side carries squeeze fuel into the window?"
+Jev prior check: off-chart info could materially change forecast/evaluation p=0.92.
+
+Findings (research agent, snapshots 2026-10-29 11:43-11:59Z, all dated):
+F1 Re-anchor: Binance spot 80168.87 (~11:56Z), perp last 80138.60, mark 80141.668 (11:56:52Z),
+   CoinGecko 80094. Chart header was 80120.1 @11:41Z -> drift +0.06%, immaterial; ticket coherent
+   at live price (Jev 0.78). Last completed 1h candles (Binance spot, UTC, open-time labels):
+   05Z C80234.14 | 06Z C79968.94 | 07Z C79861.89 | 08Z C80070.01 | 09Z C80207.40 (H80345) |
+   10Z C80285.00 (H80374.42) | in-progress 11Z C80168.88 @11:56Z (H80312.92 L80120.60).
+   Reconciliation vs chart read: crash candle close 80019.56 (02Z), true wick low 79710.00 (03Z);
+   rebound caps 80345/80374 (not 80250-80300); graphpoints.csv last rows corrected to these closes.
+   Source: ccxt->Binance live calls; fapi.binance.com/fapi/v1/premiumIndex; coingecko 11:57Z.
+F2 Funding (Binance 8h settlements): +0.0062% (29th 00Z), +0.0053% (29th 08Z, post-crash, mark
+   79822.84), current +0.0089% (~+9.8%/yr); 3-venue OI-weighted +0.0069%/8h; never negative through
+   the crash -> no short crowding, no pay-to-be-short. Source: fapi/v1/fundingRate; swiftedge.uk/btc/funding 11:43Z.
+F3 OI: Binance BTC-denominated 96739 @11Z; +1613 BTC (+1.68%) into the 02-04Z low; cross-venue
+   192374 BTC / $15.42bn, +1.4% in 24h while price -1.4%. Retail long/short accounts 1.83->2.2113
+   (11Z), top-trader positions 2.0757 (11Z): longs re-loaded into the low = downside tail fuel.
+   Source: fapi futures/data/openInterestHist, globalLongShortAccountRatio, topLongShortPositionRatio.
+F4 Liquidations 24h to 11:41Z: longs $32.6M vs shorts $14.4M (3 venues); biggest print $5.7M long
+   @79969 (01:49Z) -> the 79970-80000 long shelf is ALREADY swept. Forward clusters (model, 11:38Z):
+   longs $104M within 1% below, $594M within 2%, largest bands 78450-78800 ($44-52M each); bid-wall
+   block 1308 BTC at 79000/79150/79200; dealer gamma flip 79468; 0DTE flip 80319. Shorts: only $6.4M
+   within 1% above, first real cluster 82500-82700 -> 80450 is an ask wall, not a squeeze trigger.
+   Resting asks 80250 (263 BTC) and 80300 (317 BTC) = the entry zone.
+   Source: swiftedge.uk/btc/liquidations 11:41Z, /btc/liquidation-heatmap 11:38Z, /btc/levels 11:43Z.
+F5 Events in window: US Sep PCE + Q3 GDP advance + jobless claims 2026-10-29T12:30Z (only
+   high-importance US print; first PCE after the 28 Oct hawkish hold 3.75-4.00%); BTC monthly options
+   expiry 2026-10-30T08:00Z: 153958 BTC = 34.4% of OI, max pain 79000 (Deribit+OKX+Bybit; Deribit-only
+   78000), P/C 0.59, expected move +/-1.4% (78974-81259), DVOL 36.2; US ECI 2026-10-30T12:30Z (at/after
+   a 12:00Z expiry, outside the chosen 08:00Z expiry). Sources: swiftedge.uk/btc/expiry/2026-10-30,
+   xoomar.com/markets/options 11:00Z, xoomar.com/markets/calendar 11:30Z.
+F6 Crash context: CoinDesk 2026-10-29 - Alphabet Q3 miss + Samsung chip profit short + Kospi -2% +
+   hawkish hold -> BTC 81700 -> ~79800 in the Asian session.
+   https://www.coindesk.com/markets/2026-10-29/bitcoin-dips-below-usd80-000-as-samsung-led-risk-aversion-in-tech-and-a-hawkish-fed-weigh-on-crypto
+
+How findings changed the view (Jev, post-research conditionals vs pre-research):
+- Downside reachability raised: cond TP-first for the short ticket 0.74 (20h) vs chart-only
+  P(<=79450 in 24h) 0.23 pre-research; max-pain 79000 + $594M long fuel below supply the mechanism.
+- Upside squeeze disarmed: short-liq clusters only from 82500 -> SL 80880 sits behind crash-origin
+  congestion 80550-80850 without sitting inside a squeeze path; cond SL-first 0.16 (20h).
+- Long side rejected: longs re-loaded (ratios 2.21/2.08) + max pain below = crowded-long tail risk;
+  Jev cond TP-first for LONG LIMIT 79850 only 0.34 vs SL-first 0.58 -> negative EV/fill -0.114%.
+- Expiry moved from 24h to 20h (2026-10-30T08:00Z): Jev "12:00Z better than 08:00Z" p=0.30, and the
+  20h EV/order +0.596% vs 24h +0.402% (script); the max-pain drift window ends at the expiry.
+
+Could NOT be found: CoinGlass/Hyblock heatmaps (JS-walled; free endpoint empty); exchange-level OI
+beyond Binance/Bybit/OKX (CME, coin-m, USDC excluded); per-position leverage distributions; a settled
+cross-venue funding aggregate beyond the 3-venue weighted figure. Liquidation totals disagree ~7x
+(CoinDesk $356M all-venue vs swiftedge $47M 3-venue capped at 1 print/sec) - both quoted as-is;
+heatmap rank correlation only 0.43 (vendor's own backtest) so cluster values are treated as
+illustrative positioning estimates, not measured books. Taker-ratio bucket timestamps +/-1h.
+
+Ticket arithmetic (script, journal model: no fees/funding/slippage; LIMIT fills on touch; candle
+straddling place_at skipped; TP ignored in the fill candle; both-touch = LOSS; expiry = last close):
+entry 80300 | TP 79250 | SL 80880 | G +1.30760% | L -0.72229% | RR 1.810 | p_BE = L/(G+L) = 0.3558
+20h window: P(fill)=0.70, P(TP first|fill)=0.74, P(SL first|fill)=0.16, P(neither)=0.10 of which
+expiry below entry 0.73. EV/fill (expiry payoff bounded at 0) = 0.74*1.30760 - 0.16*0.72229 = +0.85205%;
+EV/order = 0.70*0.85205 = +0.59644% (upper bound with full-TP expiry credit <= +0.663%/order).
+Sensitivity: w=0.60/l=0.25 -> EV/order +0.42279%; w=0.50/l=0.30 -> +0.30598%; pf=0.55 -> +0.46863%.
+24h variant: P(fill) 0.72, w 0.56, l 0.24 -> EV/order +0.40241% (dominated by the 20h ticket).
+No-fill (P=0.30) pays 0 and is carried explicitly as EXPIRED in the journal state machine.
