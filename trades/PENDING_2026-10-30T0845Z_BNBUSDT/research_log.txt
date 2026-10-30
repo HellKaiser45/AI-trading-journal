@@ -1,0 +1,119 @@
+BNBUSDT 1h (Aster) - research and calculation log
+Evaluation run: 2026-10-30T08:45Z - 09:05Z UTC (sandbox clock verified against Binance /api/v3/time,
+serverTime 1793350450167 = 2026-10-30T08:54:10Z; no clock offset this run)
+Chart capture: 2026-10-30T08:43:20Z (chart footer 09:43:20 UTC+1), last price 705.58
+Decision time: 2026-10-30T09:00Z. Horizon and expiry: 2026-10-31T02:00Z (17h)
+
+=======================================================================
+JEV-DEFINED RESEARCH AGENDA (not chosen by me)
+=======================================================================
+Gate: "Answering an off-chart question (derivatives positioning, liquidation clusters, venue or event news)
+could materially change the BNBUSDT forecast or the trade decision over the next 24-36 hours" = 0.83.
+Agenda decision (jev_decide): event_dominance 0.71, downside_tail 0.17, upside_reclaim 0.06,
+correlated_driver 0.02, chart_sufficient 0.00 (investigate 0.04).
+=> The exact question put to the search agent: is any BNB-specific or venue/exchange-specific occurrence
+scheduled or announced between 2026-10-30T09:00Z and 2026-10-31T21:00Z that could dominate the near chart
+levels; plus what caused the 2026-10-29T20:00Z candle; plus a live price/candle anchor. Nothing else.
+
+=======================================================================
+DATED FINDINGS THAT BEAR ON THE FORECAST
+=======================================================================
+[2026-10-30T02:23:22Z] Binance official "Security Incident Update" (publishDate 1793327002672), read verbatim
+  from Binance's own CMS endpoint (the announcement HTML page is JS-gated):
+  compromised DevOps engineer laptop -> service-container access -> unauthorised withdrawals;
+  "no evidence of any wallet private key leak"; impact "around $6.3B"; "~$3 billion frozen on-chain so far";
+  losses covered from the SAFU fund and company funds; an updated Proof of Reserves and a technical
+  post-mortem will follow, neither dated.
+  https://www.binance.com/en/support/announcement/c5a8729a97ac486d963784d96c5642d7
+  (via https://www.binance.com/bapi/composite/v1/public/cms/article/detail/query)
+[2026-10-30T04:21:00Z] Binance co-founder Yi He, relayed by Scott Melker on X: withdrawals expected to begin
+  resuming "in the next 48 hours", deposits still operating as normal -> implied band
+  2026-10-30T04:21Z to 2026-10-31T04:21Z. No exact timestamp published; the two statements conflict on
+  whether deposits are suspended.
+  https://gokhshtein.com/news/2026-10-30-scott-melker-reports-binance-expects-to-resume-withdrawals
+[2026-10-29T20:24Z - 21:25Z] On-chain sequence behind the crash hour: ~167,464 ETH + 1.615B USDT moved out of
+  the wallet labelled "Binance 14" (20:24:23Z); Tether blacklists the recipient (21:01:35Z); repeat sweep of
+  1,699.92 ETH (21:04:23Z); Blockaid calls it "consistent with unauthorized movements" (21:11Z); Circle
+  reports >800M USDC frozen (21:18Z); Ardoino reports >1.567B USDT frozen (21:25Z).
+  https://cryptonews.net/news/security/33674161
+  https://www.outlookmoney.com/invest/binance-estimates-630-billion-impact-from-security-incident-says-it-will-cover-all-losses
+[2026-10-29T20:00Z hour, Binance spot klines] O 744.90 H 745.04 L 680.00 C 698.00, volume 137,382.82 BNB,
+  269,669 trades; prior hour 2,437.30 BNB (56x). Same hour: ETH -3.38% (low -4.45%), BTC -2.47% (low -3.16%).
+  So the trigger was common (exchange-solvency fear) but BNB carried ~2.5x the beta - it is the venue's own token.
+  About $600-628M liquidated in that hour, longs dominant.
+[2026-10-30] Standard Chartered (Geoffrey Kendrick): "I suspect the negative price action still has some way to
+  go. Only after assets are unfrozen and more detail of the hack emerges will we find a new base."
+  https://www.coindesk.com/markets/2026/10/30/usd6-billion-binance-hack-sends-bitcoin-ether-tumbling-standard-chartered-sees-more-losses-ahead
+[2026-10-30 08:54Z, venue APIs] Binance spot 706.04 / perp 705.67; Bybit perp 705.09 with funding
+  -0.058798%/8h (next 16:00Z) and OI 188,273.4 BNB; MEXC perp 706.3; Aster perp 704.41.
+  Binance 24h: open 750.37, high 754.29, low 680.00, -5.908%, volume 684,778 BNB.
+[2026-10-30 08:59Z, freshness] Binance spot 705.66, perp 705.40, Aster perp 705.39 vs chart 705.58 (+0.01%)
+  -> no re-anchor needed, no level moved.
+[Wick dispersion, same crash] Binance spot 680.00 (the chart's number), Bybit perp 676.40, Bybit spot 678.14,
+  MEXC spot 679.31 / perp 679.00, Aster spot 684.00. The 680 low is a single-venue print.
+
+Checked and cleared for the window (no BNB event): 37th quarterly burn executed 2026-10-19 (1,646,196.44 BNB)
+-> next burn ~Jan 2027; no unlock/vesting schedule exists for BNB; the 12 /BTC-quoted pair delistings on
+2026-10-30T03:00Z touched no BNB pair; no scheduled spot/futures maintenance (only bStocks equity services,
+outside scope); BNB Chain Jenner hardfork is testnet-only, mainnet late Nov; no calendared SEC/Florida hearing
+inside the window; Bybit stated on 2026-10-29 that its own operations are unaffected.
+https://cryptoticker.io/en/bnb-quarterly-burn-supply-decline
+https://cryptonews.net/news/market/33664362
+https://cryptobriefing.com/bnb-chain-jenner-hardfork-testnet
+
+Could not be found / limitations
+- No exact UTC timestamp for withdrawal resumption; only the 48h guidance band.
+- Whether the post-mortem or updated Proof of Reserves lands inside the window: unknown.
+- Whether BNB is in scope of the 2026-10-30 collateral-ratio and margin-tier updates: bodies not retrieved.
+- Per-hour liquidation breakdown at 20:00-21:00Z: headline-level only, no primary Coinglass print read.
+- Reuters / The Block / Bloomberg / Economic Times reached as headlines only (cookie wall / paywall); facts
+  used above are only those corroborated by an independently readable source.
+- Hyperliquid does not list BNB. No working general news engine at fetch time (recency from googlenews
+  snippets plus direct site fetches).
+- Chart-side limitation: the screenshot is a line of 1h closes at 2.4 px per bar, so wicks are invisible
+  (the true 680.00 low never appears in the chart line). Pixel extraction validated against Binance 1h
+  closes: mean +0.39, median +0.38, sd ~1.4 units (~0.19%); three-wick structure therefore comes from the
+  exchange klines, not from the image.
+
+=======================================================================
+CALCULATIONS (script arithmetic, exact values)
+=======================================================================
+Selected ticket: SHORT LIMIT 716.00, TP 694.00, SL 734.00, expire 2026-10-31T02:00Z
+  G = (716 - 694) / 716 * 100 = +3.07263%
+  L = (734 - 716) / 716 * 100 = -2.51397%
+  RR = G / L = 1.2222
+  p_BE = L / (G + L) = 18 / 40 = 0.4500
+  Measured conditional probabilities (Jev, all asked as separate propositions):
+    P(TP 694 first | fill) = 0.80, P(SL 734 first | fill) = 0.08, P(neither) = 0.12
+    P(expiry close below 716 | neither) = 0.82
+  EV/fill = 0.80 * 3.07263 - 0.08 * 2.51397 = +2.25698%   (neither branch valued at 0 in the base case)
+  P(fill by 2026-10-31T02:00Z) = 0.56
+  EV/order = 0.56 * 2.25698 = +1.26391%; P(no fill) = 0.44 pays 0 (EXPIRED, no cost in this model)
+  Sensitivity (EV/order): p_TP 0.72 / p_SL 0.16 -> +1.01363%; 0.65 / 0.20 -> +0.83687%;
+    0.60 / 0.25 with p_fill 0.50 -> +0.60754%; 0.55 / 0.30 with p_fill 0.45 -> +0.42109%.
+    Positive across every tested set; p_BE 0.45 is cleared even by the lowest measured p_TP (0.58 over 24h).
+Alternative levels measured and rejected (same script):
+  SHORT 716/694/727: G +3.07263 L -1.53631 RR 2.000 p_BE 0.3333; p_TP 0.72 p_SL 0.16 -> EV/order +1.10123%
+    (stop 0.16 above nothing but 0.16 below the 726.84 extreme; Jev "727 sits too close to 726.84" = 0.73)
+  SHORT 716/694/730: p_BE 0.3889; p_TP 0.76 p_SL 0.14 -> EV/order +1.15441%
+    (stop clears 726.84 by 0.58% = 0.7 ATR; Jev "thin buffer" = 0.73)
+  SHORT 718/694/730: p_fill 0.41 -> EV/order +0.91136%
+  SHORT 719/696/730: p_fill 0.42 -> EV/order +0.89783%
+  SHORT 716/700/730: EV/order +0.83531% (Jev prefers TP 694 over a nearer target = 0.79)
+  LONG 692/712/676: p_BE 0.4444, p_TP 0.63 -> EV/order +0.64624% (Jev: the "single-venue 680 low holds"
+    premise is materially risky = 0.80; fading 715-720 better supported than buying 690-696 = 0.60)
+  LONG 686/712/674: p_fill 0.36, EV/order +0.50694%
+  MARKET SHORT 705.60/690/716: p_TP 0.48 vs p_BE 0.4000 -> EV/order +0.29478%
+  MARKET LONG 705.60/720/694: p_TP 0.40 vs p_BE 0.4462 -> EV/order -0.17007% (negative)
+No fees, funding or slippage exist in this journal model; nothing was added for them and no buffer was
+added above p_BE.
+
+=======================================================================
+EXPIRY RATIONALE
+=======================================================================
+Jev: "an expiry at 2026-10-31T02:00Z fits this ticket better than 2026-10-31T09:00Z" = 0.85 (auto), and
+better than 2026-10-31T21:00Z = 0.64. Structural reason: the guided withdrawal-resumption band runs from
+2026-10-30T04:21Z to 2026-10-31T04:21Z, so 02:00Z closes the ticket just inside the band's end while
+avoiding the fully-flagged window, and it caps the exposure to the undated post-mortem / Proof-of-Reserves
+headline. 17h is also about 20x the sensorimotor unit of the setup: P(716 touched) 0.56 and P(694 touched)
+0.80 within it, so neither leg needs a stretch of the horizon.
