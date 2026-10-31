@@ -1,0 +1,128 @@
+XMRUSDT 1h (Aster perp feed) - research log
+Idea folder: IDEA_2026-10-31T0901Z_XMRUSDT
+Evaluation time: 2026-10-31T09:01Z (UTC). Chart capture: footer clock 20:44:57 UTC+1 = 2026-10-30T19:44Z,
+so the screenshot was ~13.3h stale at evaluation time and was re-anchored with live venue data.
+
+=====================================================================
+PASS 1 - price anchor and candle validation (requested as re-anchor + extraction check)
+Window asked: 2026-10-30T17:00Z -> 2026-10-31T09:00Z. Retrieved 2026-10-31T09:09-09:11Z.
+=====================================================================
+Live quotes at 09:07-09:10Z
+- Aster perp 595.54 (closeTime 1793437661100 = 2026-10-31T09:07:41Z)
+  https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=XMRUSDT
+- Binance USD-M perp 595.80 (2026-10-31T09:10:19Z) https://fapi.binance.com/fapi/v1/ticker/24hr?symbol=XMRUSDT
+- Bybit linear perp 595.71, mark 595.63, index 595.15 (2026-10-31T09:10:16Z)
+  https://api.bybit.com/v5/market/tickers?category=linear&symbol=XMRUSDT
+- Sanity: Kraken spot 595.03, MEXC spot 594.85, KuCoin spot 595.20 (retrieved 09:09-09:10Z).
+- Binance SPOT XMRUSDT is NOT usable: /api/v3/exchangeInfo returns status BREAK, bid=ask=0, lastPrice 118.70
+  from a 24h window ending 2026-10-06T05:00:04Z. No live Binance spot book exists.
+- Aster spot and Bybit spot do not list XMRUSDT ({"code":-1121} / retCode 10001).
+
+Hourly OHLC (Aster perp), 2026-10-30T19:00Z -> 2026-10-31T09:00Z, used as the fresh tail of graphpoints.csv
+19:00 590.75 596.70 588.60 596.70 | 20:00 596.81 600.00 594.81 597.23 | 21:00 597.01 597.80 592.90 592.90
+22:00 592.45 592.90 589.31 589.57 | 23:00 590.13 590.99 588.23 589.50 | 00:00 588.68 600.60 588.57 596.74
+01:00 596.40 601.77 594.00 597.78 | 02:00 596.74 597.60 591.96 593.33 | 03:00 592.20 597.60 590.00 591.35
+04:00 591.32 593.10 590.12 593.10 | 05:00 593.04 596.90 593.04 594.90 | 06:00 594.00 598.68 594.00 598.54
+07:00 597.98 598.03 595.46 597.07 | 08:00 595.35 596.40 589.81 594.28 | 09:00 (forming) 594.81 595.81 594.81 595.54
+Source: https://fapi.asterdex.com/fapi/v1/klines?symbol=XMRUSDT&interval=1h&limit=60 (retrieved 09:09:50Z)
+
+Screenshot-extraction validation (4 bars compared to venue klines; read minus Aster):
+- 2026-10-29T20:00Z read 601.6/651.1/598.5/624.2 vs Aster 601.48/651.13/598.29/624.19 (max dev +0.21)
+- 2026-10-30T01:00Z read 623.8/642.2/616.6/618.9 vs Aster 623.70/642.13/616.45/618.80 (max dev +0.15)
+- 2026-10-30T14:00Z read 588.1/604.2/574.3/599.5 vs Aster 588.00/604.13/574.08/599.40 (max dev +0.22)
+- 2026-10-30T19:00Z read 590.8/596.6/588.9/596.6 vs Aster 590.75/596.70/588.60/596.70 (max dev +0.30)
+Verdict: extraction correct within +/-0.30 (<=0.05%) and the chart feed is Aster perp (Bybit/Binance prints sit 0.6-0.8 away).
+Extraction limits: closes/bodies are reliable to ~0.3; 1px wicks give +/-0.35 on extremes; the 564.24 low and
+660.73 high reproduce the two levels TradingView itself highlighted on the axis (564.00 and 660.66).
+
+24h stats at 09:07Z: Aster high 604.38 / low 574.08, 1,984 XMR ($1.18M); Binance perp high 604.79 / low 574.40,
+volume 113,687 XMR ($67.5M); Bybit high 604.81 / low 574.35, 24h change -1.39%, funding 0.00014385/8h,
+OI 71,840 XMR ($42.8M).
+
+=====================================================================
+PASS 2 - Jev-defined research agenda: "positioning_structure"
+(jev_decide 2026-10-31T09:18Z selected positioning_structure 0.75 over market_wide_calendar 0.10,
+no_research 0.08, event_and_catalyst 0.06; confidence 0.71)
+Window asked: 2026-10-31T09:20Z -> 2026-11-01T09:20Z. Retrieved 2026-10-31T09:07-09:17Z.
+=====================================================================
+CAUSE OF THE 29-30 OCT VOLATILITY (dated facts)
+- 2026-10-29T20:24Z: 167,464 ETH (~$388M) left a wallet labelled "Binance 14" (outflow window 20:24-21:04Z);
+  Binance paused withdrawals on multiple networks and called it a security incident; reported totals $2B-$5.7B
+  (unconfirmed), Tether froze >$1.5B and Circle >$800M. BTC fell ~3.2% below $79,000.
+  https://finance.yahoo.com/markets/crypto/articles/binance-probes-suspected-hot-wallet-233842276.html
+  https://tech-insider.org/binance-withdrawals-paused-3-52b-outflow-tether-circle-freeze-2026
+- XMR was a haven bid inside that scare ("rose about 6% to $637 on October 29, 2026 ... while Bitcoin fell"):
+  24/7 Wall St / CoinMarketCap coverage. The 651.13 hourly high lands in the same 20:00Z hour as the transfer.
+- Status at 2026-10-31T06:00Z: withdrawals still paused; co-founder indicated resumption "within the next 42 hours",
+  other reports target Sunday 1 Nov. https://x.com/WuBlockchain/status/2116409842449678425
+  https://shattered.io/binance-withdrawals-resume-sunday-target-6-3b-hack-2026
+  Reading: resumption is at/just beyond the 19.5h trade window, but headline risk sits inside it, and it is the
+  event that would retire the privacy-haven bid.
+
+POSITIONING (all venue APIs, 09:07-09:17Z)
+- Funding (8h interval, all settle 00/08/16Z; next print 2026-10-31T16:00Z, inside the window):
+  Binance 0.014362% (peak 0.058980% at 30 Oct 00:00Z), Bybit 0.016002% (peak 0.062742% at 31 Oct 00:00Z),
+  Aster 0.010000%, Gate 0.0100%, Bitget 0.0122% (peak 0.0858%), MEXC 0.0143%, KuCoin 0.0291%.
+  No negative print on any venue in the last 48h: the crowd never flipped short, it just stopped paying as much.
+  https://fapi.binance.com/fapi/v1/fundingRate?symbol=XMRUSDT&limit=10
+  https://api.bybit.com/v5/market/funding/history?category=linear&symbol=XMRUSDT
+- Open interest: Binance 89,722 XMR ($53.3M), Bybit 72,102, Gate 55,907, KuCoin 61,892, MEXC 29,623,
+  Bitget 14,431, Aster 1,366 -> aggregate ~324,600 XMR (~$193M).
+  Inside the 29 Oct 20:00Z hour: Binance 102,115 -> 107,335 (+4.9%, 72h peak), Bybit 67,312 -> 78,030 (+15.9%):
+  the 651 spike was leveraged entry, not spot repricing. Since then Binance -7.0%/24h and -9.3%/72h (below the
+  pre-spike level) while Gate +22.2%/24h and +89.0%/72h: leverage migrated to a retail venue rather than vanishing.
+  The 574.08 flush did NOT force-unwind: Binance OI fell only 582 XMR in that hour and Bybit OI rose through it.
+- Taker flow (Binance perp, last 24 x 1h): volume 109,387 XMR, taker buy 53,058 / sell 56,330 -> buy share 48.50%.
+  Last two completed hours strongly sell-side: buy/sell 0.6848 (07:00Z) and 0.6726 (08:00Z).
+- Long/short accounts (Binance) 1.7663 at 09:00Z (63.9% long), up from 1.6082 at 01:00Z. Gate taker L/S 2.69.
+- Basis (perp vs Kraken spot, reconstructed): +0.125% at the 651 spike, +0.471% at the 574 flush, +0.256% at 09:00Z.
+  No dislocation; the perp did not lead the spike and recovered faster at the flush.
+- BINANCE ORDER BOOK (mid 595.67, 09:14Z) - bids 1,304 / asks 434 XMR within +/-0.5% (3.01:1);
+  2,641 / 956 within +/-1% (2.76:1). Buckets (XMR): 588-592 bid 1,290.7 (incl. ~343 in 588.00-590.00),
+  580-588 bid 1,983.6, 573-580 bid 126.0, 560-573 bid 0; asks 596-600 739.8, 600-604 436.3,
+  604-615 1,233.3, 615-625 20.3. Walls: bid 593.80 x 498.5 ($296k), 590.36 x 318.7, 590.40 x 248.2,
+  587.43 x 247.8; ask 610.00 x 435.6 ($266k), 597.79 x 61, 598.98 x 60.4.
+- Bybit book: 1.36:1 bid-heavy within +/-1%; walls 593.62 x 216.8 bid, 599.83 x 100.2 ask.
+  Aster ~1:1 (bid 570.64 x 100.1; ask 620.95 x 96.9, 604.40 x 80.3). Hyperliquid 0.54:1 (ask-heavy).
+  Kraken SPOT book is ask-heavy: 666 XMR bid vs 1,665 XMR ask within +/-2% (0.4:1).
+- Distance cost to move the book: reaching 604.00 needs ~1,176 XMR of asks (~$700k); reaching 588.00 needs
+  ~2,947 XMR of bids (~$1.75M), i.e. 2.5x more. Book geometry favours an UP move; flow/positioning favours DOWN.
+- NOT OBTAINABLE: liquidation totals, long/short split and liquidation clusters. Binance forceOrders 401,
+  Bybit liquidation endpoints 404, Coinglass "API key missing". Gate reports 1.2 XMR of liquidations in 24h
+  (empty counter). No liquidation claim is used anywhere in this trade.
+
+=====================================================================
+ARITHMETIC (script, exact; journal model: no fees, no funding, no slippage)
+=====================================================================
+Stop-placement investigation (2026-10-31T09:30Z)
+A first version used SL 611.50 (just above the single 435.6 XMR wall at 610.00). Jev was asked whether that stop sits
+beyond a measured structural extreme: "The stop at 611.50 sits beyond a measured structural extreme rather than inside
+the noise of the 604-615 supply block" -> P = 0.13, i.e. Jev reads it as INSIDE the block. That echoes this journal's own
+two stop-inside-structure losses (LOSS-1.50%_2026-10-23T1147Z_ZECUSDT stopped 5 min after fill;
+LOSS-1.30%_2026-10-19T1533Z_XRPUSDT stopped inside the squeeze reach). The stop was therefore moved to 615.50, above
+the whole 604-615 block (1,233 XMR), with Jev: "a stop at 615.50 is beyond the measured supply block and structurally
+sound" 0.79, and "P(touch 615.50 before 05:00Z)" 0.11.
+Tickets costed with the 615.50 stop: SHORT 601.50/589.00/615.50 EV/order +0.8071%;
+SHORT 604.00/589.50/615.50 +0.5768%; SHORT 602.50/589.00/615.50 +0.7189%.
+The tighter 611.50 stop shows a higher raw EV (+0.9310%) but only because it prices a 0.21 loss branch against a 2.33%
+wide invalidation; it is rejected on structural grounds, not on EV grounds. Recorded trade-off, not hidden.
+
+Selected ticket: SHORT LIMIT 601.50, TP 589.00, SL 615.50, expire 2026-11-01T05:00Z
+G = (601.50-589.00)/601.50 = +2.07811%
+L = (615.50-601.50)/601.50 = -2.32751%
+RR = 0.8929 ; p_BE = L/(G+L) = 2.32751/4.40562 = 0.52835
+P(fill before 2026-11-01T05:00Z) = 0.70 (Jev)
+P(589.00 before 615.50 | filled at 601.50) = 0.79 (Jev; 0.80 was given for the 611.00 variant, which is an ordering
+violation - a wider stop cannot lower the TP-first probability - so the lower figure is used)
+EV/fill = 0.79*2.07811 - 0.21*2.32751 = +1.15293%
+EV/order = 0.70 * 1.15293 = +0.80705%  (no-fill branch pays 0: EXPIRED)
+The "neither TP nor SL by expiry" branch was carried at 0 in the base EV, although Jev puts
+P(still inside 588-604 at 05:00Z) = 0.63 and a filled short would normally book a small gain at expiry.
+Sensitivity (p_TP / fill): 0.75/0.65 -> EV/fill +1.06995%, EV/order +0.69547%; 0.70/0.60 -> +0.75642% / +0.45385%;
+0.65/0.55 -> +0.44289% / +0.24359%. Break-even p_TP is 0.5284, still below every tested value.
+All alternative tickets are positive under a 0.10 haircut to both Jev inputs; the short side dominates every tested
+level set, and 601.50 dominates the higher 604.00 entry on order-level EV because of fill probability.
+Expiry rationale: 2026-11-01T05:00Z is 19.5h after placement, keeps the trade inside the compressed weekend
+session and ends before the Sunday withdrawal-resumption announcement most sources expect; the 16:00Z funding
+print stays inside the window.
+=====================================================================
