@@ -1,0 +1,93 @@
+ASTERUSDT — research log
+Decision time (UTC): 2026-11-01T10:10Z   Chart capture: 2026-11-01T10:06:46Z (footer clock 11:06:46 UTC+1)
+Forecast / trade horizon: 2026-11-01T10:10Z -> 2026-11-02T22:00:00Z (35.8h)
+Chart: ASTERUSDT 1h (Aster/TradingView feed), 248 hourly bars extracted 2026-10-22T03:00Z..2026-11-01T10:00Z
+
+AGENDA (set by Jev, jev_decide 2026-11-01T10:20Z): positioning_structure 0.78 > aster_events 0.13 >
+no_research 0.05 > market_driver 0.03, confidence 0.74. One research pass, all endpoints pulled
+2026-11-01T10:12:16Z..10:13:41Z, i.e. 1-4 minutes before the decision.
+
+1) LIVE PRICE / CANDLES (re-anchor)
+- Binance USD-M perp fapi.binance.com/fapi/v1/ticker/24hr?symbol=ASTERUSDT, 10:12:16Z: last 0.7007,
+  24h O 0.6893 H 0.7097 L 0.6888, 24h volume 35,099,019 ASTER ($24.57M).
+- Cross-venue same minute: Aster last 0.7019 (mark 0.70170), Bybit 0.7003, Gate 0.7003, OKX ~0.7006.
+  Aster prints about +0.13% over Binance — Aster is the rich venue.
+- Own re-fetch 10:18:31Z: Binance 0.7002; 09:00Z bar closed 0.7010, 10:00Z bar forming 0.7002.
+- Validation of my own extraction: my bar-by-bar read of the screenshot matches Binance klines within
+  +0.0010-0.0012 on every sampled hour (e.g. 10-31 17:00Z aster O0.7048 H0.7100 L0.7034 C0.7078 vs
+  Binance O0.7040 H0.7099 L0.7025 C0.7067; 11-01 08:00Z 0.7007/0.7045/0.6998/0.7041 vs
+  0.6995/0.7035/0.6986/0.7029). The chart's own header (O 0.7019 H 0.7023 L 0.7015 C 0.7016) and the
+  visible-range extremes it labels (0.7321 / 0.6587) both reproduce from my calibration.
+  https://fapi.binance.com/fapi/v1/klines?symbol=ASTERUSDT&interval=1h&limit=24
+- The sub-agent's OHLCV tool labels bars +1h ahead of true UTC; all rows were relabelled -1h and then
+  agreed with my chart timestamps (the chart axis is on UTC+1, day gridlines at 23:00Z).
+
+2) VOLUME / VOLATILITY STRUCTURE
+- Hourly volume decayed 510,225 (10-31 11:00Z) -> 350k -> 155k (14:00Z) -> 110-160k now. Genuine volume
+  contraction under the 1.04% 12-hour range, not only a range contraction.
+- ATR(14 hourly) 0.00316 = 0.45%; ATR(48) 0.00449 = 0.64%; median hourly range (72h) 0.00510.
+
+3) FUNDING (fapi.asterdex.com/fapi/v1/premiumIndex, fapi.binance.com/fapi/v1/fundingRate)
+- Aster 0.00021555 per 4h (+0.0216%), Binance/Bybit/OKX/Gate all 0.00005 (+0.0050%). Next print 12:00Z.
+  Aster is 4.3x the rest of the complex; not a stale figure (nextFundingTime 6464s out).
+- 48h: 12 consecutive positive Aster prints (10-30 06:00Z .. 11-01 08:00Z), +0.0050%..+0.0446%, summing
+  +0.277% paid by longs. Binance briefly printed negative during the crash aftermath (-0.00000158 at
+  10-30 12:00Z, -0.00005929 at 10-30 18:00Z); Aster never did.
+
+4) OPEN INTEREST
+- Aster 120.97M ASTER (~$84.9M) snapshot only — its openInterestHist endpoint returns 404, so the primary
+  venue's OI trend is unmeasurable (gap).
+- Binance 130.38M ASTER ($91.4M): -2.3% over 24h, -4.6% over 72h; stepped down through the crash
+  (135.62M at 10-29 20:00Z -> 132.39M at 10-30 01:00Z) and kept drifting.
+- Bybit published 66.03M = exactly 2x singleOpenInterest 33.02M (single side ~$23.1M), +3.1% over 72h.
+  OKX 14.47M, -0.4%/24h. Net: flat-to-down, no re-leveraging into the flat price.
+  https://fapi.binance.com/futures/data/openInterestHist?symbol=ASTERUSDT&period=1h&limit=96
+
+5) ORDER BOOK (four books, 10:13:05-10:13:41Z)
+- Cost to move 1%: Binance $623k up vs $1.03M down (bids 1.66x heavier); OKX bids 1.76x; Bybit 1.14x;
+  Aster itself symmetric ($602k up / $573k down, asks marginally heavier). The "bid wall" is a Binance/OKX
+  phenomenon, not an Aster one.
+- Bid walls: 0.6986 Binance 180,517 ($126k); 0.6982 OKX 186,593 ($131k); 0.6989 Aster 57,964 ($41k);
+  0.6998 Aster 43,911; Bybit nothing at 0.6980 but 118,029 at 0.6968.
+- Ask walls: 0.7040 Aster 133,696 ($94k); 0.7049 Aster 34,205; 0.7051 Bybit 116,532 ($82k);
+  0.7050 Binance only 14,604; 0.7067 Binance 59,182; 0.7090 Binance 73,289; 0.7100 Aster 210,868 ($148k)
+  with 0.7102 Aster 114,343 behind it.
+
+6) POSITIONING / FLOW
+- Binance global account long/short 1.6525 at 10:00Z (62.30% long) from 1.2671 24h earlier (+30%), rising
+  steadily overnight. Top-trader position ratio 4.5992 (82.14% long), flat for 12h. Bybit accounts 75.95%
+  buy (L/S 3.16). Gate users 479 long / 277 short.
+- Taker buy/sell Binance 24h 1.016 (balanced), but the 09:00Z hour printed 0.663 (520k sold vs 345k
+  bought) — sellers into the decision time.
+  https://fapi.binance.com/futures/data/takerlongshortRatio?symbol=ASTERUSDT&period=1h&limit=24
+- Liquidations: one OKX print only (29,333 ASTER long at 0.6991, 2026-11-01T04:33Z, ~$20.5k). No cluster.
+
+7) ASTER-SPECIFIC NEWS INSIDE THE WINDOW
+- Nothing verifiable in the last 24h. AInVest (2026-10-31) "Aster (ASTER) Trades Near $0.70 ..." states
+  "ASTER has been relatively quiet news-wise today", $0.68-0.72 range, and ties the tape to a market-wide
+  Binance hack (2026-10-29, $6.3B reported, single secondary source, unverified).
+  https://www.ainvest.com/news/aster-aster-trades-0-70-privacy-focused-derivatives-dex-binance-hack-fallout-2611
+- Unlocks: last cliff 2026-10-30T01:23Z, 2.25M ASTER (0.09% of float); next ~2026-11-29 (snippet-level).
+  Nothing inside 36h. https://defillama.com/unlocks/aster
+- Two de-dated false positives: "Aster cuts emissions 97%" (byline 2026-03-30) and the 2026-10-13/14
+  unlock-plan update. CryptoPotato tokenomics piece blocked (not read, not used).
+
+NOT FOUND / LIMITATIONS
+- No liquidation heatmap or cluster data for 0.6900-0.7150 (Coinglass key-gated, Binance allForceOrders
+  key-gated, Bybit exposes nothing, OKX gave one print). No liquidation level is used in this trade.
+- Aster OI history (404), Aster long/short ratio (not public), OKX account ratio (unbounded endpoint).
+- Gate/OKX exact 1% depth beyond the visible 50 levels could not be cumulated.
+
+CALCULATION / EXPIRY RATIONALE (arithmetic done locally, not by Jev)
+- Expiry 2026-11-02T22:00Z = 35.8h from placement. Rationale: the rotation box has held 17h; the two
+  journal ASTER fades that worked ran 36-48h, the 1h ATR is 0.45% and the box is 1.04% wide, so a
+  two-box-duration window is needed for a pullback entry plus a traversal to target. Jev put P(price
+  inside 0.6970-0.7060 at that expiry) at 0.64 and P(box keeps rotating rather than resolving) at 0.72.
+- Final ticket: SHORT LIMIT 0.7050, TP 0.6986, SL 0.7122. G = 0.7050-0.6986 = 0.0064 = +0.908% of entry;
+  L = 0.7122-0.7050 = 0.0072 = -1.021%; RR 0.889; pBE = L/(G+L) = 0.0072/0.0136 = 0.5294.
+  p_fill 0.64 (re-anchored live), P(TP before SL | fill) 0.68, P(SL first) 0.10, P(neither) 0.22 with the
+  expiry branch worth about +0.0015 (Jev: expiry below entry 0.77 in that branch).
+  EV/fill = 0.68*0.0064 - 0.10*0.0072 + 0.22*0.0015 = +0.003962 = +0.562%; EV/order = 0.64 * 0.562% =
+  +0.360%. Neither branch set to zero payoff (conservative): EV/fill +0.515%, EV/order +0.330%.
+  Pessimistic 0.55/0.25/0.20 with zero expiry payoff: EV/order +0.156%. Positive in every variant.
+  The journal model charges no fees, funding or slippage; that limitation is stated, not netted out.
