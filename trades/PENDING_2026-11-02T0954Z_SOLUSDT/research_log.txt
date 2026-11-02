@@ -1,0 +1,67 @@
+THESIS
+Short the 95.90-96.44 supply shelf on a limit retest, targeting 94.30 inside the box, stop 97.20 above the
+96.90/97.09 double top. Invalidated by an hourly close above 97.20, i.e. the shelf being reclaimed rather than sold.
+Horizon 48h (to 2026-11-04T10:00Z) because the chart is 1h and the box has held for 54 hours; Jev put the
+capture of a 48h window at 0.62 versus 24h (p9) and only 0.24 that 24h would have been insufficient (p8), so a
+longer window was not bought for a reason — 48h simply covers both the retest that has to happen first and the
+target leg.
+
+DATA CHECKED
+- prices (charts): screenshot SOLUSDT 1h captured 2026-11-02T09:52:44Z, last 94.51, footer clock 10:52:44 UTC+1.
+  Series of record: Binance spot 1h klines 2026-10-20T12:00Z..2026-11-02T09:00Z (310 bars, zero gaps, daily
+  aggregation matched the 1d candles 12/12 exactly). Aster perp quoted 94.39 vs spot 94.41 at the same instant,
+  so the venue is immaterial and the spot series was used. Chart's own marked extremes (109.16 / 92.37) match
+  the exchange extremes (109.20 trade at 2026-10-21T18:31:00.630Z / 92.34 trade at 2026-10-30T00:23:30.148Z)
+  within one tick of the screenshot's rendering resolution.
+- prices (live): re-anchored 2026-11-02T10:05Z, Binance last 94.41 (09:57:22.058Z), bid/ask 94.40/94.41,
+  24h high 95.95 / low 93.18, volume 1,144,640 SOL, 24h change -1.17%. Aster perp last 94.39. Jev: setup
+  still valid at the live price 0.89 (auto), the 0.11% drift "materially changes the setup" 0.02 (auto).
+- news: the 29-30 Oct decline was a market-wide liquidation flush triggered by the Binance hot-wallet compromise
+  disclosed 2026-10-29T20:05Z, not Solana deterioration. Solana chain operational. Background supply pressure:
+  1.02M SOL moved to seven exchanges over five days (Lookonchain, reported 29 Oct); spot SOL ETF net outflows
+  $27.69M (29 Oct) and $10.74M (30 Oct). Binance targeted a full Proof of Reserves report for Monday 2 Nov.
+- other assets: 29 Oct 12:00Z -> trough, SOL -8.0%, ETH -6.5%, BTC -4.4%; peak-to-trough SOL -10.5%, ETH -8.6%,
+  BTC -6.5%. All three topped in the same hour and broke in the same hour, 55 minutes after the disclosure.
+- liquidation data: $1.53B in 24h, 83.8% longs; SOL $82.6M of it; SOL's break hour traded 794,579 SOL, about
+  10x the prior 24-hour average; shorts were 95% of the last hour's liquidations during the rebound.
+- tokenomics / schedules: no SOL-specific market catalyst inside 2026-11-02T10:00Z..2026-11-04T10:00Z. Anza v4.4
+  schedule shows only "Create v4.5 branch" targeted 2 Nov with no delivery date; "Resume feature activation" is
+  targeted 2026-11-09, outside the window. status.solana.com operational at fetch.
+- forums: not consulted (no Jev question required them).
+
+TIMESTAMP CONVENTION NOTE
+Two independent pulls of the same Binance data disagreed by exactly one hour on intraday labels. The first labelled
+candles by open time; the second (used for the news cross-check) labelled them by close time. Resolved on causality,
+not on preference: the 20:05Z hack disclosure cannot cause a candle that closed at 20:00Z, so the open-time labelling
+in graphpoints.csv is the correct one and the break candle is 2026-10-29T20:00Z (open 99.83 -> close 96.17, low 95.00).
+The daily-OHLC cross-check (12/12 exact) independently supports open-time labelling.
+
+LINKS
+- https://api.binance.com/api/v3/klines?symbol=SOLUSDT&interval=1h (retrieved 2026-11-02T09:56:35Z)
+- https://api.binance.com/api/v3/ticker/24hr?symbol=SOLUSDT (retrieved 2026-11-02T09:57:22Z)
+- https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=SOLUSDT (retrieved 2026-11-02T09:57:20Z)
+- https://www.coindesk.com/markets/2026/10/30/usd6-billion-binance-hack-sends-bitcoin-ether-tumbling-standard-chartered-sees-more-losses-ahead (30 Oct 2026)
+- https://www.coindesk.com/markets/2026/10/30/bitcoin-ether-and-xrp-selloff-wipes-out-usd1-5-billion-in-leveraged-crypto-bets (30 Oct 2026)
+- https://socradar.io/blog/binance-hack-6-3b-hot-wallet-theft (30 Oct 2026)
+- https://cryptoticker.io/en/crypto-liquidations-leverage-margin-call-30-october-2026 (30 Oct 2026)
+- https://www.kucoin.com/news/flash/global-liquidations-reach-1-112-billion-in-24-hours (30 Oct 2026)
+- https://www.coingabbar.com/en/solana-holds-98-support-whale-selling-etf-outflows-add-risk (29 Oct 2026)
+- https://coinstats.app/ai/a/latest-news-for-solana (1 Nov 2026, carrying the 29-30 Oct ETF outflow figures)
+- https://www.coingabbar.com/en/solana-news-kamino-borrowing-pause-rwa-value-ondo (30 Oct 2026)
+- https://github.com/anza-xyz/agave/wiki/v4.4-Release-Schedule (page updated 2026-10-30, fetched 2026-11-02T10:01Z)
+- https://status.solana.com/ (operational at 2026-11-02T10:01Z)
+
+CALCULATION RATIONALE (reproduced by script; no fees, funding or slippage exist in this journal model)
+entry 96.00, TP 94.30, SL 97.20, SHORT:
+  gross gain G = (96.00-94.30)/96.00 = 1.77083%
+  gross loss L = (97.20-96.00)/96.00 = 1.25000%
+  RR = 1.417 ; pBE = L/(G+L) = 1.25/3.02083 = 0.41379
+  P(fill) 0.68 ; P(TP before SL | fill) 0.55 ; P(SL touched at all | fill) 0.27 ; remainder 0.18
+  EV/fill (binary)    = 0.55*1.77083 - 0.45*1.25      = +0.4115%
+  EV/fill (3-branch)  = 0.55*1.77083 - 0.27*1.25 + 0.18*0.36 = +0.7013%   (0.36% = expiry payoff when neither
+                        level is touched; Jev 0.65 that such a chop closes the short in profit, 0.62 that price
+                        is above 95.30 at expiry)
+  EV/order (binary)   = 0.68 * 0.4115 = +0.2798% ; (3-branch) = 0.68 * 0.7013 = +0.4769%
+  break-even on the conditional: p_TP must stay above 0.4138; Jev's 0.55 leaves 0.1362 of headroom, and the
+  binary edge survives down to p_TP 0.414 and the 3-branch edge to about 0.35.
+No cost was subtracted because this journal's model has none: that is a stated limitation, not a zero-cost claim.
