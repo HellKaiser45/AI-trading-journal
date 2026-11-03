@@ -1,0 +1,127 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  // ---------------- 1. DATA ----------------
+  subgraph cluster_data {
+    label="data (2026-11-03T09:09Z)";
+    chart [label="chart image 1920x1080, Aster XRP perp 1h, captured 2026-11-02T14:26Z\l210 candles extracted by script 2026-10-24T21:00Z..11-02T14:00Z\lcalibration 15 gridlines, 5533.9 px/unit; validates to header OHLC\lValidates to marked extremes 1.3440 / 1.2002 (extracted 1.3440 / 1.2002)\l"];
+    live  [label="live re-anchor 2026-11-03 ~09:05Z: Binance 1.2535, Bybit 1.2530, OKX 1.2533\l24h high 1.2640, low 1.2355, vol 72.2M XRP, chg ~+0.1%\l18 hourly candles 11-02T15:00Z..11-03T08:00Z added as live bridge\lbasis note: Aster 14:00Z close 1.2520 vs Binance 1.2546\lgap since capture: +0.12% -> chart was stale, re-anchored (no rejection trigger)"];
+    meas  [label="measured: range 1.2333-1.2642 (88 candles, 4 days), mid 1.2488, height 2.47%\lclose mean 1.2509, sd 0.00350; 90.9% of closes inside 1.2440-1.2560\lrange-high tests 1.2596/1.2613/1.2615/1.2633/1.2642 (5 rejections)\lrange-low tests 1.2333/1.2421/1.2423/1.2355 (last bought back in 2h)\lATR1h 0.00806 (0.64%), ATR48 0.58%, ATR168 0.73% -> contraction\lfib of 1.3440->1.2002: 23.6%=1.2341 38.2%=1.2551 50%=1.2721\lswing low 30 Oct 1.2287; 28-29 Oct double top 1.3440/1.3425"];
+    res   [label="research (Jev-designated question, links in research_log.txt)\lD1 29 Oct hack trigger, XRP liqs 100% longs; D2 1 Nov XRPL withdrawals reopened\lD3 2 Nov PoR incl XRP, XRP not in unreplaced 5%\lD4 funding neutral +0.0100%/8h x17 settlements, never negative\lD5 OI rebuilt to 101-103% of pre-event; D6 liq run-rate 26th pct, stress 0.218\lD7 XRP -0.49% vs BTC -2.06% 24h; D8 XRP ETF +$4.32M only positive\lD9 Ripple ~300M XRP outside escrow (mild supply); D10 midterms/JOLTS/4 Nov snapshot\lNOT FOUND: non-Binance event-window funding, aggregate OI peak, netflow"];
+  }
+
+  // ---------------- 2. SCENARIOS ----------------
+  subgraph cluster_scen {
+    label="scenarios to 2026-11-05T09:00Z (48h)";
+    s1 [label="S1 range containment / chop (central)\loscillate 1.2440-1.2610, probe the ceiling, no decisive break\lJev: p(inside range at 48h)=0.70, p(decisive break)=0.23, p(time in 1.2440-1.2560 > outside)=0.66"];
+    s2 [label="S2 upside resolution\lreclaim 1.2642 -> 1.2721 (50% fib) -> 1.2891\lJev: p(above 1.2642 before below 1.2333)=0.46 (highest single branch) / but p(break)=0.23"];
+    s3 [label="S3 downside resolution\llose 1.2333 -> 1.2287 -> 1.2150/1.2002\lJev: p(below 1.2333 first)=0.24; weakened by D5/D6/D7 and p(defended low)=0.82"];
+    note [label="S2/S3 are mutually exclusive with S1's containment but the yes/no estimates overlap by construction; no weights were normalised or summed", shape=note];
+  }
+
+  // ---------------- 3. CANDIDATES ----------------
+  subgraph cluster_cand {
+    label="candidates (LIMIT only; MARKET variants tested and negative)";
+    short [label="A SHORT LIMIT 1.2625 / TP 1.2440 / SL 1.2695, expire 11-05T09:00Z\lG=+1.4653% L=+0.5545% RR=2.64 p_BE=0.2745\lSELECTED", style=filled, fillcolor="#cfe8d5"];
+    long  [label="B LONG LIMIT 1.2385 / TP 1.2560 / SL 1.2270\lG=+1.4130% L=+0.9285% RR=1.52 p_BE=0.3966\lEV/fill +0.5935%, order +0.3383% -> viable runner-up"];
+    rej1  [label="C SHORT at market 1.2535/1.2355/1.2655 -> EV/fill -0.1915% (mid-range entry) REJECTED"];
+    rej2  [label="D SHORT 1.2625/1.2540/1.2680 -> +0.1632%/fill (reward too small) REJECTED"];
+    rej3  [label="E LONG 1.2385/1.2560/1.2300 -> +0.2584%/fill; Jev p=0.87 stop sits in noise band REJECTED"];
+  }
+
+  // ---------------- 4. JEV RECORD ----------------
+  subgraph cluster_jev {
+    label="Jev: exact propositions, answers, probabilities";
+    j1  [label="P(above 1.2642 before below 1.2333, 48h) = 0.46"];
+    j2  [label="P(below 1.2333 before above 1.2642, 48h) = 0.24"];
+    j3  [label="P(inside 1.2333-1.2642 at 2026-11-04T09:00Z) = 0.70"];
+    j4  [label="P(touch >=1.2620 within 36h) = 0.62"];
+    j5  [label="P(touch <=1.2380 within 48h) = 0.61"];
+    j6  [label="P(reach 1.2620 in 36h -> then 1.2420 before 1.2700) = 0.35"];
+    j7  [label="P(reach 1.2380 in 48h -> then 1.2560 before 1.2295) = 0.32"];
+    j8  [label="P(1.2333-1.2642 are the governing levels vs a wider 1.2002-1.2900 structure) = 0.79"];
+    j9  [label="P(distribution/continuation rather than accumulation base) = 0.50"];
+    j10 [label="P(decisive break, close >0.5% beyond a boundary, within 48h) = 0.23"];
+    j11 [label="P(fill 1.2625 within 36h -> reach 1.2440 before 1.2680) = 0.51"];
+    j12 [label="P(fill 1.2625 within 36h -> reach 1.2540 before 1.2680) = 0.54"];
+    j13 [label="P(fill 1.2385 within 48h -> reach 1.2560 before 1.2300) = 0.47"];
+    j14 [label="P(fill 1.2385 -> reach 1.2480 before 1.2300) = 0.61"];
+    j15 [label="P(selling at 1.2535 now is materially worse than waiting for 1.2625) = 0.45"];
+    j16 [label="P(limit sell 1.2625 touched within 36h) = 0.57"];
+    j17 [label="P(limit buy 1.2385 touched within 48h) = 0.57"];
+    j18 [label="P(resolving whether the 29-30 Oct liquidation is digested could materially change the forecast) = 0.79 -> research round run"];
+    j19 [label="P(scheduled macro or XRP-specific catalyst in 48h likely to break the range) = 0.10"];
+    j20 [label="P(1.2385-1.2420 support is stronger than 1.2600-1.2642 resistance) = 0.29"];
+    j21 [label="P(fill 1.2625, stop 1.2680 -> reach 1.2440 before 1.2680) = 0.50"];
+    j22 [label="P(fill 1.2625, stop 1.2700 -> reach 1.2440 before 1.2700) = 0.47"];
+    j23 [label="P(fill 1.2625, stop 1.2725 -> reach 1.2440 before 1.2725) = 0.48"];
+    j24 [label="P(a 1.2680 stop is so tight that an ordinary probe very likely hits it first) = 0.53"];
+    j25 [label="P(short filled 1.2625 profitable at 48h expiry more often than stopped) = 0.58"];
+    j26 [label="P(waiting for 1.2625 sell limit beats selling at 1.2535 with the same target/risk) = 0.40"];
+    j27 [label="P(fill 1.2625, neither 1.2440 nor 1.2680 touched by expiry) = 0.33"];
+    j28 [label="P(fill 1.2385, neither 1.2560 nor 1.2300 touched by expiry) = 0.40"];
+    j29 [label="P(given neither touched, price <1.2600 at expiry | fill 1.2625) = 0.25"];
+    j30 [label="P(given neither touched, price >1.2420 at expiry | fill 1.2385) = 0.48"];
+    j31 [label="P(short 1.2625/1.2680 beats long 1.2385/1.2300 in expected net outcome over 48h) = 0.39"];
+    j32 [label="P(2 Nov 18:00Z high-volume sweep to 1.2355 = defended level, not likely to break down in 48h) = 0.82"];
+    j33 [label="P(range more likely to hold now that funding is neutral / OI rebuilt / no long overhang) = 0.78"];
+    j34 [label="P(1.2642 defended by sellers more than 1.2333 defended by buyers) = 0.65"];
+    j35 [label="P(sellers from the five rejections still present on a rally into 1.2600-1.2642) = 0.66"];
+    j36 [label="P(limit buy 1.2385 fills on a wick that reverses rather than a genuine breakdown) = 0.81"];
+    j37 [label="P(limit sell 1.2625 fills on a wick that reverses rather than a genuine breakout) = 0.87"];
+    j38 [label="P(fill 1.2385 within 36h -> reach 1.2560 before 1.2270) = 0.65"];
+    j39 [label="P(fill 1.2385 within 36h -> reach 1.2560 before 1.2300) = 0.43"];
+    j40 [label="P(fill 1.2625 within 36h -> reach 1.2440 before 1.2695) = 0.63"];
+    j41 [label="P(SL 1.2300 for a long at 1.2385 sits in the noise band of a downside probe) = 0.87"];
+    j42 [label="P(five-rejection ceiling makes 1.2625 the sounder fade than 1.2385) = 0.73"];
+    j43 [label="P(price spends more time in 1.2440-1.2560 than outside over 48h) = 0.66"];
+  }
+
+  // ---------------- 5. ECONOMICS ----------------
+  subgraph cluster_econ {
+    label="order-level economics (script, gross: no fees/funding/slippage in this model)";
+    e1 [label="A three-branch: p_tp 0.63 (j40), p_sl 0.07, p_neither 0.30 (j27), expiry payoff +0.12%\lEV/fill = 0.63*1.4653 - 0.07*0.5545 + 0.30*0.12 = +0.9204%\lorder EV = 0.57 (j16) * 0.9204 = +0.5246%; p(no fill)=0.43 -> EXPIRED, no pct"];
+    e2 [label="A sensitivity: p_tp 0.50 (j21 measure, SL 1.2680 wording) -> EV/fill +0.6578%, order +0.3749%\lA sensitivity: expiry payoff -0.30%/+0.60% -> EV/fill +0.7944%/+1.0644%\lA two-branch only: +0.7180% (p 0.63) / +0.5149% (p 0.50)\lA break-even p=0.2745 -> cleared by every estimate"];
+    e3 [label="B runner-up: 0.65 (j38)*1.4130 - 0.35*0.9285 = +0.5935%/fill; order 0.57*0.5935 = +0.3383%"];
+    e4 [label="selection: A > B on EV (+0.52 vs +0.34 order), required-vs-estimated cushion (0.275/0.63 = 2.3x vs 0.397/0.65 = 1.6x), j42 0.73, j37 0.87 vs j36 0.81, j34 0.65", style=filled, fillcolor="#e8e0cf"];
+  }
+
+  // ---------------- 6. FORECAST ----------------
+  subgraph cluster_fc {
+    label="independent forecast (not bent to the trade)";
+    f1 [label="central path 1.2535 -> 1.2468 (11-03T21:00Z trough) -> 1.2605 (11-04T12:00Z peak, inside the rejection band) -> 1.2512 at expiry\lreaches neither entry 1.2625, nor TP 1.2440, nor SL 1.2695: range containment, contested\lmarked contested because j1 0.46 vs j2 0.24 do not let one branch dominate"];
+  }
+
+  // ---------------- 7. LESSONS / UNCERTAINTY ----------------
+  subgraph cluster_risk {
+    label="historical lessons applied + unresolved uncertainty";
+    l1 [label="trades/WIN+1.26%_2026-10-27T0919Z_ASTERUSDT: stop 0.2% beyond the measured extreme won -> 1.2695 sits 0.42% (0.65 ATR) above 1.2642, under the 1.2721 fib"];
+    l2 [label="trades/LOSS-1.01%_2026-10-23T1024Z_ASTERUSDT, trades/LOSS-1.50%_2026-10-23T1147Z_ZECUSDT: longs stopped with the stop inside the extreme -> long candidate's 1.2300 widened to 1.2270 (j41 0.87)"];
+    l3 [label="trades/EXPIRED_2026-10-28T0840Z_ZECUSDT, EXPIRED_2026-10-30T0845Z_BNBUSDT, EXPIRED_2026-10-18T1730Z_AVAXUSDT: limits 1.5%+ from price never filled -> entry here 0.72% away, j16 0.57"];
+    l4 [label="trades/EXPIRED+3.95%_2026-10-18T1535Z_ASTERUSDT: TP beyond the window's deliverable turned a winner into an expiry capture -> TP 1.2440 at the edge of the dense 1.2440-1.2560 band, not beyond it"];
+    l5 [label="trades/WIN+1.76%_2026-10-25T0942Z_XRPUSDT, trades/LOSS-1.30%_2026-10-19T1533Z_XRPUSDT: no directional inference from 2 same-symbol samples; only the stop-placement lesson was carried"];
+    l6 [label="trades/EXPIRED_2026-11-01T1010Z_ASTERUSDT (settled in this same run): a limit only 0.48% from price in a low-ATR compression was never touched over 36h, 4th no-fill in 17 orders. Carried as a downward risk to the 0.57 fill estimate; order EV at p(fill)=0.45 is still +0.414% and at 0.35 is +0.322%, so the trade does not depend on the optimistic fill"];
+    u1 [label="UNRESOLVED: j21 0.50 (stop 1.2680) vs j40 0.63 (stop 1.2695) is a 0.13 jump for a 0.12% stop change -> estimates are bracket-sensitive; decision carried at both ends, positive in each"];
+    u2 [label="UNRESOLVED: j31 0.39 (short beats long head-to-head, tight-stop version) vs j40 0.63 / j38 0.65 (singles, corrected stops) - a preference conflict, not a payoff conflict; both payoffs are positive, A dominates on cushion"];
+    u3 [label="UNRESOLVED: j9 0.50 - continuation vs accumulation is a coin flip; the trade does not rely on either, only on the 0.70 containment and the 0.65/0.66 ceiling evidence"];
+    u4 [label="DATA CAVEAT: research agent's clock ran ~1h ahead of the shell clock (data labelled to 10:00Z at 09:09Z) -> live bridge truncated at 08:00Z; venue basis Aster perp vs Binance spot 0.0026 at 14:00Z; account long/short ratios contested between trackers"];
+    u5 [label="HOUSEKEEPING: a research agent wrote a stray CSV into this folder; it was deleted - only the scoped files remain"];
+  }
+
+  // ---------------- 8. EDGES ----------------
+  chart -> meas; live -> meas; res -> scen;
+  meas -> scen -> short; scen -> long;
+  meas -> short; meas -> long;
+  j1 -> scen; j2 -> scen; j3 -> scen;
+  j40 -> e1; j16 -> e1; j27 -> e1; j21 -> e2; j38 -> e3;
+  e1 -> short; e3 -> long;
+  e4 -> short;
+  short -> f1; j37 -> short; j42 -> short;
+  l1 -> short; l2 -> rej3; l3 -> short; l4 -> short; l5 -> long;
+  f1 -> decide;
+  short -> decide [label="EV>0, RR 2.64, p_BE 0.275 vs 0.63"];
+  rej1 -> decide [label="negative EV"]; rej2 -> decide [label="thin"]; rej3 -> decide [label="stop in noise"];
+  decide [label="SHORT LIMIT 1.2625 TP 1.2440 SL 1.2695 expire 2026-11-05T09:00Z", shape=diamond, style=filled, fillcolor="#cfe8d5"];
+}

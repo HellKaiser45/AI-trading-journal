@@ -1,0 +1,153 @@
+# research_log.txt - IDEA_2026-11-03T0858Z_XRPUSDT
+# Symbol XRPUSDT, 1h, chart captured 2026-11-02T14:26Z, decision time 2026-11-03T09:09Z.
+# Horizon: 48h, to 2026-11-05T09:00Z (trade expiry). All times UTC.
+
+## 0. Data sources actually used
+
+[1] Chart image 261103_09h57m14s_screenshot.png (Aster XRP perp, 1h, 1920x1080). 210 candles
+    extracted by script (see graphpoints.csv): 2026-10-24T21:00Z - 2026-11-02T14:00Z.
+    Pixel calibration fitted on 15 price gridlines (1.21-1.35) at 5533.9 px/unit; validates to
+    the chart's own header OHLC (O 1.2541 / H 1.2588 / L 1.2500 / C 1.2520 -> extracted
+    1.2540 / 1.2587 / 1.2502 / 1.2521) and to the marked extremes 1.3440 and 1.2000
+    (extracted 1.3440 / 1.2002).
+[2] Live re-anchor, Binance spot XRPUSDT 1h + Bybit v5 + OKX tickers, retrieved 2026-11-03
+    ~09:05-10:00Z: last 1.2535 (Bybit 1.2530, OKX 1.2533). 24h high 1.2640, 24h low 1.2355,
+    24h volume 72.2M XRP, 24h change ~+0.1%. 18 hourly candles 2026-11-02T15:00Z-2026-11-03T08:00Z
+    are carried into graphpoints.csv as a live bridge between the chart edge and "now".
+    Source endpoints: api.binance.com/api/v3/klines, api.bybit.com/v5/market/tickers,
+    okx.com/api/v5/market/ticker. Note: XRP is quoted here on spot; the chart is an Aster perp,
+    so a small venue basis exists (chart 14:00Z close 1.2520 vs Binance 1.2546).
+[3] Position/flow tape, retrieved 2026-11-03T09:05Z (Jev-derived question, see section 2):
+    fapi.binance.com/fapi/v1/fundingRate?symbol=XRPUSDT and
+    fapi.binance.com/futures/data/openInterestHist?symbol=XRPUSDT&period=4h
+    plus coinperps.com/open-interest, coinperps.com/funding-rates, tradradar.io/markets/xrp,
+    squeeze-labs.com/pairs/XRPUSDT, swolecharts.com/liquidations.
+
+## 1. Structural read from the chart (measured, not eyeballed)
+
+- Double top 1.3440 (28 Oct 12:00Z) / ~1.3425 (29 Oct 05:00Z); decline of 10.7% to a
+  capitulation spike low of 1.2002 (30 Oct ~10:00Z).
+- V-recovery to 1.2613 within hours, then a 4-day (88-candle) compression:
+  high 1.2642 (2 Nov 03:00Z), low 1.2333 (30 Oct 18:00Z), midpoint 1.2488, height 2.47%.
+  Mean of closes 1.2509, sd 0.00350 (0.28%); 90.9% of closes inside 1.2440-1.2560.
+- Range-high tests 1.2596 / 1.2613 / 1.2615 / 1.2633 / 1.2642 (5 rejections);
+  range-low tests 1.2333 / 1.2421 / 1.2423 / 1.2355 (the last on the largest hourly volume
+  since 30 Oct, bought back within two hours).
+- ATR(1h) 0.00806 = 0.64%; ATR(48) 0.58%; ATR(168) 0.73% -> volatility contracting.
+- Fibonacci of the 1.3440->1.2002 decline: 23.6% 1.2341, 38.2% 1.2551, 50% 1.2721,
+  61.8% 1.2891. Price at 1.2535 sits just under the 38.2% level; the range high 1.2642 sits
+  between 38.2% and 50%; the range low 1.2333 sits on the 23.6% level.
+
+## 2. Dated findings on the Jev-designated material question
+
+Question put to research (Jev p=0.79 that resolving it could materially change the forecast):
+is the 29-30 October forced-liquidation cascade fully digested, i.e. is there a residual
+forced-selling or trapped-position overhang that would push XRP out of 1.2333-1.2642 within 48h?
+
+[D1] 2026-10-29T20:05Z - Trigger: a Binance hot-wallet / internal-signing compromise was
+     disclosed, >$6B affected; FBI later attributed it (alert 31 Oct) to North Korea's
+     TraderTraitor group. XRP liquidations 29 Oct 20:39-20:48Z: $9.72M in 9 minutes, 100% longs,
+     largest single order a $1.23M OKX long at 1.23 (markettrace.ai, edgedepth.com).
+     Sources: cnbc.com (2 Nov), theblock.co (2 Nov), FBI alert via bitcoinmagazine.com (2 Nov).
+[D2] 2026-11-01 - Binance reopened XRP Ledger withdrawals (Recovery Update #4). cryptoticker.io.
+[D3] 2026-11-02T12:45Z - Binance published a proof-of-reserves snapshot (31 Oct 00:00Z) covering
+     XRP at 1:1; 95% of stolen assets already replaced and XRP is explicitly NOT among the
+     unreplaced 5%. Sources: theblock.co (2 Nov), cnbc.com (2 Nov), reuters.com (2 Nov),
+     cryptoticker.io (3 Nov 01:03Z).
+[D4] Funding: Binance XRPUSDT printed the neutral +0.01000%/8h on 17 consecutive settlements from
+     2026-10-31T00:00Z to 2026-11-03T08:00Z, and never went negative during the event. Cross-venue
+     OI-weighted funding on 3 Nov is +0.0064%/8h vs BTC +0.0104%; Bybit -0.0030%, WhiteBIT
+     -0.0068% (coinperps, tradradar). Read: no funded-long overhang and no short crowding.
+[D5] Open interest: Binance XRPUSDT OI $406.1M on 29 Oct 16:00Z -> trough $329.6M on 31 Oct
+     08:00Z (-18.8%) -> $418.2M on 3 Nov 08:00Z, i.e. rebuilt slightly ABOVE the pre-event level.
+     Aggregate $2.91B vs $2.97B pre-event (-2%). 7-day OI change -0.8% (fapi openInterestHist;
+     coinperps; squeeze-labs).
+[D6] Liquidation run-rate now: XRP 24h liquidations $1.09M-$2.43M across trackers = 26th
+     percentile of the last 90 days; leverage-stress score 0.218/1.0 ("low") (squeeze-labs,
+     swolecharts, tradradar, coinstats, 3 Nov 08:59-09:04Z). Market-wide 24h liquidations
+     $193.68M, $170.60M of it longs.
+[D7] Price behaviour since the event: XRP held 1.2421-1.2616 on 1h closes from 31 Oct 00:00Z;
+     last 24h XRP -0.49% versus BTC -2.06% (relative strength). BTC OI +1.36% while BTC price
+     -2.06%, read as new shorts building market-wide (coinperps, 3 Nov).
+[D8] Flows: XRP spot ETFs +$4.32M net for the week of 2 Nov, the only positive among
+     BTC/ETH/SOL/XRP; October total +$18.83M (kucoin flash 2 Nov; coinstats 3 Nov).
+[D9] Supply: Ripple unlocked 1B XRP on 1 Nov and re-escrowed 700M, leaving ~300M XRP (~$375M)
+     outside escrow for the cycle (blog.mexc.com 2 Nov; crypto.news 2 Nov). Mild, dated
+     supply overhang - the one finding that points against a clean upside resolution.
+[D10] Scheduled inside the horizon (Jev p=0.10 that any of these breaks the range): US midterms
+     3 Nov, JOLTS 3 Nov, further Binance withdrawal-network restorations from 3 Nov, another
+     reserves snapshot 4 Nov, XRPL fixCleanup3_4_0 earliest activation 4 Nov ~14:46Z (XRP supply
+     unaffected).
+
+Could NOT be found: aggregate XRP OI peak print for 28-29 Oct; a funding series for any venue
+other than Binance (OKX/Bybit/Hyperliquid event-window prints unconfirmed); reconcilable
+long/short account ratios (tradradar 74.7% long conflicts with coinperps 47.3% on 28 Oct -
+treat account-ratio direction as contested, funding/OI as the hard evidence); post-31 Oct XRP
+exchange netflow; USDT-denominated turnover; the exact date of the "upcoming jobs report".
+
+## 3. Candidate economics (scripts; journal model = no fee, funding, slippage or partial fills)
+
+Selected: SHORT, LIMIT 1.2625, TP 1.2440, SL 1.2695, place ~2026-11-03T09:10Z,
+expire 2026-11-05T09:00Z.
+
+  G = (1.2625-1.2440)/1.2625 = +1.4653%
+  L = (1.2695-1.2625)/1.2625 = +0.5545%   (risk, positive magnitude)
+  RR = G/L = 2.64
+  p_BE = L/(G+L) = 0.5545/2.0198 = 0.2745
+
+  Jev: p(fill within 36h) = 0.57; p(reach 1.2440 before 1.2695 | fill) = 0.63.
+  Three-branch (TP 0.63 / SL 0.07 / neither 0.30, expiry payoff assumed +0.12%):
+      EV/fill = 0.63*1.4653 - 0.07*0.5545 + 0.30*0.12 = +0.9204%
+  Order level: 0.57 * 0.9204 = +0.5246% per order placed; the 0.43 no-fill branch is
+  EXPIRED with no percentage under this model.
+  Sensitivity, Jev's tighter-stop estimate p=0.50 instead of 0.63:
+      EV/fill = 0.50*1.4653 - 0.20*0.5545 + 0.30*0.12 = +0.6578%  ->  order +0.3749%
+  Sensitivity, expiry payoff -0.30% / +0.60% at p=0.63:
+      EV/fill +0.7944% / +1.0644%  ->  order +0.4528% / +0.6067%
+  Two-branch only (no expiry branch): EV/fill +0.7180% (p=0.63) / +0.5149% (p=0.50).
+  Positive in every variant; break-even requires only p=0.2745.
+  Fill sensitivity (see lesson below): p(fill) 0.57 -> order +0.5246%; 0.45 -> +0.4142%;
+  0.35 -> +0.3221%. The order is positive across the whole plausible fill range.
+
+Runner-up (viable, not selected): LONG LIMIT 1.2385, TP 1.2560, SL 1.2270.
+  G = +1.4130%, L = +0.9285%, RR 1.52, p_BE = 0.3966, Jev p(TP first) = 0.65
+  -> 2-branch EV/fill +0.5935%, order EV 0.57*0.5935 = +0.3383%.
+  Rejected because: lower EV, weaker required-vs-estimated cushion (0.397 vs 0.65 = 1.6x
+  against the short's 0.275 vs 0.63 = 2.3x), Jev p=0.73 that the five-rejection ceiling is the
+  structurally sounder fade than a level with two prior touch points, and p=0.65 that resistance
+  is more likely defended than support.
+
+Rejected outright: SHORT at market 1.2535, TP 1.2355, SL 1.2655 -> EV/fill -0.1915% (entry in
+the middle of the range); SHORT 1.2625/TP 1.2540/SL 1.2680 -> +0.16%/fill (too little reward);
+LONG with SL 1.2300 -> +0.26%/fill and Jev p=0.87 that the stop sat in the noise band.
+
+Expiry rationale: 48h from placement. The chart's operative structure is a 4-day range; one ATR
+(0.64%) per ~day of drift means a 1.47% target needs on the order of 1.5-2 days. A fill within
+36h (p=0.57) therefore leaves at least ~12h and typically ~30h to resolve, and the expiry branch
+(price inside 1.2333-1.2642 at expiry, p=0.70) still pays a short filled at 1.2625.
+
+## 4. Historical lessons applied (source folders in trades/)
+
+- trades/WIN+1.26%_2026-10-27T0919Z_ASTERUSDT: the record's cleanest win had its stop 0.2%
+  beyond the measured swing extreme. Applied sideways: 1.2695 sits 0.42% (0.65 ATR) above the
+  1.2642 range high and just under the 1.2721 fib, so a real breakout, not a wick, is needed
+  to stop the trade.
+- trades/LOSS-1.01%_2026-10-23T1024Z_ASTERUSDT and trades/LOSS-1.50%_2026-10-23T1147Z_ZECUSDT:
+  both longs were stopped with the stop only ~0.3-0.5% inside the measured extreme. This is why
+  the LONG candidate's 1.2300 stop was widened to 1.2270 (Jev p=0.87 that 1.2300 sat in the
+  noise band of a downside probe, with the 30 Oct swing low at 1.2287 immediately below it).
+- trades/EXPIRED_2026-10-28T0840Z_ZECUSDT, trades/EXPIRED_2026-10-30T0845Z_BNBUSDT,
+  trades/EXPIRED_2026-10-18T1730Z_AVAXUSDT: three limits never filled, all placed ~1.5%+ from
+  price. The entry here is 0.72% from the live price, with p(fill)=0.57.
+- trades/EXPIRED_2026-11-01T1010Z_ASTERUSDT, settled during this same run: a limit only 0.48%
+  from price inside a low-ATR compression was never touched in 36h (window max high 0.7033 vs
+  limit 0.705). That is the 4th no-fill in 17 orders and a direct warning that even sub-0.5%
+  limits miss. The entry here is 0.61-0.72% from the live price; order EV stays positive at
+  p(fill) 0.45 (+0.4142%) and at 0.35 (+0.3221%), so the position does not rest on the 0.57
+  estimate.
+- trades/EXPIRED+3.95%_2026-10-18T1535Z_ASTERUSDT: a TP beyond what the window delivered turned
+  a winning position into an expiry capture. Here the TP sits at the edge of the dense
+  1.2440-1.2560 close band, not beyond it.
+- trades/WIN+1.76%_2026-10-25T0942Z_XRPUSDT and trades/LOSS-1.30%_2026-10-19T1533Z_XRPUSDT:
+  both XRP fades used entry ~1.304 and TP 1.281; the one that failed had its 1.3% stop inside
+  the high that followed. No directional inference is drawn from a 2-sample symbol history.
