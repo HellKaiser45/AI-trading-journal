@@ -56,3 +56,24 @@ Chart captured 2026-11-04T14:31Z (image 261104_15h31m25s_screenshot.png, footer 
    P(TP first|fill) = 0.50 (EV/order +0.141%).
    The journal charges no fees, funding or slippage, so these are gross figures; a 0.05-0.10% round
    trip would raise p_BE to roughly 0.513-0.552, which 0.63 still clears.
+
+5) Intraday re-check requested by the user ("the market just spiked"), 2026-11-04T14:54Z
+   - Live Binance spot 79,258.75; 24h H 79,665.66 L 75,736.38 (+2.454%). 14:00Z hourly bar still open:
+     O 78,364.01 H 79,665.66 L 78,210.00, volume 1,738.83 BTC versus 420-810 BTC in the four prior hours.
+   - 1m anatomy of the spike: 78,321.25 at 14:29 -> 78,718 at 14:39 -> 79,558.79 at 14:44 -> 79,295 at 14:45
+     -> 79,665.66 at 14:50 (+1.717% in 21 minutes) -> 79,240.93 at 14:54 (0.533% off the high).
+   - Fill check: the lowest print after place_at 14:50:20Z is 79,240.93, so the 78,900 limit was never touched;
+     the straddling 14:50 candle (low 79,291.47) is skipped by the resolver in any case. Still PENDING.
+   - Staleness check: 79,349.04 at placement -> 79,258.75 now = -0.1138%. The spike net-netted to about zero, so
+     entry/TP/SL/expiry are all still correctly placed (entry 0.4526% below live, TP 0.7460% above, SL 1.5251% below).
+   - Refreshed Jev estimates at 79,258.75: ticket still valid 0.62; P(touch 78,900 before expiry) 0.58 versus 0.66 at
+     placement; P(TP 79,850 before SL 78,050 | fill) 0.57 versus 0.63; impulse is genuine flow 0.63; long side still
+     better 0.71; raising the entry to 79,150 better 0.41; 78,050 still outside the needed noise 0.53; durable
+     breakout rather than sweep 0.60.
+   - Updated economics: EV/fill +0.39544%, EV/order +0.22935% (from +0.46768% / +0.30867%). p_BE stays 0.4722, so the
+     refreshed 0.57 still clears it; the ticket stays positive down to P(fill) 0.50 and TP-first 0.50.
+   - Re-pricing tested and rejected: entry 79,150 / TP 79,850 / SL 78,050 gives RR 0.6364 and p_BE 0.6111, above the
+     0.57 hit rate Jev prices. No amendment was made; no second stake was opened (one identical stake per trade).
+   - No new external research was run for this check: the question was whether the spike changed the execution of an
+     existing order, which the live candles answer. The ISM Services print at 15:00Z that research could not date was
+     not used, and the 14:30Z impulse remains unattributed rather than assigned a cause.
