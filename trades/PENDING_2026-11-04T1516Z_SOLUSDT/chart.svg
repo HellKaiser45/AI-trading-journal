@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="820" viewBox="0 0 1500 820">
+<rect x="0" y="0" width="1500" height="820" fill="#0e1116"/>
+<line x1="70" y1="670.0" x2="1360" y2="670.0" stroke="#1e242c"/>
+<text x="62" y="674.0" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">89.36</text>
+<line x1="70" y1="595.8" x2="1360" y2="595.8" stroke="#1e242c"/>
+<text x="62" y="599.8" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">90.73</text>
+<line x1="70" y1="521.5" x2="1360" y2="521.5" stroke="#1e242c"/>
+<text x="62" y="525.5" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">92.11</text>
+<line x1="70" y1="447.2" x2="1360" y2="447.2" stroke="#1e242c"/>
+<text x="62" y="451.2" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">93.48</text>
+<line x1="70" y1="373.0" x2="1360" y2="373.0" stroke="#1e242c"/>
+<text x="62" y="377.0" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">94.86</text>
+<line x1="70" y1="298.8" x2="1360" y2="298.8" stroke="#1e242c"/>
+<text x="62" y="302.8" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">96.23</text>
+<line x1="70" y1="224.5" x2="1360" y2="224.5" stroke="#1e242c"/>
+<text x="62" y="228.5" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">97.61</text>
+<line x1="70" y1="150.2" x2="1360" y2="150.2" stroke="#1e242c"/>
+<text x="62" y="154.2" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">98.98</text>
+<line x1="70" y1="76.0" x2="1360" y2="76.0" stroke="#1e242c"/>
+<text x="62" y="80.0" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">100.36</text>
+<line x1="70.0" y1="76" x2="70.0" y2="670" stroke="#1a2028"/>
+<text x="70.0" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">02 Nov</text>
+<text x="70.0" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">00:00</text>
+<line x1="120.6" y1="76" x2="120.6" y2="670" stroke="#1a2028"/>
+<text x="120.6" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">02 Nov</text>
+<text x="120.6" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04:00</text>
+<line x1="171.2" y1="76" x2="171.2" y2="670" stroke="#1a2028"/>
+<text x="171.2" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">02 Nov</text>
+<text x="171.2" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">08:00</text>
+<line x1="221.8" y1="76" x2="221.8" y2="670" stroke="#1a2028"/>
+<text x="221.8" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">02 Nov</text>
+<text x="221.8" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="272.4" y1="76" x2="272.4" y2="670" stroke="#1a2028"/>
+<text x="272.4" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">02 Nov</text>
+<text x="272.4" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">16:00</text>
+<line x1="322.9" y1="76" x2="322.9" y2="670" stroke="#1a2028"/>
+<text x="322.9" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">02 Nov</text>
+<text x="322.9" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">20:00</text>
+<line x1="373.5" y1="76" x2="373.5" y2="670" stroke="#1a2028"/>
+<text x="373.5" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">03 Nov</text>
+<text x="373.5" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">00:00</text>
+<line x1="424.1" y1="76" x2="424.1" y2="670" stroke="#1a2028"/>
+<text x="424.1" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">03 Nov</text>
+<text x="424.1" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04:00</text>
+<line x1="474.7" y1="76" x2="474.7" y2="670" stroke="#1a2028"/>
+<text x="474.7" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">03 Nov</text>
+<text x="474.7" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">08:00</text>
+<line x1="525.3" y1="76" x2="525.3" y2="670" stroke="#1a2028"/>
+<text x="525.3" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">03 Nov</text>
+<text x="525.3" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="575.9" y1="76" x2="575.9" y2="670" stroke="#1a2028"/>
+<text x="575.9" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">03 Nov</text>
+<text x="575.9" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">16:00</text>
+<line x1="626.5" y1="76" x2="626.5" y2="670" stroke="#1a2028"/>
+<text x="626.5" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">03 Nov</text>
+<text x="626.5" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">20:00</text>
+<line x1="677.1" y1="76" x2="677.1" y2="670" stroke="#1a2028"/>
+<text x="677.1" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04 Nov</text>
+<text x="677.1" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">00:00</text>
+<line x1="727.6" y1="76" x2="727.6" y2="670" stroke="#1a2028"/>
+<text x="727.6" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04 Nov</text>
+<text x="727.6" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04:00</text>
+<line x1="778.2" y1="76" x2="778.2" y2="670" stroke="#1a2028"/>
+<text x="778.2" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04 Nov</text>
+<text x="778.2" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">08:00</text>
+<line x1="828.8" y1="76" x2="828.8" y2="670" stroke="#1a2028"/>
+<text x="828.8" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04 Nov</text>
+<text x="828.8" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="879.4" y1="76" x2="879.4" y2="670" stroke="#1a2028"/>
+<text x="879.4" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04 Nov</text>
+<text x="879.4" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">16:00</text>
+<line x1="930.0" y1="76" x2="930.0" y2="670" stroke="#1a2028"/>
+<text x="930.0" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04 Nov</text>
+<text x="930.0" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">20:00</text>
+<line x1="980.6" y1="76" x2="980.6" y2="670" stroke="#1a2028"/>
+<text x="980.6" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">05 Nov</text>
+<text x="980.6" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">00:00</text>
+<line x1="1031.2" y1="76" x2="1031.2" y2="670" stroke="#1a2028"/>
+<text x="1031.2" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">05 Nov</text>
+<text x="1031.2" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04:00</text>
+<line x1="1081.8" y1="76" x2="1081.8" y2="670" stroke="#1a2028"/>
+<text x="1081.8" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">05 Nov</text>
+<text x="1081.8" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">08:00</text>
+<line x1="1132.4" y1="76" x2="1132.4" y2="670" stroke="#1a2028"/>
+<text x="1132.4" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">05 Nov</text>
+<text x="1132.4" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="1182.9" y1="76" x2="1182.9" y2="670" stroke="#1a2028"/>
+<text x="1182.9" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">05 Nov</text>
+<text x="1182.9" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">16:00</text>
+<line x1="1233.5" y1="76" x2="1233.5" y2="670" stroke="#1a2028"/>
+<text x="1233.5" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">05 Nov</text>
+<text x="1233.5" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">20:00</text>
+<line x1="1284.1" y1="76" x2="1284.1" y2="670" stroke="#1a2028"/>
+<text x="1284.1" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">06 Nov</text>
+<text x="1284.1" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">00:00</text>
+<line x1="1334.7" y1="76" x2="1334.7" y2="670" stroke="#1a2028"/>
+<text x="1334.7" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">06 Nov</text>
+<text x="1334.7" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04:00</text>
+<text x="70" y="34" fill="#dfe6ee" font-size="18" font-family="monospace">SOLUSDT  .  1H  .  Binance</text>
+<text x="70" y="56" fill="#8b96a3" font-size="12" font-family="monospace">2026-11-02T00:00Z - 2026-11-04T15:00Z  .  real Binance hourly closes</text>
+<rect x="70" y="76" width="1290" height="594" fill="none" stroke="#2b333d"/>
+<polyline points="70.0,413.5 82.6,368.7 95.3,364.9 107.9,333.6 120.6,367.6 133.2,370.8 145.9,395.7 158.5,404.3 171.2,384.9 183.8,401.1 196.5,409.2 209.1,414.6 221.8,414.6 234.4,400.5 247.1,398.4 259.7,443.7 272.4,451.3 285.0,516.6 297.6,516.1 310.3,539.9 322.9,550.7 335.6,510.2 348.2,519.9 360.9,528.5 373.5,505.8 386.2,508.0 398.8,538.8 411.5,519.3 424.1,512.9 436.8,542.6 449.4,552.8 462.1,521.5 474.7,531.2 487.4,503.1 500.0,505.3 512.6,498.3 525.3,468.0 537.9,458.9 550.6,450.8 563.2,432.9 575.9,443.7 588.5,453.5 601.2,450.2 613.8,458.3 626.5,441.6 639.1,436.2 651.8,444.8 664.4,482.6 677.1,500.4 689.7,527.4 702.4,588.5 715.0,577.1 727.6,509.6 740.3,486.9 752.9,472.4 765.6,470.7 778.2,457.2 790.9,467.0 803.5,440.5 816.2,441.6 828.8,495.0 841.5,475.6 854.1,355.7 866.8,219.1" fill="none" stroke="#2f81f7" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="80" y="96" fill="#2f81f7" font-size="12" font-family="monospace">SOLUSDT 1h close</text>
+</svg>

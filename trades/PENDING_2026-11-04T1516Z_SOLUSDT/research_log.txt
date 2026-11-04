@@ -1,0 +1,101 @@
+SOLUSDT LONG LIMIT 96.40 / TP 99.00 / SL 95.00 / expiry 2026-11-06T06:00Z
+Run date 2026-11-04, evaluation moment 2026-11-04T15:16Z. Horizon ~38.7h.
+
+THESIS
+The 96.00 shelf held SOL beneath it for five days (range 92.47-96.00) and was reclaimed today with
+2-4x volume. Buy the retest of that reclaimed shelf from above, targeting 99.00, stopping at 95.00.
+This is deliberately the MIRROR of the journal's own previous SOL ticket, which shorted the same level
+as supply. See HISTORICAL COMPARISON below: that ticket expired unfilled ~4.5h before the level broke,
+and would have been stopped at -1.25% had it filled.
+
+DATA CHECKED
+- prices (exchange of record): Binance spot SOLUSDT. No chart screenshot was supplied for this run, so
+  graphpoints.csv history is the real 1h feed rather than an image extraction. Last 97.58 at
+  2026-11-04T15:18:46Z, 24h high 98.14 / low 89.86, +4.80%.
+- impulse measured from 1h and 15m klines: 14:30Z bar 92.85 -> 95.08 on 89,438 volume (prior 15m bars
+  14,956-21,068); 15:00Z bar 95.17 -> 97.92 on 276,784; 15:15Z bar 97.72 -> 98.14 then closed 97.57.
+  So the whole day's range 92.62 -> 98.14 was created in three consecutive 15m bars.
+- 1h ATR14 = 1.208, i.e. 1.24% of price. Entry is 1.21% below spot, roughly 1x hourly ATR.
+- synchronized context: BTC +4.40% (81,065 high), ETH +6.30% (2,445.50), XRP +4.82% (1.3414). This is a
+  market-wide impulse, not a SOL-specific event. SOL's move was not idiosyncratic.
+
+EXTERNAL FINDINGS (verified this run)
+- Derivatives positioning is short-covering, not new long crowding. Binance funding exactly +0.0100%/8h
+  (baseline) on all four majors, next settlement 16:00Z. Open interest 3 Nov 15:00Z -> 4 Nov 15:00Z:
+  BTC 99,544 -> 98,986 (-0.56%), SOL 9.343M -> 9.273M (-0.75%), ETH +0.03%, XRP -0.20%, while price rose
+  4-6%. Price up with OI down means positions were closed, not opened.
+  Source: https://fapi.binance.com/fapi/v1/premiumIndex , https://fapi.binance.com/futures/data/openInterestHist
+- Aggressive flow was moderate: taker buy/sell volume ratio 14:00Z BTC 1.37 (14,826 buy / 10,833 sell),
+  XRP 1.20, versus >2.0 readings that mark genuine squeeze climaxes.
+  Source: https://fapi.binance.com/futures/data/takerlongshortRatio
+- Retail positioning FELL into the rally: global long/short account ratio BTC 1.918 (10:00Z) -> 1.621
+  (15:00Z); XRP 2.560 -> 2.421. Top-trader position ratio flat (BTC 1.887 -> 1.910).
+- Liquidations 24h: shorts ~$537M vs longs ~$166M, 3.2:1 short-dominated (third-party aggregate,
+  https://coinclass.com/liquidations). RELIABILITY FLAG: the same source's "largest orders" table shows
+  BTC fills at 81,079-81,110 at 15:10Z, above Binance's own 24h high of 80,770.83 at that moment; that
+  table was discarded. Venue totals used only as a labelled third-party figure.
+- Options, BTC: 80,700-81,500 is an options VACUUM - no listed strike carries open interest at 250-point
+  granularity (80,250 / 80,750 / 81,250 / 81,500 all zero; 80,500 = 236 BTC). Nearest real options
+  resistance is 82,000 (6,636 BTC, ~$538M, call-heavy); 80,000 holds 20,843 BTC (~$1.67B). Deribit 6 Nov
+  weekly = 32,552 BTC ($2.62B) expiring 08:00Z with max pain 79,000, i.e. 2.1% BELOW the spot at fetch.
+  5 Nov $0.34B and 7 Nov $0.40B also expire 08:00Z.
+  Source: https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency=BTC&kind=option
+- Options, XRP: Deribit lists none. Binance lists XRPUSDT strikes at 1.340/1.350/1.360 but its OI
+  endpoint returned HTTP 400, so XRP option OI could not be retrieved (inaccessible, not zero). Bybit
+  27NOV26 shows strike 1.350 = 23,860 calls / 15,800 puts; the whole series is roughly 1.1M contracts,
+  under 0.5% of XRP's $454M perp OI.
+- Order book: 302.09 BTC (~$24.4M) resting spot asks in the 80,700-81,500 band, largest single level
+  exactly 81,000.00 holding 39.37 BTC (~$3.19M). Ask/bid size ratio within +-1.2% = 3.62, but that is
+  partly mechanical after a +4% day. Binance futures depth REST caps at 1,000 levels (only +0.22%), so
+  the perp book across the band could NOT be measured - spot only. XRP perp asks in 1.344-1.360 =
+  4.29M XRP (~$5.8M) = 27.3% of ask size within +3%, clustered at round 1.35 and 1.36.
+- Macro: ISM Services released 2026-11-04T15:00Z at 54.5% (from 54.9%), Business Activity 53.8 from 56.5.
+  NOT the cause - the impulse began ~14:29Z, before the print, and BTC extended after it.
+  https://www.prnewswire.com/news-releases/services-pmi-at-54-5-october-2026-ism-services-pmi-report-302928112.html
+- US Nonfarm Payrolls Fri 2026-11-06T13:30Z, verified on the BLS schedule
+  https://www.bls.gov/schedule/news_release/empsit.htm . This is AFTER the 06:00Z expiry, so it is
+  deliberately outside the trade. No FOMC or CPI in the window (FOMC 28 Oct, CPI 10 Nov).
+- No token unlocks: XRP fully unlocked since July 2022; Ripple's monthly 1B escrow release was 1 Nov,
+  outside the window. Nothing scheduled for SOL.
+- US spot BTC ETF flows still negative: 2 Nov -$398.6M (IBIT -$405.3M), 3 Nov -$115.6M (IBIT -$95.0M,
+  BITB +$21.9M), cumulative -$514.2M (self-consistent: -398.6 -115.6 = -514.2). 4 Nov not published at
+  fetch time. https://thebitjournal.com/bitcoin-etf-outflows-ibit , https://www.tftc.io/bitcoin-etf-flows/november-2026
+  (the 3 Nov line rests on a social post, low authority - flagged as such)
+
+COULD NOT BE FOUND
+- Binance XRP option open interest (HTTP 400). Binance liquidation endpoints /fapi/v1/allForceOrders and
+  /futures/data/liquidationOrders both 404 (removed), so liquidations are third-party only.
+- Binance futures full-depth book across 80,700-81,500 (1,000-level cap).
+- Any dated (2-4 Nov) report of whale or OTC resting offers at 80,700-81,500 or 1.344-1.360. Searches
+  returned only undated 2022-era material and an unsourced claim of a sell wall at 86,900, unusable.
+- 4 Nov US spot BTC ETF flow (not yet published).
+- NFP consensus (carried from an earlier pass, not re-verified this run).
+
+HISTORICAL COMPARISON (from this journal)
+- EXPIRED_2026-11-02T0954Z_SOLUSDT: SHORT LIMIT 96.00, TP 94.30, SL 97.20, placed 2026-11-02T10:12Z,
+  expired 2026-11-04T10:00Z UNFILLED. SOL crossed 96.00 at 14:30Z today, ~4.5 hours after that expiry,
+  and reached 98.14. A filled 96.00 short would have been stopped at 97.20 for -1.25%. Two lessons, kept
+  in proportion (n=1): the level identification was sound while the expiry was hours too short, and the
+  no-fill happened to prevent a loss rather than cause a missed gain. The polarity inversion is the point -
+  the same shelf is now support, and that reversal is proven by today's prices, not assumed.
+- LOSS-1.01%_2026-10-23T1024Z_ASTERUSDT and LOSS-1.50%_2026-10-23T1147Z_ZECUSDT both died to stops
+  placed inside the reach of the range. That is why the stop here was widened from 95.40 to 95.00 on
+  Jev's advice (see decision_tree.dot) even at the cost of a worse reward-to-risk ratio.
+- WIN+1.26%_2026-10-27T0919Z_ASTERUSDT is the journal's one clear fade win, and it worked because its
+  stop sat just outside the measured extreme rather than inside the noise band.
+- Six of eighteen folders are bare EXPIRED. No-fill is the journal's most common outcome, so P(fill) is
+  treated as a first-class part of the expected value, not an afterthought.
+
+CALCULATION RATIONALE (reproduced by script; this journal model has no fees, funding or slippage - a
+stated limitation, not a claim that trading is free)
+LONG entry 96.40, TP 99.00, SL 95.00:
+  gross gain G = (99.00 - 96.40) / 96.40 = 2.69710%
+  gross loss L = (96.40 - 95.00) / 96.40 = 1.45228%
+  RR = 1.85714 ; p_BE = L / (G + L) = 1.45228 / 4.14938 = 0.35000
+  P(fill) 0.54 ; P(TP before SL | fill) 0.63
+  EV/fill  (binary) = 0.63*2.69710 - 0.37*1.45228 = +1.16183%
+  EV/order          = 0.54 * 1.16183 = +0.62739%
+  sensitivity: at P(TP|fill) 0.48 (15 points below Jev) EV/fill +0.53942%, EV/order +0.29129%;
+               at 0.35 the conditional edge reaches zero; at 0.45 EV/order still +0.2002%
+  break-even on the conditional is 0.35000, so Jev's 0.63 leaves 0.28 of headroom.
+  A noon-fill and a fill-then-outcome are NOT independent; see decision_tree.dot for that caveat.

@@ -1,0 +1,124 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  subgraph cluster_state {
+    label="facts at evaluation 2026-11-04T15:16Z (UTC)";
+    f1 [label="SOLUSDT Binance spot 97.58, 24h H 98.14 / L 89.86, +4.80%\n1h ATR14 1.208 = 1.24% of price"];
+    f2 [label="synchronized impulse began ~14:29Z across four majors:\nBTC +4.40% (H 81,065) ETH +6.30% (H 2,445.50)\nXRP +4.82% (H 1.3414) SOL +4.82% (H 98.14)"];
+    f3 [label="SOL 14:30Z bar 92.85->95.08 vol 89,438 (prior 15m 14,956-21,068)\n15:00Z bar 95.17->97.92 vol 276,784\n15:15Z bar 97.72->98.14 close 97.57"];
+    f4 [label="96.00 was hardware: SOL capped under it for five days\n(92.47-96.00) and decisively reclaimed today"];
+    f5 [label="no chart screenshot supplied this run\ngraphpoints.csv history = real Binance 1h feed\n(fetched 2026-11-04T15:16:54Z), stated in the file header"];
+  }
+
+  subgraph cluster_evidence {
+    label="external evidence (verified this run unless flagged)";
+    e1 [label="funding flat at baseline +0.0100%/8h on all four majors"];
+    e2 [label="open interest 24h: BTC -0.56%, SOL -0.75%, ETH +0.03%, XRP -0.20%\nwhile price rose 4-6% -> positions CLOSED not opened"];
+    e3 [label="taker buy/sell 14:00Z BTC 1.37, XRP 1.20\n(>2.0 marks a climax squeeze; this is not one)"];
+    e4 [label="retail long/short account ratio FELL into the rally\nBTC 1.918 -> 1.621, XRP 2.560 -> 2.421"];
+    e5 [label="liquidations 3.2:1 short-dominated $537M vs $166M\nTHIRD-PARTY, reliability-flagged and partly discarded"];
+    e6 [label="Deribit 6 Nov weekly $2.62B expires 08:00Z, max pain 79,000\n= 2.1% BELOW spot; BTC 80,700-81,500 is an options vacuum\nnearest real options resistance 82,000 ($538M)"];
+    e7 [label="302 BTC ($24.4M) spot asks in 80,700-81,500;\nlargest single level exactly 81,000.00 = 39.37 BTC"];
+    e8 [label="US spot BTC ETF flows negative two sessions (-$514.2M)"];
+    e9 [label="ISM Services 15:00Z 54.5% (mild decel) - NOT the cause,\nimpulse began 14:29Z and extended after the print"];
+    e10 [label="NFP Fri 2026-11-06T13:30Z - deliberately AFTER the 06:00Z expiry"];
+    e11 [label="NOT FOUND: Binance XRP option OI (HTTP 400),\nBinance liquidation endpoints (404), futures full depth (1000-level cap),\nany dated whale/OTC offer at these levels, 4 Nov ETF flow"];
+  }
+
+  subgraph cluster_history {
+    label="journal history applied (see research_log.txt)";
+    h1 [label="EXPIRED_2026-11-02T0954Z_SOLUSDT: SHORT limit 96.00 TP 94.30 SL 97.20\nexpired UNFILLED 2026-11-04T10:00Z; SOL crossed 96.00 at 14:30Z (~4.5h later)\nand ran to 98.14 -> a filled short would have lost -1.25%\nLESSON: level was right, expiry hours too short; polarity now inverted and PROVEN"];
+    h2 [label="LOSS-1.01%_2026-10-23T1024Z_ASTERUSDT, LOSS-1.50%_2026-10-23T1147Z_ZECUSDT\nboth stopped inside the range reach -> reason to widen stop 95.40 -> 95.00"];
+    h3 [label="WIN+1.26%_2026-10-27T0919Z_ASTERUSDT\nworked because stop sat just OUTSIDE the measured extreme"];
+    h4 [label="6 of 18 folders are bare EXPIRED -> P(fill) treated as first-class in EV"];
+  }
+
+  subgraph cluster_scenarios {
+    label="scenarios (mutually exclusive for the horizon)";
+    s1 [label="S1 reclaimed shelf holds (base case):\npullback to 96.4, shelf supports, advance through 98.14 to 99.0"];
+    s2 [label="S2 impulse extends without retest:\nprice runs to 99+ from here, limit never fills -> EXPIRED, no P&L"];
+    s3 [label="S3 shelf fails: pullback continues through 96.00 and 95.00 -> stop"];
+    s4 [label="S4 chop inside 96.4-98.14 to expiry: filled, neither level touched\n-> EXPIRED at the closing price (a third outcome the binary model ignores)"];
+  }
+
+  subgraph cluster_jev {
+    label="Jev calls: exact proposition / answer / probability";
+    j1 [label="Q: market buy now has favorable EV on 24-48h\nA: 0.31 (uncertain) -> do not chase"];
+    j2 [label="Q: fading the impulse at market has favorable EV\nA: 0.24 -> do not fade"];
+    j3 [label="Q: a pullback limit 0.5-1.0% below beats a market entry\nA: 0.71 -> limit chosen"];
+    j4 [label="Q: no new position is defensible rather than an error\nA: 0.85 (likely)"];
+    j5 [label="Q: impulse is durable regime shift vs squeeze\nA: 0.53 (coin flip)"];
+    j6 [label="Q: BTC has the cleanest structure of the four\nA: 0.67"];
+    j7 [label="Q: falling OI + rising price = spot-led demand that extends\nA: 0.09 (UNLIKELY) -> read as short-covering that reverses"];
+    j8 [label="Q: max pain 79,000 raises chance BTC trades to 79,000 this week\nA: 0.55"];
+    j9 [label="Q: BTC stalls before 81,400\nA: 0.68"];
+    j10 [label="Q: 81,065 is already the local top\nA: 0.49 (coin flip)"];
+    j11 [label="Q: short into the band beats a long on the pullback\nA: 0.71"];
+    j12 [label="Q: shorting a 45-minute-old impulse is premature\nA: 0.33"];
+    j13 [label="Q: 1% stop at the impulse top gets noise-hit first\nA: 0.68"];
+    j14 [label="Q: SOL holds above 96.40 on any retest\nA: 0.40 -> the retest MAY overshoot the shelf, stop must allow for it"];
+    j15 [label="Q: research question most decision-critical\nA: overhead supply chosen 0.37, positioning 0.30, catalyst 0.29,\nno_research 0.04 -> a three-way tie at confidence 0.16; overhead run as\nprimary, positioning as bounded secondary"];
+    j16 [label="Q: BTC 79,900 long overlap with the 78,900 long unacceptable\nA: 0.45 -> not disqualifying, but btc_long_79900 still lost the ranking"];
+    j17 [label="Q: SOL no-overlap makes it the better addition despite weaker move\nA: 0.63"];
+    j18 [label="Q: existing XRP 1.2625 short is irrelevant (5.9% below spot)\nA: 0.69"];
+  }
+
+  subgraph cluster_candidates {
+    label="candidates priced (p_BE from this candidate's own G and L)";
+    cA [label="A BTC LONG 79,900 / TP 81,400 / SL 79,050\nG +1.8773% L -1.0638% RR 1.765 p_BE 0.3617\nP(fill) 0.62 P(TP|fill) 0.60 -> EV/order +0.4346%\nREJECTED: overlaps the resting 78,900 BTC long"];
+    cB [label="B BTC SHORT 80,950 / TP 79,100 / SL 81,500\nG +2.2853% L -0.6794% RR 3.364 p_BE 0.2292\nP(fill) 0.74 P(TP|fill) 0.64 -> EV/order +0.9013%\nREJECTED: requirement 'no correlated duplicate' CONTRADICTED"];
+    cC [label="C BTC SHORT 81,000 / TP 79,300 / SL 81,650\np_BE 0.2766, P(fill) 0.69 P(TP|fill) 0.62 -> EV/order +0.6875%\nREJECTED: same correlation contradiction, and only 0.01 from Jev"];
+    cD [label="D XRP SHORT 1.3440 / TP 1.3150 / SL 1.3555\np_BE 0.2840, P(fill) 0.60 P(TP|fill) 0.46 -> EV/order +0.3182%\nREJECTED: weakest conditional hit rate, 1.344 unbroken for 7 days"];
+    cE [label="E SOL LONG 96.40 / TP 99.00 / SL 95.40\np_BE 0.2778, P(fill) 0.67 P(TP|fill) 0.64 -> EV/order +0.9063%"];
+    cF [label="F no new trade\nJev 0.33 in the head-to-head; P(defensible) 0.85 - defensible, not optimal"];
+  }
+
+  subgraph cluster_selection {
+    label="head-to-head decision";
+    d1 [label="Jev jev_decide at 15:14Z:\nsol_long 0.49 | no_new_trade 0.33 | btc_short 0.14 |\nbtc_short_81000 0.01 | btc_long_79900 0 | xrp_short 0\nconfidence 0.43, requirements: sol_long supported on BOTH\n(positive EV + survives 15pt haircut; no correlated duplicate)"];
+    d2 [label="both BTC shorts FAILED the correlation requirement\n(contradicted) - decisive against an otherwise comparable EV"];
+  }
+
+  subgraph cluster_anchor {
+    label="required re-anchor at live price";
+    r1 [label="2026-11-04T15:18:46Z SOL 97.58, 24h H 98.14\nsetup remains valid 0.86 (likely)"];
+    r2 [label="P(limit 96.40 fills) 0.54 (eased from 0.67 as price rose)\nP(TP before SL | fill) 0.63"];
+    r3 [label="P(99.00 needing a breakout past the new 98.14 high\nmaterially weakens the trade) 0.35 -> not material"];
+    r4 [label="P(stop 95.40 is far enough below the 96.00 shelf) 0.46\n-> WEAK LINK, prompted the stop re-test below"];
+    r5 [label="stop re-test, Jev jev_decide confidence 0.53:\nsl_9500 0.61 | sl_9540 0.26 | sl_9460 0.03\n-> WIDENED 95.40 -> 95.00"];
+  }
+
+  subgraph cluster_final {
+    label="FINAL, as submitted to finalize.py";
+    z1 [label="SOLUSDT LONG LIMIT 96.40\nTP 99.00  SL 95.00\nexpire 2026-11-06T06:00:00Z (before the 08:00Z option expiries, 7.5h before NFP)"];
+    z2 [label="G = (99.00-96.40)/96.40 = +2.69710%\nL = (96.40-95.00)/96.40 = -1.45228%\nRR = 1.85714   p_BE = 1.45228/4.14938 = 0.35000"];
+    z3 [label="EV/fill  = 0.63*2.69710 - 0.37*1.45228 = +1.16183%\nEV/order = 0.54*1.16183 = +0.62739%"];
+    z4 [label="sensitivity: P(TP|fill) 0.48 -> EV/order +0.29129%\n0.45 -> +0.2002% ; break-even at 0.35\nstill positive after a 15-point haircut on Jev"];
+  }
+
+  subgraph cluster_uncertainty {
+    label="unresolved uncertainty (stated, not hidden)";
+    u1 [label="ADVERSE SELECTION: P(fill) and P(TP|fill) are multiplied here as if\nindependent. They are not - a limit below market fills preferentially when\nsellers are pressing. True EV/order is therefore likely LOWER than +0.63%.\nNo trade in this journal has ever been charged for that gap."];
+    u2 [label="the impulse is only ~50 minutes old and Jev puts the local top at\n0.49 / durable-vs-squeeze at 0.53 - genuinely unresolved"];
+    u3 [label="P(fill) 0.54 means a 46% chance of a bare EXPIRED with zero information,\nthe journal's single most common outcome"];
+    u4 [label="Jev read falling OI as a short-covering bounce that reverses (0.09),\nyet still rated this LONG 0.63 to win - the two are in tension. The wider\nstop was the response; the tension is not fully dissolved."];
+    u5 [label="no fees, funding or slippage exist in this model -> figures are a\ngross upper bound, not net"];
+  }
+
+  f1 -> s1; f4 -> s1;
+  e2 -> j7; e6 -> j8; e7 -> j11; e9 -> j5;
+  j1 -> cB [label=" chase veto"]; j2 -> cD [label=" fade veto"]; j3 -> cE [label=" limit preferred"];
+  j11 -> cB; j12 -> cB; j14 -> r4;
+  h1 -> s1 [label=" polarity inverted"]; h2 -> r5 [label=" widen stop"];
+  h4 -> u3;
+  s1 -> cE; s2 -> u3; s3 -> z2; s4 -> u3;
+  cA -> d1; cB -> d1; cC -> d1; cD -> d1; cE -> d1; cF -> d1;
+  d2 -> d1 [style=dashed];
+  d1 -> r1; r1 -> r5 -> z1;
+  z1 -> z2 -> z3 -> z4;
+  u1 -> z3 [style=dashed, label=" overstates"]; u4 -> r5 [style=dashed];
+  z4 -> decide;
+  decide [label="GO: LONG LIMIT 96.40", shape=diamond, style=filled, fillcolor="#d9f2d9"];
+}

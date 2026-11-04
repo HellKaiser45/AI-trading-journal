@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "SOLUSDT"
+side     = "LONG"
+
+[entry]
+type     = "LIMIT"
+price    = 96.4
+
+[exit]
+tp       = 99.0
+sl       = 95.0
+
+[schedule]
+place_at  = 2026-11-04T15:20:33Z
+expire_at = 2026-11-06T06:00:00Z
