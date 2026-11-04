@@ -1,0 +1,58 @@
+BTCUSDT 1h - research log
+Decision point: 2026-11-04T14:50Z. Horizon: 48h (expiry 2026-11-06T06:00Z).
+Chart captured 2026-11-04T14:31Z (image 261104_15h31m25s_screenshot.png, footer clock 15:31:25 UTC+1 = 14:31Z).
+
+1) Chart extraction (own work, script-assisted)
+   - 253 hourly candles 2026-10-25T02:00Z..2026-11-04T14:00Z read from the raster:
+     price = 82500 - 7.8342*(y_px - 65); time = last bar 14:00Z, 5.954 px/h.
+     Calibration cross-checks: axis label centres at y=384 -> 80001 and y=256 -> 81003; the chart's own
+     last-price tag 78567.2 sits at y=565-567. Extraction reproduced the header of the final bar
+     (H 78591 vs 78596.7, L 78183 vs 78176.1, C 78567 vs 78567.2) inside 0.01%.
+   - The extracted tail (07:00Z..14:00Z) was then REPLACED with real Binance spot 1h values pulled
+     directly from api.binance.com (server time 2026-11-04T14:45:57Z):
+     07:00 78140.00, 08:00 78500.00, 09:00 78400.00, 10:00 78608.86, 11:00 78477.25, 12:00 78298.00,
+     13:00 78364.01, 14:00 (open) H 79558.79 L 78210.00 C 79326.78. Live last price 79349.04,
+     24h high 79558.79, 24h low 75736.38, +2.51% on 24h.
+   - Structure: 29 Oct high 81936 (breakdown origin) -> 30 Oct low 76476. Five-day base, flat top
+     78690-78841 (touches 78771 on 30 Oct, 78841 on 2 Nov, 78693 and 78700 on 4 Nov), descending lows
+     76476 -> 76280 -> 76687 -> 76382 -> 75700 (4 Nov 03:00Z, reclaimed the same hour, close 76468).
+     Estimated 1h ATR 850-900 points (1.1%).
+   - RE-ANCHOR EVENT: between the capture (78567 at 14:31Z) and the decision (14:50Z) the 14:00Z hour
+     broke the five-day base top and printed 79558.79, now 79349. The chart's own setup (a fade of the
+     78690-78841 band) is therefore void: Jev put P(the 14:35Z fade setup is still valid) at 0.12.
+
+2) Dated findings used (research agenda set by Jev: "which scheduled events fall inside the window",
+   selected at p 0.64 over positioning 0.18 / catalyst 0.15 / flows 0.01 / no-research 0.01)
+   - Deribit weekly BTC options expiry: Fri 2026-11-06T08:00Z, ~$2.5-3.6B notional, max pain 79,000,
+     put/call 0.34-0.47, call walls 82,000 and 85,000, put clusters 74,000 and 75,000.
+     Sources: en.coinotag.com/options/bitcoin (4 Nov 2026); tokenpost.com/news/investing/45332 (31 Oct 2026).
+   - US Nonfarm Payrolls: Fri 2026-11-06T13:30Z, consensus ~45-60K, prior 29K, U3 4.2%.
+     Sources: bls.gov/schedule/news_release/empsit.htm (release calendar); KPMG October employment primer,
+     30 Oct 2026; seekingalpha.com/news/4662163 (2 Nov 2026). Outside the chosen expiry by 7.5 hours.
+   - No FOMC (last 28 Oct, next 8-9 Dec), no CPI (10 Nov), no CME BTC futures/options expiry
+     (27 Nov), no BTC unlock, no scheduled protocol or regulatory decision inside the window.
+     Source: investing.com/futures-expiration-calendar; federalreserve.gov/newsevents/2026-november.htm.
+   - Background: US midterms 3 Nov won by the Democrats, DXY at a five-week low 101.24, gold +2.8%,
+     Nasdaq futures +0.9% (1trader.com breaking, 4 Nov 2026; forbes.com live results, 4 Nov 2026).
+     Binance $6.3B hack on 29 Oct still an overhang (coindesk.com, 29 Oct 2026).
+   - Flow/positioning: ETF outflows five straight sessions (-$643M 30 Oct, -$399M 2 Nov, -$116M 3 Nov),
+     average ETF cost basis ~81,500 (Glassnode via coinlab.info, 4 Nov 2026); funding 0.01%/8h baseline,
+     Binance BTC futures OI 98,775 BTC -0.3%/24h, long/short accounts 2.31 (coinlab.info, 4 Nov 2026).
+   - Could not be found: the actual ISM Services print for 2026-11-04T15:00Z (pages still "pending"
+     at 14:44Z); Thursday 5 Nov jobless-claims and Q3 productivity consensus; exact times for the
+     5-6 Nov Fed speakers. The 14:00Z impulse in BTC is therefore not attributed to a specific print
+     in this log - midterm risk-on follow-through is the only dated candidate and is labelled inference.
+
+3) Why this expiry (2026-11-06T06:00Z)
+   - 39 hours of runway, enough for the retest-then-bounce sequence Jev describes (P(touch 78900 by
+     5 Nov 20:00Z) = 0.71).
+   - It stops two hours BEFORE the Deribit weekly expiry at 08:00Z (max pain 79,000 would pull price
+     down toward that strike) and 7.5 hours before NFP at 13:30Z, which research flags as the only
+     genuine impulse risk in the 48h window. No part of the ticket is a bet on either.
+
+4) Arithmetic used (scripts, exact numbers in decision_tree.dot)
+   G = +1.20406%, L = -1.07731%, RR 1.118, p_BE = 0.4722, P(fill) 0.66, P(TP first|fill) 0.63,
+   EV/fill +0.46768%, EV/order +0.30867%, P(no fill) 0.34 pays 0. Stays positive down to
+   P(TP first|fill) = 0.50 (EV/order +0.141%).
+   The journal charges no fees, funding or slippage, so these are gross figures; a 0.05-0.10% round
+   trip would raise p_BE to roughly 0.513-0.552, which 0.63 still clears.
