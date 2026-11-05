@@ -1,0 +1,71 @@
+ETHUSDT 1h - research log
+Evaluation moment (UTC): 2026-11-05T09:00Z
+Chart capture: the supplied screenshot's chart clock and its last bar reconcile with Binance 1h candles for
+2026-11-04 up to ~15:35Z; the final 5px "candle" in the image could not be reconciled with any real hour
+(it sits 36 points above the prior close) and was NOT used. History = chart-extracted closes 2026-10-24T01:00Z
+to 2026-11-04T06:00Z plus real Binance 1h closes from 2026-11-04T15:00Z onward. Forecast horizon: 2026-11-06T20:00Z.
+
+HORIZON RATIONALE
+Jev: "a 23-hour window is the right length for a range trade on this balance rather than a 36-hour window that
+includes the NFP release" = 0.76 likely. Trade expiry therefore 2026-11-06T08:00Z (Deribit weekly expiry),
+while the forecast is drawn to 2026-11-06T20:00Z to show the post-expiry drift and keep the chart honest about
+what is not being traded.
+
+MARKET DATA (fetched 2026-11-05T08:52Z)
+- Binance ETHUSDT spot last 2420.23; Bybit 2420.82; OKX 2420.63 (spread 0.02%).
+- Binance 24h: open 2325.70, high 2450.00, low 2310.00, +4.065%, volume 297,583.79 ETH / $715.26M.
+  Endpoints: api.binance.com/api/v3/ticker/24hr, /api/v3/klines?interval=1h&limit=24 (raw openTime used),
+  api.bybit.com/v5/market/tickers, okx.com/api/v5/market/ticker.
+- The whole 24h range printed inside the single 2026-11-04T16:00Z candle: 140.00 points (6.06%) on 79,990 ETH,
+  2.3x the next largest hour. Afterwards 16 hours of 2405.23-2446.28 balance; mean hourly range 23.6 points.
+
+WHAT DROVE THE 2026-11-04 IMPULSE (question posed by the decision engine: "What external factor could materially
+change whether ETHUSDT resolves above 2450 or below 2405 within the next 36 hours?")
+- Macro/political risk-on, not ETH-native: Democratic sweep of both chambers in the 03 Nov midterms; Schumer
+  pledged to use the power of the purse over the Iran war; oil -8%; stocks/gold/silver up.
+  iranintl.com/en/202611044924 (2026-11-04); commondreams.org/news/schumer-defund-iran-war (2026-11-04);
+  coingabbar.com/en/crypto-news-nov-5-bitcoin-ethereum-surges-fear-index-midterms (2026-11-05, 04:00Z snapshot).
+- Mechanism was position closing, not new leverage: Binance ETH perp OI 2,378,409 -> 2,372,135 ETH (-0.26%) over
+  2026-11-04T08:00Z..2026-11-05T08:00Z while USD notional rose only with price ($5.478B -> $5.730B).
+  fapi.binance.com/fapi/v1/futures/data/openInterestHist.
+- Funding: pinned at +0.0100%/8h through 03-04 Nov, printed -0.00265% at 2026-11-05T00:00Z, last settled
+  +0.00573%/8h, current predicted +0.0100% (next settle 16:00Z). fapi/v1/fundingRate, fapi/v1/premiumIndex.
+- Liquidations: ~$154.8M ETH in 24h, ~92% shorts, largest single bucket 2425 ($59.81M). Third-party aggregator
+  (marginpad.io/api/v1/liquidations/recent, 2026-11-05T08:57Z); corroborated in shape by CoinStats ($88.68M,
+  90.1% shorts) and Coinotag. Absolute size NOT corroborated - flagged low reliability.
+- Cohorts disagree: global long/short accounts 1.9274 (65.84% long, rising from 1.8686 at 04:00Z) vs top-trader
+  long/short positions 1.4467 (59.13% long, flat). Taker sell/buy 0.8929 in the 08:00Z hour (71,767 sell vs
+  64,080 buy ETH) - the heaviest and most sell-skewed hour of the session.
+- Residual short-liquidation pockets ABOVE spot: 2435 ($11.13M) and 2440 ($9.89M); long pockets 2405-2410 ~$3.3M.
+
+SCHEDULED EVENTS INSIDE THE WINDOW (2026-11-05T09:00Z .. 2026-11-06T21:00Z)
+- 2026-11-05T13:30Z US initial claims, forecast 196K vs 194K prior (forex.tradingcharts.com calendar, 2026-11-05).
+- 2026-11-05 ~21:00Z US spot-ETH ETF flow print (exact time not verifiable).
+- 2026-11-06T08:00Z Deribit ETH weekly expiry: max pain 2,350; OI 93,609 contracts; put/call 1.256.
+  Strike OI: puts 6,441 at 2300; calls 7,294 at 2400 plus puts 2,080; calls 3,224 at 2450; calls 5,313 at 2500.
+  deribit get_instrument/get_book_summary, 2026-11-05T08:57Z; whole-curve context xoomar.com (DVOL 51.11).
+- 2026-11-06T13:30Z US NFP: forecast +65K vs +29K prior; unemployment 4.2% expected.
+- 2026-11-06T15:00Z UMich sentiment (48.5 forecast). No FOMC/CPI/PCE in the window (CPI 10 Nov).
+
+FLOWS AND PUBLISHED LEVELS
+- US spot ETH ETF net flows (farside.co.uk/eth, retrieved 2026-11-05T08:56Z): 02 Nov -139.7, 03 Nov -85.3,
+  04 Nov +53.0 (first inflow in the visible series). October total -$1.61B, the worst month since launch.
+- Widely published technical map dated 2026-11-04 (coinbird.com/analysis/ethereum-price-week45-2026):
+  resistance 2,480 then the 50-day at 2,510; 2,360 flipped to support; volume ~50% above the 30-day average.
+
+NOT FOUND / NOT USED
+- No ETH-native catalyst for the 13:00-14:00Z minute of 04 Nov; the macro attribution is inferred timing, not a
+  proven wire timestamp.
+- No exchange-primary liquidation aggregates (Binance/OKX publish none); only aggregators, which disagree on scope.
+- Exact ETF print publication time unverified; BOE consensus second-hand and irrelevant to this window.
+- "ETH max pain $22.50" search hits were the Grayscale Mini ETH ETF equity ticker - discarded.
+- Harvest/2017 cycle analogues: not sought, no bearing on a 23-hour window.
+
+ECONOMICS REPRODUCED (see decision_tree.dot for the full table)
+LONG LIMIT 2408, TP 2444, SL 2374, expiry 2026-11-06T08:00Z
+  G = (2444-2408)/2408 = +1.49502%; L = (2374-2408)/2408 = -1.41200%; RR = 1.0588
+  p_BE = L/(G+L) = 0.48556
+  P(fill) 0.69 (Jev) ; P(TP|fill) 0.71 (0.63 at a 2378 stop and 0.74 at a 2372 stop, interpolated at 2374)
+  EV/fill = 0.71*1.49502 - 0.29*1.41200 = +0.6520%
+  EV/order = 0.69*0.6520 = +0.4499%   (no fill = 0.00%, the journal charges no fees or slippage)
+  Haircut test: EV/fill stays positive down to P(TP|fill) ~0.51.

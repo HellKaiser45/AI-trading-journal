@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="820" viewBox="0 0 1500 820">
+<rect x="0" y="0" width="1500" height="820" fill="#0e1116"/>
+<line x1="70" y1="650.2" x2="1360" y2="650.2" stroke="#1e242c"/>
+<text x="62" y="654.2" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2180</text>
+<line x1="70" y1="610.6" x2="1360" y2="610.6" stroke="#1e242c"/>
+<text x="62" y="614.6" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2200</text>
+<line x1="70" y1="571.0" x2="1360" y2="571.0" stroke="#1e242c"/>
+<text x="62" y="575.0" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2220</text>
+<line x1="70" y1="531.4" x2="1360" y2="531.4" stroke="#1e242c"/>
+<text x="62" y="535.4" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2240</text>
+<line x1="70" y1="491.8" x2="1360" y2="491.8" stroke="#1e242c"/>
+<text x="62" y="495.8" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2260</text>
+<line x1="70" y1="452.2" x2="1360" y2="452.2" stroke="#1e242c"/>
+<text x="62" y="456.2" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2280</text>
+<line x1="70" y1="412.6" x2="1360" y2="412.6" stroke="#1e242c"/>
+<text x="62" y="416.6" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2300</text>
+<line x1="70" y1="373.0" x2="1360" y2="373.0" stroke="#1e242c"/>
+<text x="62" y="377.0" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2320</text>
+<line x1="70" y1="333.4" x2="1360" y2="333.4" stroke="#1e242c"/>
+<text x="62" y="337.4" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2340</text>
+<line x1="70" y1="293.8" x2="1360" y2="293.8" stroke="#1e242c"/>
+<text x="62" y="297.8" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2360</text>
+<line x1="70" y1="254.2" x2="1360" y2="254.2" stroke="#1e242c"/>
+<text x="62" y="258.2" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2380</text>
+<line x1="70" y1="214.6" x2="1360" y2="214.6" stroke="#1e242c"/>
+<text x="62" y="218.6" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2400</text>
+<line x1="70" y1="175.0" x2="1360" y2="175.0" stroke="#1e242c"/>
+<text x="62" y="179.0" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2420</text>
+<line x1="70" y1="135.4" x2="1360" y2="135.4" stroke="#1e242c"/>
+<text x="62" y="139.4" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2440</text>
+<line x1="70" y1="95.8" x2="1360" y2="95.8" stroke="#1e242c"/>
+<text x="62" y="99.8" fill="#7d8794" font-size="12" text-anchor="end" font-family="monospace">2460</text>
+<line x1="112.9" y1="76" x2="112.9" y2="670" stroke="#1a2028"/>
+<text x="112.9" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">24 Oct</text>
+<text x="112.9" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="206.4" y1="76" x2="206.4" y2="670" stroke="#1a2028"/>
+<text x="206.4" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">25 Oct</text>
+<text x="206.4" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="299.9" y1="76" x2="299.9" y2="670" stroke="#1a2028"/>
+<text x="299.9" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">26 Oct</text>
+<text x="299.9" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="393.5" y1="76" x2="393.5" y2="670" stroke="#1a2028"/>
+<text x="393.5" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">27 Oct</text>
+<text x="393.5" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="487.0" y1="76" x2="487.0" y2="670" stroke="#1a2028"/>
+<text x="487.0" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">28 Oct</text>
+<text x="487.0" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="580.5" y1="76" x2="580.5" y2="670" stroke="#1a2028"/>
+<text x="580.5" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">29 Oct</text>
+<text x="580.5" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="674.1" y1="76" x2="674.1" y2="670" stroke="#1a2028"/>
+<text x="674.1" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">30 Oct</text>
+<text x="674.1" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="767.6" y1="76" x2="767.6" y2="670" stroke="#1a2028"/>
+<text x="767.6" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">31 Oct</text>
+<text x="767.6" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="861.1" y1="76" x2="861.1" y2="670" stroke="#1a2028"/>
+<text x="861.1" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">01 Nov</text>
+<text x="861.1" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="954.7" y1="76" x2="954.7" y2="670" stroke="#1a2028"/>
+<text x="954.7" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">02 Nov</text>
+<text x="954.7" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="1048.2" y1="76" x2="1048.2" y2="670" stroke="#1a2028"/>
+<text x="1048.2" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">03 Nov</text>
+<text x="1048.2" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="1141.8" y1="76" x2="1141.8" y2="670" stroke="#1a2028"/>
+<text x="1141.8" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">04 Nov</text>
+<text x="1141.8" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="1235.3" y1="76" x2="1235.3" y2="670" stroke="#1a2028"/>
+<text x="1235.3" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">05 Nov</text>
+<text x="1235.3" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<line x1="1328.8" y1="76" x2="1328.8" y2="670" stroke="#1a2028"/>
+<text x="1328.8" y="690" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">06 Nov</text>
+<text x="1328.8" y="703" fill="#7d8794" font-size="11" text-anchor="middle" font-family="monospace">12:00</text>
+<rect x="70" y="76" width="1290" height="594" fill="none" stroke="#2b333d"/>
+<text x="70" y="34" fill="#dfe6ee" font-size="18" font-family="monospace">ETHUSDT  .  1H  .  Aster</text>
+<text x="70" y="56" fill="#8b96a3" font-size="12" font-family="monospace">2026-10-24T01:00Z - 2026-11-04T15:00Z  .  extracted from the 2026-11-05 screenshot, cross-checked against Binance 1h closes</text>
+<polyline points="70.0,253.1 73.9,246.8 77.8,251.2 81.7,250.6 85.6,258.8 89.5,255.0 93.4,265.7 97.3,277.0 101.2,281.4 105.1,275.7 109.0,284.6 112.9,277.6 116.8,280.8 120.7,331.1 124.6,402.2 128.5,378.9 132.4,368.8 136.3,339.3 140.2,336.1 144.0,322.3 147.9,334.9 151.8,322.9 155.7,297.8 159.6,294.6 163.5,287.1 167.4,273.2 171.3,290.2 175.2,278.9 179.1,309.1 183.0,333.6 186.9,319.8 190.8,344.9 194.7,360.0 198.6,361.9 202.5,335.5 206.4,346.8 210.3,347.5 214.2,328.0 218.1,326.7 222.0,301.5 225.9,298.4 229.8,304.7 233.7,313.5 237.6,321.0 241.5,350.6 245.4,330.5 249.3,356.3 253.2,355.6 257.1,385.2 261.0,404.7 264.9,407.8 268.8,371.4 272.7,360.7 276.6,373.9 280.5,378.3 284.4,363.8 288.2,343.0 292.1,358.1 296.0,346.8 299.9,366.3 303.8,408.5 307.7,361.3 311.6,359.4 315.5,372.0 319.4,362.5 323.3,385.8 327.2,378.9 331.1,401.6 335.0,392.1 338.9,387.1 342.8,366.3 346.7,360.7 350.6,367.6 354.5,387.1 358.4,385.8 362.3,387.7 366.2,382.0 370.1,404.1 374.0,385.2 377.9,387.7 381.8,389.0 385.7,381.4 389.6,382.7 393.5,344.3 397.4,368.8 401.3,346.2 405.2,322.3 409.1,313.5 413.0,322.9 416.9,327.3 420.8,319.1 424.7,326.1 428.5,313.5 432.4,314.7 436.3,314.7 440.2,322.3 444.1,305.3 448.0,299.6 451.9,294.6 455.8,304.1 459.7,311.6 463.6,305.3 467.5,293.4 471.4,271.3 475.3,269.4 479.2,278.9 483.1,294.0 487.0,335.5 490.9,342.4 494.8,348.7 498.7,344.3 502.6,334.9 506.5,315.4 510.4,288.3 514.3,272.0 518.2,294.0 522.1,285.2 526.0,295.2 529.9,300.9 533.8,306.6 537.7,388.3 541.6,394.0 545.5,397.2 549.4,368.2 553.3,368.2 557.2,390.9 561.1,381.4 565.0,374.5 568.9,360.0 572.7,358.1 576.6,367.0 580.5,368.2 584.4,343.0 588.3,280.1 592.2,308.5 596.1,332.4 600.0,342.4 603.9,351.9 607.8,360.7 611.7,445.0 615.6,466.3 619.5,487.1 623.4,511.0 627.3,621.1 631.2,580.2 635.1,591.5 639.0,526.7 642.9,526.1 646.8,506.6 650.7,536.2 654.6,555.7 658.5,554.4 662.4,551.3 666.3,514.2 670.2,544.3 674.1,552.5 678.0,546.2 681.9,559.4 685.8,559.4 689.7,537.4 693.6,548.7 697.5,531.1 701.4,536.2 705.3,537.4 709.2,536.2 713.1,524.2 716.9,514.8 720.8,526.1 724.7,526.1 728.6,529.9 732.5,534.9 736.4,531.8 740.3,523.6 744.2,526.7 748.1,528.6 752.0,524.8 755.9,523.6 759.8,517.3 763.7,509.1 767.6,514.2 771.5,516.0 775.4,511.6 779.3,510.4 783.2,504.7 787.1,496.5 791.0,508.5 794.9,506.0 798.8,502.8 802.7,504.7 806.6,502.2 810.5,495.3 814.4,481.4 818.3,484.0 822.2,477.0 826.1,480.8 830.0,474.5 833.9,474.5 837.8,473.9 841.7,461.3 845.6,473.3 849.5,473.3 853.4,473.3 857.3,490.3 861.1,478.3 865.0,470.8 868.9,480.8 872.8,474.5 876.7,485.2 880.6,487.7 884.5,495.3 888.4,486.5 892.3,485.2 896.2,493.4 900.1,463.8 904.0,468.2 907.9,434.9 911.8,423.6 915.7,396.5 919.6,428.0 923.5,430.5 927.4,443.1 931.3,444.3 935.2,419.2 939.1,431.7 943.0,440.6 946.9,442.4 950.8,442.4 954.7,439.3 958.6,431.7 962.5,467.6 966.4,475.1 970.3,494.7 974.2,505.3 978.1,504.7 982.0,516.0 985.9,496.5 989.8,499.1 993.7,506.6 997.6,495.9 1001.5,497.2 1005.3,509.1 1009.2,506.6 1013.1,498.4 1017.0,516.0 1020.9,529.9 1024.8,497.2 1028.7,498.4 1032.6,477.0 1036.5,469.5 1040.4,479.6 1044.3,447.5 1048.2,440.6 1052.1,438.7 1056.0,415.4 1059.9,416.7 1063.8,421.1 1067.7,427.4 1071.6,438.7 1075.5,433.6 1079.4,425.5 1083.3,428.0 1087.2,465.1 1091.1,464.5 1095.0,485.2 1098.9,524.8 1102.8,514.8 1106.7,453.8 1110.6,428.0 1114.5,418.5 1118.4,406.6 1122.3,368.2 1126.2,368.8 1130.1,357.5 1134.0,358.8 1137.9,385.8 1141.8,376.4 1145.6,256.2 1149.5,169.4 1153.4,256.1 1157.3,163.1 1161.2,145.3 1165.1,165.4 1169.0,168.9 1172.9,201.8 1176.8,173.0 1180.7,178.3 1184.6,142.8 1188.5,165.9 1192.4,172.6 1196.3,155.2 1200.2,156.1 1204.1,166.3 1208.0,165.1 1211.9,177.0 1215.8,155.2 1219.7,174.5" fill="none" stroke="#2f81f7" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="80" y="96" fill="#2f81f7" font-size="12" font-family="monospace">ETHUSDT 1h close</text>
+</svg>

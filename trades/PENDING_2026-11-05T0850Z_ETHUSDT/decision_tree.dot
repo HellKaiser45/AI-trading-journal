@@ -1,0 +1,107 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  subgraph cluster_state {
+    label="facts at evaluation 2026-11-05T09:00Z (UTC)";
+    f1 [label="ETHUSDT spot 2420.23 (Binance/Bybit/OKX agree within 0.02%)\n24h +4.065%, H 2450.00 / L 2310.00, vol 297,584 ETH"];
+    f2 [label="chart capture (1h, Aster) reconciles with Binance 1h bars to ~2026-11-04T15:35Z\nthe last 5px candle in the image matched no real hour -> discarded, real Binance data used after 15:00Z"];
+    f3 [label="Oct 24-29 distribution 2389 -> 2293; Oct 30 flash low 2182.63;\nOct 30-Nov 3 grinding recovery with higher lows 2218/2263/2271/2243"];
+    f4 [label="Nov 4 13:00-15:00Z impulse 2311.93 -> 2426; the 16:00Z hour printed the whole 24h range\n(2310.00-2450.00, 140 points, 6.06%) on 79,990 ETH = 2.3x the next hour"];
+    f5 [label="then 16 hours of balance 2405.23-2446.28 (1.7% band), mean hourly range 23.6\nfloor tested 2405.23 / 2405.59 / 2407.66; top tested 2446.28 / 2444.75 / 2437"];
+    f6 [label="1h ATR14 ~24 points (1.0%); Deribit DVOL 51.1 -> ~2.7% per day\nso 2405 (-0.63%) and 2450 (+1.23%) both sit INSIDE one day of noise"];
+  }
+
+  subgraph cluster_evidence {
+    label="external evidence (2026-11-05, sourced in research_log.txt)";
+    e1 [label="catalyst = macro/political risk-on + short squeeze, not ETH-native:\nmidterm sweep, Schumer/Iran, oil -8%; documented same day"];
+    e2 [label="position closing not new leverage: OI -0.26% in ETH terms over 24h;\nfunding +0.006%/8h, printed -0.0027% at 00:00Z; 92% of $155M liquidations were SHORTS"];
+    e3 [label="crowded retail long: accounts L/S 1.93 (65.8% long, rising) vs top traders 59% long;\ntaker sell/buy 0.89 in the 08:00Z hour, the most sell-skewed hour"];
+    e4 [label="residual short pockets 2435 ($11.1M) / 2440 ($9.9M) sit just above spot"];
+    e5 [label="Deribit 2026-11-06T08:00Z weekly: max pain 2350, put/call 1.256,\nputs 6,441 at 2300; calls 7,294 at 2400, 3,224 at 2450, 5,313 at 2500"];
+    e6 [label="US spot ETH ETF: -139.7, -85.3, then +53.0 (Nov 4, first inflow); October -$1.61B"];
+    e7 [label="scheduled: claims 2026-11-05T13:30Z (196K f); Deribit expiry 2026-11-06T08:00Z;\nNFP 2026-11-06T13:30Z (+65K f vs +29K prior); ETF prints ~21:00Z"];
+    e8 [label="published technical map: resistance 2480 then 50-day 2510; 2360 flipped support"];
+  }
+
+  subgraph cluster_history {
+    label="journal history applied (folder names are the source)";
+    h1 [label="EXPIRED_2026-11-02T0954Z_SOLUSDT: level was right but the expiry was hours too short -\nfill was the binding constraint, so EV is computed per ORDER here, not per fill"];
+    h2 [label="LOSS-1.01%_2026-10-23T1024Z_ASTERUSDT + LOSS-1.50%_2026-10-23T1147Z_ZECUSDT:\nboth stopped inside the range reach -> stop moved OUT of open space to 2374, under the\nimpulse close 2379.06 and the 2380 round number"];
+    h3 [label="WIN+1.26%_2026-10-27T0919Z_ASTERUSDT: the winner sat just OUTSIDE the measured extreme"];
+    h4 [label="6 of 20 folders are bare EXPIRED -> fill probability treated as first-class (0.69)"];
+    h5 [label="LOSS-1.08%_2026-10-18T1703Z_ETHUSDT: an ETH limit fade against a fresh impulse was run over;\ntoday the fresh impulse is the reason the SHORT ranks second, not first"];
+  }
+
+  subgraph cluster_scenarios {
+    label="scenarios for the traded window (to 2026-11-06T08:00Z)";
+    s1 [label="S1 base: dip to the 2405-2412 floor, rotate back to 2436-2446 -> order fills and TPs"];
+    s2 [label="S2 continuation: breaks 2450 without touching 2408 -> order never fills (EXPIRED, 0.00%)"];
+    s3 [label="S3 breakdown: loses 2405 and 2379 -> stop at 2374 (-1.41%)"];
+    s4 [label="S4 chop 2408-2444 to expiry: filled, neither level -> EXPIRED at the expiry close"];
+    note [label="S1-S4 are exhaustive for this order; no weights are invented.\nJev probabilities below are separate yes/no judgments and are not summed", shape=note];
+  }
+
+  subgraph cluster_jev {
+    label="Jev calls: exact proposition -> answer (probability)";
+    j1 [label="chart only: above 2450 before below 2405 in 36h -> 0.60"];
+    j2 [label="chart only: retrace into 2380-2390 before 2460 -> 0.42 (a 2390 retest long is weak)"];
+    j3 [label="chart only: 16h balance is accumulation resolving up -> 0.56"];
+    j4 [label="unresolved external question is material in 36h -> 0.88 (research commissioned on that) "];
+    j5 [label="enriched: drift to 2400-2350 before breaking 2450 in 24h -> 0.65"];
+    j6 [label="enriched: nearer 2400 than above 2450 at 2026-11-06T08:00Z -> 0.71"];
+    j7 [label="enriched: touch below 2405 at some point in 36h -> 0.70 ; above 2450 -> 0.57"];
+    j8 [label="enriched: squeeze wick above 2450 in 24h -> 0.51 ; NFP adds risk beyond geometry -> 0.82"];
+    j9 [label="touch 2405 before 2446 -> 0.60 ; touch 2446 before 2405 -> 0.51 (overlapping, not complementary)"];
+    j10 [label="touch 2408 before 2450 by 2026-11-06T08:00Z -> 0.74"];
+    j11 [label="limit 2408 fills by 2026-11-06T08:00Z -> 0.69 ; limit 2446 fills -> 0.59"];
+    j12 [label="if 2408 fills: 2444 before 2392 -> 0.60 ; before 2386 -> 0.68 ; before 2378 -> 0.63 ; before 2372 -> 0.74"];
+    j13 [label="if 2408 fills: 2405 before 2444 -> 0.29 (i.e. the rotation usually comes first)"];
+    j14 [label="if 2446 fills: 2405 before 2468 -> 0.64 ; 2406 before 2472 -> 0.55 / reversed polarity 2472 before 2406 -> 0.33"];
+    j15 [label="stop below 2378 better construction than 2386 -> 0.69"];
+    j16 [label="long 2408 has the better probability-weighted outcome vs short 2446 -> 0.57"];
+    j17 [label="market long at 2420 is worse than waiting for 2408 -> 0.70"];
+    j18 [label="23h window better than 36h incl. NFP -> 0.76 ; ending before NFP better -> 0.66"];
+    j19 [label="no new ETH position is defensible -> 0.80 (defensible, not established as optimal)"];
+    j20 [label="CONFLICT recorded: chart-only Jev leaned UP (0.60) while enriched Jev leans DOWN (0.65/0.71).\nNeither reading is strong; both keep the 2405-2450 range intact, so the trade is built on RANGE\ngeometry + fill probability rather than on a directional call. Resolving the conflict does not\nchange the ranking of the candidates below."];
+  }
+
+  subgraph cluster_candidates {
+    label="candidates priced from their own G, L and costs (no fees in this journal)";
+    cA [label="A LONG LIMIT 2408 / TP 2444 / SL 2374 / exp 2026-11-06T08:00Z\nG +1.49502% L -1.41200% RR 1.0588 p_BE 0.48556\nP(fill) 0.69 P(TP|fill) 0.71 -> EV/fill +0.6520% -> EV/order +0.4499%\nSELECTED"];
+    cB [label="B SHORT LIMIT 2446 / TP 2406 / SL 2472\nThe best short: G +1.6353% L -1.0630% RR 1.5385 p_BE 0.3939\nP(fill) 0.59 P(TP|fill) 0.61 (0.55 direct vs 0.67 reversed -> midpoint)\nEV/fill +0.5829% -> EV/order +0.3439%\nREJECTED: lower order EV, lower fill odds, and the fill happens while the\n2435-2440 pockets are igniting (adverse selection)"];
+    cC [label="C LONG LIMIT 2390 / TP 2450 / SL 2362\nG +2.5105% L -1.1715% RR 2.1429 p_BE 0.3182, P(TP first) 0.52\nREJECTED: needs a retest Jev rates at 0.42 and the edge is a coin flip"];
+    cD [label="D LONG MARKET 2420 / TP 2450 / SL 2400\nG +1.2397% L -0.8264% RR 1.50 p_BE 0.4000, P(TP first) 0.63\nREJECTED: mid-balance entry, Jev 0.70 that waiting for 2408 is better,\nand it duplicates the pending BTC 78,900 / SOL 96.40 longs"];
+    cE [label="E no new position: defensible (0.80) but not optimal - A is positive\nEV even after a 20-point haircut on the conditional hit rate"];
+  }
+
+  subgraph cluster_exec {
+    label="execution";
+    x1 [label="LIMIT 2408 (0.50% below spot) fills on touch per the journal fill model\n(skip the straddling candle; low <= 2408) - no breakout entry needed"];
+    x2 [label="expiry 2026-11-06T08:00Z = the Deribit weekly pin, 5.5h before NFP;\nthe forecast is drawn to 2026-11-06T20:00Z but nothing is held into NFP"];
+    x3 [label="re-anchor check at 09:2xZ: spot 2420.x vs 2420.23 at capture -> setup unchanged"];
+  }
+
+  f1 -> e1; f4 -> e2; f5 -> e3; e2 -> e4; e5 -> e6; e5 -> e7;
+  h1 -> cA; h2 -> cA; h4 -> cA; h5 -> cB;
+  j11 -> cA; j12 -> cA; j14 -> cB; j15 -> cA; j16 -> cA; j17 -> cD; j19 -> cE;
+  cA -> cB [label="better EV/order"]; cB -> cE [label="ranked lower"]; cC -> cE; cD -> cE;
+  cA -> x1 -> x2 -> x3;
+
+  subgraph cluster_postdecision {
+    label="settled during this run AFTER the ETH decision - documented, not an input";
+    p1 [label="LOSS-0.55%_2026-11-03T0858Z_XRPUSDT (XRP short limit 1.2625, TP 1.244, SL 1.2695):
+filled 2026-11-03T11:10Z on touch, stopped 12:15Z at 1.2695 for -0.55%, price then ran to 1.3414.
+Same failure mode as h2: a 0.55% stop inside the range reach. It reinforces - it did not cause -
+the choice to put this stop at 2374 rather than 2386-2392"];
+  }
+
+  subgraph cluster_uncertainty {
+    label="unresolved";
+    u1 [label="Jev's conditional estimates scatter by ~0.10 across formulations (0.55 vs 0.67 on the\nsame short question); the long's numbers are stable (0.65-0.68) which is why it ranks first"];
+    u2 [label="the chart's final pixel candle was unreconcilable; if the capture were 18h stale the\nrange read would be wrong, but the live Binance series confirms the same 2405-2450 balance"];
+    u3 [label="liquidation magnitudes are aggregator-only and unverified in absolute size"];
+    u4 [label="a macro headline (Iran funding fight, veto risk) can override the range in either direction;\nno level in this plan survives a 3% shock, and the 1.41% stop is deliberately inside that limit"];
+  }
+}
