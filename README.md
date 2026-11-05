@@ -10,18 +10,28 @@ It is a mock journal and a framework: nothing is ever sent to an exchange, and n
  chart image(s)
       │
       ▼
- extract points ─► find structure ─► forecast the price path
-      │                                    │
-      │                  targeted research (scaled to the chart's horizon)
-      ▼                                    ▼
-        Jev (calibrated probabilities) decides: direction, entry, TP, SL, expiry, go / reject
-                               │
-                               ▼
+ 1. chart analysis  extract points ─► find structure ─► forecast the price path
+      │
+      ▼
+ 2. searches        only the questions the decision engine marks material
+      │
+      ▼
+ 3. learning pass   the settled trades' recap.md ─► lessons for levels, stops, fills, expiry
+      │
+      ▼
+ 4. decision        Jev (calibrated probabilities): direction, entry, TP, SL, expiry, go / reject
+      │
+      ▼
       finalize.py ─► PENDING / OPEN / REJECTED folder (+ trade.toml)
-                               │
-              after expiry: real candles ─► resolve_expired.py ─► WIN / LOSS / EXPIRED ± %
-                               │
-                           stats.py
+      │
+      ▼
+      after expiry: real candles ─► resolve_expired.py ─► WIN / LOSS / EXPIRED ± %
+      │
+      ▼
+      recap.md (post-mortem: what happened, why, what to change) ─► feeds the next run
+      │
+      ▼
+      stats.py
 ```
 
 Key ideas:
@@ -30,6 +40,8 @@ Key ideas:
 - **The AI decides, scripts only measure.** Decisions come from Jev, a decision engine that returns calibrated probabilities for choices and yes/no questions. The scripts do not judge any decision: they name folders, write `trade.toml`, and settle trades from real candles.
 - **Grading is objective.** Outcomes are computed by `resolve_expired.py` with a fixed fill model, never by the agent.
 - **Research follows the horizon.** Searches are driven by questions that can change the forecast inside the trade's horizon, so a 15m chart does not get a generic fundamentals sweep.
+- **The journal learns from itself.** Every settled folder carries a `recap.md` — why the trade was taken, why those levels, what the market actually did (measured from the real candles), what worked, what failed, and the lessons. The run order is fixed: 1. chart analysis → 2. searches → 3. learning pass over the settled recaps → 4. decision. Past outcomes therefore tune how a forecast is executed (levels, stops, fill assumptions, expiry) without shaping the forecast itself.
+- **The history stays readable.** A recap is capped at ~2,200 characters with a one-line `TL;DR`, so the whole settled history can be skimmed before every decision instead of growing into an unreadable archive.
 
 ## Repository layout
 
@@ -54,7 +66,8 @@ The folder name carries the status: `STATUS_YYYY-MM-DDTHHMMZ_SYMBOL`, for exampl
 | `decision_tree.dot` | free-form record of the agent's reasoning |
 | `trade.toml` | the trade (side, entry, TP, SL, schedule), written by `finalize.py` |
 | `outcome_candles.csv` | real candles used to settle the trade |
-| `review.md` | written when the trade settles |
+| `review.md` | written by `resolve_expired.py` when the trade settles |
+| `recap.md` | written on every terminal folder (≤ 2,200 characters, `TL;DR` on line 2): the idea, the plan, the measured path, what worked and what failed, the right trade, and the lessons — the input to the next run's learning pass |
 
 Lifecycle:
 
