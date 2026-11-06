@@ -1,0 +1,46 @@
+ETHUSDT 1h — IDEA_2026-11-06T1030Z — research log
+question set by Jev (P=0.63 that a publicly known catalyst inside the 36h horizon could move ETH >2% and change the decision)
+window searched: 2026-11-06T10:30Z .. 2026-11-07T23:00Z | retrieved 2026-11-06T10:38Z
+
+1) ETH-specific scheduled events in the window — NONE FOUND.
+   - Fusaka already live, activated epoch 411392, 2025-12-03T21:49:11Z (https://ethereum.org/en/roadmap/fusaka/) — "Fusaka in November" hits are stale 2025 content.
+   - Glamsterdam: no confirmed date, scope frozen, devnets only, page updated 2026-11-05 (https://ethereum.org/roadmap/glamsterdam).
+   - BlackRock ETH ETF staking 19b-4: SEC decision postponed, no dated deadline in the window (https://www.ainvest.com/news/ethereum-news-today-blackrock-seeks-sec-approval-ethereum-etf-staking-2507 — undated, unconfirmed).
+   - No listing, outage, unlock or regulatory deadline dated Nov 6-7 found.
+
+2) Latest price / recent tape
+   - 2242.17 at 2026-11-06T10:38Z (Binance spot via ccxt).
+   - CoinGecko aggregate 2238, -7.41% / 24h (https://www.coingecko.com/en/coins/ethereum).
+   - Prior 6h (04:00Z-10:00Z, Binance 1h): 2236.26 -> 2239.10, +0.13%, range 2213.47-2247.44.
+   - Volume rose on the 08:00Z (17,962 ETH) and 09:00Z (29,221 ETH) bars versus 4-5k on 03:00-05:00Z.
+
+3) Derivatives / flows
+   - funding lastFundingRate +0.00004103 (+0.0041%/8h), next funding 2026-11-06T16:00Z (fapi.binance.com/fapi/v1/premiumIndex?symbol=ETHUSDT).
+   - open interest 2,354,795 ETH (~$5.25B) at 2026-11-06T08:00Z; -0.73% 24h in coin terms (2,372,134 -> 2,354,795); intraday trough 2,314,306 ETH at 2026-11-05T16:00Z (fapi.binance.com/futures/data/openInterestHist?symbol=ETHUSDT&period=4h).
+   - spot-ETF net flow -$99.9m on 2026-11-05, after +$53.0m on 2026-11-04 (https://farside.co.uk/eth/).
+
+4) Market-wide scheduled events inside the window
+   - US October Employment Situation: Friday 2026-11-06 08:30 ET = 13:30Z, i.e. 2h45m after the decision and inside every horizon considered (https://www.bls.gov/schedule/news_release/empsit.htm).
+   - October CPI 2026-11-10 (outside); FOMC 2026-12-08/09 (outside).
+   - Deribit monthly expiry settled 08:00Z on 2026-11-06, before the decision.
+   - Context, not scheduled: the Nov 5 move was an AI/tech-led deleveraging, about $1.08B liquidations, BTC below $76k (https://crypto.news/crypto-crash-long-short-liquidations-bitcoin-stocks).
+
+could not be found / not determined
+   - Deribit Nov 6 notional expiry size: no dated figure.
+   - Any Aster-specific maintenance or listing in the window.
+   - No ETH-specific catalyst: the only scheduled >2%-class item is the 13:30Z US release.
+
+how the findings were used
+   - The release sits 2h45m ahead, inside the coil-resolution window and inside every candidate's holding period, so any ticket's stop has to survive it; Jev put 0.59 on "a 1.9% stop would be stopped by event noise rather than by the coil's own resolution", and 0.48 on "expire before the release is preferable", i.e. the release argues for a wider stop, not for a different side.
+   - Funding (+0.0041%/8h) and the coin-denominated OI (-0.73%) show no stressed positioning that would justify a squeeze or flush bias; ETF flow (-$99.9m) is mildly negative and one day stale.
+   - Price re-anchor: capture 2238.15 at 10:29Z, live 2242.17 at 10:38Z (+0.18%); Jev gave 0.95 that the coil setup survives that re-anchor.
+
+arithmetic recorded here (script output, no costs in this journal model)
+   - ATR: 24h 24.34 pts (1.09% of 2238), 72h 20.71 (0.93%), 168h 15.54 (0.69%).
+   - long limit 2228 / TP 2286 / SL 2200: p_fill 0.60, TP|fill 0.31, SL 0.57, EXP 0.12, p_BE 0.326, order EV +0.159%
+   - long limit 2228 / TP 2286 / SL 2180: TP|fill 0.38, SL 0.35, EXP 0.28, p_BE 0.453, order EV +0.204%
+   - long limit 2228 / TP 2286 / SL 2168: TP|fill 0.43, SL 0.28, EXP 0.29, p_BE 0.510, order EV +0.292%
+   - long limit 2228 / TP 2300 / SL 2200: order EV -0.106%
+   - short limit 2247 / TP 2206 / SL 2291: p_fill 0.92, TP|fill 0.29, SL 0.46, EXP 0.26, p_BE 0.518, order EV about -0.35%
+   - short limit 2247 / TP 2206 / SL 2270: TP|fill 0.23, SL 0.74, p_BE 0.339
+   - SE of the mean realised outcome across effectively independent 36h windows (about 5 per 234 bars): ~0.6 percentage points, i.e. larger than every positive EV above.
