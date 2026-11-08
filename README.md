@@ -28,18 +28,18 @@ You do not need to install anything or know any commands. You need a chart pictu
 
 1. **Get a chart picture.** Open TradingView or any other charting site, pick a coin or a stock, and take a screenshot of the chart. Note the timeframe (for example one hour, or one day) so you can tell the AI.
 
-2. **Hand the AI the skill.** Open an AI agent that can look at images, write files and run commands — Claude Code and Codex CLI are two everyday examples. Give it the file `agent/skills/trading-journal/SKILL.md`, which tells it exactly how to keep this journal, and paste the starter prompt below with your screenshot attached.
+2. **Point the AI at the manual.** Open an AI agent that can look at images, write files and run commands — Claude Code and Codex CLI are two everyday examples. Give it the file `agent/manual/trading-journal.md`. It is a plain markdown file that comes with the repository, not a plugin and nothing to install, and it tells the AI exactly how to keep this journal. Paste the starter prompt below with your screenshot attached.
 
 3. **Look at the result.** The AI creates a folder under `trades/` holding the chart redrawn, the points it read off it, its forecast in a second chart, its research notes and its decision. After the time you gave the trade has passed, the same folder is graded against the real price.
 
 Copy this starter prompt, attach your screenshot, and send it:
 
 ```text
-Load the skill at agent/skills/trading-journal/SKILL.md and follow it exactly.
+Read the file agent/manual/trading-journal.md and follow it exactly.
 The chart image attached to this message is my screenshot for a new trade.
 Read the chart yourself and note the symbol, the timeframe, and every level you can actually see.
 Forecast where the price is likely to go, then decide whether a trade is worth taking, and say why.
-If it is, create the trade folder under trades/ and fill in every file the skill asks for. If it is not, write down why you passed.
+If it is, create the trade folder under trades/ and fill in every file the manual asks for. If it is not, write down why you passed.
 ```
 
 ## What you get back
@@ -69,6 +69,10 @@ No. Nothing is ever sent to an exchange. Trades are written into folders on your
 ### Do I need to know how to code?
 
 No. If you can take a screenshot and paste a message to an AI, you can use this. The scripts run when the AI runs them for you.
+
+### My AI says the skill is "not assigned" — is something broken?
+
+No. The manual is an ordinary markdown file in the repository, not a plugin your AI has to be granted access to. Some AI tools reserve the word "skill" for things they manage themselves, and then look for the manual in the wrong place. Tell it: "read the file `agent/manual/trading-journal.md` directly with cat" and it will carry on.
 
 ### Do I need a paid API key?
 
@@ -114,7 +118,7 @@ The five scripts, all plain Python 3.8+ with no dependencies:
 
 A trade folder holds nine files: `chart.svg`, `graphpoints.csv`, `chart_prediction.svg`, `research_log.txt`, `decision_tree.dot`, `trade.toml`, `outcome_candles.csv`, `review.md` and `recap.md`.
 
-- `agent/skills/trading-journal/SKILL.md` is the operating manual. It is self-sufficient: give the AI this and nothing else and it can run a trade end to end.
+- `agent/manual/trading-journal.md` is the operating manual. It is self-sufficient: give the AI this and nothing else and it can run a trade end to end.
 - `agent/system_prompt.md` sets out the analyst's stance. It is optional, and only shapes tone and scepticism.
 
 </details>

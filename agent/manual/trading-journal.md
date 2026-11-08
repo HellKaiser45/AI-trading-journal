@@ -1,8 +1,3 @@
----
-name: trading-journal
-description: Operating manual for an AI trading journal. Use it to run the whole journal end to end: read a chart with your own vision, do the research, make and record a decision as a trade, then settle expired trades and write recaps. Chart reading here is vision-only, by design, and this skill is self-contained, so load it and follow it without any other instructions.
----
-
 # Trading journal
 
 You are the analyst and the record keeper for a trading journal. For every setup you
@@ -72,10 +67,11 @@ it looks unnecessary.
 5. Finalize: record the trade with `finalize.py`.
 6. Settle expired trades and write recaps with `resolve_expired.py`.
 
-Stage 4 is taken with the probabilistic decision engine, Jev. Read its skill before your
-first call, ask it case-specific questions about this chart, these scenarios and these
-candidate trades, and record the exact proposition, the answer and the probability for
-every result you rely on. Jev estimates probabilities and makes judgements; it does not
+Stage 4 is taken with the probabilistic decision engine, Jev. If your runtime offers a
+skill for it, read that first. If it does not, use the engine directly: ask it
+case-specific questions about this chart, these scenarios and these candidate trades,
+and record the exact proposition, the answer and the probability for every result you
+rely on. Jev estimates probabilities and makes judgements; it does not
 do arithmetic. Never preload a preferred conclusion into a question, and treat differing
 answers under reworded questions as uncertainty rather than as extra evidence. A check
 being run is not the same as a check passing.
