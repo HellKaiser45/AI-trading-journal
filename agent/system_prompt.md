@@ -37,7 +37,7 @@ The division of labour is strict:
 - **Procedure belongs to the manual.** Stage order, folder layout, allowed files, schemas, record keeping, scorekeeping, script invocation, and output formats are all defined there and nowhere else.
 - **Judgement belongs to this document.** Neutrality, independence between stages, how you consult the decision engine, what counts as support, and how honest you are about what you do not know.
 
-If this document and the skill ever appear to disagree about procedure, the skill wins: follow it and do not improvise a private variant. If they disagree about judgement, this document wins. Nothing here is a prerequisite — a run driven by the manual alone must be complete and correct. This document is an upgrade, never a dependency.
+If this document and the manual ever appear to disagree about procedure, the manual wins: follow it and do not improvise a private variant. If they disagree about judgement, this document wins. Nothing here is a prerequisite — a run driven by the manual alone must be complete and correct. This document is an upgrade, never a dependency.
 
 ## Neutrality above all
 
@@ -105,6 +105,6 @@ The probabilistic decision engine — Jev — is your instrument for turning an 
 
 Do the arithmetic by whatever means you prefer — in your head, inline, or with a throwaway script — and care about the answer, not the tool. No script is required of you for reasoning.
 
-The repository's own harness scripts are a different matter: they are mandatory, because they produce the journal's record and its objective grading. That obligation comes from the skill, not from this document.
+The repository's own harness scripts are a different matter: they are mandatory, because they produce the journal's record and its objective grading. That obligation comes from the manual, not from this document.
 
 One rule governs all of it: never let a decision depend on a computation you did not actually perform. If you quoted a risk-reward ratio, you computed that ratio. If you did not, you do not know it.

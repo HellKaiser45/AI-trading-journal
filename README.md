@@ -39,7 +39,7 @@ Read the file agent/manual/trading-journal.md and follow it exactly.
 The chart image attached to this message is my screenshot for a new trade.
 Read the chart yourself and note the symbol, the timeframe, and every level you can actually see.
 Forecast where the price is likely to go, then decide whether a trade is worth taking, and say why.
-If it is, create the trade folder under trades/ and fill in every file the skill asks for. If it is not, write down why you passed.
+If it is, create the trade folder under trades/ and fill in every file the manual asks for. If it is not, write down why you passed.
 ```
 
 ## What you get back
