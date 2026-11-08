@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="ttl2">
+<title id="ttl2">One trade folder: a captured chart, exported data, a forecast, a research log, a decision tree, the order, outcome candles, a review and a recap.</title>
+<rect width="1200" height="520" fill="#0d1117"/>
+<text x="40" y="26" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#8b949e" letter-spacing="1.4">ONE TRADE, FULLY RECORDED</text>
+<rect x="40" y="64" width="1120" height="432" rx="12" fill="#161b22" stroke="#30363d"/>
+<rect x="40" y="42" width="256" height="24" fill="#161b22"/>
+<path d="M40 65V52a10 10 0 0 1 10-10h236a10 10 0 0 1 10 10v13" fill="none" stroke="#30363d"/>
+<path d="M40 128H1160" stroke="#30363d"/>
+<text x="64" y="101" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#c9d1d9" letter-spacing=".2">WIN+1.26%_2026-10-27T0919Z_ASTERUSDT</text>
+<rect x="1043" y="87" width="93" height="25" rx="12.5" fill="#3fb950" fill-opacity=".12" stroke="#3fb950" stroke-opacity=".45"/>
+<text x="1090" y="104" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" font-weight="600" fill="#3fb950" text-anchor="middle">WIN +1.26%</text>
+<path d="M592 158V482" stroke="#30363d" stroke-dasharray="2 5"/>
+<g transform="translate(64 153)" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-linejoin="round" opacity=".8"><path d="M1.6 1.6h7.2l4.4 4.4v11.4H1.6z"/><path d="M8.8 1.6v4.4h4.4"/><path d="M4.4 10.2h5.2M4.4 13.4h5.2"/></g>
+<text x="90" y="166" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#c9d1d9">chart.svg</text>
+<text x="90" y="185" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#8b949e">the chart, redrawn</text>
+<g transform="translate(64 218)" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-linejoin="round" opacity=".8"><path d="M1.6 1.6h7.2l4.4 4.4v11.4H1.6z"/><path d="M8.8 1.6v4.4h4.4"/><path d="M4.4 10.2h5.2M4.4 13.4h5.2"/></g>
+<text x="90" y="231" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#c9d1d9">graphpoints.csv</text>
+<text x="90" y="250" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#8b949e">the numbers read off the axes</text>
+<g transform="translate(64 283)" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-linejoin="round" opacity=".8"><path d="M1.6 1.6h7.2l4.4 4.4v11.4H1.6z"/><path d="M8.8 1.6v4.4h4.4"/><path d="M4.4 10.2h5.2M4.4 13.4h5.2"/></g>
+<text x="90" y="296" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#c9d1d9">chart_prediction.svg</text>
+<text x="90" y="315" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#8b949e">the forecast, drawn</text>
+<g transform="translate(64 348)" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-linejoin="round" opacity=".8"><path d="M1.6 1.6h7.2l4.4 4.4v11.4H1.6z"/><path d="M8.8 1.6v4.4h4.4"/><path d="M4.4 10.2h5.2M4.4 13.4h5.2"/></g>
+<text x="90" y="361" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#c9d1d9">research_log.txt</text>
+<text x="90" y="380" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#8b949e">dated findings with links</text>
+<g transform="translate(64 413)" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-linejoin="round" opacity=".8"><path d="M1.6 1.6h7.2l4.4 4.4v11.4H1.6z"/><path d="M8.8 1.6v4.4h4.4"/><path d="M4.4 10.2h5.2M4.4 13.4h5.2"/></g>
+<text x="90" y="426" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#c9d1d9">decision_tree.dot</text>
+<text x="90" y="445" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#8b949e">the reasoning trail</text>
+<g transform="translate(608 153)" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-linejoin="round" opacity=".8"><path d="M1.6 1.6h7.2l4.4 4.4v11.4H1.6z"/><path d="M8.8 1.6v4.4h4.4"/><path d="M4.4 10.2h5.2M4.4 13.4h5.2"/></g>
+<text x="634" y="166" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#c9d1d9">trade.toml</text>
+<text x="634" y="185" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#8b949e">the order</text>
+<g transform="translate(608 218)" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-linejoin="round" opacity=".8"><path d="M1.6 1.6h7.2l4.4 4.4v11.4H1.6z"/><path d="M8.8 1.6v4.4h4.4"/><path d="M4.4 10.2h5.2M4.4 13.4h5.2"/></g>
+<text x="634" y="231" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#c9d1d9">outcome_candles.csv</text>
+<text x="634" y="250" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#8b949e">real candles used to grade</text>
+<g transform="translate(608 283)" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-linejoin="round" opacity=".8"><path d="M1.6 1.6h7.2l4.4 4.4v11.4H1.6z"/><path d="M8.8 1.6v4.4h4.4"/><path d="M4.4 10.2h5.2M4.4 13.4h5.2"/></g>
+<text x="634" y="296" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#c9d1d9">review.md</text>
+<text x="634" y="315" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#8b949e">what happened</text>
+<g transform="translate(608 348)" fill="none" stroke="#8b949e" stroke-width="1.3" stroke-linejoin="round" opacity=".8"><path d="M1.6 1.6h7.2l4.4 4.4v11.4H1.6z"/><path d="M8.8 1.6v4.4h4.4"/><path d="M4.4 10.2h5.2M4.4 13.4h5.2"/></g>
+<text x="634" y="361" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#c9d1d9">recap.md</text>
+<text x="634" y="380" font-family="ui-sans-serif, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#8b949e">the lesson, kept short</text>
+</svg>
