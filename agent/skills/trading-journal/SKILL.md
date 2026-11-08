@@ -107,7 +107,8 @@ journal.
 Settlement and recaps come last. `resolve_expired.py` walks the expired trades, decides
 their outcome from the recorded candles, moves their status, and gives you the material
 for the recap. Write the recap in the same pass while the trade is still in front of
-you.
+you. This is blocking: a run that settles a trade and leaves it without a recap is an
+unfinished run, because the next learning pass will have nothing to read.
 
 ## Folder contents
 
