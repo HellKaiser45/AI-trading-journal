@@ -1,62 +1,7 @@
 ---
 name:trading-manual
-description: trading manual guidelines to follow whenever the user gives a chart or a trading related request
+description:trading manual guidelines to follow whenever the user gives a chart or a trading related request
 ---
-
-You are the analyst and the record keeper for a trading journal. For every setup you
-look at a chart, write down what you actually saw, research it, decide, record the
-decision as a trade, and later settle it and write a recap. The journal's value comes
-from honesty: a recorded read that turns out wrong is still valuable, a record that was
-quietly adjusted to look right is worthless.
-
-Everything you need is in this file and in the repository. Read the whole thing before
-you start a trade.
-
-## Hard rules
-
-- Read charts with your own vision on the image. Nothing else is an acceptable
-  instrument. See "Reading a chart with your eyes".
-- Never invent a number. Every price, percentage and level you write down is either
-  read off the image or read off a source you fetched in stage 2, and where it came
-  from is recorded.
-- Never edit history to fit an outcome. Once a point is in `graphpoints.csv`, only the
-  documented late-research correction may change it, and only with a log entry.
-- Three tiers of code apply to every task, and you decide nothing outside them:
-
-  - REQUIRED, this is the harness, it guarantees the journal is objectively graded.
-    Never reimplement it, never bypass it, never write your own version of it:
-    `new_trade.py`, `finalize.py`, `resolve_expired.py`, `set_status.py`, `stats.py`.
-  - OPTIONAL, your choice, by hand or with a throwaway script, whichever is quicker
-    and clearer: arithmetic (percentages, reward/risk, break-even probability,
-    expected value, range and span measures), and rendering `chart.svg` or
-    `chart_prediction.svg` from points you have already written down. No script is
-    required for any of this, and doing it by hand is fully acceptable.
-  - FORBIDDEN, in every stage: any code that reads the chart image, any tool that
-    pulls market data during chart analysis, and any new script file added to the
-    repository.
-
-- If a task is a handful of numbers a competent person would do in their head or on
-  paper, no script is expected. Do the arithmetic and write the answer down.
-- One trade, one folder. Do not reuse a folder across symbols or dates.
-- Write in UTC everywhere, in filenames, in timestamps, in `trade.toml`.
-- Do not add fields, files or flags that this manual does not describe. If a field is
-  missing and you need it, put the information in the free-text fields you already
-  have.
-
-## Reading a chart with your eyes
-
-You look at the image and you write down what you see. That is the whole method, and
-you do not need help to do it.
-
-No script and no OCR reads the chart. Do not sample pixels, do not calibrate the axes,
-do not trace the candles in code, and do not fit your read against exchange data.
-
-Read the axes, the bars and the levels off the picture, put them in `graphpoints.csv`,
-and redraw the chart as `chart.svg` yourself. The SVG is your reading drawn out, not a
-second measurement of the image.
-
-Where the picture is too coarse to settle a level, say so and give a band instead of a
-false decimal place.
 
 ## Pipeline order
 
@@ -70,44 +15,65 @@ it looks unnecessary.
 5. Finalize: record the trade with `finalize.py`.
 6. Settle expired trades and write recaps with `resolve_expired.py`.
 
-Stage 4 is taken with the probabilistic decision engine, Jev. If your runtime offers a
-skill for it, read that first. If it does not, use the engine directly: ask it
-case-specific questions about this chart, these scenarios and these candidate trades,
-and record the exact proposition, the answer and the probability for every result you
-rely on. Jev estimates probabilities and makes judgements; it does not
-do arithmetic. Never preload a preferred conclusion into a question, and treat differing
-answers under reworded questions as uncertainty rather than as extra evidence. A check
-being run is not the same as a check passing.
+## 1. Chart Analysis
+The user provided a chart as image, you ①extract the points into graphpoints.csv. 
+as precisely as you can, ②you remake the exact graph provided by the user it could be candles 
+or lines . 
 
-## Workflow
+- Read charts with your own vision on the image. Nothing else is an acceptable
+  instrument. See "Reading a chart with your eyes". 
+  No script and no OCR reads the chart. Do not sample pixels, do not calibrate the axes,
+do not trace the candles in code, and do not fit your read against exchange data.
+- Never invent a number. Every price, percentage and level you write down is either
+  read off the image or read off a source you fetched in stage 2.
 
-Chart analysis comes first and stands alone. Everything in stage 2 is research, and
-research is allowed to contradict you only through the late-correction rule below.
+  Then do a thorough chart analysis to find potential supports,resistances, or chart patterns. 
+  Then draw the chart_prediction.svg with those findings.
 
-Searches come second. Look for the news and context that would change how you read the
-setup: scheduled events, recent announcements, regime changes, anything that makes the
-chart's pattern mean something different than it looks. Fetch prices here only if the
-decision engine marks the current price or recent bars as material to the decision.
+## 2. Searches
+This is an optional step. In fact , if we search, what to search , and why should be defined 
+and approved or decided by our decision engine JEV.
+Even how we search , parallel, sequential, a mix of the 2, and after every round of search 
+we determine if we command more searches or not. 
+Because sometimes searches are purely a waste of time and tokens if the timeframe is small
+and we are confident on prediction based on the graph.
 
-The learning pass comes third. Read the settled recaps, and specifically read your own
-mistakes: reads that were wrong, decisions that were right for the wrong reason,
-statuses that took too long to resolve. The learning pass is where the journal pays
-for itself, so give it real attention rather than a glance.
+## 3. Learning pass
+This is mandatory step.
+If in the journal you have already finished trades you must review them.
+Those trade were also made by you by this exact system. 
+You can read charts , charts_predictions as well as the recap for those trades.
+This is very important because you must learn from your past trades to enhance the
+precision and odds to provide a win for the user. 
 
-The decision comes fourth. State the direction, the entry, the TP, the SL, the expiry
-and the reason in one short paragraph. If you cannot state it in one short paragraph,
-you do not have a decision yet.
+## 4. Finalize
+Based on all the previous step, you gathered 3 sources of information:
+- graph with chart analysis
+- resarches
+- past trade knowledge
+  
+You define trade based on those, you correct and refine the chart_prediction.svg at 
+this step.
+You run all the possibles scenarios you have against JEV with the necessary unbiaised, neutral context.
+The goal is to find the most profitable and probable outcome for a trade, by evaluating everything.
+You also must confirm your answer by using jev with different angles provided in context to see if the 
+outcome changes .
+This is a conclave so iterate until you find the best candidate possible. 
 
-Finalize comes fifth. Create the trade with `new_trade.py` if the folder does not
-exist yet, then record the decision with `finalize.py`. Finalize is the only way a
-trade becomes real; a decision that exists only in your reasoning is not in the
-journal.
+## 5. Finalize
+write the trade with `finalize.py`
 
-Settlement and recaps come last. `resolve_expired.py` walks the expired trades, decides
-their outcome from the recorded candles, moves their status, and gives you the material
-for the recap. Write the recap in the same pass while the trade is still in front of
-you. This is blocking: a run that settles a trade and leaves it without a recap is an
-unfinished run, because the next learning pass will have nothing to read.
+## 6. Settle
+Check among the open trades if some are over (expiry). 
+If it is the case you must research the klines for that period (between entry and expiry)
+Then you must resolve the trade by also finding out what happened and why and make a recap.md.
+then you can use `resolve_expired.py` to finish this process. 
+
+## Decision rules - JEV
+if you have a skill related to jev or typesafeai - READ IT.
+EVERY single decision you make explicit or implicit must be done by JEV.
+the only decision you don't make using jev is deciding whether you use jev or not. YOU DO!
+JEV doesn't know anything so you must provide it the necessary context for it to decide.
 
 ## Folder contents
 
@@ -265,25 +231,6 @@ The model is all-or-nothing: no fees, no funding, no slippage, no partial fills.
 Read the metrics sceptically. A headline win rate on a handful of trades means very
 little, and the learning pass should say so rather than draw a conclusion.
 
-## Late research and correcting a vision read
-
-Chart reading stays independent of exchange data. That independence is deliberate, so
-the exchange data arrives later, in stage 2, where it belongs.
-
-- During stage 2 you MAY fetch candles or klines if and only if the decision engine
-  marks the current price or recent bars as material to the decision. Otherwise, do not
-  fetch price data at all.
-- Such data informs the DECISION. It never silently rewrites the vision-read history in
-  `graphpoints.csv`.
-- If a fetched candle clearly contradicts a vision-read point, you may correct the
-  point at decision time. The correction must be recorded in `research_log.txt` with
-  the vision-read value, the fetched value, the source, and the reason.
-- Silent correction is a defect. A corrected point without a log entry is a corrupted
-  journal, and it invalidates the recaps that follow from it.
-
-The rule exists so the chart read stays a clean, independent observation while the
-decision still gets anchored to fresh prices. Keep the two separate, and record the
-moment they disagree.
 
 ## Scripts
 
@@ -313,9 +260,5 @@ does not describe.
 - Live execution, order routing, broker connections, position management.
 - Portfolio sizing across trades, correlation between open trades, capital allocation.
 - Tax, accounting and reporting formats.
-- Any market-data pipeline: the journal records what you read and what you fetched,
-  not a feed.
-- Backtesting infrastructure. The journal is a record of decisions, not a strategy
-  laboratory.
 - Editing or improving the scripts. If a script is wrong, record the problem in
   `research_log.txt` and stop.
