@@ -29,6 +29,8 @@ or lines .
 do not trace the candles in code, and do not fit your read against exchange data.
 - Never invent a number. Every price, percentage and level you write down is either
   read off the image or read off a source you fetched in stage 2.
+- do not use commands to crop or else to read the image , it is loaded in your context anyway.
+- Just rewrite it from memory
 
   Then do a thorough chart analysis to find potential supports,resistances, or chart patterns. 
   Then draw the chart_prediction.svg with those findings.
