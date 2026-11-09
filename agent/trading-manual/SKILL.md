@@ -87,6 +87,9 @@ Or consider that the user don't want to lose a good opportunity.
 The user doesn't want your explanation he just want a clean trade 
 so only output the trade nothing else.
 
+## IMPORTANT
+- Do not create files that are not specified by the framework into the repo.
+
 ## Folder contents
 
 One folder per trade, named by the grammar below. Each folder holds these files:
