@@ -15,6 +15,9 @@ it looks unnecessary.
 5. Finalize: record the trade with `finalize.py`.
 6. Settle expired trades and write recaps with `resolve_expired.py`.
 
+## Before pipeline
+Before starting the pipeline start a new trade folder with `new_trade.py`
+
 ## 1. Chart Analysis
 The user provided a chart as image, you ①extract the points into graphpoints.csv. 
 as precisely as you can, ②you remake the exact graph provided by the user it could be candles 
@@ -74,6 +77,9 @@ if you have a skill related to jev or typesafeai - READ IT.
 EVERY single decision you make explicit or implicit must be done by JEV.
 the only decision you don't make using jev is deciding whether you use jev or not. YOU DO!
 JEV doesn't know anything so you must provide it the necessary context for it to decide.
+Presenting the option no_trade to jev against the other option will always be the highest score 
+so don't do that. 
+Or consider that the user don't want to lose a good opportunity. 
 
 ## Folder contents
 
