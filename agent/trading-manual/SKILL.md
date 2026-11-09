@@ -81,6 +81,10 @@ Presenting the option no_trade to jev against the other option will always be th
 so don't do that. 
 Or consider that the user don't want to lose a good opportunity. 
 
+## Output
+The user doesn't want your explanation he just want a clean trade 
+so only output the trade nothing else.
+
 ## Folder contents
 
 One folder per trade, named by the grammar below. Each folder holds these files:
