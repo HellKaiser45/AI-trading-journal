@@ -1,0 +1,360 @@
+THESIS
+(what you expect, why, and what would invalidate it)
+
+DATA CHECKED
+- news:
+- prices:
+- other assets:
+- forums:
+- tokenomics:
+
+LINKS
+-
+
+================================================================
+RESEARCH RUN 20261112T112421Z  (window: 2026-11-12T11:24Z -> 2026-11-14, ~36h)
+================================================================
+
+SCOPE: ZEC-specific catalysts only. No trading advice, no price prediction.
+
+----------------------------------------------------------------
+Q1. WHAT CAUSED THE 2026-11-10 / 11 ZEC COLLAPSE
+----------------------------------------------------------------
+
+PRICE FACTS (Binance ZECUSDT, primary, verified)
+- Daily closes: 11-09 1163.94 (-4.08%) | 11-10 1044.95 (-10.22%) | 11-11 964.38 (-7.73%) | 11-12 987.49 (+2.41%, in progress)
+- Close-to-close 11-09 -> 11-11: -17.15%
+- Intraday: 11-11 low 951.21 (the 4h kline 21:00 shows the tag), 11-10 low 994.22
+- 11-06 high 1388.00 -> 11-11 low 951.21 = -31.47%  [this is the -31.5% figure; it is a 5-day high-to-low, NOT a 2-day move]
+- 4h detail: the waterfall was concentrated 11-10 13:00-17:00 UTC (1151 -> 1033.60, two 4h bars of -4.95% and -5.52% on 69.5k and 85.5k ZEC volume) plus a second leg 11-11 05:00-09:00 UTC (1028.92 -> 989.44, low 961.07)
+
+VERDICT: forced deleveraging / crowded-long unwind. No exchange, protocol, regulatory, delisting, security or chain event found.
+- CoinGlass (via The Crypto Times, 2026-11-11): ~$40.96M ZEC liquidated in 24h, $35.66M longs = 87.1%, $5.29M shorts.
+  https://www.cryptotimes.io/2026/11/11/zcash-price-crashes-below-1000-for-first-time-since-september-as-35-7m-longs-liquidated
+- CryptoBriefing (2026-11-11): "> $16.5M in derivatives positions liquidated within a single day, and roughly 88-89% of those were long positions"; explicitly "none of this appears tied to problems with Zcash itself. There were no reported security incidents or technical failures in the protocol during the decline."
+  https://cryptobriefing.com/zcash-falls-out-of-top-10
+- FXEmpire (2026-11-11): yesterday's liqs were "the fifth highest on record for the token"; ZEC was 3rd-largest contributor at ~$35M of a $555M market-wide event.
+  https://www.fxempire.com/forecasts/article/zcash-price-prediction-zec-braces-for-a-15-drop-after-breaking-below-1000-1643815
+- MarginPad (multi-exchange liquidation feed, per-coin tables):
+  11-10: whole market $580.2M ($504.8M longs, 87%); ZEC $23.2M, 4,222 events, 88% long. Busiest hour 15:00-16:00 UTC ($245.2M market-wide).
+  11-11: whole market $251.5M ($148.6M long / $102.9M short); ZEC $16.5M, 3,528 events, 74% long.
+  https://marginpad.io/liquidations/recap/2026-11-10 , /2026-11-11
+- Liqwall aggregate: 11-10 $468M ($413M L / $54.4M S); 11-11 $170M ($98.4M L / $71.5M S).
+  NOTE DISAGREEMENT: 11-11 long/short split is 59/41 at MarginPad but 58/42 at Liqwall and 87/13 at CoinGlass for the trailing 24h. Split is source-dependent; the direction (long-heavy) is consistent, the ratio is not.
+  https://liqwall.com/liquidations/2026-11-11
+
+Second-order drivers reported (all contributing, none a discrete trigger):
+- Post-NU7 "sell the news". NU7 activated 2026-11-06 02:34 UTC at block 3,543,405 (verified in ZIP 259 and forum). ZEC rallied to 1388 high 11-06 then gave it all back over 5 days.
+  https://zips.z.cash/zip-0259 , https://forum.zcashcommunity.com/t/the-zcash-daily/57219 (2026-11-06 post)
+- Grayscale ZCSH ETF outflows: $46.25M in October; current-month outflows $29.78M through 11-11 with a single-day -$14.61M on 11-11 (SoSoValue). Net assets $562.16M, lowest since 2026-09-04.
+  https://finance.yahoo.com/markets/crypto/articles/why-zcash-zec-price-falling-093344296.html (BeInCrypto, 2026-11-12)
+  Conflicting: CryptoBriefing said ">$15M in November"; crypto.news/Blockonomi said "nearly $30M through Nov 11". The $29.78M SoSoValue figure is the most specific.
+- Macro: US October CPI released 11-10, headline +0.4% m/m vs +0.3% expected, core +0.3% (BLS). Fed funds at 3.75-4.00% after the 2026-09-16 hike. ZEC fell ~3x harder than BTC on the week.
+- Grayscale's 2026-11-10 $1M ecosystem pledge + WSJ front-page wrap failed to hold price (it involves no open-market ZEC buying).
+  https://www.globenewswire.com/news-release/2026/11/10/3399445/0/en/Grayscale-Launches-Zcash-Invest-and-Commits-1-Million-to-Support-the-Zcash-Ecosystem.html
+
+RULED OUT (searched, nothing found):
+- No exchange delisting or trading halt of ZEC on Binance/OKX/Bybit/Upbit/Bithumb between 11-05 and 11-12. Binance delisting-announcement catalog (446 entries) latest items are 10-27; no ZEC. getcoinsight.com radar (Binance/Bybit/OKX/Upbit/Bithumb/Coinbase, checked ~1 min) shows no ZEC event. Binance Futures catalog shows no ZEC delisting.
+- No chain halt, no consensus failure at/after NU7 (NU7 activated cleanly, no split; Zebra 7.0.0 shipped with 7 security fixes as planned).
+- No new security incident. (The Orchard soundness bug was May-June 2026, already remediated by NU6.2 + Ironwood. It is NOT the November event.)
+- No large foundation/trust sale disclosed. ZCG treasury proposal is a *proposal*, not an executed sale, and the vote has not opened.
+- No court date or regulatory decision specific to ZEC in the window.
+
+WHAT I COULD NOT CONFIRM FOR Q1
+- The exact location/venue of the largest single ZEC liquidation. CoinGlass, MarginPad, Liqwall and crypto.news give $11.98M / $16.5M / $18M / $23.2M / $40.96M for overlapping windows. No single authoritative total.
+- Whether the 11-10 15:00-16:00 UTC market-wide cascade (ETH $220.8M liq, biggest single a $31.5M ETH long on HTX) was the proximate trigger for ZEC's first leg or a parallel event.
+- Whether any single whale was force-closed. One 18,000 ZEC 10x long ($17.63M) was reported by lookonchain as near liquidation at ~$895 and still open as of 11-11 (secondary, X post, not read directly).
+
+----------------------------------------------------------------
+Q2. SCHEDULED ZEC-SPECIFIC EVENTS INSIDE 2026-11-12 -> 2026-11-14
+----------------------------------------------------------------
+
+CONFIRMED INSIDE THE WINDOW (1 event, low materiality):
+1) Zcash Arborist Call — Thursday 2026-11-12 (today), regular bi-weekly protocol dev call.
+   Confirmed by ZecHub's official call recap (2026-10-19): "The next Zcash Arborist Call is scheduled for November 12, 2026. The October 29 call has been canceled due to Zcon7."
+   https://zechub.substack.com/p/zcash-arborist-call-update-october
+   Also @ZcashFoundation on X: "Calls will resume at the next regularly scheduled time: Thursday, November 12th."
+   NOTE: no agenda or notes for this specific call found; z.cash/arborist-call-notes returned Cloudflare 520 during the run. Expected content per prior calls: NU7.1 planning, 20s-block proposal, ZSAs, post-quantum. Not a scheduled price catalyst.
+
+2) Q4 2026 Coinholder-Directed Retroactive Grants — proposal submission DEADLINE 2026-11-13 20:00 UTC.
+   Confirmed at source (FPF, official call for proposals, 2026-10-30): "Deadline to submit a proposal: November 13th at 20:00 UTC." Full schedule: call 10-30 -> 11-13; mandatory review 11-16 -> 12-16; polling 12-17 -> 12-29.
+   https://forum.zcashcommunity.com/t/q4-2026-coinholder-directed-retroactive-grant-program-call-for-proposals/58598
+   Materiality: administrative. It is a deadline for *applications*, not a vote or a disbursement. Retroactive grants fund already-completed work. No supply or flow effect on 11-13/14.
+
+CONFIRMED IMMEDIATELY AFTER THE WINDOW (relevant because positioning may front-run):
+3) ZCG / Dev Fund poll — polling OPENS 2026-11-16, closes 2026-11-30 23:59 UTC. Proposal discussion 11-09 -> 11-15.
+   https://forum.zcashcommunity.com/t/zcg-and-the-dev-fund-timeline-for-proposals-and-polling/58906
+   Draft ZIP (remove 50,000 ZEC from ZCG treasury, ~55% of the 91,453 ZEC October snapshot; end ZCG's 8% issuance share into a Future Dev & Legal Defense Fund lockbox) merged 2026-11-11 (PR #1428).
+   https://github.com/zcash/zips/pull/1428
+   Coverage: https://www.coindesk.com/tech/2026/11/12/zcash-holders-to-vote-on-pulling-50-000-zec-from-grants-treasury
+   READ THIS CAREFULLY: removing 50,000 ZEC from circulation + ending the 8% issuance stream is *supply-reducing* in framing, but it is a 2-week poll that starts AFTER the window and requires a later network upgrade (NU7.1) with no activation height set. No mechanical flow on 11-12/13/14.
+   Note a figure disagreement: CoinDesk says 50,000 = ~55% of 91,453 ZEC; Blockonomi/The Defiant says 53.4% of 93,657.47 ZEC (Nov-7 snapshot) = ~$49M. Snapshot dates differ.
+
+MACRO EVENT IN THE WINDOW (not ZEC-specific but the only dated release):
+4) US October PPI — Friday 2026-11-13, 08:30 ET (13:30 UTC). Verified on the BLS primary schedule.
+   https://www.bls.gov/schedule/news_release/ppi.htm
+   Context: October CPI already came in hot on 11-10. Consensus expectation reported as the biggest yearly rise since 2022.
+
+NOTHING ELSE SCHEDULED — explicitly checked and empty:
+- No token unlock. ZEC has no unlock schedule; issuance is the block subsidy (1,5625 ZEC/block pre-NU7 cadence; 17.0M of 21M issued = 81%).
+- No halving. Next halving block 6,132,390 (ZIP 259, post-NU7 25s recalculation) / commonly quoted block 4,406,400 pre-NU7, ~Nov 2028. Not 2026.
+- No mainnet upgrade. NU7 shipped 11-06. NU7.1 has NO activation height and no reference implementation; the 20s-block change (ZIP draft posted 11-08/11-09) is at discussion stage only.
+  https://forum.zcashcommunity.com/t/proposal-lower-zcash-block-target-spacing-from-25s-to-20s/59035
+- No ETF or regulatory decision dated in the window. ZCSH already trades (NYSE Arca, since 2026-08-25). Winklevoss WINK S-1 filed 2026-10-06 — no scheduled decision date found.
+- No exchange listing/delisting notice for ZEC in the window (checked Binance catalog, getcoinsight radar, cryptolisting.ws Upbit tracker).
+- No Zcon / conference. Zcon7 was 2026-10-27/29 in Cancún, already past. Devcon was 2026-11-03/06 Mumbai, past.
+- No product launch dated 11-12..11-14. ZODL's private wallet-server / OHTTP rollout began 2026-11-09 (already live); Grayscale Zcash Invest launched 2026-11-10 (already live).
+- No court date found.
+- No published ZCG meeting minutes for the window.
+
+HONEST CAVEAT: a confirmed-empty calendar is stated with the following limits — z.cash and zfnd.org both returned Cloudflare 520 during this run, so their events pages could not be read directly; CoinMarketCal's ZEC page rendered only navigation (its "6 upcoming catalysts" list was not readable); CoinCarp's ZEC events page rendered empty. The emptiness is therefore established from the forum (primary), the BLS schedule (primary), exchange announcement feeds (primary), GitHub (primary) and ZIPs (primary) — not from those aggregators.
+
+----------------------------------------------------------------
+Q3. POSITIONING AND DERIVATIVES (primary, Binance fapi, pulled 11-12 ~11:26Z)
+----------------------------------------------------------------
+
+FUNDING — 8h, Binance ZECUSDT. Longs paying throughout.
+  11-08 08:00  -0.00006%   11-11 00:00  +0.00320%
+  11-08 16:00  -0.00187%   11-11 08:00  +0.00449%
+  11-09 00:00  +0.00098%   11-11 16:00  +0.00542%
+  11-09 08:00  +0.01000%   11-12 00:00  +0.00910%
+  11-09 16:00  +0.01000%   11-12 08:00  +0.00616%
+  11-10 00:00  +0.00999%   (next settle 11-12 16:00, lastFundingRate +0.00720%)
+  11-10 08:00  +0.00490%
+  11-10 16:00  +0.00045%
+  Source: https://fapi.binance.com/fapi/v1/fundingRate?symbol=ZECUSDT
+  READ: funding never flipped meaningfully negative during the flush (briefly ~0 on 11-10 16:00 and slightly negative on 11-08). It has re-accelerated to +0.0091% since. Longs are STILL paying to hold. Annualised ~4.7% (Arbitron) to ~11% (Squeeze Labs uses 0.01%). This is NOT a reset funding profile.
+
+OPEN INTEREST — Binance, ZEC-denominated (avoids price-effect distortion)
+  11-09 12:00  435,515 ZEC ($525.5M)
+  11-10 12:00  451,129 ZEC ($518.9M)   <- OI still RISING into the first leg
+  11-10 16:00  443,035 ZEC ($484.5M)
+  11-11 00:00  435,501 ZEC ($455.1M)
+  11-11 12:00  490,245 ZEC ($480.8M)   <- PEAK, during the flush
+  11-12 00:30  468,120 ZEC ($460.3M)
+  11-12 08:00  478,705 ZEC ($471.9M)
+  11-12 10:30  481,458 ZEC ($478.5M)   <- building again
+  Source: https://fapi.binance.com/futures/data/openInterestHist?symbol=ZECUSDT
+  READ: OI in ZEC terms is +10.5% above the 11-09 level and within 2% of the 11-11 peak. Positions were NOT cleared out — new shorts and new longs replaced the liquidated ones. Aggregated OI (Squeeze Labs, all venues) $685.4M, +2.8% 24h, -15.2% 7d.
+  Cross-check: CoinGlass total ZEC OI ~$2.12-2.15B (all venues incl. Hyperliquid $398-399M).
+
+LONG/SHORT ACCOUNT RATIO — Binance, retail accounts
+  11-11 06:00  1.2936  (56.4% long)
+  11-11 09:00  1.0194
+  11-11 12:00  0.9627  (49.1% long)   <- flipped
+  11-11 18:00  0.9391
+  11-11 21:00  0.9220  (48.0% long)
+  11-12 03:00  0.8678  (46.5% long)   <- most short-skewed
+  11-12 09:00  0.8744  (46.7% long)
+  Source: https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=ZECUSDT
+  READ: the RETAIL account balance has flipped from crowded-long to mildly short-skewed. That is a partial reset — but it is a head-count ratio, not notional.
+
+TOP-TRADER POSITION RATIO — Binance, by notional value (the one that matters for size)
+  11-11 06:00  1.6451
+  11-11 12:00  1.4832
+  11-12 00:00  1.4095
+  11-12 09:00  1.4251
+  Source: https://fapi.binance.com/futures/data/topLongShortPositionRatio?symbol=ZECUSDT
+  READ: still 59% long by value. Reduced from 62% at the pre-flush peak, but NOT reset. Top-trader ACCOUNT ratio flipped below 1 (0.9124 at 11-12 09:00) — so big accounts are net short in count while net long in size.
+
+HYPERLIQUID WHALES — direct on-chain positions (largest single signal)
+  24 tracked accounts: $9.11M long (6) vs $124.16M short (18) = net $115.06M SHORT. Was net $169.71M short at the start of the tracked week — i.e. shorts have been CUT by ~$55M, so some short covering has already happened.
+  https://squeeze-labs.com/pairs/ZECUSDT
+  Alternative trackers disagree on the size but agree on direction:
+  - XOOMAR (2026-11-12 10:05 UTC): 11 wallets, $137.3M notional, 0% long / 100% short; largest single $66.2M short at 3x, entry $1,336.39; second $54.4M short at 3x, entry $1,478.37.
+  - Deep Blue Alpha: 179 whales, $111.0M long / $161.2M short (41% long); within 10% of $991.73 there is $13.3M of whale LONGS and $0 of whale shorts.
+  READ: large speculative accounts are short into this, meaning the crowd that remains is NOT uniformly long. A further flush is not simply "crowded longs getting stopped".
+
+LIQUIDATION CLUSTERS (modelled, not observed — treat as weak)
+  Hyperliquid modelled bands (Buildix): $979.03 long / $1,005.49 short at 75x (1.3% away); $965.80 / $1,018.72 at 37.5x; $935.56 / $1,048.96 at 17.5x; $859.96 / $1,124.56 at 7.5x. ~$39.9M of longs in range on a 5% drop, ~$39.9M of shorts on a 5% rise.
+  https://www.buildix.trade/hyperliquid/ZEC
+  Daan Crypto Trades (via BeInCrypto, 2026-11-12): "There is a big liquidation cluster on Hyperliquid in the $800-$900 area."
+  CryptoPotato (2026-11-11): one 18,000 ZEC 10x long ($17.63M) is fully liquidated at ~$895 absent added collateral.
+  CoinCOINOTAG estimate: below $922.48 and above $995.85.
+  Observed 24h ZEC liquidations now: $9.88M (Squeeze Labs agg), $11.98M (CoinGlass via CoinGabbar), ~$18M (crypto.news/CoinGlass). The pace has clearly slowed from 11-10/11-11.
+
+TAKER FLOW: Binance taker buy/sell 11-12 08:00 = 1.28 (buy-dominant); crypto.news reports aggregate taker 0.96 (sell-dominant). Direction disagrees by venue/window.
+
+IS POSITIONING STILL CROWDED LONG? — MIXED, and the honest answer is "partially reset":
++ Retail account ratio has flipped short (0.874).
++ Hyperliquid whales are net short.
++ Top-trader position ratio down from 1.645 to 1.425.
+- Funding is still positive and re-accelerating (+0.0091% at 11-12 00:00).
+- OI in ZEC terms is rebuilding toward the 11-11 peak.
+- Top-trader notional is still 59% long.
+So: a crowded-long unwind explains the drop, but the book has not de-risked — it has re-levered with shorts added. That is a two-sided condition, not a one-way one.
+
+----------------------------------------------------------------
+Q4. ANALYST / DESK COMMENTARY, LAST 72h (2026-11-09 -> 11-12)
+----------------------------------------------------------------
+
+BEARISH
+- FXEmpire / Alejandro Arrieche, 2026-11-11. Maintains $807 target (200-day EMA zone); says a break there opens $500. Notes daily RSI below 40, "market fully ignored the successful rollout of NU7", "leaning toward a bearish outlook in the near term". Confidence: explicit directional call.
+  https://www.fxempire.com/forecasts/article/zcash-price-prediction-zec-braces-for-a-15-drop-after-breaking-below-1000-1643815
+- CoinGabbar / Dikshant Dibbey, 2026-11-12 08:10 UTC. "Bears hold the edge." Base case range $863.52-$1,118.59; bear trigger a daily close below $863.52 -> $737.40. RSI 35.87 "oversold conditions haven't formed."
+  https://www.coingabbar.com/en/zcash-price-prediction-zec-etf-outflows-key-support
+- CoinMarketCap AI desk, 2026-11-12. "Market Outlook: Bearish Pressure." Key watch: hold $952.64 -> rebound toward $1,046.42; lose it -> $900-895.
+  https://coinmarketcap.com/cmc-ai/zcash/price-analysis
+- Crypto Patel (via crypto.news/Blockonomi, 2026-11-12). Advises taking 50% profit and trailing a stop; floats $500-$200 as a speculative scenario. Strongly bearish, self-flagged as speculative.
+
+CONSTRUCTIVE / BOTTOM-FISHING (all conditional, all low-conviction language)
+- Altcoin Sherpa (via crypto.news, 2026-11-12; CryptoPotato, 2026-11-11). Expects a possible bottom in $800-$900 before a recovery attempt. Bearish-with-a-floor, not bullish.
+- Daan Crypto Trades (via BeInCrypto, 2026-11-12). Would look for longs on a wick into the $800-$900 Hyperliquid cluster; "target is modest, a relief bounce toward $950 to $1,000." Low conviction on upside.
+- CryptoPotato / Dimitar Dzhondzhorov, 2026-11-11. Notes two bullish inputs: RSI printed 29 (oversold) and exchange netflows negative for several days (coins leaving CEXs = less immediate sell pressure). Balanced.
+  https://cryptopotato.com/zcash-zec-collapses-below-1000-can-the-bulls-fight-back
+- Grayscale research (published 2026-11-10, via BeInCrypto): Zcash monthly active devs roughly doubled in two years while the wider crypto dev pool shrank; ~70% of ZEC devs have >1yr crypto experience vs 58% industry-wide. Structural bull case; explicitly has not worked on price.
+  https://finance.yahoo.com/markets/crypto/articles/why-zcash-zec-price-falling-093344296.html
+
+TALLY: 4 clearly bearish, 4 constructive-but-conditional, 0 unambiguously bullish price calls. The bearish ones publish specific levels; the constructive ones publish conditional entries. No institutional desk note (GS/JPM/Amber/QCP) on ZEC found in the last 72h.
+
+----------------------------------------------------------------
+Q5. IDIOSYNCRATIC vs BROAD DELEVERAGING; PRIVACY-COIN POLICY
+----------------------------------------------------------------
+
+IT IS PREDOMINANTLY ZEC-IDIOSYNCRATIC — this is the strongest-evidenced conclusion.
+- ZEC -14.2% against BTC over the same 24h while its USD loss was -14.5% (The Crypto Times, quoting CoinGecko) -> BTC was flat; the move was not beta.
+- BeInCrypto: 7-day ZEC -25.22% vs BTC -8.49%, ETH -15.45%, XMR -10.41%. "That smaller decline [XMR] points to pressure concentrated on Zcash itself."
+- Binance primary data confirms: BTC 11-10 -2.09%, 11-11 +0.30%; ETH 11-10 -3.84%, 11-11 +0.15%; SOL 11-10 -3.90%, 11-11 -0.08%. ZEC -10.22% / -7.73%.
+- CoinMarketCap AI: "no fresh Zcash specific catalyst is evident" and "more like lingering ZEC selling and long liquidations than a market wide drop."
+
+BUT THERE WAS A REAL BROAD COMPONENT on 11-10:
+- Market-wide 11-10 liquidations $468M-$580M, 87-88% longs (MarginPad, Liqwall). ETH $220.8M and BTC $156.6M were the largest single-coin pools; ZEC was 4th at $23.2M. A single $31.5M ETH long was force-closed on HTX at 15:40 UTC.
+- So 11-10 was a market-wide long flush in which ZEC was an outsized casualty; 11-11 was almost purely ZEC (ZEC -7.73%, everything else flat).
+- NOT described anywhere I found as "an altcoin deleveraging event" in the specific sense. Coverage frames it as ZEC-specific. I found no piece labelling it part of a coordinated altcoin unwind.
+
+PRIVACY-COIN POLICY — no new policy event in the window; the existing overhang is EU AMLR.
+- EU AMLR (Regulation (EU) 2024/1624) Article 79 bars regulated CASPs from accounts enabling anonymity-enhancing coins, effective 2027-07-10. Covers shielded ZEC and XMR. Self-custody unaffected.
+  https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1624
+  Repeatedly re-covered in early November (2026-11-01 to -04) but no NEW action dated 11-10..11-12.
+- NO new EU/US/UK/KR privacy-coin action was found dated between 2026-11-09 and 2026-11-12. The Binance "12 privacy coins" delisting story that surfaces in search results is Blockworks dated 2023-12-29 (the OKX-delisting cycle), not November 2026. I flag this because it appeared in results with a November-looking date and is a trap.
+- FinCEN withdrew its proposed mixing rule (reported October 2026) — that is a de-escalation, not a trigger.
+- CoinStats' 11-11 roundup states directly: "No Zcash-specific regulatory action, exchange delisting or network outage was found in the reviewed sources."
+
+WHERE THE POLICY RISK ACTUALLY SITS: it is a structural overhang, not a dated catalyst. Any surprise delisting announcement tied to the July-2027 deadline would be a real event — none exists as of this run.
+
+----------------------------------------------------------------
+WHAT COULD NOT BE CONFIRMED  (read this before relying on anything above)
+----------------------------------------------------------------
+1. A single authoritative ZEC liquidation total. The reported figures span $11.98M to $40.96M because windows, venues and snapshots differ. The long-share (72%-89%) is consistent; the dollar figure is not.
+2. Whether a specific whale was liquidated. Only one candidate exists (18,000 ZEC 10x long, liquidation ~$895, reported still open 11-11 via a lookonchain X post I did not read directly).
+3. The exact 11-12 Arborist Call agenda, outcome, or whether it happened before/after this run. No notes published; z.cash and zfnd.org both 520'd.
+4. CoinMarketCal's "6 upcoming ZEC catalysts" — its ZEC page rendered only navigation. Its list is unknown to me. It is the one aggregator that might hold a date I missed.
+5. CoinCarp's ZEC events page — rendered empty.
+6. Any OFAC/SEC/CFTC action specifically naming Zcash in the window — none found, but absence from my sources is not proof of absence.
+7. ZCG's exact treasury balance. Two snapshots disagree: 91,453 ZEC (October, cited by CoinDesk) vs 93,657.47 ZEC (2026-11-07, cited by The Defiant/Blockonomi).
+8. The Grayscale ZCSH outflow figure for November. $15M+, $29.78M and "nearly $30M" all appear; only the $14.61M single-day 11-11 print (SoSoValue) is specific.
+9. Whether the 11-10 15:00-16:00 UTC market-wide cascade caused ZEC's first leg or merely coincided with it.
+10. Any institutional (bank/desk) research note on ZEC in the last 72h — none found.
+
+----------------------------------------------------------------
+CLAIM TABLE (confidence / depth)
+----------------------------------------------------------------
+high  / full     Binance price, funding, OI, long-short ratios — pulled directly from fapi.binance.com
+high  / full     NU7 activated 2026-11-06 block 3,543,405 — zips.z.cash/zip-0259
+high  / full     ZCG polling 11-16 -> 11-30 — forum.zcashcommunity.com/t/.../58906
+high  / full     Q4 CDRGP deadline 2026-11-13 20:00 UTC — forum.zcashcommunity.com/t/.../58598
+high  / full     PPI Oct-2026 releases 2026-11-13 08:30 — bls.gov
+high  / full     Arborist Call 2026-11-12 — zechub.substack.com + @ZcashFoundation
+high  / full     Grayscale $1M + ZCSH sponsor-fee pledge 2026-11-10 — globenewswire press release
+high  / full     Next halving ~Nov 2028, no 2026 unlock/halving — zips.z.cash/zip-0259
+med   / full     $40.96M ZEC liq / 87.1% long — CoinGlass via cryptotimes.io
+med   / full     ~$16.5M liq / 88-89% long, no protocol incident — cryptobriefing.com
+med   / full     ZEC -14.2% vs BTC while USD -14.5% -> idiosyncratic — cryptotimes.io
+med   / full     ZCSH Nov outflows $29.78M, 11-11 -$14.61M, AUM $562.16M — SoSoValue via BeInCrypto
+med   / full     Hyperliquid whales net short $115M (from $169.7M) — squeeze-labs.com
+med   / full     Whale longs $111M vs shorts $161M, $13.3M whale longs within 10% — deepbluealpha.io
+low   / full     Modelled liq bands $979/$1,005 etc — buildix.trade (model, not observed)
+low   / snippet  $800-900 Hyperliquid cluster — Daan Crypto Trades via BeInCrypto
+low   / snippet  18,000 ZEC long liquidation at ~$895 — lookonchain via cryptopotato
+low   / full     Blockworks "privacy coin delisting" story is 2023-12-29, NOT Nov 2026 — date corrected via brave
+n/a   / —        CoinMarketCal 6 catalysts; CoinCarp events; z.cash events pages — unreadable
+
+----------------------------------------------------------------
+BOTTOM LINE FOR THE TRADE WINDOW (facts, not advice)
+----------------------------------------------------------------
+- Cause: long liquidation cascade, ZEC-specific, amplified by post-NU7 profit-taking and ZCSH outflows. No protocol, exchange, legal or security event.
+- Calendar 11-12 -> 11-14: one low-materiality event (Arborist Call 11-12), one administrative deadline (grants proposals 11-13 20:00 UTC), one macro print (PPI 11-13 13:30 UTC). No ZEC supply, upgrade, listing, legal or ETF event. Calendar is effectively EMPTY of ZEC catalysts.
+- Positioning: partially reset on retail head-count and whale direction, NOT reset on funding (still positive, re-accelerating) or notional (top traders still 59% long, OI rebuilding). Two-sided.
+- Commentary: predominantly bearish-with-levels; the constructive side is conditional on a wick into $900 or below.
+- Correlation: ZEC is currently trading on its own book, not BTC's.
+
+FILES
+- Log: artifacts/research-logs/20261112T112421Z_zec-catalysts/log.jsonl
+- Report: artifacts/research-logs/20261112T112421Z_zec-catalysts/REPORT_20261112T113200Z.md
+- Source ledger: artifacts/research-logs/source-status.json
+
+================================================================
+2026-11-12T12:35Z  ANALYST QUANTITATIVE PASS (appended, nothing above rewritten)
+================================================================
+
+SCOPE DECISION (JEV): search scope was put to Jev before searching.
+  both 0.15 | zec_only 0.78 | market_only 0.00 | no_search 0.06. zec_only chosen.
+  Reason recorded: a 31.5% idiosyncratic drop is more likely to be explained by a
+  symbol-level catalyst than by beta, and generic market colour duplicates the chart.
+
+VOLATILITY MEASURED ON THIS SYMBOL (exchange 1h klines, for stop sizing only - the price
+levels in graphpoints.csv remain the vision read):
+  ATR14 1h = 18.22 pts = 1.84%   ATR48 1h = 27.39 = 2.77%
+  hourly return sd last 48h = 2.03%, last 168h = 1.44%; last 24h range 7.4%
+  Consequence: a 1.0-1.5% stop is inside roughly one hour of noise. This is the exact
+  defect that produced six of the journal's nine losses.
+
+BASE RATES (15,000 1h bars, 2025-02-25 to 2026-11-12). Non-overlapping windows only:
+  regime-matched (dd <= -20% from rolling 20d high), n=165, 36h horizon:
+    fwd return median +0.2%, mean +1.0%, 51% closed up
+    MFE up median 4.1% (p75 9.9%); MFE dn median 4.8% (p75 7.9%) -> near symmetric
+  setup-matched (dd <= -25%, 12h range <= 7%, 3h drift <= 1.5%), n=85, 36h:
+    fwd return median +0.2%, mean +0.2%, 51% closed up -> directional content ~nil
+    MFE up median 3.8%; MFE dn median 4.4%
+  first-touch on the setup sample:
+    2.2% rally prints within 12h in 49% of cases; 2.2% decline in 66%
+    new low below 951 (-4.25%) BEFORE a 2.2% rally: 39% vs 59%
+
+NEGATIVE RESULT RECORDED DELIBERATELY (this is the most important measurement in the run):
+  Pooling OVERLAPPING hourly windows produced a large apparent long edge. It is an
+  artefact. The regime sample collapses to only 19 independent episodes, where the 36h
+  forward return median is -0.5% with 47% up. Splitting the sample by year flips the sign
+  (2025-only favours shorts, 2026-only favours longs, n=402/502 overlapping).
+  Therefore: no candidate here is statistically distinguishable from a coin flip. Every
+  priced EV below sits within about one standard error of zero, and the trade is taken as
+  a positive-point-estimate geometry with a protected stop, not as a proven edge.
+
+GAP-REALISTIC PRICING (stop fills at the candle OPEN when gapped through, i.e. worse than
+the journal's own fill model). EV% per window with SE, setup(n=85) / dd20(n=165):
+  LONG  L966 TP1046 SL925  RR 1.95  P(fill) 0.72  P(TP|fill) 0.34  +0.28+-0.49 / +0.10+-0.31
+  LONG  L966 TP1024 SL925  RR 1.41               0.44  +0.31+-0.43 / -0.02+-0.28
+  LONG  L966 TP1015 SL925  RR 1.20               0.50  +0.33+-0.40 / +0.14+-0.27
+  LONG  L966 TP1015 SL914  RR 0.94               0.59  +0.37+-0.42 / +0.14+-0.29
+  LONG  L960 TP1024 SL925  RR 1.83  P(fill) 0.62 0.30  +0.01+-0.38 / +0.14+-0.27
+  SHORT L1018 TP963  SL1050 RR 1.72  P(fill) 0.69 0.38  +0.33+-0.33 / -0.07+-0.24
+  SHORT L1024 TP951  SL1046 RR 2.77  P(fill) 0.61 0.19  +0.03+-0.26 / -0.09+-0.19
+  LONG  MKT990 TP1024 SL951 RR 0.87  P(fill) 1.00 0.47  -0.40+-0.38 / -0.21+-0.28
+
+JEV CONCLAVE (iterated, several angles, as the manual requires):
+  round 1 with escape hatches: escaped to 'none' 0.77 / long 0.22. Rejected as a reading
+    because the manual warns that offering no_trade against trade candidates always wins;
+    ranking was then restricted to trade candidates only.
+  round 2 trade candidates only: long_retest 1.00; shorts 0. Shorts contradicted on both
+    the stop-envelope requirement (1050 sits only 0.5% above the coil high) and the
+    requirement of positive EV on the broader dd20 sample.
+  round 3 adversarial (how does the long fail): gap_and_flush 0.41 (not fixable by ticket
+    design), adverse_fill 0.31 (fixable by demanding a confirmed bounce), tp_shortfall 0.28
+    (fixable by lowering the target), macro_shock 0.00. This drove the target in from 1046.
+  round 4 confirmation on a different axis (calibrated): forced-liquidation not fundamental
+    deterioration 0.95; unfinished unwind = real 36h downside risk 0.85; stop 2.8% under the
+    low outlives one at the low 0.80; EV positive but indistinguishable from zero 0.93;
+    1046 less reachable than 1015-1024 0.90.
+  round 5 final geometry: tp1015_sl925 0.99 (tp1015_sl914 0.01, tp1046 0, tp1024 0).
+
+DECISION: LONG LIMIT 966, TP 1015, SL 925, expire 2026-11-13T23:16Z.
+  +5.07% / -4.24%, RR 1.20. Stop is 2.8% below the 951.21 capitulation low, i.e. beyond
+  the measured overshoot envelope, which is the one parameter both journal wins shared.
+  TP at ~1015.76, the repeatedly traded 11-11 16:00 high, inside the coil - deliberately
+  NOT the coil high 1024.57 (the level the coil keeps failing at) and NOT the 1045-1070
+  supply shelf, because P(TP|fill) rises from 0.34 to 0.50.
+
+RESEARCH GAPS CARRIED FORWARD (do not treat the empty calendar as certain):
+  CoinMarketCal's "6 upcoming ZEC catalysts" list was unreadable (navigation only);
+  z.cash and zfnd.org both returned Cloudflare 520. The empty-calendar finding rests on
+  the Zcash forum, BLS schedule, exchange announcement feeds and GitHub, not aggregators.
+  Reported liquidation totals for 11-10/11-11 disagree across venues ($12M-$41M).

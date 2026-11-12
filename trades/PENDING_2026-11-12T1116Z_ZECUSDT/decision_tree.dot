@@ -1,0 +1,62 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  // ================= stage 1: chart read (vision only) =================
+  chart [label="ZECUSDT 1h, Aster, 988.80 @ 2026-11-12T12:14Z\n289 hourly closes read by eye into graphpoints.csv\naxis 940-1400, 20pt gridlines", shape=box];
+
+  structure [label="STRUCTURE MEASURED FROM THE IMAGE\n- rounded distribution top 10-21 -> 11-06, peak 1362-1388\n- lower highs through late Oct: 1362 > 1338 > 1310 > 1305\n- waterfall: 1330 -> 951.21 on 11-10/11-11 (-31.5% from peak)\n- 14h coil 951.21 .. 1024.57 after the low\n- price 988.80 = lower third of coil, 4.2% above the low\n- overhead supply shelf 1045-1070 from the 11-10 breakdown bars", shape=box];
+
+  levels [label="LEVELS\nsupport: 951.21 (capitulation low), 963 (coil floor), 900\nresistance: 1015 (11-11 16:00 high 1014.76), 1024.57 (coil high), 1045-1070 shelf\ninvalidation: 900 = long thesis void", shape=box];
+
+  chart -> structure -> levels;
+
+  // ================= stage 2: research scope decided by JEV =================
+  scope [label="JEV: should we search, and what?\ncandidates: both / zec_only / market_only / no_search\nRESULT zec_only 0.78 (both 0.15, no_search 0.06)\nrequirements all supported for zec_only", shape=diamond];
+  levels -> scope;
+
+  research [label="ZEC-ONLY RESEARCH (sourced)\n- CAUSE: forced long-liquidation cascade, ZEC-idiosyncratic\n  BTC -1% while ZEC -14% vs BTC; no protocol/exchange/security/legal event\n  liqs reported $12M-$41M, long share 72-89% (magnitude disputed)\n- CALENDAR 11-12..11-14: effectively EMPTY of ZEC catalysts\n  Arborist call (routine), grants deadline (admin), US PPI 11-13 13:30Z\n  no unlock (ZEC has none), no halving until ~2028, NU7 live since 11-06\n  no dated regulatory/ETF decision; treasury poll OPENS 11-16 (after window)\n- POSITIONING: partially reset, NOT de-risked\n  funding +0.0091%/8h and re-accelerating; OI rebuilt within 2% of flush peak\n  retail L/S 1.29 -> 0.87 (short-skewed); top-trader notional 1.43 (59% long)\n  Hyperliquid whales net short ~$115M", shape=box];
+  scope -> research;
+
+  // ================= stage 3: learning pass =================
+  learn [label="LEARNING PASS over 21 settled trades (2W 9L 10X, sum -0.80%, WR 18.2%)\nFAILURE MODE #1: six losses had 1.0-1.5% stops hit inside normal noise\n  while the favourable side never printed\n  (ASTER 10-23, XRP 11-03, BTC 11-04, SOL 11-04, ETH 11-05, ZEC 10-23)\nFAILURE MODE #2: fill-sequence error - 3 of 3 prior ZEC trades\n  ZEC 10-19 short: favourable extreme printed 45min BEFORE the fill\n  ZEC 10-23 long: limit filled inside a fresh down-leg, stopped in 5 min\n  ZEC 10-28 short: entry needed a sweep the analysis called unlikely\nSHAPE OF THE TWO WINS: stop BEYOND the measured overshoot envelope\n  (MAE only 0.53% in both), entry ~0.5% from spot, TP at a many-touch level\n  not at a range extreme", shape=box];
+  research -> learn;
+
+  // ================= stage 4: base rates =================
+  baserates [label="BASE RATES (15,000 1h bars, 2025-02..2026-11)\nregime-matched non-overlapping (dd<=-20%, n=165, 36h):\n  fwd med +0.2% mean +1.0% 51% up\n  MFE up med 4.1% | dn med 4.8%  -> near symmetric\nsetup-matched (dd<=-25%, 12h range<=7%, 3h drift<=1.5%, n=85):\n  fwd med +0.2% mean +0.2% 51% up -> directionally nil\nfirst-touch on setup sample: 2.2% rally in 12h 49% | 2.2% decline 66%\nnew low below 951 BEFORE 2.2% rally: 39% vs 59%", shape=box];
+  learn -> baserates;
+
+  honesty [label="MEASUREMENT HONESTY (recorded, not hidden)\npooling OVERLAPPING hourly windows produced a spurious long edge\nregime sample collapses to only 19 independent episodes:\n  36h fwd median -0.5%, 47% up -> edge disappears\nsplitting by year FLIPS the sign: 2025 favours shorts, 2026 favours longs\nCONCLUSION: no candidate is statistically distinguishable from a coin flip\n  every priced EV is within ~1 standard error of zero", shape=diamond, color=orange];
+  baserates -> honesty;
+
+  // ================= stage 5: ticket pricing =================
+  pricing [label="TICKETS PRICED (gap-realistic: stop fills at candle open when gapped)\nEV% per window +/- SE, setup(n=85) / dd20(n=165)\n  LONG L966 TP1046 SL925  RR1.95 P(fill).72 P(TP|f).34  +0.28+-.49 / +0.10+-.31\n  LONG L966 TP1024 SL925  RR1.41            .44  +0.31+-.43 / -0.02+-.28\n  LONG L966 TP1015 SL925  RR1.20            .50  +0.33+-.40 / +0.14+-.27\n  LONG L966 TP1015 SL914  RR0.94            .59  +0.37+-.42 / +0.14+-.29\n  SHORT L1018 TP963 SL1050 RR1.72       .38  +0.33+-.33 / -0.07+-.24\n  SHORT L1024 TP951 SL1046 RR2.77       .19  +0.03+-.26 / -0.09+-.19\n  LONG MKT990 TP1024 SL951 RR0.87       .47  -0.40+-.38 / -0.21+-.28", shape=box];
+  honesty -> pricing;
+
+  // ================= stage 6: the conclave =================
+  jev1 [label="JEV round 1 (with escape hatches)\nescaped to 'none' 0.77 / long 0.22\n-> manual says no_trade always outscores trades when offered;\n   rank trade candidates only, per the manual's instruction", shape=diamond, color=orange];
+  pricing -> jev1;
+
+  jev2 [label="JEV round 2 (trade candidates only, no escape hatch)\nlong_retest 1.00 | short_fade 0 | short_break 0 | long_market 0\nall 3 requirements supported for long_retest\nshorts contradicted on stop-envelope and both-sample-EV", shape=diamond];
+  jev1 -> jev2 [label="re-run per manual"];
+
+  jev3 [label="JEV round 3 - ADVERSARIAL ANGLE (how does the long fail?)\ngap_and_flush 0.41 (NOT fixable by ticket design)\nadverse_fill 0.31 (fixable: demand a confirmed bounce)\ntp_shortfall 0.28 (fixable: lower the target)\nmacro_shock 0.00\n-> this is why the target was pulled in from 1046", shape=diamond];
+  jev2 -> jev3;
+
+  jev4 [label="JEV round 4 - CONFIRMATION, different angle (calibrated probabilities)\nforced-liq not fundamental deterioration: 0.95 likely\nunfinished unwind = real 36h downside risk: 0.85 likely\nstop 2.8% under the low outlives one at the low: 0.80\nEV positive but indistinguishable from zero: 0.93 likely\n1046 less reachable than 1015-1024: 0.90 likely", shape=box];
+  jev3 -> jev4;
+
+  jev5 [label="JEV round 5 - FINAL GEOMETRY (converged)\ntp1015_sl925 0.99 | tp1015_sl914 0.01 | tp1046_sl925 0 | tp1024_sl925 0\ntp1046 contradicted on 'target at a many-touch level, not an extreme'\ntp1024 contradicted on both-sample EV and on targeting a failed level", shape=diamond, color=green];
+  jev4 -> jev5;
+
+  // ================= decision =================
+  ticket [label="FINAL TICKET\nZECUSDT LONG LIMIT 966\nTP 1015 (+5.07%)\nSL 925 (-4.24%)\nRR 1.20\nplace 2026-11-12T11:16Z  expire 2026-11-13T23:16Z\nP(fill) 0.72  P(TP|fill) 0.50  EV +0.14% (conservative)\nfill path: a 2.2% dip prints within 12h in 66% of setup-matched cases\nstop: 2.8% below the 951.21 low = beyond the overshoot envelope\nTP: 1015.76 area, repeatedly traded, INSIDE the coil - not the coil high", shape=box, color=green, penwidth=2];
+  jev5 -> ticket;
+
+  why_this [label="WHY THIS AND NOT THE OTHERS\n- not the short: stop at 1050 sits inside the coil, and every short\n  variant was negative on the dd20 sample\n- not TP 1046: JEV 0.90 that the nearer target is more reachable,\n  and the journal's ASTER 10-18 lesson: TP on a rejected extreme cost a win\n- not market entry: EV -0.21/-0.40, RR 0.87, stop AT the low not beyond it\n- not TP 1024: that is the level the coil has repeatedly failed at", shape=box];
+  jev5 -> why_this;
+
+  risks [label="ACCEPTED RISKS (stated, not resolved)\n1. EV is ~1 SE from zero; this is close to a coin flip with a good stop\n2. gap risk: 11-10 had two 4h bars of -4.95% and -5.52%; a gap through\n   925 fills worse than the model assumes (mitigated only by the stop sitting 2.8% below structure)\n3. PPI 2026-11-13 13:30Z lands inside the window after a hot CPI\n4. the unwind is unfinished - funding positive and OI near peak\n5. the 951 low has been tested once only", shape=box, color=red];
+  ticket -> risks;
+}
