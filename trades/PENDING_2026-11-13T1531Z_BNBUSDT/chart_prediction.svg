@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="800" viewBox="0 0 1560 800">
+<rect width="1560" height="800" fill="#0d0e12"/>
+<text x="70" y="26" fill="#e6edf3" font-family="monospace" font-size="16">BNBUSDT 1h  SHORT LIMIT 642  TP 588  SL 686  RR 1.23</text>
+<text x="70" y="48" fill="#9aa7b4" font-family="monospace" font-size="12">history 2026-11-01T21Z-11-13T15Z (vision read) . forecast 11-13T16Z-11-15T15Z . shelf 645-657 . low 622.12 . 48h sigma 4.43%</text>
+<rect x="70" y="133.1" width="1380" height="85.6" fill="#ef4444" opacity="0.1"/>
+<text x="78" y="145.1" fill="#ef4444" opacity="0.85" font-family="monospace" font-size="10">resistance 700-724 (Nov 5 double top 723/724)</text>
+<rect x="70" y="224.0" width="1380" height="44.6" fill="#ef4444" opacity="0.09"/>
+<text x="78" y="236.0" fill="#ef4444" opacity="0.85" font-family="monospace" font-size="10">resistance 686-698.5 (Nov 8 lower high 698.5, Nov 11 686)</text>
+<rect x="70" y="372.0" width="1380" height="42.8" fill="#ef4444" opacity="0.16"/>
+<text x="78" y="384.0" fill="#ef4444" opacity="0.85" font-family="monospace" font-size="10">resistance 645-657 (held 24h on 11-12, broken 11-13)</text>
+<rect x="70" y="571.6" width="1380" height="33.9" fill="#22c55e" opacity="0.14"/>
+<text x="78" y="583.6" fill="#22c55e" opacity="0.85" font-family="monospace" font-size="10">support 591.5-601 (blockchain.news 591.68, liq band 597-598)</text>
+<rect x="70" y="496.4" width="1380" height="31.4" fill="#22c55e" opacity="0.12"/>
+<text x="78" y="508.4" fill="#22c55e" opacity="0.85" font-family="monospace" font-size="10">support 613.3-622.1 (blockchain.news 613.27, low 622.12)</text>
+<line x1="70" y1="682.2" x2="1450" y2="682.2" stroke="#1b1e26"/>
+<text x="1458" y="686.2" fill="#8b949e" font-family="monospace" font-size="11">570</text>
+<line x1="70" y1="646.5" x2="1450" y2="646.5" stroke="#1b1e26"/>
+<text x="1458" y="650.5" fill="#8b949e" font-family="monospace" font-size="11">580</text>
+<line x1="70" y1="610.9" x2="1450" y2="610.9" stroke="#1b1e26"/>
+<text x="1458" y="614.9" fill="#8b949e" font-family="monospace" font-size="11">590</text>
+<line x1="70" y1="575.2" x2="1450" y2="575.2" stroke="#1b1e26"/>
+<text x="1458" y="579.2" fill="#8b949e" font-family="monospace" font-size="11">600</text>
+<line x1="70" y1="539.5" x2="1450" y2="539.5" stroke="#1b1e26"/>
+<text x="1458" y="543.5" fill="#8b949e" font-family="monospace" font-size="11">610</text>
+<line x1="70" y1="503.9" x2="1450" y2="503.9" stroke="#1b1e26"/>
+<text x="1458" y="507.9" fill="#8b949e" font-family="monospace" font-size="11">620</text>
+<line x1="70" y1="468.2" x2="1450" y2="468.2" stroke="#1b1e26"/>
+<text x="1458" y="472.2" fill="#8b949e" font-family="monospace" font-size="11">630</text>
+<line x1="70" y1="432.6" x2="1450" y2="432.6" stroke="#1b1e26"/>
+<text x="1458" y="436.6" fill="#8b949e" font-family="monospace" font-size="11">640</text>
+<line x1="70" y1="396.9" x2="1450" y2="396.9" stroke="#1b1e26"/>
+<text x="1458" y="400.9" fill="#8b949e" font-family="monospace" font-size="11">650</text>
+<line x1="70" y1="361.3" x2="1450" y2="361.3" stroke="#1b1e26"/>
+<text x="1458" y="365.3" fill="#8b949e" font-family="monospace" font-size="11">660</text>
+<line x1="70" y1="325.6" x2="1450" y2="325.6" stroke="#1b1e26"/>
+<text x="1458" y="329.6" fill="#8b949e" font-family="monospace" font-size="11">670</text>
+<line x1="70" y1="289.9" x2="1450" y2="289.9" stroke="#1b1e26"/>
+<text x="1458" y="293.9" fill="#8b949e" font-family="monospace" font-size="11">680</text>
+<line x1="70" y1="254.3" x2="1450" y2="254.3" stroke="#1b1e26"/>
+<text x="1458" y="258.3" fill="#8b949e" font-family="monospace" font-size="11">690</text>
+<line x1="70" y1="218.6" x2="1450" y2="218.6" stroke="#1b1e26"/>
+<text x="1458" y="222.6" fill="#8b949e" font-family="monospace" font-size="11">700</text>
+<line x1="70" y1="183.0" x2="1450" y2="183.0" stroke="#1b1e26"/>
+<text x="1458" y="187.0" fill="#8b949e" font-family="monospace" font-size="11">710</text>
+<line x1="70" y1="147.3" x2="1450" y2="147.3" stroke="#1b1e26"/>
+<text x="1458" y="151.3" fill="#8b949e" font-family="monospace" font-size="11">720</text>
+<line x1="70" y1="111.7" x2="1450" y2="111.7" stroke="#1b1e26"/>
+<text x="1458" y="115.7" fill="#8b949e" font-family="monospace" font-size="11">730</text>
+<line x1="70" y1="76.0" x2="1450" y2="76.0" stroke="#1b1e26"/>
+<text x="1458" y="80.0" fill="#8b949e" font-family="monospace" font-size="11">740</text>
+<line x1="82.5" y1="76" x2="82.5" y2="700" stroke="#1a2028"/>
+<text x="82.5" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">02 Nov</text>
+<line x1="182.9" y1="76" x2="182.9" y2="700" stroke="#1a2028"/>
+<text x="182.9" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">03 Nov</text>
+<line x1="283.3" y1="76" x2="283.3" y2="700" stroke="#1a2028"/>
+<text x="283.3" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">04 Nov</text>
+<line x1="383.6" y1="76" x2="383.6" y2="700" stroke="#1a2028"/>
+<text x="383.6" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">05 Nov</text>
+<line x1="484.0" y1="76" x2="484.0" y2="700" stroke="#1a2028"/>
+<text x="484.0" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">06 Nov</text>
+<line x1="584.4" y1="76" x2="584.4" y2="700" stroke="#1a2028"/>
+<text x="584.4" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">07 Nov</text>
+<line x1="684.7" y1="76" x2="684.7" y2="700" stroke="#1a2028"/>
+<text x="684.7" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">08 Nov</text>
+<line x1="785.1" y1="76" x2="785.1" y2="700" stroke="#1a2028"/>
+<text x="785.1" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">09 Nov</text>
+<line x1="885.5" y1="76" x2="885.5" y2="700" stroke="#1a2028"/>
+<text x="885.5" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">10 Nov</text>
+<line x1="985.8" y1="76" x2="985.8" y2="700" stroke="#1a2028"/>
+<text x="985.8" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">11 Nov</text>
+<line x1="1086.2" y1="76" x2="1086.2" y2="700" stroke="#1a2028"/>
+<text x="1086.2" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">12 Nov</text>
+<line x1="1186.5" y1="76" x2="1186.5" y2="700" stroke="#1a2028"/>
+<text x="1186.5" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">13 Nov</text>
+<line x1="1286.9" y1="76" x2="1286.9" y2="700" stroke="#1a2028"/>
+<text x="1286.9" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">14 Nov</text>
+<line x1="1387.3" y1="76" x2="1387.3" y2="700" stroke="#1a2028"/>
+<text x="1387.3" y="720" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">15 Nov</text>
+<rect x="70" y="76" width="1380" height="624" fill="none" stroke="#2b333d"/>
+<polyline points="70.0,165.1 74.2,161.6 78.4,154.4 82.5,147.3 86.7,136.6 90.9,143.7 95.1,158.0 99.3,168.7 103.5,179.4 107.6,190.1 111.8,200.8 116.0,211.5 120.2,222.2 124.4,229.3 128.5,236.5 132.7,240.0 136.9,236.5 141.1,229.3 145.3,218.6 149.5,211.5 153.6,215.1 157.8,222.2 162.0,225.8 166.2,218.6 170.4,207.9 174.5,211.5 178.7,218.6 182.9,225.8 187.1,232.9 191.3,236.5 195.5,232.9 199.6,222.2 203.8,211.5 208.0,204.4 212.2,197.2 216.4,200.8 220.5,211.5 224.7,222.2 228.9,229.3 233.1,236.5 237.3,240.0 241.5,243.6 245.6,240.0 249.8,232.9 254.0,222.2 258.2,215.1 262.4,207.9 266.5,200.8 270.7,197.2 274.9,204.4 279.1,215.1 283.3,222.2 287.5,229.3 291.6,232.9 295.8,225.8 300.0,215.1 304.2,204.4 308.4,197.2 312.5,200.8 316.7,207.9 320.9,218.6 325.1,229.3 329.3,232.9 333.5,225.8 337.6,215.1 341.8,207.9 346.0,215.1 350.2,229.3 354.4,240.0 358.5,254.3 362.7,282.8 366.9,311.3 371.1,318.5 375.3,314.9 379.5,300.6 383.6,279.2 387.8,257.9 392.0,240.0 396.2,229.3 400.4,218.6 404.5,207.9 408.7,197.2 412.9,186.5 417.1,175.8 421.3,165.1 425.5,154.4 429.6,143.7 433.8,136.6 438.0,133.1 442.2,140.2 446.4,147.3 450.5,154.4 454.7,161.6 458.9,165.1 463.1,158.0 467.3,150.9 471.5,143.7 475.6,136.6 479.8,140.2 484.0,150.9 488.2,161.6 492.4,172.3 496.5,186.5 500.7,204.4 504.9,222.2 509.1,236.5 513.3,247.2 517.5,254.3 521.6,250.7 525.8,243.6 530.0,236.5 534.2,232.9 538.4,236.5 542.5,240.0 546.7,232.9 550.9,229.3 555.1,232.9 559.3,236.5 563.5,229.3 567.6,225.8 571.8,229.3 576.0,232.9 580.2,236.5 584.4,236.5 588.5,232.9 592.7,229.3 596.9,225.8 601.1,229.3 605.3,232.9 609.5,236.5 613.6,232.9 617.8,229.3 622.0,225.8 626.2,229.3 630.4,232.9 634.5,236.5 638.7,240.0 642.9,243.6 647.1,247.2 651.3,250.7 655.5,254.3 659.6,254.3 663.8,250.7 668.0,247.2 672.2,243.6 676.4,240.0 680.5,236.5 684.7,232.9 688.9,229.3 693.1,225.8 697.3,229.3 701.5,232.9 705.6,240.0 709.8,247.2 714.0,254.3 718.2,261.4 722.4,268.5 726.5,275.7 730.7,279.2 734.9,282.8 739.1,286.4 743.3,289.9 747.5,293.5 751.6,297.1 755.8,300.6 760.0,304.2 764.2,300.6 768.4,293.5 772.5,286.4 776.7,279.2 780.9,272.1 785.1,265.0 789.3,257.9 793.5,254.3 797.6,257.9 801.8,265.0 806.0,272.1 810.2,279.2 814.4,286.4 818.5,293.5 822.7,297.1 826.9,300.6 831.1,304.2 835.3,304.2 839.5,300.6 843.6,293.5 847.8,286.4 852.0,279.2 856.2,272.1 860.4,268.5 864.5,272.1 868.7,279.2 872.9,286.4 877.1,293.5 881.3,297.1 885.5,300.6 889.6,304.2 893.8,300.6 898.0,293.5 902.2,286.4 906.4,279.2 910.5,275.7 914.7,279.2 918.9,286.4 923.1,289.9 927.3,286.4 931.5,279.2 935.6,272.1 939.8,268.5 944.0,272.1 948.2,279.2 952.4,286.4 956.5,293.5 960.7,300.6 964.9,307.8 969.1,314.9 973.3,318.5 977.5,314.9 981.6,307.8 985.8,300.6 990.0,293.5 994.2,286.4 998.4,279.2 1002.5,272.1 1006.7,268.5 1010.9,265.0 1015.1,261.4 1019.3,257.9 1023.5,261.4 1027.6,265.0 1031.8,268.5 1036.0,272.1 1040.2,275.7 1044.4,279.2 1048.5,282.8 1052.7,286.4 1056.9,289.9 1061.1,293.5 1065.3,297.1 1069.5,300.6 1073.6,304.2 1077.8,300.6 1082.0,297.1 1086.2,297.1 1090.4,300.6 1094.5,304.2 1098.7,311.3 1102.9,318.5 1107.1,329.2 1111.3,343.4 1115.5,357.7 1119.6,368.4 1123.8,375.5 1128.0,379.1 1132.2,379.1 1136.4,382.7 1140.5,379.1 1144.7,375.5 1148.9,372.0 1153.1,372.0 1157.3,372.0 1161.5,375.5 1165.6,375.5 1169.8,372.0 1174.0,372.0 1178.2,375.5 1182.4,379.1 1186.5,396.9 1190.7,418.3 1194.9,439.7 1199.1,454.0 1203.3,458.8 1207.5,481.2 1211.6,453.4 1215.8,467.6 1220.0,433.5 1224.2,429.0 1228.4,427.2 1232.5,431.9 1236.7,423.7 1240.9,420.1 1245.1,435.0 1249.3,471.0" fill="none" stroke="#2f81f7" stroke-width="1.8"/>
+<polyline points="1253.5,457.5 1257.6,446.8 1261.8,436.1 1266.0,429.0 1270.2,425.4 1274.4,432.6 1278.5,441.5 1282.7,454.0 1286.9,464.7 1291.1,475.4 1295.3,486.1 1299.5,495.0 1303.6,507.5 1307.8,514.6 1312.0,502.1 1316.2,511.0 1320.4,521.7 1324.5,532.4 1328.7,543.1 1332.9,550.2 1337.1,539.5 1341.3,548.5 1345.5,557.4 1349.6,568.1 1353.8,577.0 1358.0,585.9 1362.2,578.8 1366.4,589.5 1370.5,600.2 1374.7,593.0 1378.9,601.9 1383.1,609.1 1387.3,603.7 1391.5,612.6 1395.6,607.3 1399.8,618.0 1404.0,614.4 1408.2,623.3 1412.4,618.0 1416.5,625.1 1420.7,619.8 1424.9,628.7 1429.1,623.3 1433.3,630.5 1437.5,626.9 1441.6,632.3 1445.8,628.7 1450.0,634.0" fill="none" stroke="#ff8a3d" stroke-width="2.2" stroke-dasharray="6,3"/>
+<line x1="1249.3" y1="76" x2="1249.3" y2="700" stroke="#e6edf3" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="1243.3" y="92" fill="#e6edf3" font-family="monospace" font-size="11" text-anchor="end">now</text>
+<line x1="1450.0" y1="76" x2="1450.0" y2="700" stroke="#c084fc" stroke-width="1" stroke-dasharray="2,4"/>
+<text x="1444.0" y="110" fill="#c084fc" font-family="monospace" font-size="11" text-anchor="end">expiry</text>
+<line x1="70" y1="425.4" x2="1450" y2="425.4" stroke="#ffd23f" stroke-width="1.4"/>
+<text x="1444" y="420.4" fill="#ffd23f" font-family="monospace" font-size="11" font-weight="bold" text-anchor="end">entry 642</text>
+<line x1="70" y1="618.0" x2="1450" y2="618.0" stroke="#22c55e" stroke-width="1.4"/>
+<text x="1444" y="613.0" fill="#22c55e" font-family="monospace" font-size="11" font-weight="bold" text-anchor="end">TP 588</text>
+<line x1="70" y1="268.5" x2="1450" y2="268.5" stroke="#ef4444" stroke-width="1.4"/>
+<text x="1444" y="263.5" fill="#ef4444" font-family="monospace" font-size="11" font-weight="bold" text-anchor="end">SL 686</text>
+<line x1="70" y1="360.2" x2="1450" y2="360.2" stroke="#9aa7b4" stroke-width="1" stroke-dasharray="5,4"/>
+<text x="78" y="374.2" fill="#9aa7b4" font-family="monospace" font-size="11">invalidation 660.30 - reclaim of the 24h high voids the short</text>
+<text x="80" y="766" fill="#2f81f7" font-family="monospace" font-size="11">history</text>
+<text x="160" y="766" fill="#ff8a3d" font-family="monospace" font-size="11">forecast</text>
+</svg>

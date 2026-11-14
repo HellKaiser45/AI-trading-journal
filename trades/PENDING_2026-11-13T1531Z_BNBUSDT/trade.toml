@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "BNBUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "LIMIT"
+price    = 642.0
+
+[exit]
+tp       = 588.0
+sl       = 686.0
+
+[schedule]
+place_at  = 2026-11-13T15:31:00Z
+expire_at = 2026-11-15T15:31:00Z

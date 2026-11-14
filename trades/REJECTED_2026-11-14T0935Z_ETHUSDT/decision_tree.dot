@@ -1,0 +1,68 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  subgraph cluster_input {
+    label="INPUT — 2026-11-14T09:35Z, ETHUSDT 1h, spot 1908.50";
+    chart [label="chart read by vision\nlast 1907.20 (-1.25%)\npeak ~2790 Oct 1-5\nAug base 1862-1918\ndrop -32.0% from 2806.76"];
+    data [label="exchange confirm\n11-14 low 1875.00 @02:00Z\n90d low 1868.01 @08-16\nr7d -14.98%\nATR48h 21.83 (1.14%)"];
+  }
+
+  subgraph cluster_measure {
+    label="MEASUREMENT — 9000 hourly bars, non-overlapping blocks";
+    p_fill [label="P(fill) for LONG 1878 limit = 0.70"];
+    p_tp   [label="P(TP|fill) = 0.250\nP(SL|fill) = 0.643"];
+    ev     [label="EV = -0.150%\nCI95 [-0.63, +0.32]", color=red];
+    grid   [label="180-geometry grid x 3 regimes\nCI&gt;0: 0/180 uncond, 0/180 dd25, 1/180 dd30\n(after widest) -> NO edge"];
+    boot   [label="block bootstrap B=4000\nevery CI straddles zero"];
+  }
+
+  subgraph cluster_failure {
+    label="FALSIFICATION ATTEMPTS — all failed to rescue it";
+    widen  [label="widen stop past 1.5 ATR?\nSL1840 (1.77 ATR) EV -0.267\nSL1835 (2.00 ATR) EV -0.459\nWORSE, not better", color=red];
+    horizon[label="extend to 120h?\nall 9 variants mildly +\nbut CI [-0.64,+1.56] n=17\n= drift, not edge"];
+    barrier[label="symmetric barrier asymmetry?\ndown-first 0.55 at 1.5%\nup-first 0.53 at 2.0%\nno exploitable scale"];
+    low90  [label="buy the 90d low?\n13 independent episodes in 7y\n3 in the hourly year\nUNUSABLE n", color=red];
+  }
+
+  subgraph cluster_cause {
+    label="CAUSE + POSITIONING";
+    cause [label="NOT an ETH event:\nJensen Huang resigned NVDA CEO 11-12\nPPI +6.5% y/y highest since Nov-2022\nleg 1 preceded PPI by 10h"];
+    oi    [label="OI in ETH terms -2.21% only\nand ROSE into leg 1\npositions REPLACED not cleared", color=red];
+    fund  [label="funding +0.00004631%/8h flat"];
+    ls    [label="retail 78% long, ADDED into low\ntop trader 65% long"];
+    etf   [label="ETF -184.6M/11-09, -144.8M/11-11\n+2.3M/11-13 (first inflow)"];
+  }
+
+  subgraph cluster_jev {
+    label="JEV CONCLAVE";
+    r1 [label="R1 scope: chart_only 0.56 / eth_specific 0.44\nchart_only CONTRADICTED on catalyst req\n-> searched eth_specific"];
+    r2 [label="R2 with no_trade on ballot: no_trade 0.93\nREJECTED AS A READING\n(manual: no_trade always wins)"];
+    r3 [label="R3 trades only: escaped to 'none' 0.55\nlong_1878 0.34 | long_mkt 0.07 | short_1938 0.02\nlong_1878 CONTRADICTED req1 (1.40 ATR)"];
+    r4 [label="R4 jev_noul 9 propositions\npositive-EV long 0.25 | short 0.23\ncapitulation 0.06 | shelf holds 0.54\n+EV attainable 0.40 | stop outside noise 0.29\nNOTHING reached auto-accept"];
+  }
+
+  decision [label="REJECTED\nno trade\nmeasured absence of edge", shape=diamond, color=red, style="rounded,filled", fillcolor="#ffe0e0"];
+
+  chart -> data -> p_fill -> p_tp -> ev -> grid -> boot -> decision;
+  ev -> widen -> decision;
+  ev -> horizon -> decision;
+  ev -> barrier -> decision;
+  ev -> low90 -> decision;
+  cause -> oi -> decision;
+  oi -> fund -> decision;
+  oi -> ls -> decision;
+  oi -> etf -> decision;
+  r1 -> r2 -> r3 -> r4 -> decision;
+  boot -> r3 [style=dashed, label="evidence"];
+  r3 -> widen [style=dashed, label="req1 contradicted\n-> try to repair"];
+
+  counterfactual [label="COUNTERFACTUAL (labelled, not a result)\nSHORT 1908.50 would have paid\nif a bounce to 1875 came first\nEV -0.008 CI [-0.61,+0.60]\nALSO zero", shape=note];
+  ev -> counterfactual [style=dotted];
+
+  lesson1 [label="LESSON 1\nA 'return to the origin' base is not\nan entry signal: 1868-1875 holds 0.54", shape=note];
+  lesson2 [label="LESSON 2\nNo capitulation = no reversal edge.\nOI rose into the fall on ETH.", shape=note];
+  decision -> lesson1 [style=dotted];
+  decision -> lesson2 [style=dotted];
+}

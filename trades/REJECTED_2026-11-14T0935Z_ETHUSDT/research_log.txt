@@ -1,0 +1,179 @@
+THESIS
+ETFUSDT is not traded — this is ETHUSDT, 1h, read 2026-11-14T09:35Z, spot 1908.50.
+Expectation BEFORE measuring: price has returned to the Aug 2026 base (1862-1918) that
+launched the Aug-Oct rally, after a -32.0% drawdown from 2806.76 and a -14.98% week.
+That is textbook "return to the origin", which looks like a high-quality long. This log
+records whether that intuition survived measurement. It did not.
+
+DATA CHECKED
+- news: one narrow ETH-specific pass (JEV-selected over chart_only / full_market).
+  JEV flagged chart_only as CONTRADICTED on the catalyst requirement (0.56 vs 0.44),
+  so a search was commanded rather than assumed unnecessary.
+- prices: Binance fapi primary. 9000 hourly bars 2025-11-04T10:00Z -> 2026-11-14T09:00Z
+  (artifacts/eth_1h.json) and 2541 daily bars 2019-12-01 -> 2026-11-14.
+- other assets: BTC context read; ETH -32.0% from its 60d high vs BTC -15.13% from 11-05.
+- forums: not searched (JEV excluded that scope).
+- tokenomics: no ETH unlock in the window; staking exit-queue reports noted below.
+
+LINKS
+- (source doc) artifacts/eth_research/ETH_source_doc_2026-11-14.md
+- Binance fapi: /fapi/v1/klines, /fundingRate, /futures/data/openInterestHist,
+  /globalLongShortAccountRatio, /topLongShortPositionRatio, /takerlongshortRatio
+- Deribit public API (options expiry 11-15 08:00Z, 32,125 contracts, max pain 1960)
+- https://www.bls.gov/schedule/news_release/ppi.htm
+- https://zips.z.cash/... NOT applicable this run (ZEC trade only)
+- Farside daily ETF flow column (11-09 -$184.6M, 11-11 -$144.8M, 11-13 +$2.3M)
+
+================================================================
+VISION READ vs FETCHED DATA  (both kept visible, as the manual requires)
+================================================================
+Vision read of the image: last plotted value 1907.20, label "-1.25%"; y-axis 1800-2880;
+x-axis 4 Aug -> 17 Nov; peak ~2790 near 1-5 Oct; low at far right ~1875-1890; a sharp
+one-day vertical advance 19 Aug from ~1917 to ~2250 (the Aug base breakout).
+Exchange data at the same moment: last close 1908.50 at 09:00Z; 11-14 low 1875.00 at
+02:00Z; 60d high 2806.76 (2026-09-21); 90d low 1868.01 (2026-08-16).
+Agreement is close. Differences recorded: my "peak ~2790" is 2806.76 (-0.6%); my
+"~1917 to ~2250" matches the 08-19 session exactly (open 1917.09, close 2252.16).
+graphpoints.csv keeps the VISION numbers, not the exchange ones, per the manual.
+
+================================================================
+BASE RATES  (journal fill model, NON-OVERLAPPING 48h blocks)
+================================================================
+Directional, close-to-close 48h:
+  ALL        n=187  median -0.11%  P(up) 49%
+  dd<=-25%   n= 49  median +0.36%  P(up) 51%
+  dd<=-30%   n= 38  median +0.70%  P(up) 55%
+MFE/MAE, 48h, dd<=-30%: MFE median 4.01% (p75 6.17%) | MAE median 2.47% (p75 5.35%).
+Saturday 09Z placements, 53 windows, 48h close-to-close:
+  mean +0.50%  median +0.99%  sd 3.63  P(up) 62%  t-stat 1.00  <- not significant.
+
+GRID SEARCH, 180 geometries (LONG/SHORT x entry dip x TP x SL) x 3 regimes,
+block bootstrap on non-overlapping windows:
+  EV CI95 entirely ABOVE zero:  ALL 0/180 | dd<=-25% 0/180 | dd<=-30% 1/180
+  EV CI95 entirely BELOW zero:  ALL 9/180 | dd<=-25% 3/180 | dd<=-30% 20/180
+The single positive combo (LONG entry -1.0% TP 1.0% SL 2.5%, EV +0.408, CI [+0.01,+0.75],
+n=38) is exactly the yield expected from 180 attempts at the 5% level, and it did not
+reproduce at 72h or 120h horizons. Treated as multiple-comparisons noise, NOT an edge.
+13 of the 20 negative-CI combos at dd<=-30% were SHORT geometries.
+
+================================================================
+CANDIDATE TICKETS, measured then rejected
+================================================================
+All four were run on non-overlapping 48h blocks at dd<=-30% (the current regime):
+  LONG  LIMIT 1878  TP 1929  SL 1845  RR 1.70  EV -0.150  CI [-0.63,+0.32]
+  LONG  MARKET 1908.50 TP 1955 SL 1868 RR 1.15  EV +0.179  CI [-0.52,+0.88]
+  SHORT LIMIT 1938  TP 1878  SL 1965  RR 2.22  EV -0.110  CI [-0.61,+0.44]
+  SHORT MARKET 1908.50 TP 1875 SL 1948 RR 0.85  EV -0.008  CI [-0.61,+0.60]
+Widening the stop past 1.5 ATR (the journal's documented failure mode) did not fix it;
+it made every LONG worse:
+  LONG 1878 TP 1929 SL 1840 (1.77 ATR)  EV -0.267  CI [-0.80,+0.26]
+  LONG 1878 TP 1935 SL 1840 (1.77 ATR)  EV -0.359  CI [-0.89,+0.18]
+  LONG 1878 TP 1945 SL 1840 (1.77 ATR)  EV -0.337  CI [-0.88,+0.23]
+  LONG 1880 TP 1935 SL 1840 (1.86 ATR)  EV -0.287  CI [-0.87,+0.30]
+Extending the horizon to 120h: all nine widened variants turn mildly positive (best
+LONG 1880 TP1935 SL1840 EV +0.493) but every CI still straddles zero [-0.64,+1.56] on
+n=17. Not evidence of an edge, merely of drift.
+
+================================================================
+FIRST-TOUCH ASYMMETRY (why the tight stop is not the whole story)
+================================================================
+Symmetric barriers, 48h, dd<=-30%, n=38:
+  +1.5%/-1.5%: down-first 0.55   +2.0%/-2.0%: up-first 0.53
+  +2.5%/-2.5%: up-first 0.55     +3.0%/-3.0%: up-first 0.53
+  +4.0%/-4.0%: up-first 0.47     +5.0%/-5.0%: up-first 0.34
+There is no clean asymmetry to exploit; the edge is inside the noise band at every scale.
+
+================================================================
+CAUSE OF THE DROP (facts, primary sources)
+================================================================
+NOT an Ethereum event. Macro/AI-complex shock with ETH supply overlays.
+- Jensen Huang resigned as NVIDIA CEO 2026-11-12, effective immediately (CNBC/Reuters/
+  NYT/CBS); NVDA -10%+.
+- Oct PPI printed 2026-11-13 13:30Z at +6.5% y/y, the largest since Nov 2022 (BLS).
+- Liquidation totals DISAGREE by 2.4x: ETH $106.07M (Coinglass via BeInCrypto), $226.9M
+  (MarginPad calendar 11-13), $256.52M (Coinglass 24h to 11-14). Market-wide $680.81M to
+  $1.23B. Report the range, not a point estimate.
+- Sequencing caveat: both legs were Asia-session (03:00Z and 02:00Z) and leg 1 preceded
+  the 13:30Z PPI print by ten hours. PPI conditions the move; it did not trigger leg 1.
+  No discrete trigger timestamped to leg 1 was found.
+RULED OUT: no protocol incident, no client bug, no finality loss, no foundation sale, no
+hack, no exchange problem. The $6.36B Binance breach was 2026-10-29 and its 204,500 ETH
+was already replenished per Binance's 11-12 notice.
+
+================================================================
+POSITIONING: NO CAPITULATION  (this is the finding that killed the long)
+================================================================
+- OI in ETH terms only -2.21% over 7 days; it ROSE into leg 1 (2,308k -> 2,350k ETH) and
+  rebuilt within 90 minutes of the 02:25Z drop. Positions were REPLACED, not cleared.
+  A repricing, not a deleveraging reset.
+- Funding +0.00004631%/8h now; 12-settlement mean ~3.55% annualised. No extreme either way.
+- Retail account long/short 3.59 (78% long now) vs 3.95 a week ago; retail ADDED into the
+  11-13 low.
+- Top-trader notional 1.87 (65% long) vs 2.01 a week ago.
+- ETH spot ETF: -$184.6M 11-09, -$144.8M 11-11, +$2.3M 11-13 (first inflow since 11-04,
+  Farside). The widely repeated "-$695.9M November outflows" does NOT reconcile with the
+  Farside daily column, which sums to -$586.4M for 11-02 -> 11-11. Use daily prints.
+- Staking exit queue reported inflating 4,320 -> 269,951 ETH between 11-06 and 11-13:
+  ONE publisher reading validatorqueue; that API is a dead GitHub Pages link and
+  beaconcha.in needs a key, so this could NOT be verified at source. Unverified.
+- BTCS (Nasdaq) disclosed selling ETH below cost to defend a $64.1M Aave loan with a
+  liquidation line near $1,717.
+
+================================================================
+CALENDAR
+================================================================
+Inside 2026-11-14 -> 2026-11-16: nothing ETH-specific. One dated item, 2026-11-16, ACDT,
+where Dedaub/ChainSecurity/EF present Glamsterdam EIP-8037/8038 findings with "no
+decision pre-committed" in the EF's own words. Nothing activates. Hoodi fork was postponed
+2026-10-22 with no new date; mainnet undecided. No SEC decision (next crypto-regulatory
+dates Dec 7 and Dec 14). No unlock. No Binance/OKX ETH announcement.
+Options expiries inside the window (Deribit, public API, not a dashboard):
+  2026-11-15 08:00Z  32,125 contracts  max pain 1960  puts 1900 (3,543), 1800 (3,122)
+  2026-11-16 08:00Z  28,651 contracts  max pain 1980
+  Both small vs 11-20 (126,650) and 11-27 (273,805).
+After the window: NVIDIA FQ3 on 2026-11-17 ~21:20Z (call 22:00Z), CONFIRMED from the
+primary newsroom release. Note that release predates the CEO resignation, so "date
+unchanged" rests on secondary reporting.
+
+================================================================
+DECISION  (JEV, iterated)
+================================================================
+Round 1, scope: chart_only 0.56 / eth_specific 0.44 / full_market 0.00. chart_only
+  flagged CONTRADICTED on the catalyst requirement -> eth_specific executed instead.
+Round 2, with no_trade on the ballot: no_trade 0.93. REJECTED AS A READING, per the
+  manual's warning that no_trade always wins when offered against trade candidates.
+Round 3, trade candidates only, no escape hatches: escaped to 'none' 0.55;
+  long_limit_1878 0.34 | long_market_1908 0.07 | short_limit_1938 0.02 |
+  short_market_1908 0.00. long_limit_1878 CONTRADICTED on requirement 1 (its 1.60% stop
+  is 1.40 ATR48h, inside the 1.5 ATR floor). Widening it was then measured and made
+  every LONG variant worse, so the contradiction could not be repaired.
+Round 4, independent axis (jev_noul, 9 propositions):
+  positive EV long 48h                 0.25 uncertain
+  positive EV short 48h                0.23 uncertain
+  today = capitulation resetting book  0.06 unlikely
+  1868-1875 holds to 11-16             0.54 uncertain  (coin flip)
+  48h trade can be given +EV           0.40 uncertain
+  waiting below 1875 improves entry    0.56 uncertain
+  0-for-6 LONG record is decisive      0.46 uncertain
+  weekend materially changes odds      0.58 uncertain
+  1.6% stop is outside noise           0.29 uncertain
+  NO proposition reached auto-accept. Nothing is confidently true here.
+
+RESULT: REJECTED. No trade placed. Reason is measured absence of edge, not caution:
+four specific geometries all have EV CIs straddling zero; a 180-geometry grid produced
+zero reproducible positive combos; the 1868-1875 shelf is a 0.54 coin flip; and the
+positioning data refuses the "capitulation" premise the long needed (0.06).
+
+INVALIDATION / WHAT WOULD CHANGE THE READ (recorded for the next pass):
+- A close below 1868.01 (the 90d low) breaks the Aug base floor and turns this into a
+  measured continuation setup rather than a base-hold long.
+- A reclaim and hold above 1943 (the 11-14 bounce high) with OI in ETH terms FALLING
+  would supply the missing deleveraging signal.
+- OI in ETH terms still rising while price falls = the book is being replaced, and the
+  same conclusion (no edge) applies.
+
+FILES
+- Data: artifacts/eth_1h.json (9000 hourly bars)
+- Measurements: artifacts/eth_research/{grid.py,geom3.py,setup.py,weekend.py,tickets.py,
+  widen.py,measure_eth3.py,low90.py,daily_setup.py,regret.py}
+- Source doc: artifacts/eth_research/ETH_source_doc_2026-11-14.md

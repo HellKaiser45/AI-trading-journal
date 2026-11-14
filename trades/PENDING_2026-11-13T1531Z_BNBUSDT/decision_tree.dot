@@ -1,0 +1,77 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  idea [label="IDEA 2026-11-13T1531Z BNBUSDT 1h\nvision read: 12d lower highs, 645-657 shelf broken,\nlast print 632.64, no support visible below"];
+
+  // stage 2 gate
+  scope [label="JEV R1 search scope\nbnb_only 0.71 | both 0.21 | price_only 0.04 | no_search 0.00", shape=diamond];
+  idea -> scope;
+
+  research [label="research pass (Binance fapi primary)\n3 premises CORRECTED:\n- low was 622.12, not 632.64\n- peak 723.99 on 11-04, not 11-05\n- broad beta, NOT idiosyncratic"];
+  scope -> research;
+
+  // stage 3
+  learn [label="learning pass, 19 terminal folders\nsum -0.80% | win rate 18.2%\nboth wins: stop beyond structure, never tested\n6 of 9 losses: 1.0-1.5% stop eaten by noise"];
+  research -> learn;
+
+  // direction
+  r2 [label="JEV R2 direction (no_trade on ballot)\nno_trade 0.69 | short 0.21 | long 0.02\nflagged: ballot bias, not treated as answer", shape=diamond];
+  learn -> r2;
+
+  r3 [label="JEV R3 trade-only\nlong_622 0.45 | shorts 0.04-0.07\nCONTRADICTED all short stops (only 0.4-0.6% past 660.30)", shape=diamond];
+  r2 -> r3;
+
+  r4 [label="JEV R4 adversarial\nshort 648/670/601 -> 0.89, both reqs supported\nlong 622 rejected once stop entered liq band", shape=diamond];
+  r3 -> r4;
+
+  // the reversal
+  confirm [label="JEV R5 independent confirmation (jev_noul)\nREFUTED the R4 ticket:\nstop 670 beyond noise 0.19\nrise to 648 in 48h 0.40\nbeats 18.2% base rate 0.22", shape=diamond];
+  r4 -> confirm;
+
+  withdraw [label="TICKET WITHDRAWN\nno trade placed on a refuted premise"];
+  confirm -> withdraw;
+
+  kept [label="what R5 DID confirm\nnext 48h down 0.76\n645-657 shelf resistance 0.83\nlong side structurally worse 0.89 (auto)"];
+  confirm -> kept;
+
+  r6 [label="JEV R6 final geometry, trade-only ballot\n642/686/588 -> 0.83 | 645/686/601 -> 0.16\n651/688/585 -> 0.00 | 645/686/588 -> 0.01", shape=diamond];
+  kept -> r6;
+  withdraw -> r6;
+
+  r7 [label="JEV R7 final confirmation\ndirection 0.78 | target path 0.73\nbounded risk 0.86 (auto) | retest 645 only 0.45", shape=diamond];
+  r6 -> r7;
+
+  final [label="SHORT LIMIT 642 / TP 588 / SL 686\n+8.41% / -6.85% | RR 1.23 | expire 11-15T15:31Z", shape=diamond, style="rounded,filled", fillcolor="#ffd23f"];
+  r7 -> final;
+
+  // rejected alternatives and why
+  rej_long [label="REJECTED long 622 wick-buy\nsingle-print low, 71% retail long,\nOI unwashed, no reclaim, no higher low\nJEV 0.02 | long side 0.89 against", fillcolor="#f2dede"];
+  rej_645 [label="REJECTED entry 645\nnever traded; needs marginal new high above 642.48\nBNB 10-30 died the same way (-0.75%)", fillcolor="#f2dede"];
+  rej_670 [label="REJECTED stop 670\nR5: survives noise only 0.19\nin the 660-686 gap, below Nov-11 high 686", fillcolor="#f2dede"];
+  rej_mkt [label="REJECTED short MARKET 631\nsells 1.5% off the 13d low after -7.2% in 2d\n= LOSS-1.45% SOLUSDT adverse-fill shape", fillcolor="#f2dede"];
+  rej_tp601 [label="REJECTED TP 601 as target\nRR 1.07 - too thin for a 4.43% sigma window", fillcolor="#f2dede"];
+
+  final -> rej_long;
+  final -> rej_645;
+  final -> rej_670;
+  final -> rej_mkt;
+  final -> rej_tp601;
+
+  // risk record
+  risk [label="EV under driftless walk = +0.00%\nP(TP first) 44/(44+54) = 0.449\ntaken as geometry with a stop outside noise,\nNOT as a proven edge"];
+  final -> risk;
+
+  why_stop [label="stop 686 = 3.9 x ATR4h from entry,\nbeyond the Nov-11 lower high 686,\noutside all measured structure"];
+  final -> why_stop;
+
+  why_entry [label="entry 642 = the MEASURED 642.48 print,\nno marginal new high required\n(cure for EXPIRED BNB 2026-10-30)"];
+  final -> why_entry;
+
+  why_tp [label="TP 588 below 591.68 published support,\nthrough the 597-598 liq band -> accelerates"];
+  final -> why_tp;
+
+  caveat [label="CAVEATS\nP(fill) weakest link - 6/19 folders never filled\nzero-catalyst weekend, one binary catalyst (0.81)\nfunding 6 of 7 settlements at 0.0000% weakens\nthe crowded-long reading (0.61)", fillcolor="#fff3cd"];
+  final -> caveat;
+}
