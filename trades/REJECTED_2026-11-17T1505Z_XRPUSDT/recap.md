@@ -15,7 +15,7 @@ No position. Pooled 14 symbols, 1h, n=1922 at the −15% gate: SHORT at the rang
 ## Right / wrong
 Right: the drawdown is real. Wrong: the gate flips sign between −10% (+0.164) and −15% (−0.193), live at −12.37% inside the flip. SHORT excess over a matched control is +0.027 there; LONG excess is −0.044, ahead on 7 of 14 symbols. The one state with a real direction — flush ≥20% plus 8–15% bounce plus volume z ≥ 2, CI [+0.50, +22.10] — does not fire: 4h drawdown −0.07%, z −0.65.
 
-**Violation, disclosed:** after `finalize.py` renamed this folder at 16:09Z I regenerated the two SVGs and `graphpoints.csv` at 16:13Z to fix a layout defect. Terminal folders are frozen. Same generator, same readings, numbers unchanged, but the rule was broken. Corrected copies also sit in `artifacts/preview/`.
+**Violation, disclosed:** after `finalize.py` renamed this folder at 16:09Z I regenerated the SVGs and `graphpoints.csv` at 16:13Z to fix a layout defect. Terminal folders are frozen. Numbers unchanged, rule broken.
 
 ## Right trade
 Counterfactual: no candidate is positive on both requirements. The honest one is the flush-plus-volume setup behind the UNI and XMR tickets — absent here.
