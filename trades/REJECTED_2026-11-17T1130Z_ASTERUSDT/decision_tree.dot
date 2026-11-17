@@ -1,0 +1,47 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  chart [label="chart read (vision)\nASTERUSDT 4h, live 0.5816\nbar 11-17 08:00 close 0.5861\ndd20 -17.73%  bounce +21.80%  volz -0.36\nATR14 6.51% = 95.9th pct of own history"];
+  state [label="state fixed BEFORE geometry search\n dd20 in [-23,-14]\n bounce off 48h low in [18,30]\n volz <= 0\n=> 103 events / 13 syms / 25 months"];
+  chart -> state;
+
+  state -> ctrl_atr [label="control 1"];
+  ctrl_atr [label="ATR-MATCHED control\n95-100pct band:\n events n=99  EV +2.303%\n non-event n=7484  EV +0.143%\n delta +2.160%\n=> state NOT redundant with vol"];
+  ctrl_atr -> ok_state [label="PASS"];
+
+  state -> ctrl_fill [label="control 2"];
+  ctrl_fill [label="FILL ARTIFACT control\nmedian fill delay 2 bars (8h)\n47% fill on bar 1\nwithin-bar retrace only +0.391%\nvs limit EV ~+2.0%\nforced 18-bar hold: +2.255%\n=> not the end-of-window artifact"];
+  ctrl_fill -> ok_state [label="PASS"];
+
+  state -> ctrl_dir [label="control 3"];
+  ctrl_dir [label="DIRECTION control\npaired LONG-SHORT +1.219%\n95% CI [-1.997,+4.276]\nLONG>SHORT on 48/103 events\nmarket entry  +0.438%\n95% CI [-2.028,+2.948]\n=> direction is a COIN FLIP";
+  ctrl_dir -> fail_dir [label="FAIL", color="red", fontcolor="red"];
+  fail_dir [label="limit premium +1.459pp\n< entry discount 0.6ATR = 3.91%\nEV is geometric, not directional", color="red"];
+
+  grid [label="wide-stop grid, era robustness\nLONG lim -.6ATR tp 3.0ATR sl 3.0ATR\nn=103  EV +1.897%\nmonth CI [+0.190,+3.581]\nP(EV<=0)=0.015\ndrop3best-months +1.211%\ndrop5best-events  +0.949%\nstop 19.54% clears 95.0% of envelope"];
+  state -> grid;
+  grid -> long_cand [label="supported on 2/3"];
+  short_cand [label="SHORT same geometry\nEV +0.678%\nCI [-1.011,+2.446]\ndrop5best-events -0.072%\nweaker on every cut", style=dashed];
+  state -> short_cand;
+
+  long_cand [label="LONG LIMIT 0.5589\nTP 0.6725 / SL 0.4452\nRR 1.00"];
+  long_cand -> jev [label="requirement 3"];
+  jev [label="JEV decide  (3 candidates, 3 requirements)\nno_ticket 0.91\nlong_wide 0.07\nshort_wide 0.00"]; 
+  jev -> verdict [label="contradicted: EV rests on the entry discount"];
+  verdict [label="NO TRADE\nREJECTED_2026-11-17T1130Z_ASTERUSDT", color=red];
+
+  rejected_alt [label="alternatives considered and dropped", shape=diamond];
+  state -> rejected_alt;
+  rejected_alt -> a1 [label="1.5 ATR stop"];
+  a1 [label="covers only 83.8% of ASTER envelope\nJEV contradicted it\n(correct: my own requirement violated)"];
+  rejected_alt -> a2 [label="t16 market +8.027%"];
+  a2 [label="MY BUG: fill index 0 -> loop from bar 1\ncorrect value +0.457%"];
+  rejected_alt -> a3 [label="t10 SHORT==LONG print"];
+  a3 [label="case bug 'SHORT' vs 'short'\nrewritten t11-t19"];
+  rejected_alt -> a4 [label="absolute % geometry"];
+  a4 [label="12% stop = 15 ATR on TRX\n1.84 ATR on ASTER\nall t9+ is ATR-normalised"];
+  rejected_alt -> a5 [label="ASTER own 2 events"];
+  a5 [label="short +19.51%/+6.77%\nlong -6.91%/+5.02%\nn=2, NOT evidence\nnot used to pick a side"];
+}

@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "XMRUSDT"
+side     = "LONG"
+
+[entry]
+type     = "LIMIT"
+price    = 490.56
+
+[exit]
+tp       = 529.8
+sl       = 451.32
+
+[schedule]
+place_at  = 2026-11-16T11:46:32Z
+expire_at = 2026-11-21T12:00:00Z

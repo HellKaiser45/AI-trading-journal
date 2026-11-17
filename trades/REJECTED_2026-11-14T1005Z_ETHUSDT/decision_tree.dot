@@ -1,0 +1,52 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  idea [label="IDEA 2026-11-14T10:05Z ETHUSDT\nspot 1909.06 · 1h\n-24.4% from 30d high\n1.7% above the 1878 low"];
+
+  chart [label="chart read (vision)\nAug base 1862-1918 = two weeks, launched the rally to 2806.76\nfive weeks of lower highs: 2436-2450 -> 2237-2253 -> 2052-2116\n2052-2116 shelf broken on 11-13\ninvalidation: 1878 break / 1943 reclaim"];
+
+  t1 [label="TEST 1  1h data, 60k bars, 5 syms, 1.37y\nSHORT TP3.0/SL3.0 H48 random entry\nWR 54.4% vs 50.0% needed · EV +0.279%\ncond dd<=-15%: n=3238 EV +0.279 halves +0.323/+0.204 5/5 syms"];
+
+  t2 [label="TEST 2  same trade, UNCONDITIONAL\nn=9345 EV +0.115\nfilter adds only +0.164\nLONG -0.281 cond vs -0.115 uncond\n=> filter is SYMMETRIC BETA, not signal", color=red];
+
+  t3 [label="TEST 3  same rule, 9y DAILY, by era\n2017-19 n=66  EV +0.394\n2020-22 n=609 EV -0.360\n2023-24 n=737 EV -0.053\n2025-26 n=676 EV -0.001\n3 of 4 eras negative/flat", color=red];
+
+  t4 [label="TEST 4  geometry sweep, 60k independent 1h bars\n3000 samples/sym/config\nTP1.5/SL3.0  L -0.016  S -0.001\nTP2.0/SL4.0  L -0.004  S +0.013\nTP2.0/SL6.0  L -0.040  S +0.033\nno pair positive for both sides", color=red];
+
+  t5 [label="TEST 5  LIMIT 1 ATR, dd<=-20%\n7 symbols NOT used to design it\nn=274 EV -1.50 CI [-3.48,+0.46]\nP(win) 0.434 · fill 0.323", color=red];
+
+  t6 [label="TEST 6  180-geometry grid on ETH, 3 regimes\n0/180 reproducible EV>0", color=red];
+
+  t7 [label="TEST 7  ETH NN analogues (200 of 11230, no lookahead)\nSHORT TP3/SL3 EV +0.522\nearlier 100 +0.825 · later 100 -0.271\nUNSTABLE", color=orange];
+
+  t8 [label="TEST 8  journal's own 22 trades\nTP1.5% counterfactual +22.86% vs actual -5.04%\nbut in-sample, 22 overlapping, and TEST 4 shows 0\n=> selection, rejected", color=orange];
+
+  book [label="order book\nOI(ETH) -2.21% wk, ROSE into leg 1\nfunding flat · retail 78% long and adding\ntop traders 65% long\nNOT a capitulation (jev_noul 0.06)"];
+
+  jev [label="JEV decide · 4 candidates · 2 requirements\necape hatches on\nreject_no_trade 1.00\nevery trade candidate contradicted on both requirements", shape=diamond, color=red];
+
+  idea -> chart;
+  chart -> t1;
+  t1 -> t2 [label="does the filter",
+           style=dashed];
+  t2 -> t3 [label="hold across era?"];
+  t3 -> t4 [label="any geometry?"];
+  t4 -> t5 [label="any entry?"];
+  t5 -> t6;
+  t6 -> t7;
+  t7 -> t8;
+  t8 -> book;
+  chart -> book [style=dotted];
+  book -> jev;
+  t2 -> jev [style=dotted];
+  t3 -> jev [style=dotted];
+  t4 -> jev [style=dotted];
+  t5 -> jev [style=dotted];
+  jev -> rejected [label="1.00"];
+
+  rejected [label="REJECTED\nno trade.toml\nno position", color=red, penwidth=2];
+  rejected -> lesson [style=dotted];
+  lesson [label="1. a drawdown filter that moves both sides equally\n   is beta, not signal: test conditional vs unconditional\n2. no TP/SL geometry earns anything on 60k independent bars:\n   the entry must carry the edge, not the exits"];
+}

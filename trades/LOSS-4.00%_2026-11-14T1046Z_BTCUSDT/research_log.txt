@@ -1,0 +1,62 @@
+THESIS
+This ticket is written at the operator's explicit and repeated direction, NOT because a
+positive edge was found. The measured expected value is approximately zero. That is
+stated first because it is the most important fact about this position.
+
+Expectation under test: BTCUSDT at 67,297.11 after a fall from a 24h high near 69,600,
+close under SMA50(1h) 69,634.55 and 7d return -11.45%. A LIMIT at 66,163.41 (2 ATR
+below close, -1.68%) buys the continuation of that dip; TP 67,486.68 (+2.00%), SL
+63,516.87 (-4.00%), 48h window.
+Invalidation: a close below 65,000 invalidates the dip-buy premise before either level.
+
+WHAT THE MEASUREMENT ACTUALLY SAYS  (read this before the ticket)
+Same geometry, same regime filter, 12 symbols x 19,000 hourly bars, 2024-09-13 to
+2026-11-14, train/test split at 2025-10-14, settlement per the manual including
+"only SL counts in the fill candle":
+- Pooled n=47,068: EV -0.137%. Symbols positive on BOTH halves: 0 of 12.
+- BTCUSDT specifically: n=3,607, P(fill) 0.632, ALL EV +0.006%, h1 +0.022, h2 -0.005.
+  That is zero to three decimal places and BELOW any realistic fee (4-10 bp per side).
+- TP2/SL2 variant on BTC: ALL +0.026%, h1 +0.027, h2 +0.026. Also below fee.
+- The regime filter makes the pooled result WORSE (-0.073% unfiltered vs -0.137%).
+
+FOUR RESULTS FROM THIS RUN THAT I HAD TO DISCARD AS MY OWN ERRORS
+1. AVAX LONG TP2/SL4 first printed +0.417% with both halves positive and appeared to be
+   the only survivor. Cause: I applied the TP check to the fill candle. The manual says
+   only SL counts there. Corrected: -0.026%, and all 16 AVAX geometry variants fail.
+2. A "market-neutral" +1.873% per 48h with all five eras positive. This was arithmetic,
+   not edge: (exit-entry)/entry minus (exit-close)/close is approximately
+   (close-entry)/close = 2.75%, the entry discount itself. The same test on all 12
+   symbols returned +0.920% to +2.777% for every single symbol, which gave it away.
+3. Pre-registered H1 cross-sectional 7d momentum passed at +0.420%, then measured
+   +0.422% for equal-weight buy-and-hold (excess -0.002%) and -0.045% market-neutral.
+4. H6 Friday-to-Sunday long +0.269% vs +0.099% baseline, but exactly +0.000%
+   market-neutral, and Tuesday scores higher at +0.346%.
+
+WHY THIS SYMBOL AND NOT ANOTHER (JEV, not preference)
+jev_decide, 4 trade candidates, no no_trade in the ballot per the manual, 2 requirements:
+"not measurably negative EV" and "disclosed honestly". btc_zero_ev selected 0.95;
+bnb_negative, avax_bugged and eth_negative each contradicted on BOTH requirements.
+BNB was additionally excluded because a SHORT limit 642 is already pending on it.
+
+DATA CHECKED
+- prices: Binance klines 1h, 19,000 bars per symbol, 12 symbols, fetched this run.
+  BTC last 67,297.11; 2 ATR(24h) = 566.85; 2 ATR below close = 66,163.41.
+  All 12 majors are in the regime (close < SMA50 and 7d return negative).
+- news: no dated crypto-native catalyst inside 2026-11-14..16. No US macro print Sat/Sun.
+  NVIDIA FQ3 2026-11-17 ~21:20Z is after the window. (Carried from the 10:05Z ETH pass.)
+- forums/sentiment: not re-fetched this run; the 10:05Z pass found funding flat, OI in
+  coin terms barely reduced, retail majority long. A repricing, not a capitulation.
+
+WHAT COULD NOT BE FOUND
+- Any configuration with positive edge surviving a time holdout. 264 geometry x symbol
+  combinations, 6 pre-registered hypotheses, 4 prior angles: none survived.
+- An explanation for why BTC returns exactly 0.000 while the other 11 are negative. It
+  is most likely the cheapest-to-borrow, most liquid symbol showing the least noise, not
+  a BTC-specific property. Treating +0.006% as a signal would be a mistake.
+
+HONEST SUMMARY
+This is a zero-expectation coin-flip with a 0.63 fill probability, written because the
+operator ordered a position. It is not an edge and it is not presented as one.
+
+LINKS
+- https://api.binance.com/api/v3/klines (BTCUSDT 1h, 12 symbols, fetched 2026-11-14)

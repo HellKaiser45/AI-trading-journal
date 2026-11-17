@@ -1,0 +1,35 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  chart [label="CHART INPUT (vision)\nXMRUSDT 4h, 2026-09-15 -> 11-16\nhigh 659.64 (Nov 4), low 455.75 (Nov 14/15)\nbreakdown 648 -> 455.75 = -29.6%\nbounce off the low to ~505\nreplica rendered, 375 bars"];
+
+  structure [label="STRUCTURE READ\n- 455.75 = 48h low AND 60d low\n- 520-538 = Nov 14 supply shelf\n- 583-607 = Oct distribution block\n- live 505.73 sits just under that block"];
+
+  signal [label="SIGNAL (measured, fires now)\ndd20 = -21.82 (<= -20)\nbounce = +11.32% off 48h low (>= 8)\nflush vol z = 3.90 (>= 2.0)\nn = 153 bars / 20 independent episodes"];
+
+  decomp [label="DECOMPOSITION (falsification)\ndd alone     72h +1.37%  (n=1394)\nbounce alone 72h -0.34%  (n=1296)\nBOTH         72h +1.65%\nrandom control p = 0.0000", color=orange];
+
+  era [label="ERA SPLIT of dd-alone (falsification)\n2021-22  +1.45%\n2023-24  +3.23%\n2025-26  -0.04%  <- the drawdown\ncondition has NO edge in the\ncurrent era on its own", color=red];
+
+  grid [label="GEOMETRY GRID, EV/ticket, delta by era\nlim-3 tp8  sl8 : +1.76/+2.08/+1.39 <- only\n   row positive in ALL THREE eras\nlim-3 tp10 sl5 : +0.99/+2.12/+0.92\nlim-3 tp10 sl8 : +1.43/+2.11/+0.32\nlim-3 tp10 sl10: +1.05/+2.39/+0.02\nlim+0 tp10 sl8 : -0.41/+1.92/+1.53"];
+
+  oos [label="OUT OF SAMPLE, 8 other symbols\n4 of 8 positive, mean delta +0.19%\npooled EV negative (-0.30 to -0.48)\n=> does NOT generalise across symbols", color=red];
+
+  loo [label="LEAVE-ONE-EPISODE-OUT (20 episodes)\nworst +1.906% (drop 2021-12-04)\nbest  +2.564%\nsign HOLDS", color=green];
+
+  mirror [label="SHORT MIRROR of same signals\nEV/ticket -0.417%\n=> directional, not symmetric beta", color=green];
+
+  learning [label="LEARNING PASS (24 folders)\n6 of 9 losses = stop too tight\nwinners RR 1.46 < losers RR 1.70\n=> do NOT buy a high RR with a tight stop\nZEC loss: structure + >=1x ATR is the floor\nASTER: quote the far edge for fill"];
+
+  jev [label="JEV decide (6 candidates, 3 requirements)\nselected lim3_tp8_sl8  confidence 1.00\nno contradicted requirements\nshort_mirror / gather_more_evidence -> 0", shape=diamond];
+
+  ticket [label="TICKET\nXMRUSDT 4h LONG LIMIT 490.56\nTP 529.80 (+8.00%) / SL 451.32 (-8.00%)\nRR 1.00  expire 2026-11-21T12:00Z\ninvalidation: 4h close below 470", color=green];
+
+  chart -> structure -> signal;
+  signal -> decomp -> era;
+  era -> grid -> oos -> loo -> mirror -> learning -> jev -> ticket;
+  grid -> jev [style=dashed, label="20 rows tested"];
+  oos -> jev [style=dashed, label="declared, not hidden"];
+}

@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "UNIUSDT"
+side     = "LONG"
+
+[entry]
+type     = "LIMIT"
+price    = 5.0467
+
+[exit]
+tp       = 5.586
+sl       = 4.2376
+
+[schedule]
+place_at  = 2026-11-15T09:49:40Z
+expire_at = 2026-11-18T09:50:00Z

@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "BTCUSDT"
+side     = "LONG"
+
+[entry]
+type     = "LIMIT"
+price    = 66163.41
+
+[exit]
+tp       = 67486.68
+sl       = 63516.87
+
+[schedule]
+place_at  = 2026-11-14T10:47:22Z
+expire_at = 2026-11-16T10:46:00Z

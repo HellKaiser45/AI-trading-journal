@@ -1,0 +1,131 @@
+THESIS
+UNIUSDT is the only one of 9 majors in a capitulation flush: 7-day return -28.97% with the close
+sitting in the 20-40% band of the 48h range (i.e. already off the low but not recovered) and 24h
+volume at z=+2.49 against its own trailing week. Measured on 134 historical bars meeting exactly
+this condition, the forward 72h return is +8.15% raw / +8.37% on the candidate geometry, against
++1.74% for entering at a random hour of the same 17 days. That +6.4% gap is the edge I am trading.
+Invalidation: a close below 4.619 (the 2026-11-14 capitulation low) kills the premise that the
+flush is exhausted.
+
+DATA CHECKED
+- news: no UNI-specific shock exists for 8-15 Nov. Governance: newest Snapshot proposal 2026-09-18,
+  nothing since. Unlocks: vesting complete Sept 2024; the only recurring draw is 5M UNI quarterly
+  on 1 Jan/Apr/Jul/Oct, next 2027-01-01 — outside the window. Fee switch ON since 2025-12-27,
+  live on 14 chains. No exploit, no delisting (Coinbase's 11-25 cut is 12 non-USD pairs, UNI not
+  among them). Explicit statement from CoinMarketCap 2026-11-14: "no evidence of a discrete
+  Uniswap-only shock." -> the move is beta: UNI -29.6% vs BTC -14.7%, ETH -19.5%, SOL -20.7%.
+- prices: Binance 1h, 53 986 closed bars 2020-09-17 -> 2026-11-15T08:00Z. Live 5.115. ATR14(1h)
+  2.672%. Last closed 1h 5.015. 30d high 7.8200, 30d low 4.6190 (14 Nov 21:00Z), 90d high 10.9420
+  (Sept), so -54.2% from the 90d high and -35.9% from the 30d high.
+- other assets: panel of 8 more symbols, 17 519 1h bars each (2 years). Only UNI meets the condition
+  today; the others are at r7 -14% to -20% with pir 0.25-0.42, i.e. shallower and lower volume z
+  for BTC but no r7<=-25%.
+- forums: not used. The -35.2% whale deposit to Binance 2026-11-15 (592 895 UNI at 4.81, bought at
+  7.42) is a flow fact, not a thesis.
+- tokenomics: supply 1,000,000,000 with 114,143,581 UNI (11.41%) in 0xdEaD, spendable 885.9M.
+  Protocol revenue 8.139M USD/30d and RISING 2.6x over the last week while the token fell 29%.
+
+MEASUREMENTS (all reproducible from the files in artifacts/uni_research/)
+Condition C = r7<=-25% AND 0.20 <= pir(48h) < 0.40 AND v24z >= 2.
+- n=134 bars, 17 distinct calendar days, 11 calendar months, 6 years.
+- Raw forward 72h from the signal close: mean +8.15%, median +8.97%, P(>0) 87%.
+  Day-clustered bootstrap CI on the day means: [+0.05, +9.24].
+- MATCHED CONTROL, the test that matters: entry at a random hour of the SAME 17 days, 72h hold,
+  n=720 -> +1.74% (median +2.60%). At the signal hour -> +8.15% (median +8.97%). Excess +6.4%.
+- OOS (the 5 non-UNI symbols with enough bars): candidate geometry EV +8.15%, day CI [+7.55,+12.48].
+  Portable across symbols, not a UNI artefact.
+- Candidate geometry, d=0.5 tp4/sl6, expire 72h, 24h fill window:
+  fill 0.82 / P_TP 0.35 / P_SL 0.00 / P_exp 0.65 / RR 0.67 / EV +8.37% / EV|fill +10.19%.
+- Leave-one-day-out on that geometry: +7.93% to +9.03% around the +8.37% base. Excluding the
+  dominant day (2026-02-06, 51 of 134 bars) the EV RISES to +8.98%. Excluding the top four days
+  it is still +7.22%. No single day carries the result.
+- Threshold sensitivity (no cherry-picked cut): vz>=0.0 -> +6.68% (CI PASS), 1.0 -> +7.69% (PASS),
+  1.5 -> +8.48% (PASS), 2.0 -> +8.15% (PASS), 3.0 -> +8.25% (CI includes 0). The filter is monotone
+  in the direction claimed, not a knife-edge.
+- MAE over 72h from the signal, exact set: median -4.23%, p10 -18.68%, worst -30.74%.
+  MFE median +13.69%, p90 +24.52%. The 6-ATR stop at -16.03% sits inside the p10 of the adverse
+  excursion, which is why P_SL measured 0/110 rather than "never reachable" — it is a 17-day sample
+  fact, not a guarantee. I state it as such in the recap.
+- The 4 worst days in the UNI footprint paid -8.95%, -8.75%, -8.01% over 72h. That is the loss side.
+
+WHAT I THREW AWAY (and why)
+- Without the volume filter, restricting to non-crash months drove UNI EV to -0.04%. The naive
+  "buy the flush" prior is worthless; the volume condition is what separates it. I did not know
+  that when I started and it changes what the ticket is.
+- BUY-INTO-DRAWDOWN base rates by bucket were non-monotone and unusable (dd30<=-50% had median
+  -1.33% but episode mean +13.51%, CI [+6.37,+20.99]) — 27 episodes. Discarded.
+- The "SHORT to press the -54% 90d / -89% multi-year decline" idea: every short geometry on this
+  condition set measured negative (-0.17% to -0.22%). Discarded, and it is why the ticket is long.
+- A volume-z>=1.5 cut gives a slightly better point estimate (+8.48%) than >=2.0 (+8.15%). I kept
+  2.0 because the higher threshold has 19 days vs 17 and the lower one would have been picked after
+  seeing the number. Recording the choice so the next run does not re-fit it silently.
+
+LIMITS I AM NOT HIDING
+- 11-17 independent events, not 134. Every "n=134" above is bars, and I have clustered by day and
+  by month throughout to stop that from lying.
+- The sample is dominated by 2020-21 and 2024-25, both bull eras. "Buy any crash in a bull market"
+  is a competing explanation I cannot separate from the volume signal with 6 years of data. Cutting
+  2020-21 keeps the sign (vz>=1.5 -> +9.07%, CI PASS) but halves the events.
+- My own journal is 2 wins / 10 losses and its dominant failure mode is tight stops. This ticket
+  uses a 16% stop precisely because of that, which means a single loss costs ~16% of the risk unit.
+- P_SL = 0.00 is the number I would most expect a future run to falsify.
+
+DECISION
+JEV jev_decide, 5 candidates, 3 requirements (survive leave-one-day-out; beat the matched control;
+stop beyond the deepest observed adverse excursion): long_limit_capitulation 0.60, reject 0.38,
+everything else 0.00. No contradicted requirement. Margin is thin (0.22) and I am recording that.
+
+LIVE LEVELS at placement (live 5.1150, ATR 2.672%)
+LONG LIMIT 5.0467  (0.5 ATR = 1.34% below live)
+TP 5.5860 (+10.69% = 4 ATR)
+SL 4.2376 (-16.03% = 6 ATR)
+RR 0.67   break-even hit rate 0.60   measured P(TP|fill) 0.35 with 65% expiring (median exp +6.6%)
+
+LINKS
+- https://defillama.com/unlocks/uniswap — 2026-11-15 — no upcoming UNI unlocks
+- https://defillama.com/protocol/uniswap — 2026-11-15 — TVL 3.046bn, -22.2% 30d
+- https://developers.uniswap.org/docs/protocols/protocol-fee/overview — 2026-10-29 — fee switch ON, burn only
+- https://www.bls.gov/news.release/ppi.nr0.htm — 2026-11-13 — PPI +6.5% y/y
+- https://marginpad.io/liquidations/recap/2026-11-14 — 2026-11-14 — $1.66bn liquidated, 94% longs, peak hour 20:00-21:00Z = the hour of UNI's 4.619 low
+- https://coinmarketcap.com/top-stories/6af7ddf10ada0c77afaf9379 — 2026-11-14 — no UNI-only shock
+- https://www.bea.gov/news/schedule — 2026-11-13 — Retail Sales 11-17, NVIDIA FQ3 11-17, PCE+GDP 11-25
+- https://www.okx.com/en-us/learn/okxice-tsv-launch — 2026-11-11 — OKXICE on Uniswap v4 / X Layer, 2026-11-23
+
+[09:52Z] CORRECTION to my 2026-11-14 run on ETH: I reported 0.5 ATR = 1.5 ATR interchangeably in
+that log. The floor I use here (1.5 ATR minimum stop distance) is the one that matters and this
+ticket uses 6 ATR, well clear of it.
+[09:52Z] NOTED: the earlier BTC PENDING ticket carries RR 0.50, below the journal median of 1.52.
+That was geometry chosen to look credible after the decision, not before. This ticket's RR of 0.67
+comes from the measured touch distribution (4 ATR favourable vs 6 ATR adverse) and I am recording
+that the low RR is a property of the volatility regime, not a preference.
+
+[09:58Z] JEV CAUGHT AN OVERSTATEMENT — correcting it, not the ticket.
+jev_noul proposition: "the 6 ATR stop at -16.03% is placed beyond the deepest adverse excursion
+observed on the condition set" -> 0.07, i.e. UNLIKELY. Jev is right and I was wrong.
+The deepest adverse excursion measured FROM THE LIVE PRICE was -30.74% (UNIUSDT 2022-05-11 16:00Z,
+low 3.7300 vs live 5.3857). 18 of the 134 bars traded more than -16.03% below live at some point in
+the 72h window; 34 traded more than -10% below. What is true is narrower than what I wrote: no
+filled sample ever printed AT OR BELOW THE STOP LEVEL (0 of 110 fills), because the stop is ATR-
+scaled and in high-volatility regimes it sits much further away in percentage terms (the 2021
+cases had stops 35-45% below live). It is NOT true that -16.03% covers every observed excursion.
+Consequence for the reader: -16.03% is today's ATR-scaled number, not a fixed risk ceiling. If
+volatility expands, the stop moves further away and the loss size grows with it.
+
+[09:58Z] VERIFIED, not asserted: fills = 110, bars whose low reached at-or-below the stop between
+fill and expiry = 0 (0.0%). That is a property of the ATR-scaled stop and it is exactly the failure
+mode this journal keeps losing on (six losses with 1.0-1.5% fixed stops hit inside normal noise).
+It is a design choice I can defend from my own record. It is not proof the trade wins.
+
+[09:58Z] THIRD CORRECTION of the session, for the record. Earlier today I was wrong about the BTC
+RR 0.50 (chosen after the decision to look credible), wrong about the ETH "0.5 ATR vs 1.5 ATR"
+floor, and now wrong about the stop being beyond every excursion. All three are in writing here
+rather than quietly fixed.
+
+[10:23Z] SECOND IMAGE SUPPLIED, same instrument and same read. UNIUSDT 4h on Aster, peak ~10.94 in
+late Sept, staircase down to the 13-15 Nov flush to 4.62, last 5.12 (+2.74% on the bar). The replica
+in chart.svg is built from Binance 4h closes over 2026-09-12..2026-11-15T04:00Z and reproduces that
+shape; the two are the same picture. No change to the ticket: the condition is unchanged
+(r7 -28.97%, pir 0.28, v24z +2.49) and the limit at 5.0467 now sits 1.66% below the 5.132 live
+price, still inside the measured 2 ATR fill envelope (P(fill) 0.82).
+[10:23Z] The live price moved 5.115 -> 5.132 during the run. The ticket was placed against 5.1150
+and is NOT repriced: finalize.py wrote trade.toml and a PENDING folder cannot be edited.

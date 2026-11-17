@@ -1,0 +1,53 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  chart [label="CHART (4h, 2026-09-12..11-15)\npeak 10.9420 (Sept) -> 4.6190 (14 Nov 21:00Z)\n-54.2% from 90d high / -35.9% from 30d high\nlast 48h: low 4.619 -> close 5.015, pir 0.28\n=> already off the low, not at it"];
+
+  struct [label="STRUCTURE READ\nsupport  4.62 (capitulation low)\nsupport  5.93-6.25 (Nov 12/13 shelf)\nsupport  6.80-7.15 (Oct shelf)\nresistance 5.50-5.70 (Nov 13 breakdown)\nresistance 6.55-6.90 (Nov 11 swing)\nresistance 7.75-7.90 (Nov 5 high)"];
+
+  cond [label="THE TESTABLE CONDITION\nr7 <= -25%\npir(48h) in [0.20, 0.40)\nv24z >= 2\nUNI YES, other 8 symbols NO"];
+
+  base [label="BASE RATES - naive buy-the-flush\nFAILED\nnon-crash months: EV -0.04%\ndd buckets non-monotone, 27 episodes\n=> the plain prior is worthless"];
+
+  disc [label="VOLUME IS THE DISCRIMINATOR\nvz<0  n=377  +0.50%  CI[-2.99,+3.89]\n0-1   n=240  +1.92%  CI[+0.15,+8.33]\n1-2   n=165  +8.55%  CI[+2.44,+15.10]\n2-4   n=165  +5.60%  CI[-0.58,+11.41]\n>=4   n=37  +13.08%  CI[+11.65,+14.79]"];
+
+  ctrl [label="MATCHED CONTROL - the decisive test\nrandom hour, same 17 days: +1.74% (n=720)\nat the signal hour:        +8.15% (n=134)\nexcess = +6.4%\n=> not beta on those days"];
+
+  lodo [label="LEAVE-ONE-DAY-OUT\n+7.93% to +9.03% (base +8.37%)\ndrop the dominant day (51/134 bars)\n=> EV RISES to +8.98%\ntop-4 days removed => +7.22%"};
+
+  oos [label="OUT OF SAMPLE SYMBOLS\nETH SOL ADA DOGE LINK\ncandidate geometry EV +8.15%\nday CI [+7.55,+12.48]\nportable"];
+
+  thr [label="THRESHOLD SENSITIVITY\nvz>=0.0 +6.68% PASS\nvz>=1.0 +7.69% PASS\nvz>=1.5 +8.48% PASS\nvz>=2.0 +8.15% PASS\nvz>=3.0 +8.25% CI0\nmonotone, not knife-edge"];
+
+  geom [label="GEOMETRY from the touch distribution\nd=0.5 tp4/sl6 expire72h fill 0.82\nP_TP 0.35  P_SL 0.00  P_exp 0.65\nRR 0.67  BE 0.60\nEV +8.37%  EV|fill +10.19%"];
+
+  risk [label="TAIL - stated, not buried\nMAE 72h: med -4.23% p10 -18.68%\nworst -30.74%\nMFE: med +13.69% p90 +24.52%\nworst 4 days: -8.95 -8.75 -8.01%"];
+
+  rej_short [label="REJECTED: SHORT continuation\npress the -54% 90d / -89% decline\nevery short geometry on this condition\nmeasured -0.17% to -0.22%\ncontradicted on requirement 1", color=red];
+
+  rej_mkt [label="REJECTED: entry at market\nfill 1.00 but EV +7.26%\nforgoes the 1.34% entry discount\nthat IS the measured entry edge", color=red];
+
+  rej_wide [label="REJECTED: tp6/sl6 RR 1.00\nP_TP measured 0.06\n94% of the time it is a\nexpiry bet with a decorative target", color=red];
+
+  jev [label="JEV jev_decide\n5 candidates, 3 requirements\nlong_limit_capitulation 0.60\nreject_structure_unclear 0.38\nmarket / wide-tp / short 0.00\nno contradicted requirement\nmargin 0.22 - thin, recorded", shape=diamond];
+
+  ticket [label="LONG LIMIT 5.0467\nTP 5.5860 (+10.69%)\nSL 4.2376 (-16.03%)\nRR 0.67  expire 2026-11-18T09:50Z\ninvalidation: close below 4.619", style="rounded,filled", fillcolor="#dbeafe"];
+
+  caveat [label="HONEST LIMITS\n11-17 independent events, not 134\nsample dominated by 2020-21 and 2024-25 bulls\n'buy any crash in a bull market' is a\ncompeting explanation I cannot rule out\nP_SL=0.00 is a 17-day fact, not a guarantee\njournal record 2W/10L - this is a real bet", color="#fff3cd"];
+
+  chart -> struct -> cond;
+  cond -> base [label="test the naive version first"];
+  base -> disc [label="it fails; find the filter"];
+  disc -> ctrl [label="is it beta on those days?"];
+  ctrl -> lodo [label="survives"];
+  lodo -> oos [label="does it travel?"];
+  oos -> thr [label="is the cut fitted?"];
+  thr -> geom [label="not fitted"];
+  geom -> risk [label="price the tail"];
+  risk -> jev;
+  rej_short -> jev; rej_mkt -> jev; rej_wide -> jev;
+  jev -> ticket;
+  caveat -> ticket [style=dashed];
+}

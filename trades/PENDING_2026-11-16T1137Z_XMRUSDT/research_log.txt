@@ -1,0 +1,81 @@
+THESIS
+Buy the XMR 4h capitulation-reclaim: after a -21.8% drawdown from the 20d high, the
+price has bounced +11.3% off a 48h low of 455.75 that is also the 60d low, on a flush
+whose volume z-score is 3.90 (max of the last 12 bars). Enter with a limit 3% under the
+signal close, target +8%, stop -8% placed under the 455.75 wick. Invalidation: a 4h close
+below 470 (the reclaim level) kills the thesis before the limit is reached.
+
+DATA CHECKED
+- prices: XMRUSDT 4h, KuCoin, 11,200 bars 2021-10-06 -> 2026-11-16 08:00Z (fetched
+  2026-11-16T11:40Z). OHLC sanity check: 0 bad bars. Live last 505.73 (11-16 08:00 4h
+  bar, in progress). ATR14 4h = 20.21 = 3.98% of price.
+- Binance spot/data-api: REJECTED for XMR. /api/v3/klines?symbol=XMRUSDT returns
+  2024-02-19 bars regardless of endTime/limit — a stale or delisted mirror. Not used.
+- Bybit v5 spot XMRUSDT: empty list. OKX XMR-USDT and XMR-USDT-SWAP history-candles:
+  empty data array. Only KuCoin served usable XMR history.
+- other assets: 8 symbols x 4381 4h bars (BTC/ETH/SOL/XRP/BNB/ADA/DOGE/LINK/UNI) from
+  the existing 1h panels, aggregated to 4h, for the out-of-sample test.
+- news / forums / tokenomics: NOT SEARCHED. JEV ruled that search was not required for
+  this decision because the signal is purely geometric and volume-based, and the
+  decision rests on a price/volume measurement rather than a narrative. Recorded here
+  as a deliberate omission, not an oversight.
+
+WHAT WAS TESTED (all on the 11,200 KuCoin bars unless stated)
+- Signal: dd20 <= -20 AND bounce >= 8% off 48h low AND max volume z in last 12 bars >= 2.
+  n = 153 bars, collapsing to 20 independent episodes (30 bars = same episode).
+  Live bar fires: dd20 -21.82, bounce +11.32, flush z 3.90.
+- 72h forward return, no exits: conditional median +1.65% vs unconditional +0.45%.
+- Decomposition: dd20<=-20 alone +1.37% (n=1394); bounce>=8 alone -0.34% (n=1296);
+  BOTH +1.65%. The bounce leg ALONE is negative — it only works as a filter on the
+  drawdown, not as a standalone trigger.
+- Random-bar control, 2000 draws, same n: p = 0.0000.
+- ERA SPLIT of the drawdown condition alone, 72h median delta: 2021-22 +1.45%,
+  2023-24 +3.23%, 2025-26 -0.04%. The drawdown alone has NO edge in the current era.
+  This is the single most important negative finding in this folder.
+- GEOMETRY GRID, EV per ticket (unfilled = 0), delta vs same-era baseline by era:
+    lim-3 tp8  sl8 : +1.76 / +2.08 / +1.39  <- only row positive in all three eras
+    lim-3 tp10 sl5 : +0.99 / +2.12 / +0.92
+    lim-3 tp10 sl8 : +1.43 / +2.11 / +0.32
+    lim-3 tp10 sl10: +1.05 / +2.39 / +0.02
+    lim-2 tp10 sl8 : -0.01 / +3.02 / +0.53
+    lim+0 tp10 sl8 : -0.41 / +1.92 / +1.53
+- CHOSEN: lim-3 tp8 sl8, 120h max hold. fill 0.739, P(TP|fill) 0.637,
+  P(SL|fill) 0.274, P(EXP|fill) 0.088, EV/ticket +2.215%, EV/fill +2.999%.
+  Breakeven P(TP|fill) 0.500 vs realised 0.637. Bars to fill: med 4 (16h), p75 11
+  (44h), max 29. Distribution: p10 -8.00, p25 0.00, med +3.90, p75 +8.00, p90 +8.00.
+  LOOO worst +1.906% (dropping 2021-12-04), best +2.564% — sign holds.
+- SHORT mirror, same 153 signals: EV/ticket -0.417%. Directional, not symmetric beta.
+- OUT OF SAMPLE, 8 other symbols, 4381 bars each: only 4 of 8 positive, mean delta
+  +0.19%. Pooled geometry EV on those symbols was NEGATIVE (tp5/sl8 -0.303%,
+  tp8/sl8 -0.320%, tp5/sl5 -0.484%, tp10/sl10 +0.035%). The signal does NOT
+  generalise across symbols. Declared, not buried.
+- THRESHOLD SENSITIVITY: dd<=-15/bo>=6/fz>=1.5 -> +0.474%; dd<=-20/bo>=8/fz>=2.0 ->
+  +1.539%; fz>=2.5 -> +1.708%; dd<=-25 -> +1.452%; bo>=10 -> +2.534%; bo>=12 ->
+  +2.988%. Monotone in strictness, no cliff edge.
+- HOLD-TIME SENSITIVITY at lim-3 tp10 sl5: 48h +0.556%, 72h +1.030%, 96h +1.343%,
+  120h +1.539%, 144h +1.773%, 168h +1.809%.
+
+LEARNING PASS (24 prior folders)
+- The journal's dominant failure mode is a stop too tight inside the leg (6 of 9
+  losses). The two winners had LOWER average RR (1.46) than the ten losers (1.70).
+  RR 1.00 here is deliberate: it is the only geometry whose edge survives into
+  2025-26, and higher-RR rows on this grid vanish in the current era.
+- LOSS-1.50%_2026-10-23T1147Z_ZECUSDT lesson 2: structure plus >= 1x ATR is the floor
+  for a stop. Here SL 8% = 2.0x ATR, and it sits under the 455.75 wick.
+- EXPIRED_2026-11-01T1010Z_ASTERUSDT lesson 1: quote the far edge of a band for fill
+  robustness. Here the limit is 3% under the close and the measured fill rate is 0.739.
+- EXPIRED+3.95%_2026-10-18T1535Z_ASTERUSDT lesson 1: never put the TP on an extreme the
+  market already rejected. TP 529.80 is inside the 520-538 supply shelf, not above it.
+
+BIAS WARNINGS (read the numbers sceptically)
+- The signal was found by scanning this same dataset. It is in-sample selection.
+  LOOO and the era splits are the only guards applied; they are not a substitute for
+  a true holdout, which XMR's short usable history does not permit.
+- 20 episodes over 5 years, dominated by 2021-22 and 2025-26 regimes.
+- The 2025-26 absolute EV of the chosen geometry (+2.187%) sits on a same-era baseline
+  of +0.797%, i.e. the delta is +1.39 and the signal is most of it but not all.
+- Volume z uses one venue's volume; not comparable across exchanges.
+
+LINKS
+- https://api.kucoin.com/api/v1/market/candles?type=4hour&symbol=XMR-USDT
+- https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=XMR-USDT

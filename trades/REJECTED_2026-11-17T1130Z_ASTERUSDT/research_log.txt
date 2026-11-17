@@ -1,0 +1,86 @@
+THESIS
+ASTERUSDT 4h at 2026-11-17T11:30Z shows a post-flush state: dd20 vs the 20-bar high
+-17.73%, bounce off the 48h low +21.80%, volume z-score -0.36. Question: does that state
+plus an ATR-normalised bracket carry a measurable edge on ASTER?
+Invalidation: the state must not beat an ATR-matched unconditional control, or the
+expectancy must rest entirely on the limit-entry discount.
+
+STATE READ (vision, attached image)
+Last closed bar 2026-11-17T04:00Z close 0.5957; live 0.5816. ATR14 6.51% of price =
+95.9th percentile of ASTER's own 13-month history (median 2.20%). The bar 2026-11-15
+20:00Z printed high 0.7124 and low 0.4812 inside four hours: a 48% range.
+ASTER excursion envelope (13 months, next 18 bars from every bar):
+  p50 up +3.26% / down 3.82%   p75 +6.58% / 7.16%   p90 +13.04% / 13.18%
+  p95 +18.21% / 19.47%         max +48.04% / 46.35%
+Symmetric. There is no measured directional asymmetry in the instrument.
+
+DATA CHECKED
+- news: none searched. JEV was asked whether this decision needed external context and the
+  answer was that the measurement itself was the binding constraint, not news. No news
+  claim is made anywhere in this folder.
+- prices: Aster exchange klines, ASTERUSDT 4h 2442 bars (2025-10-06 -> 2026-11-17 04:00),
+  1h 6000 bars, 1d 408 bars. Panel of 13 majors 4h 12000 bars each
+  (2021-05-27 -> 2026-11-17 08:00).
+- other assets: the same panel is the design set; ASTER is deliberately EXCLUDED from it
+  so that the geometry is not fitted on the asset it is applied to.
+- forums: none. Not used.
+- tokenomics: not relevant to a 72h bracket; not searched.
+
+MEASUREMENTS (all files t1-t19 in artifacts/astr_research/)
+Signal fixed before any geometry search: dd20 in [-23,-14] AND bounce off 48h low in
+[18,30] AND volume z <= 0. 103 events, 13 symbols, 25 distinct calendar months.
+BTC contributes 0 events. ZEC 15, DOGE 14, UNI 12, ADA 11, AVAX 11.
+
+1. The state is not redundant with volatility.
+   ATR>=95th percentile with the chart condition stripped: n=7774 EV +0.240%.
+   ATR-MATCHED control, 95-100th percentile band: events n=99 EV +2.303% vs non-event
+   bars n=7484 EV +0.143%, delta +2.160%. At the 99-100th band: +1.956% vs -0.040%.
+
+2. The fill is not an end-of-window artifact.
+   Fill delay median 2 bars (8h); 47% of fills on the first bar. Earlier in this session
+   I rejected a candidate because its median fill landed on the last bar of the window;
+   that defect is absent here.
+   Within-bar retrace artifact measured directly at +0.391%, versus a limit EV near +2.0%.
+   Requiring 18 bars of real holding after the fill leaves EV +2.255%.
+
+3. The direction is NOT established.
+   Paired LONG minus SHORT: +1.219%, month-block 95% CI [-1.997, +4.276], P(gap>0)=0.774.
+   Events where LONG beats SHORT: 48 of 103. A literal coin flip.
+   Market-entry control with the same bracket: LONG +0.438%, 95% CI [-2.028, +2.948].
+   The limit-entry premium (+1.459pp) is far smaller than the mechanical entry discount
+   (0.6 ATR = 3.91%).
+
+4. Best wide-stop geometry, for the record.
+   LONG lim -0.6 ATR / TP 3.0 ATR / SL 3.0 ATR: n=103 EV +1.897%, month-block 95% CI
+   [+0.190,+3.581], P(EV<=0)=0.015, drop-3-best-months +1.211%, drop-5-best-events +0.949%.
+   Stop 19.54% clears 95.0% of ASTER's down-excursion envelope.
+   SHORT same geometry: EV +0.678%, CI [-1.011,+2.446], drop-5-best-events -0.072%.
+
+DECISION: NOT TAKEN. JEV no_ticket 0.91.
+The LONG candidate was contradicted on the requirement that positive expectancy must not
+rest solely on the limit-entry discount. It does. A single-sided ticket on a two-sided
+harvest is half the measured expectancy at full single-side variance, and the journal
+cannot hold both sides (sizing and cross-trade correlation are out of scope).
+
+WHAT I GOT WRONG ALONG THE WAY (kept, not buried)
+- t16 reported a market-entry EV of +8.027%. My bug: with market=True I set the fill index
+  to 0, so the exit loop started at bar 1 of the whole series. Corrected in t17; the true
+  figure is +0.457%.
+- t10 printed identical LIMIT/TP/SL for SHORT and LONG. Case bug, 'SHORT' vs 'short'.
+  Caught and rewritten as t11-t19.
+- t3/t4 first used percentages (lim -4%, tp 8%) across symbols whose ATR ranges from 0.81%
+  (TRX) to 6.51% (ASTER). A 12% stop is 15 ATR on TRX and 1.84 ATR on ASTER. Everything
+  after t9 is ATR-normalised.
+- My first JEV pass on this chart used the requirement "stop beyond the measured excursion
+  envelope" and I attached a 1.5 ATR stop, which covers only 83.8% of ASTER's envelope.
+  JEV contradicted it. That was correct: the requirement was mine and the ticket violated it.
+- ASTER's own history contains only 2 analogue events (2025-10-12: short +19.51% / long
+  -6.91%; 2025-11-05: short +6.77% / long +5.02%). n=2. Not evidence, and I did not use it
+  to choose a side even though it points at the short.
+
+WHAT WOULD CHANGE THE ANSWER
+A two-sided ticket, or an instrument-independent directional filter that separates long
+from short at the 95% level. Neither exists in this folder.
+
+LINKS
+- none. No external source was consulted; no claim here depends on one.
