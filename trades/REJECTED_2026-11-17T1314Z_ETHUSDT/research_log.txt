@@ -1,0 +1,91 @@
+THESIS
+ETHUSDT 4h at 2026-11-17T13:14Z, spot 1820.58, ATR14 4h 36.91 (2.03%).
+The chart shows a five-week decline from 2796 to a 1736 low, a +9.1% bounce, and now a
+stall. Question: does any measurable state on this series carry positive expectancy that
+is NOT just beta to a falling market?
+Invalidation: the state must beat the unconditional control on the SAME series and bracket,
+keep its sign across eras AND across timeframes, and beat its own mirror side.
+
+DATA CHECKED
+- news: none used. No news claim is made anywhere in this folder. The decision was
+  measurement-bound, not news-bound.
+- prices: Binance USDT-M futures klines, 13 symbols, 4h 4380 bars each
+  (2024-11-17 -> 2026-11-17, 2 years) and 1d 1500 bars each (4 years, 2022-11 -> 2026-11).
+  ETH 1h 1500 bars used only to locate the live bar.
+- other assets: the same 13-symbol panel. ETH was not privileged in the geometry.
+- forums: none.
+- tokenomics: not relevant to a 112h bracket; not searched.
+
+LIVE STATE (measured, last closed 4h bar 2026-11-17T12:00Z, close 1822.78)
+  close 1822.78 · ATR14 36.91 (2.03%) · 20-bar high 1918.87 · 20-bar low 1710.01
+  dd20 -5.01% · position in the 20-bar range 54.0% · 72h box 1710.01-1866.21 (9.13% tall)
+  ETH 4h next-18-bar envelope: p50 +3.34/-3.46, p75 +6.08/-6.37, p90 +9.61/-10.53.
+  Symmetric. No excursion asymmetry to harvest in either direction.
+
+MEASUREMENTS (all scripts in artifacts/eth2/, t1-t9)
+
+1. THE CHART'S OWN READ IS REFUTED ON ITS OWN INSTRUMENT.
+   State "deep drawdown + higher low + reclaim" (dd20 in [-30,-8] AND lateLow>=earlyLow
+   AND reclaim>=0.75 ATR), 4h panel: LONG n=1594 EV -0.032%, SHORT n=1441 EV +0.771%.
+   On ETH ALONE the same state gives SHORT -0.341% (n=63) while the DAILY series gives
+   SHORT +1.561% (n=125). The sign flips between timeframes, and 2024 on the panel is
+   -1.807%. Not usable in either direction.
+
+2. THE STATE IS NOT REDUNDANT WITH BETA, BUT ONLY ONE SIDE SURVIVES.
+   "Close in the top third of the 20-bar range" (boxpos >= 66%), 4h, SHORT,
+   limit +0.5 ATR / TP 4.0 ATR / SL 2.0 ATR, 72h hold:
+     ETH n=1227 fills, EV +0.373%/ticket
+     unconditional control on the same series and bracket: +0.067% -> delta +0.306pp
+     per-era delta on ETH: 2024 +0.599pp, 2025 +0.103pp, 2026 +0.574pp (all positive)
+     band sensitivity is monotone: boxpos>=55 +0.281, >=66 +0.306, >=75 +0.391
+     10/13 symbols positive EV, 9/13 positive delta (XRP -0.106, ZEC -0.113, TRX -0.037)
+     mirror control on the same events: LONG -0.468% vs SHORT +0.373%, gap -0.842pp
+   Month-block bootstrap (25 months): 95% CI [-0.191,+1.023], P(EV<=0) = 0.099.
+   The interval still contains zero. This is the strongest candidate found and it is not
+   statistically separable from zero.
+
+3. THE DAILY MIRROR DISAGREES, AND THAT IS THE DECIDING FACT.
+   The same idea on DAILY bars is LONG: 1d, limit -0.5 ATR / TP 4.0 / SL 2.0, hold 3,
+   close in the top third -> 11/12 symbols positive, pooled +0.592% vs all-bars +0.253%.
+   But its month-block CI is [-0.652,+0.968] over 45 months, its 2022 delta is -2.941pp,
+   and the SAME idea on 4h is LONG -0.468% in all three eras.
+   Two timeframes of one instrument give opposite answers. With no independent tiebreak,
+   neither is usable. This is the reason for the rejection, not the size of any one number.
+
+4. MULTIPLE TESTING, DECLARED.
+   t5 screened 336 (state x side x geometry) combinations and 72 passed a two-era sign
+   filter: a 21.4% pass rate against ~25% expected under a pure null. The survivor count
+   is not evidence and was not treated as such.
+
+5. WHY NO TICKET TODAY EVEN FOR THE SURVIVING SIDE.
+   The live bar sits at 54.0% of its 20-bar range, below the 66% threshold that produced
+   every number in section 2. Placing the short-on-strength ticket here would be placing a
+   trade in a state that was never measured. That is the journal's documented failure mode.
+
+BUGS I MADE AND FIXED IN THIS RUN
+- lib.py trade() initially computed the payoff as sl_atr/lim_atr, which cancels the ATR and
+  produced EV readings of -21.8% and worse on the first pass. Every t2 number before the
+  fix was meaningless. Corrected to carry A into the payoff before any conclusion was drawn.
+- t6 called cells() with boxmax/boxmin swapped, so the "top third" filter selected nothing
+  and the run crashed. Corrected.
+- t2/t5 first mixed absolute and ATR-relative logic across symbols whose ATR spans 0.8%
+  (TRX) to 6.5%; everything reported here is ATR-normalised.
+
+JEV
+- jev_decide, 4 candidates, 3 requirements, escalate_on_contradiction: wait_for_trigger 0.86,
+  no requirement contradicted. short_now_market and short_limit_above each contradicted on
+  requirements 0 and 1. long_daily_candidate contradicted on requirement 2. none: 0.14.
+- jev_noul: "the close sits in the top third on the live bar" 0.30; "positive in every era"
+  0.18; "distinguishable from zero at 95%" 0.31; "the daily LONG and 4h SHORT are both
+  usable" 0.37; "ETH more likely to reach 1745 than 1900 in 72h" 0.72; "the envelope is
+  asymmetric enough to justify a directional bet" 0.49.
+
+TRIGGER DOCUMENTED FOR A FUTURE RUN (not placed)
+  ETHUSDT 4h, SHORT on strength, long-only-side state:
+  fire when a 4h close is >= 66% of the 20-bar range (today that is a close >= ~1848)
+  limit = close + 0.5 ATR, TP = limit - 4.0 ATR, SL = limit + 2.0 ATR, hold 72h, RR 2.00
+  measured EV +0.373%/ticket, P(EV<=0) 0.099, era delta positive in 3 of 3.
+  This is an untested-on-live-bars rule. It is a watch condition, not a validated system.
+
+LINKS
+- https://fapi.binance.com/fapi/v1/klines (all series used)
