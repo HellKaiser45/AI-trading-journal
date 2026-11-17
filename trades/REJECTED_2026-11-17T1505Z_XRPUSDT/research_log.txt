@@ -1,0 +1,116 @@
+THESIS
+XRPUSDT 1h, evaluated 2026-11-17T15:05Z, price 0.9771.
+Hypothesis under test: price has bounced +8.8% off the 0.8977 low to position 0.976 of
+the last 20-bar range (0.9501-0.9793) while still -12.37% below the 8-day high and
+-27.05% below the 14-day high. Either the bounce fails there (SHORT) or the recovery
+carries through the range top (LONG). Invalidation of the whole idea: if no direction
+survives a mirror test and an era split, the state is volatility without direction.
+
+DATA CHECKED
+- news: none fetched. The decision did not need it: every candidate was tested on
+  price geometry, and the manual makes search conditional on the decision engine
+  asking for it. No JEV round requested a search.
+- prices: 14 symbols of 1h candles from artifacts/xrp_research/kl1h, 69,003 bars each
+  for ADA/BNB/BTC/ETH/LTC/TRX/XRP (2019-01-01 to 2026-11-17T14:00Z), 67,109 ZEC,
+  64,567 DOGE, 68,633 LINK, 54,925 SOL, 54,040 UNI, 53,917 AVAX, 9,771 ASTER.
+- other assets: the 14-symbol panel is the cross-section; no macro series used.
+- forums: none.
+- tokenomics: none.
+
+WHAT WAS MEASURED
+Setup definition: close in the top q of the last W-bar high-low range, while the close
+is at least D below the last L-bar high. Entry at the OPEN of the next bar (no look
+ahead), symmetric ATR bracket, fixed hold in bars. Every configuration tested is
+reported below; the multiple-comparison count is therefore visible.
+
+1. Era split, SHORT at range high, 1h, W=20 L=192 D=-15%, hold 24 bars, pooled 14
+   symbols, n=1922:
+     TP1.0/SL2.0  all -0.036  E1 -0.069  E2 +0.415  E3 -0.314
+     TP1.5/SL2.5  all -0.003  E1 -0.102  E2 +0.387  E3 -0.154
+     TP2.0/SL3.0  all -0.087  E1 -0.301  E2 +0.451  E3 -0.193
+     TP2.0/SL4.0  all -0.058  E1 -0.303  E2 +0.568  E3 -0.186
+     TP3.0/SL4.0  all -0.082  E1 -0.350  E2 +0.680  E3 -0.276
+   SHORT is negative in the current era at every geometry.
+
+2. LONG on the identical bars:
+     TP2.0/SL3.0  all +0.069  E1 +0.200  E2 -0.431  E3 +0.257
+     TP2.0/SL4.0  all +0.128  E1 +0.207  E2 -0.402  E3 +0.405
+     TP3.0/SL4.0  all +0.196  E1 +0.364  E2 -0.470  E3 +0.453
+   LONG is positive in E3 but negative in E2, so it is era-unstable in the opposite
+   direction to SHORT. Neither side is positive in all three eras.
+
+3. Excess over a matched control (same drawdown gate, close in the BOTTOM half of the
+   range instead of the top), E3 only:
+     SHORT  gate -5%  +0.090    gate -10% +0.276    gate -15% +0.027    gate -20% +0.082
+     LONG   TP2.0/SL3.0 excess -0.044, positive on only 7 of 14 symbols
+   The SHORT excess is positive but tiny at the gates that bracket the live -12.37%,
+   and the LONG excess is negative. Neither side beats its control convincingly.
+
+4. Drawdown-gate sweep, SHORT, E3 only, TP2.0/SL3.0, pooled:
+     -5% +0.093   -10% +0.164   -15% -0.193   -20% -0.287   -25% -0.273
+   The sign flips between -10% and -15%. The live state sits at -12.37%, inside the
+   flip. A monotone threshold response would be evidence of a real mechanism; a flip
+   inside the live reading is evidence of noise.
+
+5. XRPUSDT alone, TP2.0/SL3.0, E3 only:
+     gate -5%  n=256 SHORT +0.160
+     gate -10% n=84  SHORT +0.354
+     gate -15% n=34  SHORT -0.691   LONG +1.025  (+0.079 / +1.025 on n=125/125 unfiltered)
+   XRP's own best cells are on the shallow gates, which the live state has already
+   passed through.
+
+6. The one state that DID show a direction: deep flush of at least 20% in the last 12
+   bars, plus an 8-15% bounce off the 48h low, plus 4h volume z >= 2.
+     mirror on identical bars, 2ATR/18 bars: LONG +5.632 vs SHORT -5.955
+     day-cluster 95% CI of the gap [+0.50, +22.10]
+     gap positive on 70% of bars, LONG ahead on 11 of 14 symbols
+     per era gap: E1 +12.774, E2 +2.648, E3 +22.385
+     drawdown-matched control excess: +1.016 (trigger +0.855 vs lower-half -0.161)
+     placebo, 800 random placements of the same event count: observed +0.855,
+       placebo p05 -1.043 / p50 +0.079 / p95 +1.201, share >= observed 0.131
+   This is the mechanism behind the two non-commanded tickets in this journal
+   (UNI 2026-11-15T0924Z, XMR 2026-11-16T1137Z). It DOES NOT FIRE on the live bar:
+   the 4h position in range is 0.976 but the 4h drawdown is only -0.07% and the 4h
+   volume z is -0.65, so there is no flush and no volume event.
+
+7. LIVE state, XRPUSDT 1h at 2026-11-17T14:00Z bar:
+     close 0.9771, ATR 0.00824
+     dd vs 12h 0.9793 -0.07% | 24h -0.07% | 3d 0.9857 -0.72% | 5d 1.0440 -6.26%
+     dd vs 8d 1.1168 -12.37% | 11d 1.1997 -18.43% | 14d 1.3414 -27.05% | 20d 1.3442 -27.20%
+     20-bar range 0.9501-0.9793, position 0.976
+   So the "big hole" is real at 8 days and beyond, but the last 3 days are flat. Price
+   is at the top of a 3-day range, not at the top of a recovery into a downtrend.
+
+WHAT COULD NOT BE FOUND
+- No independently-sourced confirmation that the 0.8977 low marked capitulation:
+  no funding, open-interest or liquidation series was used in this run (the manually
+  required searches were not requested by JEV, and no order-book file exists in this
+  repository for XRP).
+- No out-of-sample window free of the 2024-26 era, which is the era every candidate
+  disagrees about.
+- ASTER contributes only 2,442 four-hour bars, so its rows are not comparable.
+
+PLACEMENT ACCURACY OF THE CHART REPLICA
+The 0.8977 low was drawn at hour 220 of the replica (2026-11-16T16:00Z) while the
+exchange series printed the lowest low near 2026-11-14T22:00-23:00Z. The replica is an
+eyeball reading of the supplied image and the manual forbids fitting it to exchange
+data, so it is left as read. The error means the replica cannot be used to time
+anything; all statistics above come from the candle files, not from the replica.
+
+BUGS FOUND IN THIS RUN, ALL VOIDED
+1. Two adjacency scripts (t5, t6) evaluated the state at bar i+off while entering at
+   bar i. For positive offsets that is look-ahead. Their +3.13/+5.64/+9.45 gap figures
+   are discarded.
+2. One script (t9) reused the loop variable `st` inside a per-symbol loop, so the XRP
+   geometry sweep and era table were computed on ZEC episode indices applied to XRP
+   candles. Both tables discarded.
+3. One pooled confidence interval (t8) repeated per-symbol means instead of per-event
+   values, fabricating a narrow interval around the mean of 14 numbers. Discarded.
+4. In the first draft of the chart generator the prediction SVG was emitted with two
+   root <svg> elements and failed to parse. Rewritten; both SVGs are now validated with
+   xml.dom.minidom.parse before being written.
+
+LINKS
+- scripts/new_trade.py, scripts/finalize.py, scripts/stats.py (repository scripts)
+- artifacts/xrp_research/kl1h/*.json (candle source, 14 symbols)
+- artifacts/xrp3/t1.py .. t14.py, gen_gp.py (this run's computation)
