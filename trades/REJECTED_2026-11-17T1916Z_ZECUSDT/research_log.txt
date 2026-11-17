@@ -1,0 +1,101 @@
+THESIS
+ZECUSDT 15m, evaluated 2026-11-17T19:16Z, price 923.78.
+This folder was created by new_trade.py and then abandoned: chart.svg was a 101-byte
+stub, graphpoints.csv had zero data rows, research_log.txt was the untouched template
+and decision_tree.dot was byte-identical to _template/. Nothing had been analysed.
+This run does the analysis the folder was created for, and records the outcome.
+
+The chart shows a -19.1% capitulation (1005.00 on 13 Nov to 813.00 on 15 Nov), a
++18.3% recovery to 962.00 on 17 Nov 12:00, and a -4.0% pullback to 923.78. Rebound
+off the low is +13.6%. The question this folder asks: does that recovery continue
+(LONG) or fail (SHORT)?
+
+Invalidation of the whole idea: if neither side survives a mirror test and a
+threshold-monotonicity check, the state is volatility without direction and there is
+no ticket to write.
+
+DATA CHECKED
+- news: none fetched. No JEV round requested a search, and the manual makes stage 2
+  conditional on the decision engine asking for it.
+- prices: no candle files exist in this run. Every ZEC price below is read by vision
+  off the supplied image, at the resolution declared at the bottom of this file.
+  Every statistic is quoted from measurements already committed in this repository.
+- other assets: the 12-symbol panel referenced below is the one recorded in the
+  1329Z ZEC folder; it was not re-fetched.
+- forums: none.
+- tokenomics: none.
+
+WHAT THE REPOSITORY ALREADY MEASURED, AND WHY IT APPLIES HERE
+1. This exact state was tested in REJECTED_2026-11-17T1329Z_ZECUSDT on the 4h
+   timeframe (there: dd20 -32.0%, rebound +18.7%; here: dd20 -19.1%, rebound +13.6%).
+   Over 12 symbols and 141 fills, LONG scored +0.820%/fill. But on the IDENTICAL bars:
+     SHORT mirror                      +1.991
+     bars 1-3 positions earlier        +2.235
+     unconditional baseline            -0.092
+   LONG beat SHORT on only 4 of 12 symbols, and the LONG-minus-SHORT gap was negative
+   in 13 of 15 threshold combinations. The recorded verdict is volatility, no direction.
+
+2. A range-position gate of this kind flips sign inside the live reading.
+   REJECTED_2026-11-17T1505Z_XRPUSDT measured a drawdown gate paying +0.164 at -10%
+   and -0.193 at -15%, with the live state sitting inside the flip. A threshold that
+   inverts across the current reading is a noise band, not a gate.
+
+3. The one state in this journal with a demonstrated direction is a deep flush of at
+   least 20% within 12 bars, plus an 8-15% bounce off the 48h low, plus 4h volume
+   z >= 2: LONG +5.632 vs SHORT -5.955 on identical bars, day-cluster CI [+0.50,
+   +22.10], positive in all three eras, LONG ahead on 11 of 14 symbols. It does NOT
+   fire here: the 1005->813 decline took about 30 hours (120 bars of 15m), not 12, and
+   no volume series exists in this run to test the z-score condition.
+
+4. LOSS-4.24%_2026-11-12T1116Z_ZECUSDT recorded that a limit placed mid-coil is a coin
+   flip, and that a stop within 1.5 ATR of a fresh capitulation low suffered a 1.9%
+   gap through the stop. 6 of the 9 initial losses in this journal came from stops that
+   were too tight; the winners' average RR (1.46) was LOWER than the losers' (1.70).
+
+CANDIDATES TESTED (all four were put to JEV with the evidence above)
+  LONG LIMIT 900.00, TP 962.00, SL 860.00, 72h   -- contradicted on direction
+  LONG MARKET 923.78, TP 962.00, SL 890.00, 72h  -- contradicted on direction and on
+                                                    "state live on the current bar"
+  SHORT LIMIT 950.00, TP 900.00, SL 985.00, 72h  -- contradicted on direction
+  SHORT MARKET 923.78, TP 880.00, SL 950.00, 72h -- contradicted on direction and state
+
+JEV DECISION (jev_decide, 4 candidates, 3 requirements, escape hatches enabled)
+  selected "none", p = 0.99; every trade candidate 0.00; "investigate" 0.01.
+  All four candidates contradicted on requirement 0, "the edge is direction-specific:
+  on identical bars the opposite side must not perform as well or better".
+
+WHAT COULD NOT BE FOUND
+- No candle files, so no new backtest could be computed in this run. Every statistical
+  claim above is second-hand from committed folders, which is a real limitation: an
+  error in those folders propagates here uncaught.
+- No volume series for ZEC, so the volume-z condition of the only directional setup in
+  this journal could neither be confirmed nor excluded.
+- No funding, open-interest or liquidation data, so there is no independent evidence on
+  whether 813.00 marked capitulation.
+- No out-of-sample era; 2024-26 is the era every candidate disagrees about.
+
+LIMITS OF THE CHART REPLICA (declared, not corrected)
+The supplied image is a 15m chart covering 13 Nov 06:00Z to 17 Nov 19:12Z, roughly 490
+fifteen-minute bars. graphpoints.csv holds 108 points read at HOURLY resolution: the
+replica is a coarse eyesight reading, not a 15m reconstruction. It is adequate for
+structure (where the high, the low and the bounce are) and is NOT adequate for timing
+anything. Per the manual the replica is not fitted to exchange data, so it is left as
+read. All statistics come from the committed candle studies, never from this replica.
+Labelling: the chart_prediction.svg is a no-position chart. It carries support and
+resistance bands, one invalidation line per side, and no entry/TP/SL markers, because
+no position was taken. The "now" line is at the right edge by construction.
+
+LESSON RECORDED
+1. A +13.6% rebound after a -19.1% flush fired zero of the four candidates: the state
+   is real and tradeable-looking, but on this journal's own measurements the opposite
+   side of the identical bars scores better. Require the mirror test before the story.
+2. This folder should never have existed as a shell. new_trade.py created it, the run
+   was abandoned, and it sat 2 days as a 101-byte stub with an IDEA status that made
+   stats.py --check exit non-zero. Recorded here because the record, not the ticket,
+   is what the next run reads.
+
+LINKS
+- trades/REJECTED_2026-11-17T1329Z_ZECUSDT/research_log.txt (mirror and adjacency data)
+- trades/REJECTED_2026-11-17T1505Z_XRPUSDT/research_log.txt (gate sign flip, flush setup)
+- trades/LOSS-4.24%_2026-11-12T1116Z_ZECUSDT/recap.md (mid-coil limit, stop gap)
+- scripts/new_trade.py, scripts/finalize.py, scripts/stats.py

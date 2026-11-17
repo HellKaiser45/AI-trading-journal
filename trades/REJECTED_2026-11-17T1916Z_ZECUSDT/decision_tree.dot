@@ -1,0 +1,42 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  // ZECUSDT 15m, evaluated 2026-11-17T19:16Z, live 923.78.
+  // Free-form record; no script reads this file.
+
+  st [label="folder was an abandoned stub\n101-byte chart.svg, 0 data rows,\ntemplate research_log, template dot"];
+  read [label="vision read of the supplied image\nhigh 1005.00 (13 Nov) -> low 813.00 (15 Nov)\nbounce to 962.00 (17 Nov) -> live 923.78\nflush -19.1% / rebound +13.6% / pullback -4.0%"];
+
+  mirror [label="MIRROR TEST (repository, 1329Z ZEC, 12 symbols, 141 fills)\nLONG +0.820   SHORT +1.991\nbars 1-3 earlier +2.235   unconditional -0.092\nLONG ahead on 4 of 12 symbols"];
+  gate [label="GATE MONOTONICITY (1505Z XRP)\n-10% paid +0.164   -15% paid -0.193\nsign flips across the live reading"];
+  flush [label="DIRECTIONAL SETUP (1505Z XRP)\nflush >=20% in 12 bars + 8-15% bounce\n+ volume z >=2 -> LONG +5.632 vs SHORT -5.955\nNOT LIVE: decline took 120 bars, no volume series"];
+
+  c1 [label="LONG LIMIT 900.00\nTP 962.00 / SL 860.00 / 72h"];
+  c2 [label="LONG MARKET 923.78\nTP 962.00 / SL 890.00 / 72h"];
+  c3 [label="SHORT LIMIT 950.00\nTP 900.00 / SL 985.00 / 72h"];
+  c4 [label="SHORT MARKET 923.78\nTP 880.00 / SL 950.00 / 72h"];
+
+  jev [label="jev_decide  4 candidates / 3 requirements\nnone 0.99   investigate 0.01   all trades 0.00\nall four contradicted on requirement 0\n(edge must be direction-specific)", shape=diamond];
+
+  out [label="REJECTED\nno ticket written"];
+
+  st -> read;
+  read -> mirror;
+  read -> gate;
+  read -> flush;
+  mirror -> c1 [label="contradicted"];
+  mirror -> c2 [label="contradicted"];
+  mirror -> c3 [label="contradicted"];
+  mirror -> c4 [label="contradicted"];
+  gate -> c1 [style=dashed, label="reinforces"];
+  gate -> c3 [style=dashed, label="reinforces"];
+  flush -> c2 [style=dashed, label="not live"];
+  flush -> c4 [style=dashed, label="not live"];
+  c1 -> jev; c2 -> jev; c3 -> jev; c4 -> jev;
+  jev -> out;
+
+  note [label="declared limits:\nno candle files -> no new backtest\nall statistics second-hand\nreplica read at hourly, not 15m\nno volume/funding/OI series", shape=note];
+  read -> note [style=dotted];
+}
