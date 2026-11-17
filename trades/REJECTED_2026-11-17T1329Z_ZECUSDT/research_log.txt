@@ -1,0 +1,97 @@
+THESIS
+ZEC has fallen -44.1% from its 2026-09-26 high of 1699.00 and is sitting -32.0% under its
+20-bar high while +18.7% off the 800.67 low, back above SMA20 but still under SMA50. The
+thesis I tested: a deep drawdown that has already bounced off its low and reclaimed the
+20-bar mean is a buyable state on 4h, with a limit 3% below the close, TP +10%, SL -8%.
+Invalidation: a 4h close back under SMA20 (902.52) kills the reclaim.
+
+DATA CHECKED
+- prices: ZECUSDT 4h. Two independent sources agreeing to <0.1%: a 12,000-bar panel
+  2021-05-27 -> 2026-11-17 08:00Z and a 4,380-bar Binance file 2024-11-17 -> 2026-11-17
+  12:00Z. Last bar used: 2026-11-17T12Z, close 950.41. ATR14 4h = 32.81 = 3.45%.
+- Live state: dd20 -32.00%, bounce off lo20 +18.70%, close>SMA20 (902.52), close<SMA50
+  (974.15), position in the 20-bar range 25.1%, volume z of the signal bar 0.07, max
+  volume z over the last 12 bars 1.01 (no flush surge).
+- other assets: 11 more symbols x 12,000 4h bars each (BTC/ETH/BNB/SOL/XRP/ADA/DOGE/
+  LINK/LTC/TRX/UNI/AVAX) for the cross-sectional check.
+- news / forums / tokenomics: NOT SEARCHED. Deliberate omission: the state under test is
+  purely geometric (drawdown, bounce, moving averages) and a narrative cannot change
+  whether the geometry pays. Recorded here so it is not mistaken for an oversight.
+
+WHAT WAS TESTED
+Signal: dd20 <= -28% AND bounce off the 20-bar low >= 15% AND close > SMA20 AND
+close < SMA50, one episode per 30 bars. It fires on 0.117% of 144,000 scanned 4h bars.
+
+1. AUDITED TICKET, LONG limit -3% / TP +10% / SL -8% / 30 bars (120h). Fill model as the
+   manual defines it: limit on first touch; after that TP and SL at their level on touch;
+   a bar touching both is a LOSS; in the fill bar only SL counts; otherwise close of the
+   last bar. Pooled 12 symbols: 141 fills, EV per fill +0.820%, median +0.593%,
+   TP 51 / SL 54 / EXP 36. ZEC alone: 17 episodes, 16 fills, EV per fill +2.753%,
+   median +10.000%.
+2. SHORT MIRROR on the very same signal bars (limit +3%, TP -10%, SL +8%): pooled
+   +1.991%; ZEC alone +0.868%. THE MIRROR BEATS THE LONG.
+3. LONG minus SHORT per symbol: LONG wins on only 4 of 12 (DOGE +0.507, TRX +3.903,
+   UNI +0.455, ZEC +1.885 pp). ETH -7.912, BNB -7.989, LINK -3.849, ADA -2.229,
+   LTC -1.918, AVAX -1.715, SOL -0.803, XRP -0.795 pp.
+4. Threshold sensitivity of the LONG-SHORT gap, 15 combinations from dd<=-20/bo>=10 to
+   dd<=-35/bo>=20: the gap is NEGATIVE in 13 of 15 (from -0.129 to -6.641 pp) and
+   positive only in two geometry variants at dd<=-28 (tp10/sl12 +0.434, tp15/sl10 +0.694).
+   A sign that flips with the stop distance is not a direction.
+5. ZEC's own strictness ladder: LONG +0.770 / +1.659 / +2.753 / +2.270 / +1.000 / +2.286
+   against SHORT +0.221 / +0.755 / +0.868 / +1.550 / +5.500 / +6.400 for dd<=-20 / -25 /
+   -28 / -30 / -35 / -40. The short side overtakes the long exactly where the drawdown
+   gets deepest.
+6. ADJACENT-BAR CONTROL, same symbols, same days, +/-1 to 3 bars (4 to 12 hours away):
+   pooled EV per fill +2.235% versus the signal bar's +0.820%. On ZEC alone +3.022%
+   versus +2.753%. A bar a few hours earlier paid MORE.
+7. Unconditional baseline, every bar of every panel: n=98,685 fills, EV per fill
+   -0.092%. So the state does beat the unconditional baseline - but the mirror, the
+   adjacent bars and the drift all beat it by more.
+8. Clustering: the 168 episode-rows collapse to 78 distinct calendar days. Per-day mean
+   EV +2.282%, 59% of days positive, bootstrap by day CI95 [+0.723, +3.872],
+   P(EV<=0) 0.001. The state is a real volatility-cluster marker. It is not a direction.
+9. BETA CONFOUND: ZEC went from 140.21 to 942.27 (+572%) across the panel; the
+   unconditional 120h LONG drift on ZEC alone is +1.46% mean. Most of the headline
+   +2.753% is the instrument's drift, not the state.
+10. MAE audit of the SL: of 141 fills the worst excursion beyond entry reached -13.36%,
+    and 54 of them traded through -8%. The "zero SL" impression from any single-symbol
+    sample does not survive the pooled data.
+
+ERRORS I MADE IN THIS RUN, ALL CORRECTED BEFORE DECIDING
+- Several intermediate scripts printed a "LONG vs SHORT gap" computed as LONG minus SHORT
+  on the same forward return. Because SHORT equals -LONG on that basis, the number is
+  exactly 2x LONG and measures NOTHING about direction. Every such figure is void. The
+  only valid comparison is LONG minus SHORT where each side is measured against its OWN
+  baseline, which is what section 3 reports.
+- Two fill implementations disagreed: one let TP count inside the fill bar, which the
+  manual forbids. That inflated the pooled number from +0.820% to +3.705%. The audited
+  model in section 1 is the one used for the decision.
+- A first pass also treated a 2,442-bar ASTER panel as a full history; the panel is
+  2,442 bars against 12,000 for the others, so the out-of-sample test that started from
+  it had 11 usable symbols, not 12.
+
+LEARNING PASS (27 prior folders, arithmetic sum -9.04%, win rate 15.4%)
+- The dominant failure mode is a stop too tight inside the leg (6 of 9 losses). SL -8%
+  here is 2.32x ATR and clears the 800.67 low, so that failure mode is not the reason
+  this one is rejected.
+- LOSS-1.50%_2026-10-23T1147Z_ZECUSDT lesson 1: a limit filled by a fast one-way bar is
+  adverse selection. Not applicable here (the limit is 3% away and unfilled at decision
+  time) but it is why the ticket uses a 0.94 measured fill rate rather than a near-market
+  entry.
+- EXPIRED+3.95%_2026-10-18T1535Z_ASTERUSDT lesson 1: never put the TP on an extreme the
+  market already rejected. TP 1014.09 sits inside the 975-1015 supply shelf and under the
+  11-13 swing high of 991.97, so this lesson is respected.
+- EXPIRED_2026-11-01T1010Z_ASTERUSDT lesson 1: quote the far edge of a band for fill
+  robustness. The limit at 921.90 is under the 900-960 box floor.
+
+WHAT COULD NOT BE ESTABLISHED
+- No independent directional filter separates the long from the short at any confidence.
+  The four requirement checks that matter came back contradicted.
+- ZEC has only 5.5 years of usable 4h history and 17 episodes in the current state, and
+  its post-2025 regime (+415% above the February 2026 low of 184.30) has no historical
+  analogue inside the sample, so the state cannot be calibrated for a post-parabolic tape.
+
+LINKS
+- local panel: astr_research/panel/ZECUSDT.json (12,000 4h bars)
+- local panel: p4h_ZECUSDT.json (4,380 4h bars, independent fetch)
+- local daily: panel_d1_ZECUSDT.json (1,500 daily bars)

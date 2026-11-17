@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560">
+<rect width="1000" height="560" fill="#0b0b0b"/><text x="74" y="20" fill="#d0d0d0" font-size="14" font-family="monospace">ZECUSDT 4h  Aster</text><text x="904" y="20" fill="#7d7d7d" font-size="11" font-family="monospace" text-anchor="end">close 951.56</text>
+<line x1="74" y1="477.2" x2="904" y2="477.2" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="481.2" fill="#6d6d6d" font-size="11" text-anchor="start">850</text>
+<line x1="74" y1="436.2" x2="904" y2="436.2" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="440.2" fill="#6d6d6d" font-size="11" text-anchor="start">900</text>
+<line x1="74" y1="395.2" x2="904" y2="395.2" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="399.2" fill="#6d6d6d" font-size="11" text-anchor="start">950</text>
+<line x1="74" y1="354.2" x2="904" y2="354.2" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="358.2" fill="#6d6d6d" font-size="11" text-anchor="start">1000</text>
+<line x1="74" y1="313.2" x2="904" y2="313.2" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="317.2" fill="#6d6d6d" font-size="11" text-anchor="start">1050</text>
+<line x1="74" y1="272.2" x2="904" y2="272.2" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="276.2" fill="#6d6d6d" font-size="11" text-anchor="start">1100</text>
+<line x1="74" y1="231.1" x2="904" y2="231.1" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="235.1" fill="#6d6d6d" font-size="11" text-anchor="start">1150</text>
+<line x1="74" y1="190.1" x2="904" y2="190.1" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="194.1" fill="#6d6d6d" font-size="11" text-anchor="start">1200</text>
+<line x1="74" y1="149.1" x2="904" y2="149.1" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="153.1" fill="#6d6d6d" font-size="11" text-anchor="start">1250</text>
+<line x1="74" y1="108.1" x2="904" y2="108.1" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="112.1" fill="#6d6d6d" font-size="11" text-anchor="start">1300</text>
+<line x1="74" y1="67.1" x2="904" y2="67.1" stroke="#1b1b1b" stroke-width="1"/>
+<text x="912" y="71.1" fill="#6d6d6d" font-size="11" text-anchor="start">1350</text>
+<line x1="74.0" y1="34" x2="74.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="74.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-03</text>
+<line x1="157.0" y1="34" x2="157.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="157.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-04</text>
+<line x1="240.0" y1="34" x2="240.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="240.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-06</text>
+<line x1="323.0" y1="34" x2="323.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="323.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-08</text>
+<line x1="406.0" y1="34" x2="406.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="406.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-10</text>
+<line x1="489.0" y1="34" x2="489.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="489.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-12</text>
+<line x1="572.0" y1="34" x2="572.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="572.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-14</text>
+<line x1="655.0" y1="34" x2="655.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="655.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-16</text>
+<line x1="738.0" y1="34" x2="738.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="738.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-18</text>
+<line x1="821.0" y1="34" x2="821.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="821.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-20</text>
+<line x1="904.0" y1="34" x2="904.0" y2="498" stroke="#1b1b1b" stroke-width="1"/>
+<text x="904.0" y="518" fill="#6d6d6d" font-size="11" text-anchor="middle">11-22</text>
+<polyline fill="none" stroke="#8b5cf6" stroke-width="1.6" points="74.0,153.2 81.1,139.3 88.2,149.1 95.3,165.5 102.4,153.2 109.5,145.0 116.6,157.3 123.7,145.0 130.8,140.9 137.8,149.1 144.9,157.3 152.0,149.1 159.1,140.9 166.2,132.7 173.3,116.3 180.4,124.5 187.5,108.1 194.6,116.3 201.7,99.9 208.8,83.5 215.9,58.9 223.0,83.5 230.1,108.1 237.2,132.7 244.3,124.5 251.4,116.3 258.4,124.5 265.5,99.9 272.6,91.7 279.7,108.1 286.8,132.7 293.9,140.9 301.0,149.1 308.1,157.3 315.2,165.5 322.3,173.7 329.4,177.8 336.5,190.1 343.6,206.5 350.7,222.9 357.8,239.3 364.9,255.7 371.9,272.2 379.0,288.6 386.1,305.0 393.2,321.4 400.3,337.8 407.4,321.4 414.5,337.8 421.6,354.2 428.7,362.4 435.8,354.2 442.9,370.6 450.0,387.0 457.1,403.4 464.2,419.8 471.3,436.2 478.4,428.0 485.5,411.6 492.5,395.2 499.6,387.0 506.7,403.4 513.8,419.8 520.9,436.2 528.0,452.6 535.1,460.8 542.2,469.0 549.3,473.1 556.4,456.7 563.5,444.4 570.6,452.6 577.7,464.9 584.8,473.1 591.9,460.8 599.0,444.4 606.1,428.0 613.1,419.8 620.2,436.2 627.3,448.5 634.4,452.6 641.5,440.3 648.6,428.0 655.7,415.7 662.8,407.5 669.9,403.4 677.0,399.3 684.1,395.2 691.2,394.4 698.3,411.6 705.4,423.9 712.5,432.1 719.6,419.8 726.6,407.5 733.7,395.2 740.8,382.9 747.9,395.2 755.0,407.5 762.1,419.8 769.2,432.1 776.3,419.8 783.4,403.4 790.5,391.1 797.6,403.4 804.7,415.7 811.8,423.9 818.9,411.6 826.0,399.3 833.1,407.5 840.2,419.8 847.2,428.0 854.3,415.7 861.4,403.4 868.5,411.6 875.6,421.5 882.7,429.7 889.8,419.8 896.9,410.0 904.0,415.7"/>
+<line x1="74.0" y1="415.7" x2="904" y2="415.7" stroke="#4b5563" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="912" y="419.7" fill="#c7c7c7" font-size="11" text-anchor="start">925.00</text>
+</svg>
