@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700">
+<rect width="1400" height="700" fill="#0d1117"/>
+<text x="80" y="24" fill="#c9d1d9" font-family="monospace" font-size="13">ZECUSDT 15m - forecast - live 947.52 - 2026-11-18T09:41Z - NO POSITION (repaired recovery chop, no directional edge)</text>
+<text x="1330" y="24" fill="#6e7681" font-family="monospace" font-size="11" text-anchor="end">replica: vision read</text>
+<line x1="80" y1="647.1" x2="1598" y2="647.1" stroke="#1b2430"/>
+<text x="74" y="650.1" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">780.00</text>
+<line x1="80" y1="621.2" x2="1598" y2="621.2" stroke="#1b2430"/>
+<text x="74" y="624.2" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">800.00</text>
+<line x1="80" y1="595.4" x2="1598" y2="595.4" stroke="#1b2430"/>
+<text x="74" y="598.4" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">820.00</text>
+<line x1="80" y1="569.6" x2="1598" y2="569.6" stroke="#1b2430"/>
+<text x="74" y="572.6" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">840.00</text>
+<line x1="80" y1="543.8" x2="1598" y2="543.8" stroke="#1b2430"/>
+<text x="74" y="546.8" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">860.00</text>
+<line x1="80" y1="517.9" x2="1598" y2="517.9" stroke="#1b2430"/>
+<text x="74" y="520.9" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">880.00</text>
+<line x1="80" y1="492.1" x2="1598" y2="492.1" stroke="#1b2430"/>
+<text x="74" y="495.1" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">900.00</text>
+<line x1="80" y1="466.2" x2="1598" y2="466.2" stroke="#1b2430"/>
+<text x="74" y="469.2" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">920.00</text>
+<line x1="80" y1="440.4" x2="1598" y2="440.4" stroke="#1b2430"/>
+<text x="74" y="443.4" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">940.00</text>
+<line x1="80" y1="414.6" x2="1598" y2="414.6" stroke="#1b2430"/>
+<text x="74" y="417.6" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">960.00</text>
+<line x1="80" y1="388.8" x2="1598" y2="388.8" stroke="#1b2430"/>
+<text x="74" y="391.8" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">980.00</text>
+<line x1="80" y1="362.9" x2="1598" y2="362.9" stroke="#1b2430"/>
+<text x="74" y="365.9" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1000.00</text>
+<line x1="80" y1="337.1" x2="1598" y2="337.1" stroke="#1b2430"/>
+<text x="74" y="340.1" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1020.00</text>
+<line x1="80" y1="311.2" x2="1598" y2="311.2" stroke="#1b2430"/>
+<text x="74" y="314.2" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1040.00</text>
+<line x1="80" y1="285.4" x2="1598" y2="285.4" stroke="#1b2430"/>
+<text x="74" y="288.4" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1060.00</text>
+<line x1="80" y1="259.6" x2="1598" y2="259.6" stroke="#1b2430"/>
+<text x="74" y="262.6" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1080.00</text>
+<line x1="80" y1="233.8" x2="1598" y2="233.8" stroke="#1b2430"/>
+<text x="74" y="236.8" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1100.00</text>
+<line x1="80" y1="207.9" x2="1598" y2="207.9" stroke="#1b2430"/>
+<text x="74" y="210.9" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1120.00</text>
+<line x1="80" y1="182.1" x2="1598" y2="182.1" stroke="#1b2430"/>
+<text x="74" y="185.1" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1140.00</text>
+<line x1="80" y1="156.2" x2="1598" y2="156.2" stroke="#1b2430"/>
+<text x="74" y="159.2" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1160.00</text>
+<line x1="80" y1="130.4" x2="1598" y2="130.4" stroke="#1b2430"/>
+<text x="74" y="133.4" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1180.00</text>
+<line x1="80" y1="104.6" x2="1598" y2="104.6" stroke="#1b2430"/>
+<text x="74" y="107.6" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1200.00</text>
+<line x1="80" y1="78.8" x2="1598" y2="78.8" stroke="#1b2430"/>
+<text x="74" y="81.8" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1220.00</text>
+<line x1="80" y1="52.9" x2="1598" y2="52.9" stroke="#1b2430"/>
+<text x="74" y="55.9" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="end">1240.00</text>
+<line x1="80.0" y1="40" x2="80.0" y2="660" stroke="#161d27"/>
+<text x="80.0" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">10</text>
+<line x1="206.2" y1="40" x2="206.2" y2="660" stroke="#161d27"/>
+<text x="206.2" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">11</text>
+<line x1="332.5" y1="40" x2="332.5" y2="660" stroke="#161d27"/>
+<text x="332.5" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">12</text>
+<line x1="458.7" y1="40" x2="458.7" y2="660" stroke="#161d27"/>
+<text x="458.7" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">13</text>
+<line x1="584.9" y1="40" x2="584.9" y2="660" stroke="#161d27"/>
+<text x="584.9" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">14</text>
+<line x1="711.1" y1="40" x2="711.1" y2="660" stroke="#161d27"/>
+<text x="711.1" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">15</text>
+<line x1="837.4" y1="40" x2="837.4" y2="660" stroke="#161d27"/>
+<text x="837.4" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">16</text>
+<line x1="963.6" y1="40" x2="963.6" y2="660" stroke="#161d27"/>
+<text x="963.6" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">17</text>
+<line x1="1089.8" y1="40" x2="1089.8" y2="660" stroke="#161d27"/>
+<text x="1089.8" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">18</text>
+<line x1="1216.0" y1="40" x2="1216.0" y2="660" stroke="#161d27"/>
+<text x="1216.0" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">19</text>
+<rect x="80" y="362.9" width="1518.2" height="15.5" fill="#ffb3b3" opacity="0.16" stroke="#ffb3b3" stroke-width="0.8"/>
+<rect x="80" y="396.7" width="1518.2" height="17.9" fill="#ffc9c9" opacity="0.16" stroke="#ffc9c9" stroke-width="0.8"/>
+<rect x="80" y="521.8" width="1518.2" height="14.2" fill="#b6e3b6" opacity="0.16" stroke="#b6e3b6" stroke-width="0.8"/>
+<rect x="80" y="548.9" width="1518.2" height="12.1" fill="#b6e3b6" opacity="0.16" stroke="#b6e3b6" stroke-width="0.8"/>
+<line x1="80" y1="396.7" x2="1598.2" y2="396.7" stroke="#ffc9c9" stroke-width="0.9" stroke-dasharray="5,4" opacity="0.75"/>
+<text x="1594.2" y="393.7" fill="#ffc9c9" font-family="monospace" font-size="9" text-anchor="end">973.87 recov. high</text>
+<line x1="80" y1="372.0" x2="1598.2" y2="372.0" stroke="#ffb3b3" stroke-width="0.9" stroke-dasharray="5,4" opacity="0.75"/>
+<text x="1594.2" y="369.0" fill="#ffb3b3" font-family="monospace" font-size="9" text-anchor="end">992.98 13 Nov high</text>
+<line x1="80" y1="303.8" x2="1598.2" y2="303.8" stroke="#ffb3b3" stroke-width="0.9" stroke-dasharray="5,4" opacity="0.75"/>
+<text x="1594.2" y="300.8" fill="#ffb3b3" font-family="monospace" font-size="9" text-anchor="end">1045.76 50% fib</text>
+<line x1="80" y1="527.0" x2="1598.2" y2="527.0" stroke="#b6e3b6" stroke-width="0.9" stroke-dasharray="5,4" opacity="0.75"/>
+<text x="1594.2" y="524.0" fill="#b6e3b6" font-family="monospace" font-size="9" text-anchor="end">873.00 higher low</text>
+<line x1="80" y1="561.0" x2="1598.2" y2="561.0" stroke="#b6e3b6" stroke-width="0.9" stroke-dasharray="5,4" opacity="0.75"/>
+<text x="1594.2" y="558.0" fill="#b6e3b6" font-family="monospace" font-size="9" text-anchor="end">846.62 swing low</text>
+<line x1="80" y1="619.3" x2="1598.2" y2="619.3" stroke="#8fd18f" stroke-width="0.9" stroke-dasharray="5,4" opacity="0.75"/>
+<text x="1594.2" y="616.3" fill="#8fd18f" font-family="monospace" font-size="9" text-anchor="end">801.52 capitulation low</text>
+<line x1="80" y1="362.9" x2="1598.2" y2="362.9" stroke="#8b949e" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="86" y="358.9" fill="#8b949e" font-family="monospace" font-size="9">upside invalidation 1000.00 (a close above = recovery extends)</text>
+<line x1="80" y1="561.0" x2="1598.2" y2="561.0" stroke="#8b949e" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="86" y="573.0" fill="#8b949e" font-family="monospace" font-size="9">downside invalidation 846.62 (a close below = bounce failed)</text>
+<line x1="1077.5" y1="40" x2="1077.5" y2="660" stroke="#e6edf3" stroke-width="1.2" stroke-dasharray="2,2" opacity="0.8"/>
+<text x="1077.5" y="34" fill="#e6edf3" font-family="monospace" font-size="10" text-anchor="middle">NOW 947.52</text>
+<line x1="1385.8" y1="40" x2="1385.8" y2="660" stroke="#e3b341" stroke-width="1" stroke-dasharray="1,4"/>
+<text x="1379.8" y="54" fill="#e3b341" font-family="monospace" font-size="10" text-anchor="end">EXPIRY +48h</text>
+<polyline points="80.0,86.5 88.2,91.7 96.4,99.4 102.9,109.8 109.5,113.6 116.0,109.8 122.6,118.8 129.1,125.2 135.7,133.0 142.2,140.8 148.8,143.3 155.3,148.5 161.9,151.1 168.5,147.2 175.0,153.7 181.6,160.1 188.1,166.6 194.7,161.4 201.2,155.0 207.8,160.1 214.3,165.3 220.9,160.1 227.4,151.1 234.0,129.1 240.5,99.4 246.3,67.1 247.1,98.1 247.9,145.9 248.7,205.3 249.5,259.6 250.4,298.3 252.0,311.2 253.6,324.2 255.3,335.8 256.9,342.2 260.2,324.2 263.5,308.7 266.7,300.9 271.6,291.9 276.6,281.5 281.5,272.5 284.8,291.9 288.0,324.2 292.9,317.7 297.9,326.8 302.8,337.1 307.7,338.4 312.6,324.2 317.5,315.1 322.4,321.6 327.3,330.6 332.3,350.0 337.2,362.9 342.1,368.1 347.0,353.9 351.9,362.9 356.8,370.7 361.7,368.1 366.7,379.7 371.6,374.5 376.5,372.0 381.4,375.8 386.3,390.0 391.2,383.6 396.1,379.7 401.0,382.3 406.0,393.9 410.9,399.1 415.8,404.2 420.7,409.4 425.6,417.2 430.5,404.2 435.4,397.8 440.4,390.0 445.3,406.8 448.6,417.2 453.5,414.6 458.4,435.2 463.3,443.0 468.2,450.8 473.1,465.0 478.0,479.2 482.9,492.1 487.9,501.1 492.0,505.0 496.1,492.1 501.0,476.6 505.9,461.1 510.8,445.6 515.7,431.4 520.6,423.6 525.5,417.2 530.5,405.5 535.4,414.6 540.3,431.4 545.2,443.0 550.1,461.1 555.0,458.5 559.9,468.8 564.8,476.6 569.8,479.2 574.7,486.9 579.6,490.8 584.5,486.9 589.4,494.7 594.3,505.0 599.2,510.2 604.2,516.6 609.1,524.4 614.0,528.2 618.9,532.1 623.8,528.2 628.7,524.4 633.6,539.9 638.6,554.1 643.5,561.8 648.4,572.2 653.3,586.4 658.2,595.4 663.1,604.5 666.4,589.0 669.7,569.6 674.6,550.2 679.5,543.8 684.4,533.4 689.3,524.4 694.3,516.6 699.2,520.5 704.1,524.4 709.0,516.6 713.9,506.3 718.8,498.5 723.7,502.4 728.7,505.0 733.6,498.5 738.5,502.4 743.4,493.4 748.3,490.8 753.2,494.7 758.1,501.1 763.0,498.5 768.0,494.7 772.9,510.2 777.8,516.6 782.7,512.8 787.6,524.4 792.5,533.4 797.4,536.0 802.4,541.2 807.3,536.0 812.2,524.4 817.1,512.8 822.0,510.2 826.9,501.1 831.8,494.7 836.8,483.0 841.7,476.6 846.6,481.8 851.5,486.9 856.4,479.2 861.3,471.4 866.2,465.0 871.2,472.7 876.1,479.2 881.0,475.3 885.9,468.8 890.8,465.0 895.7,472.7 900.6,479.2 905.6,475.3 910.5,467.5 915.4,457.2 920.3,449.5 925.2,440.4 930.1,435.2 935.0,443.0 940.0,449.5 944.9,445.6 949.8,439.1 954.7,445.6 959.6,465.0 964.5,467.5 969.4,479.2 974.4,483.0 979.3,477.9 984.2,467.5 989.1,457.2 994.0,449.5 998.9,439.1 1003.8,435.2 1008.7,427.5 1013.7,419.8 1018.6,415.9 1023.5,412.0 1028.4,418.5 1033.3,428.8 1038.2,436.5 1043.1,441.7 1048.1,434.0 1053.0,426.2 1057.9,419.8 1062.8,428.8 1067.7,423.6 1072.6,428.8 1077.5,430.7" fill="none" stroke="#4361ee" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1077.5,430.7 1096.8,426.2 1116.1,435.2 1135.3,427.5 1154.6,439.1 1173.9,445.6 1193.1,436.5 1212.4,427.5 1231.7,432.7 1257.4,443.0 1283.0,453.3 1308.7,445.6 1334.4,435.2 1360.1,443.0 1385.8,449.5" fill="none" stroke="#ff7a45" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6,3"/>
+<circle cx="1385.8" cy="449.5" r="3" fill="#ff7a45"/>
+<text x="1360.1" y="485.6" fill="#ff7a45" font-family="monospace" font-size="9" text-anchor="end">base case: chop 920-975, mild down bias</text>
+<rect x="80" y="40" width="1518" height="620" fill="none" stroke="#1b2430"/>
+<text x="80" y="692" fill="#7d8899" font-family="monospace" font-size="9">no entry / TP / SL drawn: folder is REJECTED, no position was taken. Bands are structure, not targets.</text>
+</svg>

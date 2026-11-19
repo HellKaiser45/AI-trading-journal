@@ -1,0 +1,65 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, style="rounded", fontname="Helvetica", fontsize=10];
+
+  q [label="User: probe Aster for a good trade to take RIGHT NOW\n2026-11-19T12:41Z"];
+  live [label="Live scan of 21-symbol clean panel\n3 states fire on the 11:00Z closed bar"];
+
+  q -> live;
+
+  aster [label="ASTERUSDT failed_bounce SHORT\nentry 0.523907 / TP 0.515186 / SL 0.532629\nRR 1.00, 0.56% to entry, medqv $1.75M"];
+  pepe [label="1000PEPEUSDT squeeze_break LONG\nmedqv $15k"];
+  btw [label="BTWUSDT oversold_reclaim LONG\nmedqv $24k, entry 4.18% from spot"];
+
+  live -> aster;
+  live -> pepe;
+  live -> btw;
+
+  t1 [label="Test 1: absolute EV positive?\nASTER +1.48% (33 fills)"];
+  t2 [label="Test 2: edge vs matched same-day control\n+1.23%, permutation p=0.487\nFAIL - indistinguishable"];
+  t3 [label="Test 3: drop-one-symbol robust?\n+1.25% to +1.60% removing any symbol\nPASS"];
+  t4 [label="Test 4: both halves positive?\nH1 +0.77% / H2 +3.36%\nPASS"];
+  t5 [label="Test 5: geometry-stable?\nsame state at 1.0/3.0/2.5/120 = -2.29%\nFAIL"];
+  t6 [label="Test 6: month-block 95% CI\n[-1.32, +4.08] - spans zero\nFAIL"];
+  t7 [label="Test 7: symbol-weighted EV\n+0.65% across 7 symbols; 19/33 episodes BTW\nFAIL - thin-symbol concentration"];
+
+  aster -> t1 -> t2 -> t3 -> t4 -> t5 -> t6 -> t7;
+
+  p1 [label="PEPE: state edge -0.19, p=0.224\nREJECT"];
+  b1 [label="BTW: same-symbol history -2.78% over 11 episodes\nREJECT"];
+  pepe -> p1;
+  btw -> b1;
+
+  drift [label="Drift trap: random-bar mean is +0.17% at 72h LONG,\nmirrored SHORT, median NEGATIVE\nA short state earns a positive mean for free in this tape"];
+
+  all [label="Six other states tested, all failed\nalso 2 of 21 wins only"];
+o1 [label="overbought_reject: edge +3.15 p=0.041\nbut drop BTW -> -0.50%  REJECT"];
+  o2 [label="failed_breakdown: p=0.000 but 8/21 symbols positive,\ndrop LIT -> -0.27%, H1 absolute EV -0.18%  REJECT"];
+  o3 [label="range_fade (the 2-win shape): beats control +0.66\nbut absolute EV -0.08% both halves  REJECT"];
+  o4 [label="capit_continuation: edge -7.35 p=0.024\nactively harmful  REJECT"];
+
+  all -> o1;
+  all -> o2;
+  all -> o3;
+  all -> o4;
+
+  drift -> t1;
+  t7 -> dec;
+  p1 -> dec;
+  b1 -> dec;
+  o1 -> dec;
+  o2 -> dec;
+  o3 -> dec;
+  o4 -> dec;
+
+  dec [label="jev_decide: reject_and_fix_book 0.61\ntrade_none 0.38, trade_aster_short 0.01,\ntrade_pepe_or_btw 0.00", shape=box, style="rounded,filled", fillcolor="#f8d7da"];
+  noul [label="jev_noul sanity: positive-edge-vs-control is sufficient -> 0.04 unlikely\nno state survived all tests -> 0.86 likely"];
+
+  dec -> noul;
+
+  out [label="DECISION: NO TRADE\nFolder REJECTED_2026-11-19T1241Z_ASTERUSDT", shape=box, style="rounded,filled", fillcolor="#d4edda"];
+  noul -> out;
+
+  book [label="Book items raised instead:\nKAVAUSDT cannot execute on Aster (100% dead bars, limit 1519% away)\nHUMAUSDT 14.85% from limit on 44.1%-flat symbol\nXMR +2.04% and LIT +2.96% open and in profit - leave to their levels", shape=box, style="rounded,filled", fillcolor="#fff3cd"];
+  out -> book;
+}

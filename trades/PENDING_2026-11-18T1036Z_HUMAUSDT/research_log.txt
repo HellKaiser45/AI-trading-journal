@@ -1,0 +1,63 @@
+PROBE RUN 2026-11-18T10:36Z — CANDIDATE 3 of 3
+===============================================
+THESIS
+Buy the HUMA oversold reclaim: -31.3% below the 120h high with a +12.2% bounce off
+the 48h low. Enter with a limit 0.5 ATR under the last closed bar (0.00702502),
+target +2.0 ATR (0.00748095), stop -2.5 ATR (0.00645511). RR 0.80 — deliberately
+below 1, because the measured hit rate here is the highest of the three at 0.72
+against a 0.56 breakeven. A frequent, small-edge trade in a coin that has already
+shown it can hold a bounce.
+
+NO CHART IMAGE WAS SUPPLIED THIS RUN. Market probe requested in words. JEV selected
+the data-probe path (0.76) over asking for screenshots (0.00). chart.svg is a DATA
+RENDER from Binance klines, not a vision trace. Deliberate deviation, recorded.
+
+DATA CHECKED
+- prices: HUMAUSDT USDT-M perpetual, Binance fapi, 1h bars, 12,982 bars available.
+  Last closed bar 2026-11-18T09:00Z close 0.007139; live 0.007051.
+- ATR14 (1h) = 3.19% of price. dd120 -31.3%, bounce off 48h low +12.2%.
+- 34-symbol universe screened. news / forums: NOT SEARCHED, JEV ruled the decision
+  geometric and measurement-based. Deliberate omission.
+
+WHAT WAS TESTED
+- Signal: dd from 120h high <= -15% AND bounce off 48h low >= 8%.
+- Symbol episodes: 89 (contiguous runs), 12,982 bars.
+- Chosen tp2.0/sl2.5 ATR at limit -0.5 ATR:
+    EV/ticket +2.01%  fill 0.96  P(TP|fill) 0.72  P(SL|fill) 0.28
+    era EARLY +3.09%   era LATE +1.05%   -> positive in both
+    geometry grid: 6/6 neighbouring cells positive
+    5% trimmed mean +2.24%
+- Stop-width study: 67% of fills saw an adverse excursion beyond 2.0 ATR, the
+  highest of the three symbols, and EV rose monotonically with stop width up to
+  3.5x ATR. 2.5x is used as the point where the both-era and cell-smoothness
+  guards still all hold.
+- Pooled context across 34 symbols: 30/34 positive; cluster bootstrap over 84
+  independent weeks mean +0.92%, 95% CI [+0.07%, +1.76%].
+
+WHAT WOULD INVALIDATE IT
+A 1h close below 0.00645511 (the stop), or no touch of 0.00702502 within 72h
+(unfilled, no loss).
+
+BIAS WARNINGS
+- IN-SAMPLE SELECTION, as above. Guards applied, no true holdout.
+- HUMA's MAE profile is the worst of the three: median adverse excursion 3.40 ATR
+  after the fill. Expect the stop to be approached routinely.
+- RR 0.80: needs the 0.72 hit rate to persist. At breakeven 0.56 there is margin,
+  but a decay toward 0.56 turns this ticket negative.
+- CORRELATION: same long-the-dip thesis, same bear regime. One idea, three tickers.
+
+LEARNING PASS (36 terminal folders)
+- Journal arithmetic sum is -5.03% with a 15.4% win rate (2 wins / 11 losses). The
+  record says the journal's problem is not picking direction, it is ticket
+  construction. Hence the ATR-based stop, the in-range TP, and the measured hit
+  rate recorded at placement.
+- EXPIRED_2026-11-01T1010Z_ASTERUSDT lesson 1: quote the far edge of a band for
+  fill robustness. The limit here sits 0.5 ATR below the close and the measured
+  fill rate at this geometry is 0.96.
+- LOSS-4.24% ZEC 11-12: a limit mid-coil is a coin flip. Here the entry is not mid
+  range: it is a defined ATR distance under a bar that already produced a +12.2%
+  reclaim, with the stop under the 48h low structure.
+
+LINKS
+- https://fapi.binance.com/fapi/v1/klines?symbol=HUMAUSDT&interval=1h
+- https://fapi.binance.com/fapi/v1/ticker/price?symbol=HUMAUSDT

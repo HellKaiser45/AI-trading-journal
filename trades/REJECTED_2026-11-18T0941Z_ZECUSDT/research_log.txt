@@ -1,0 +1,137 @@
+THESIS
+ZECUSDT 15m on Aster, evaluated 2026-11-18T09:41Z, live 947.52 as read off the image
+(949.06 on the exchange at 09:00Z). The chart shows a -37.9% bear leg from the 8 Nov
+high to a capitulation low, then a +21.5% recovery, and the question is whether that
+recovery continues (LONG) or fails (SHORT).
+
+Premise to falsify: a post-capitulation recovery of this size carries a tradeable
+DIRECTION. Invalidation of the whole idea: if neither side survives the mirror test,
+a same-day random-hour control, and horizon stability, then the state is volatility
+without direction and there is no ticket to write.
+
+DATA CHECKED
+- prices: Binance ZECUSDT 1h, 67,128 bars, 2019-03-21T04:00Z -> 2026-11-18T09:00Z,
+  fetched this run. OHLC used as returned, no cleaning applied beyond float cast.
+  ATR14(1h) = 1.73% of price.
+- news: NOT FETCHED, by decision. jev_decide was asked which stage-2 path to take and
+  returned fetch_candles 0.97 / both 0.02 / neither 0.00 / search_news 0.00, with
+  search_news contradicted on "the path must be able to falsify the direction". The
+  live state is a geometric measurement and a narrative cannot falsify it.
+- other assets: none this run. The cross-symbol panel used by the two prior ZEC
+  folders was NOT re-fetched; those numbers are quoted where cited.
+- forums / tokenomics: not checked.
+
+WHAT THE REPOSITORY ALREADY MEASURED
+1. REJECTED_2026-11-17T1329Z_ZECUSDT (ZEC 4h, same post-flush structure): LONG
+   +0.820%/fill over 12 symbols and 141 fills, but SHORT on IDENTICAL bars +1.991,
+   bars 1-3 positions earlier +2.235, unconditional baseline -0.092. LONG beat SHORT
+   on 4 of 12 symbols.
+2. REJECTED_2026-11-17T1916Z_ZECUSDT (ZEC 15m): JEV returned none at 0.99, all four
+   candidates contradicted on "the edge is direction-specific".
+3. The only setup in this journal with a demonstrated direction needs a >=20% flush
+   within 12 bars plus an 8-15% bounce plus 4h volume z >= 2. Tested directly on the
+   candles below: it does NOT fire here (the live 120h drawdown is -4.60%).
+4. The dominant failure mode across 11 losses / 2 wins / -9.04% arithmetic sum is
+   inferring direction from a post-flush recovery where the opposite side pays as
+   well or better.
+
+MEASUREMENTS COMPUTED THIS RUN (all reproducible: artifacts/build/*.py)
+State definition, from the live bar itself: bounce off the 48h low >= 12%, 120h
+drawdown >= -8%, position in the 48h range >= 0.60. Live bar: bounce +11.89%,
+dd120 -4.60%, pir 0.688 -- so the live bar sits exactly on this state (bounce
+marginally under 12 at the last close; it clears it on the 17 Nov prints).
+
+Threshold monotonicity PASSES, so the condition is not a knife-edge fit:
+  bounce >=8/10/12/14/16 -> EV +0.41/+0.55/+0.53/+0.56/+0.61 (LONG lim-0.5 tp8 sl8 72h)
+
+Mirror test, current era 2025-2026, 53 independent episodes, day-clustered bootstrap
+(1500 reps), manual fill model:
+  SHORT lim-1 tp12/sl8 72h   EV +0.70  CI95 [-0.64, +2.24]  P(EV>0) 0.82
+  SHORT mkt        tp8/sl8 72h EV +0.45  CI95 [-0.71, +1.74]  P(EV>0) 0.76
+  SHORT mkt        tp8/sl8 120h EV +0.51  CI95 [-0.80, +1.97]
+  LONG  mkt      tp12/sl12 24h EV +0.65  CI95 [-0.31, +1.49]  P(EV>0) 0.92
+  LONG  mkt        tp8/sl8 72h EV -0.47  CI95 [-1.72, +0.66]  P(EV>0) 0.22
+  LONG  lim-0.5   tp8/sl8 72h EV -0.40  CI95 [-1.65, +0.73]
+EVERY interval crosses zero. No candidate has a positive confidence interval.
+
+HORIZON STABILITY -- the finding that decides this folder. LONG-minus-SHORT gap:
+  +0.69 (8h) +0.74 (16h) +0.36 (24h) -0.51 (48h) -0.81 (72h) -0.99 (96h)
+  -0.96 (120h) -0.69 (168h)
+The winning side CROSSES ZERO between 24h and 48h. LONG wins intraday, SHORT wins
+from two days out. A measurement whose sign depends on which expiry is chosen is a
+noise band, not an edge -- the same verdict REJECTED_2026-11-17T1505Z_XRPUSDT reached
+about a drawdown gate that flipped between -10% and -15%.
+
+CONTROLS
+- Random-hour entry on the SAME days (595 days, 20 reps): LONG +1.23% (sd 0.20).
+  The signal at the signal hour: LONG +0.53% all-years. Excess -0.71pp. On this
+  measurement the LONG is WORSE than throwing a dart on those same days.
+- Same-era baseline excess for LONG: -0.57pp.
+- SHORT does beat its random control (-0.71% for the same geometry), which is why the
+  SHORT was carried to the conclave rather than dismissed. It still fails the CI test.
+- 384-cell geometry scan: best LONG cell (tp12/sl12 24h, +0.64) and best SHORT cell
+  (tp12/sl8 120h, +0.77) point in OPPOSITE directions in the same scan, and 74 of 384
+  cells cleared all three filters. 74 wins out of 384 weak cells is what chance gives.
+
+CANDIDATES PUT TO JEV (5, all with the required evidence)
+  LONG  MARKET 949.06  TP 988.12 (38.2% fib)  SL 907.53  72h
+  LONG  LIMIT  935.00  TP 973.87              SL 916.25  72h
+  SHORT LIMIT  973.87  TP 895.00              SL 1000.00 72h
+  SHORT MARKET 949.06  TP 873.00              SL 974.00  72h
+  LONG  MARKET 949.06  TP 1045.76 (50% fib)   SL 873.00  120h
+
+JEV DECISION
+jev_decide, 5 candidates, 3 requirements, escalate_on_contradiction enabled:
+  selected "none", p = 0.99. Every trade candidate 0.00 except short_market_949 at
+  0.01. The two SHORT candidates were "supported" on requirements 0 (beats its mirror
+  at the stated horizon) and 1 (beats the random control), and both CONTRADICTED on
+  requirement 2 (CI excludes zero). Every LONG candidate was contradicted on all
+  three. No trade candidate cleared all three requirements.
+Confirmation pass, jev_noul, 8 propositions: "direction-specific edge stable across
+24h-120h" 0.05 unlikely; "evidence supports a LONG" 0.04; "evidence supports a SHORT
+with a CI excluding zero" 0.05; "mirror test gives a consistent answer regardless of
+horizon" 0.04; "EV distinguishable from market beta" 0.15.
+Third angle, jev_classify: the state is repaired_recovery_chop at 0.98 (fresh
+capitulation 0.00, established downtrend 0.00). Three independent framings, one answer.
+
+WHAT COULD NOT BE FOUND
+- No ZEC-specific news, funding, open-interest or liquidation data this run, by the
+  stage-2 decision above. So there is no independent evidence on whether 801.52 was
+  forced selling or a value repricing.
+- No cross-symbol out-of-sample re-test this run; the 12-symbol panel numbers are
+  quoted second-hand from the 1329Z folder and an error there propagates uncaught.
+- The live state matches its own definition only marginally (bounce 11.89% against a
+  12% threshold), so the "live bar fires" statement is threshold-sensitive by 0.11pp.
+  It cleared 12% on the 17 Nov prints, which is what the 53 episodes are conditioned on.
+
+DECLARED CORRECTION -- vision read vs exchange, both values visible
+The manual requires the chart be read by eye and corrections declared rather than
+silently applied. My eyes put the chart window's peak at 1229.00, the low at 813.00,
+the recovery high at 962.00 and live at 947.52. The fetched candles put them at
+1199.82 (10 Nov 15:00Z), 801.52 (14 Nov 21:00Z), 973.87 (17 Nov 21:00Z) and 949.06.
+The shape and the timing agree; the LEVELS are off by 0.6% to 1.4%, which is what a
+15m line read at this resolution can deliver. Per the manual the replica is NOT
+retrofitted to exchange data: chart.svg keeps the values I read. Every statistic above
+is computed from candles, never from the replica.
+Axis model declared: x=72 -> 2026-11-10T00:00Z, x=1290 -> 2026-11-18T09:40Z
+(6.04 px/hour); price 780.00 at y=864, 1240.00 at y=68. graphpoints.csv is a 2h grid,
+102 rows, i.e. a coarse structural read, not a 15m reconstruction.
+
+LIMITS OF THE CHART_PREDICTION
+Labelling: this folder took no position, so chart_prediction.svg carries support and
+resistance bands, invalidation lines per side, and a forecast path, but NO entry, TP
+or SL markers. The "now" line is at the point where the history ends.
+
+LESSON RECORDED
+1. Test the horizon before believing the side. Here LONG won at 24h and SHORT won at
+   72h on identical bars; an expiry choice was silently making the decision.
+2. A signal that loses to a random entry on its own days has no edge to price. LONG
+   +0.53% against +1.23% random is the shortest way to say this chart was not tradeable.
+
+LINKS
+- https://api.binance.com/api/v3/klines?symbol=ZECUSDT&interval=1h (fetched 2026-11-18)
+- trades/REJECTED_2026-11-17T1329Z_ZECUSDT/research_log.txt (mirror + adjacency, 12 symbols)
+- trades/REJECTED_2026-11-17T1916Z_ZECUSDT/research_log.txt (15m dual test of this state)
+- trades/REJECTED_2026-11-17T1505Z_XRPUSDT/research_log.txt (gate sign flip precedent)
+- trades/PENDING_2026-11-15T0924Z_UNIUSDT/research_log.txt (the matched-control method used here)
+- trades/LOSS-4.24%_2026-11-12T1116Z_ZECUSDT/recap.md (mid-coil limit, stop gap risk)

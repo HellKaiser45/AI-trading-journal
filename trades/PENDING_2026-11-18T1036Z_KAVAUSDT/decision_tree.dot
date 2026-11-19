@@ -1,0 +1,52 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  start [label="REQUEST: probe crypto markets,\nfind 2-3 good trade candidates\n(no chart image supplied)"];
+  jev0 [label="JEV decide: how to proceed\nprobe_data_render 0.76 / no_folders 0.22 /\nask_screenshots 0.00", shape=diamond];
+  dev [label="DECLARED DEVIATION:\nstage 1 vision read unavailable;\nchart.svg is a data render,\nnot a vision trace"];
+
+  regime [label="REGIME (34 symbols)\nBTC -24.1%, ETH -28.5%,\nmedian -30.4% from 720h high\nvolume z -1.0..-1.7\nEMA stacks mixed/down\n=> one synchronised bear"];
+
+  fam1 [label="FAMILY 1: mean reversion (6 hypotheses)"];
+  fam2 [label="FAMILY 2: continuation shorts (4 hypotheses)"];
+  r2 [label="REJECT family 2\nEV +0.098%..+0.208%/ticket,\nlate era +0.007%\n= indistinguishable from zero"];
+
+  r1 [label="SURVIVOR: oversold_reclaim LONG\ndd120 <= -15% AND bounce >= 8%\npooled EV +1.63%\n30/34 symbols positive\ncluster bootstrap 84 weeks:\n+0.92% CI [+0.07,+1.76]\nP(mean<=0)=0.015"];
+
+  conc [label="CONCENTRATION CHECK\ncapitulation_flush looked +5.74%\nbut = illiquid microcaps\nBTW +16.6 on 7 signals\nREJECTED as non-generic"];
+
+  stale [label="STALE vs FRESH LEVEL TEST (decisive)\nold level + k bars: +2.57% k=0,\n+0.06% k=6, -0.50% k=12, -1.76% k=72\nfresh level at bar k: +1.20% k=6,\n+1.03% k=12\n96% of fills within 12 bars\n=> price off CURRENT close"];
+
+  stop [label="STOP-WIDTH TEST (JEV flagged p=0.53)\n60-67% of fills breach 2.0 ATR\nEV rises monotonically with width\n=> widen stops to 2.0-3.0 ATR"];
+
+  rej [label="REJECTED on per-symbol evidence\nEVAA  early era -0.60%\nBLESS late era -0.85%, CI crosses 0\nBREV  4/12 cells, EV -0.55%\nBTW   +4.19% but only 5.5mo history"];
+
+  jev1 [label="JEV decide: which 2-3\nkava_lit_huma 0.94", shape=diamond];
+  jev2 [label="JEV noul cross-check\nKAVA/LIT/HUMA positive EV 0.93/0.94/0.94\nmean-reversion > continuation 0.89\nin-sample bias unlikely 0.28\nstop width UNCERTAIN 0.53 -> measured"];
+
+  k [label="KAVAUSDT  LIMIT 0.0280189\nTP 0.0311744 (+11.26%)  SL 0.0248633 (-11.26%)\nRR 1.00  EV +2.73%  P(TP|fill) 0.62\neraE +3.11 / eraL +2.51"];
+  l [label="LITUSDT  LIMIT 2.83237\nTP 2.99802 (+5.85%)  SL 2.63359 (-7.02%)\nRR 0.83  EV +2.24%  P(TP|fill) 0.64\neraE +2.58 / eraL +1.05"];
+  h [label="HUMAUSDT  LIMIT 0.00702502\nTP 0.00748095 (+6.49%)  SL 0.00645511 (-8.11%)\nRR 0.80  EV +2.01%  P(TP|fill) 0.72\nEraE +3.09 / eraL +1.05"];
+
+  corr [label="DECLARED RISK: all three are the same\nthesis in one bear regime.\nOne market-wide flush can stop all three."];
+
+  start -> jev0 -> dev -> regime;
+  regime -> fam1;
+  regime -> fam2;
+  fam2 -> r2 [label="fails"];
+  fam1 -> r1 [label="passes"];
+  r1 -> conc;
+  conc -> stale;
+  stale -> stop;
+  stop -> rej;
+  rej -> jev1;
+  jev1 -> jev2;
+  jev2 -> k;
+  jev2 -> l;
+  jev2 -> h;
+  k -> corr;
+  l -> corr;
+  h -> corr;
+}

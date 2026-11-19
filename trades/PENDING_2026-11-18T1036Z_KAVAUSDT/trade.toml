@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "KAVAUSDT"
+side     = "LONG"
+
+[entry]
+type     = "LIMIT"
+price    = 0.0280189
+
+[exit]
+tp       = 0.0311744
+sl       = 0.0248633
+
+[schedule]
+place_at  = 2026-11-18T10:40:00Z
+expire_at = 2026-11-25T10:40:00Z

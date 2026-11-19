@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+<rect width="900" height="420" fill="#0e1117"/>
+<line x1="60" y1="380.3" x2="870" y2="380.3" stroke="#232a36" stroke-width="1"/><text x="8" y="384.3" fill="#7d8794" font-size="11" font-family="monospace">0.506</text>
+<line x1="60" y1="291.4" x2="870" y2="291.4" stroke="#232a36" stroke-width="1"/><text x="8" y="295.4" fill="#7d8794" font-size="11" font-family="monospace">0.537</text>
+<line x1="60" y1="199.7" x2="870" y2="199.7" stroke="#232a36" stroke-width="1"/><text x="8" y="203.7" fill="#7d8794" font-size="11" font-family="monospace">0.569</text>
+<line x1="60" y1="110.9" x2="870" y2="110.9" stroke="#232a36" stroke-width="1"/><text x="8" y="114.9" fill="#7d8794" font-size="11" font-family="monospace">0.600</text>
+<line x1="60" y1="19.1" x2="870" y2="19.1" stroke="#232a36" stroke-width="1"/><text x="8" y="23.1" fill="#7d8794" font-size="11" font-family="monospace">0.632</text>
+<path d="M60.0,306.6 L68.5,311.2 L77.1,309.8 L85.6,289.7 L94.1,303.5 L102.6,293.4 L111.2,258.2 L119.7,255.3 L128.2,20.0 L136.7,343.0 L145.3,329.6 L153.8,346.5 L162.3,380.0 L170.8,351.3 L179.4,272.8 L187.9,255.0 L196.4,262.8 L204.9,261.9 L213.5,247.6 L222.0,257.9 L230.5,273.9 L239.1,269.9 L247.6,278.2 L256.1,281.1 L264.6,271.1 L273.2,244.7 L281.7,219.8 L290.2,227.8 L298.7,198.0 L307.3,196.6 L315.8,192.0 L324.3,201.4 L332.8,197.7 L341.4,195.7 L349.9,199.4 L358.4,195.1 L366.9,176.2 L375.5,167.3 L384.0,178.5 L392.5,148.1 L401.1,157.6 L409.6,166.5 L418.1,159.3 L426.6,121.8 L435.2,119.7 L443.7,127.5 L452.2,150.7 L460.7,153.0 L469.3,107.1 L477.8,197.1 L486.3,198.3 L494.8,276.8 L503.4,282.5 L511.9,251.3 L520.4,233.0 L528.9,212.0 L537.5,172.8 L546.0,177.6 L554.5,155.0 L563.1,149.3 L571.6,168.2 L580.1,196.8 L588.6,218.9 L597.2,248.2 L605.7,243.6 L614.2,245.3 L622.7,240.4 L631.3,239.3 L639.8,242.7 L648.3,237.3 L656.8,252.2 L665.4,245.3 L673.9,249.0 L682.4,250.7 L690.9,233.8 L699.5,237.3 L708.0,264.8 L716.5,264.2 L725.1,263.3 L733.6,269.9 L742.1,286.8 L750.6,304.0 L759.2,313.2 L767.7,310.4 L776.2,301.2 L784.7,314.1 L793.3,314.9 L801.8,301.8 L810.3,307.5 L818.8,317.8 L827.4,314.4 L835.9,319.8 L844.4,320.7 L852.9,321.0 L861.5,335.9 L870.0,337.3" fill="none" stroke="#7b5cd6" stroke-width="1.6"/>
+<line x1="60" y1="337.3" x2="870" y2="337.3" stroke="#4a5563" stroke-dasharray="3 3"/>
+<text x="866" y="331.3" fill="#9aa4b2" font-size="11" text-anchor="end" font-family="monospace">0.5210</text>
+<text x="60" y="410" fill="#7d8794" font-size="11" font-family="monospace">11-15 12:00</text>
+<text x="870" y="410" fill="#7d8794" font-size="11" text-anchor="end" font-family="monospace">11-19 11:00 UTC</text>
+<text x="450" y="16" fill="#c9d1d9" font-size="12" text-anchor="middle" font-family="sans-serif">ASTERUSDT 1h — Aster exchange closes (no image supplied)</text>
+</svg>

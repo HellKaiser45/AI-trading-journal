@@ -1,0 +1,93 @@
+THESIS
+ASTERUSDT 1h at 2026-11-19T09:46Z. Question: after a 28.9% crash, a 48.9% bounce and a
+25.9% giveback, does the "failed bounce" structure carry measurable forward expectancy
+on this instrument? Invalidation: the state must show positive expectancy on the liquidity
+tier ASTER actually occupies, must survive a market-entry control, and must not be a
+selection survivor among many tested geometries.
+
+STATE READ (vision, supplied image; then exchange klines)
+Supplied chart: decline from ~0.79 (20 Oct) to ~0.66, crash to ~0.48 on 15-16 Nov, a spike
+back to ~0.61, then a decline to ~0.528. My eyes put the crash low near 0.4812 and the
+bounce near 0.6050-0.61. Exchange data: crash 0.6729 (13 Nov) -> 0.4784 (14 Nov 20:00Z),
+bounce to 0.7124 (15 Nov 21:00Z), live 0.5282. ATR14 1.41% of price, 68.3rd percentile of
+its own last 500 bars. Live ticker at decision time 0.5285 vs my trace 0.5280.
+
+DATA CHECKED
+- news: none. JEV was asked (jev_decide) whether stage 2 needed a search round; it chose
+  no_search 0.48 + measure_first 0.39 over search_catalyst 0.08 and search_regime 0.03.
+  No news claim is made anywhere in this folder.
+- prices: Aster exchange klines. ASTERUSDT 1h 9600 bars (2025-10-14 -> 2026-11-18), 4h 2400,
+  15m 1920, plus a fresh 90-day pull to 2026-11-19 09:00. Panel: 29 crypto perpetuals,
+  238,616 hourly bars, ASTER deliberately EXCLUDED from the design set.
+- other assets: the panel is the design set (see above). No index, no cross-asset claim.
+- forums: none. Not used.
+- tokenomics: not relevant to a 120h bracket. Not searched.
+
+DATA INTEGRITY (recorded, not smoothed)
+The 1h bar 2026-11-15 21:00Z prints high 0.8155 and low 0.4821 in a single hour with
+volume 365.5M - 9x the next largest bar. 0.8155 is NOT visible on the supplied chart, and
+the 2026-11-17 ASTER run measured this same bar's high as 0.7124. I clamped the high to
+0.7124 for all measurement and say so rather than silently using either value.
+
+MEASUREMENTS (scripts: artifacts/probe/coil.py, cohorts.py, diag.py, aster_test2.py,
+aster_verdict.py, aster_clean.py, test_shorts.py)
+State, fixed before any geometry was tested: within 120 bars a decline >=25% high->low,
+then a bounce >=20% off that low, then >=10% given back from the bounce high with that
+high at least 6 bars old. 107 episodes, 22 symbols, 13 distinct months.
+
+1. The live bar MEETS the state (genuine multi-bar bounce, 1.9% of panel bounces are
+   intrabar so this is a real bounce, not a flash-candle artifact).
+2. Pooled SHORT, limit +1.0 ATR / TP 3.0 ATR / SL 2.5 ATR / 120h: n=90, EV +2.060%,
+   win 52.2% vs 45.5% break-even. Genuine bounces only: n=88, EV +2.201%, month-block
+   bootstrap 95% CI [+0.736,+3.789]. Equal weight per symbol +2.033% [+0.221,+3.799].
+3. Era split at 2026-06-15: early +0.427% (n=33), late +3.005% (n=57). Fill median 4h,
+   87% within 24h.
+4. BUT: 24 geometry cells were tested; 5 pass the two-half holdout, i.e. 21% against a
+   25% chance expectation. The survivors are selection survivors, not discoveries.
+5. BUT: the edge is a function of illiquidity. Spearman rho(liquidity, outcome) = -0.210,
+   95% CI [-0.394,-0.021]. Quintile EVs: Q1 +6.45%, Q2 +2.48%, Q3 +1.51%, Q4 -1.96%,
+   Q5 +0.78%. Dropping ANSEMUSDT -> +1.17%; dropping ANSEMUSDT+CASHCATUSDT -> +0.55%;
+   adding LITUSDT -> +0.36%.
+6. BUT: ASTER sits at the 93rd percentile of panel liquidity (median hourly quote volume
+   1.19M vs panel median 41k, 1.7x above the Q4/Q5 boundary). Episodes at or above
+   ASTER's liquidity tier: 0 of 90. The measured edge was produced entirely by symbols
+   an order of magnitude thinner than the one being traded.
+7. BUT: market-entry control on liquid names gives SHORT EV -1.703% (win 37.5%). The
+   pooled limit edge does not survive without the entry discount at that tier.
+8. BUT: direction is not established. Symmetric tp=sl=3.0 ATR: SHORT +1.55% (53.3% win),
+   LONG +0.09% (46.4% win). Close to mirrors.
+9. ASTER's own analogues: 4 episodes. Three filled, all won (+6.49%, +4.84%, +6.31%);
+   one did not fill. n=4. Not evidence; not used to pick the side.
+
+DECISION: NOT TAKEN. jev_decide returned reject 0.99, with short_aster, long_aster and
+short_wide_stop each contradicted on all three requirements. jev_noul independently put
+0.96 on "the edge is absent or negative on ASTER's liquidity tier", 0.87 on "the edge is
+concentrated in microcaps", 0.91 on "5 of 24 cells is consistent with random selection",
+and 0.04 on "an edge measured on microcaps transfers to a liquid instrument".
+jev_classify confirmed the structure IS a failed bounce (0.95) - the structure is real,
+the expectancy is not transferable. Those are different claims and only the second one
+decides a ticket.
+
+CANDIDATES BUILT AND REJECTED (for the record, not taken)
+SHORT LIMIT 0.53563 (+1.0 ATR) TP 0.51303 SL 0.55446, RR 0.83, 120h.
+LONG  LIMIT 0.52077 (-1.0 ATR) TP 0.54274 SL 0.50246, RR 1.07, 120h.
+
+WHAT I GOT WRONG ALONG THE WAY (kept, not buried)
+- My first pre-specified state (crash + bounce + ATR coil <=p30) did NOT fire on the live
+  bar: ATR percentile is 68.3, not <=30. I did not adjust the threshold to make it fire;
+  I reported the state as not met and defined a different, honestly-named state.
+- My first beta control returned +17.9% for non-event bars, which is nonsense: it sampled
+  a different period and inherited a bull leg. Replaced with a symbol-matched control
+  built from the same symbol and window.
+- I suspected the bounce was an intrabar artifact and tested it: only 1.9% of panel
+  bounces are intrabar. The hypothesis was wrong and I discarded it.
+- The 0.6-ATR/3-ATR geometry I tried first was an arbitrary grid; the whole grid is
+  reported above, including the cells that lost.
+- ASTER's 0.8155 wick is unexplained. I clamped it rather than pretending it is real.
+
+WHAT WOULD CHANGE THE ANSWER
+An episode set at or above ASTER's liquidity tier, or a directional filter that separates
+long from short on liquid instruments at the 95% level. Neither exists in this folder.
+
+LINKS
+- none. No external source was consulted; no claim here depends on one.

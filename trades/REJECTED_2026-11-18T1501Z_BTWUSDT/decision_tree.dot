@@ -1,0 +1,77 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10, style=filled, fillcolor="#161b22", fontcolor="#c9d1d9", color="#30363d"];
+  edge [color="#8b949e", fontname="monospace", fontsize=9, fontcolor="#8b949e"];
+
+  // ===== entry =====
+  start [label="run 2026-11-18T15:01Z\n'Aster: find good trades'", fillcolor="#1f6feb", fontcolor="#ffffff"];
+  noimg [label="no chart image supplied\nstage-1 vision unavailable"];
+  jevpath [label="jev_decide: method\ncohort_split 0.99\nreplicate 0.01 / assume_transfer 0.00 / ask_charts 0.00"];
+
+  start -> noimg -> jevpath;
+
+  // ===== data =====
+  venue [label="Aster fapi verified live\n647 listed / 595 TRADING"];
+  fetch [label="187 symbols fetched, 1h bars\nup to 9600 bars (~400d)"];
+  coh [label="cohorts\ncrypto 115 / stock 51 / commodity 8"];
+  jevpath -> venue -> fetch -> coh;
+
+  // ===== first pass =====
+  t1 [label="6 hypotheses x 4 cohorts\ntp2.5/sl2.0, 96h hold, 0.5xATR limit"];
+  t1r [label="NONE PASSED\nev +0.22% CI [-0.78,+0.65]\nP(<=0) 0.580", fillcolor="#3d1d1d", fontcolor="#ffa198"];
+  coh -> t1 -> t1r;
+
+  // ===== the defect that saved the run =====
+  diag [label="DIAGNOSTIC: why nothing?\nflat bars high==low / zero-volume", fillcolor="#3d2c00", fontcolor="#e3b341"];
+  dstock [label="stock 45.9% flat / 34.2% zerovol\ncrypto 25.2% / 14.0%\nNVDA 3974/9600 flat, run 47 bars"];
+  dclean [label="36 of 174 clean\n(<=5% dead): 30 crypto, 3 stock"];
+  t1r -> diag -> dstock -> dclean;
+
+  // ===== clean result =====
+  c1 [label="clean crypto, oversold_reclaim LONG\n+1.58% EV/ticket, 237 events\n18/25 symbols positive", fillcolor="#0d2a17", fontcolor="#7ee787"];
+  c2 [label="all 16 geometry cells positive\n+0.70% to +1.88% — not one lucky cell"];
+  c3 [label="BUT week CI [-0.69,+3.03]\nP(<=0) 0.117, 49 weeks"];
+  dclean -> c1 -> c2 -> c3;
+
+  // ===== holdout =====
+  h0 [label="TRUE HOLDOUT\ngeometry on H1, eval on H2", fillcolor="#3d2c00", fontcolor="#e3b341"];
+  h1 [label="tp3.0/sl1.5  +2.55% -> +0.36%\nOVERFIT", fillcolor="#3d1d1d", fontcolor="#ffa198"];
+  h2 [label="tp2.5/sl2.0  +1.69% -> +1.32%\n8/16 syms, CI [-1.26,+3.94]", fillcolor="#3d2c00", fontcolor="#e3b341"];
+  c3 -> h0;
+  h0 -> h1 [label="best in-sample"];
+  h0 -> h2 [label="pre-specified"];
+
+  // ===== live =====
+  live [label="live scan: 43 symbols, 2 hits"];
+  btw [label="BTWUSDT\nera-late NEGATIVE all geoms\n-1.86 / -2.05 / -2.15 / -1.65%\ntop-5 bid $424", fillcolor="#3d1d1d", fontcolor="#ffa198"];
+  lit [label="LITUSDT\nboth-era positive only tp2.5/sl2.5\n+1.86% / +0.62%\nalready PENDING in journal", fillcolor="#3d2c00", fontcolor="#e3b341"];
+  h1 -> live;
+  h2 -> live;
+  live -> btw;
+  live -> lit;
+
+  // ===== venue-specific dead ends =====
+  basis [label="dual listings 15 pairs\nmedian basis -0.8 to -3.6bp\nnot a dislocation", fillcolor="#21262d"];
+  fund [label="funding max ASTERUSDT +0.0166%/8h\n~18%/yr carry, not a price trade", fillcolor="#21262d"];
+  lit -> basis;
+  lit -> fund;
+
+  // ===== conclave =====
+  jd [label="jev_decide\nwait_for_clean_signal 0.60\nno_trade 0.36 / trade_lit 0.04\n trade_btw 0.00", fillcolor="#1f6feb", fontcolor="#ffffff"];
+  jn [label="jev_noul\nBTW justified 0.04\n'fire as soon as clean' 0.11\ndual basis tradeable 0.14\nstock exclusion 0.91"];
+  jv [label="jev_verify 15 claims\n15 verified / 0 contradicted\n3 low-confidence flagged"];
+  basis -> jd;
+  fund -> jd;
+  jd -> jn -> jv;
+
+  // ===== outcome =====
+  out [label="NO TRADE — documented\nREJECTED folder\nno trade.toml", fillcolor="#0d2a17", fontcolor="#7ee787"];
+  jv -> out;
+
+  // ===== open book findings =====
+  obl [label="side finding: KAVAUSDT NOT LISTED on Aster\nLITUSDT limit 2.83237 sits ABOVE live 2.8225\n(fills immediately at a worse price)"];
+  out -> obl [style=dashed];
+
+  watch [label="standing watch only:\nfresh oversold_reclaim on clean crypto\n(<=5% dead, >=300k vol) at tp2.5/sl2.0", shape=box, style="filled,dashed"];
+  out -> watch [style=dashed];
+}

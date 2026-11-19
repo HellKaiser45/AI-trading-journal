@@ -1,0 +1,96 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10];
+  edge [fontname="monospace", fontsize=9];
+
+  subgraph cluster_input {
+    label="1. chart (vision only)";
+    img [label="ASTERUSDT 1h image supplied\n20 Oct -> 19 Nov, 0.4599-0.8000 axis"];
+    trace [label="graphpoints.csv: 83 vision points\nlive 0.5280 (+0.23%)"];
+    read [label="decline 0.79 -> 0.66\ncrash to ~0.48 (15-16 Nov)\nspike ~0.61, then 0.528"];
+    img -> trace -> read;
+  }
+
+  subgraph cluster_data {
+    label="data + integrity";
+    kl [label="Aster 1h 9600 bars\n4h 2400, 15m 1920\nfresh pull to 19T09:00"];
+    wick [label="bar 15T21:00Z high 0.8155\nnot on chart; 17 Nov run read 0.7124\nVOLUME 365M = 9x next\n=> CLAMPED to 0.7124"];
+    panel [label="panel 29 symbols\n238,616 hourly bars\nASTER EXCLUDED from design set"];
+    kl -> wick; kl -> panel;
+  }
+
+  subgraph cluster_search {
+    label="2. search gate (JEV)";
+    sgate [label="jev_decide: does stage 2 need searches?", shape=diamond];
+    s1 [label="search_catalyst 0.08"];
+    s2 [label="search_regime 0.03"];
+    s0 [label="no_search 0.48 + measure_first 0.39\n=> 0.87  CHOSEN"];
+    sgate -> s1; sgate -> s2; sgate -> s0;
+  }
+
+  subgraph cluster_learn {
+    label="3. learning pass";
+    l1 [label="ASTER WIN+1.26%: level tagged often\n+ stop beyond overshoot + TP not at extreme"];
+    l2 [label="ASTER LOSS-1.01%: stop was an ATR buffer\ninside rotation, not a structure"];
+    l3 [label="ASTER REJECTED 17 Nov: EV died on\nmarket-entry control => entry discount"];
+    l4 [label="BTW REJECTED 18 Nov: illiquid microcap\nresult is not transferable"];
+  }
+
+  subgraph cluster_hyp {
+    label="4. measurement";
+    h0 [label="pre-specified state #1:\ncrash + bounce + ATR coil <= p30"];
+    h0x [label="DOES NOT FIRE\nATR p68.3, need <=30\nthreshold NOT moved to fit", shape=box, style=dashed];
+    h1 [label="state #2 (named honestly):\nFAILED BOUNCE\ncrash>=25 / bounce>=20 / giveback>=10"];
+    h1y [label="LIVE BAR MEETS IT\nbounce is genuine: only 1.9% of\npanel bounces are intrabar"];
+    h0 -> h0x;
+    h1 -> h1y;
+  }
+
+  subgraph cluster_ev {
+    label="pooled edge";
+    e1 [label="SHORT lim+1.0/tp3.0/sl2.5 @120h\nn=90  EV +2.060%  win 52.2% vs BE 45.5%"];
+    e2 [label="genuine bounces only\nn=88  EV +2.201%  CI [+0.736,+3.789]"];
+    e3 [label="era split: +0.427% early\n+3.005% late  (both > 0)"];
+    e4 [label="fill median 4h, 87% within 24h"];
+    e1 -> e2 -> e3 -> e4;
+  }
+
+  subgraph cluster_kill {
+    label="5. kill tests - every one failed";
+    k1 [label="MULTIPLE COMPARISONS\n24 cells tested, 5 pass holdout = 21%\nchance expectation 25%\n=> selection survivors", shape=box, color=red];
+    k2 [label="ILLIQUIDITY DEPENDENCE\nSpearman rho(liquidity,ret) -0.210\nCI [-0.394,-0.021]\nQ1 +6.45% -> Q4 -1.96%", shape=box, color=red];
+    k3 [label="WRONG TIER\nASTER = 93rd pct liquidity\n1.19M vs panel median 41k\nepisodes at ASTER's tier: 0 of 90", shape=box, color=red];
+    k4 [label="MARKET-ENTRY CONTROL\nliquid-only SHORT -1.703%\nedge was the entry discount", shape=box, color=red];
+    k5 [label="DIRECTION NOT ESTABLISHED\nsymmetric tp=sl: SHORT +1.55%\nLONG +0.09%  near mirrors", shape=box, color=red];
+    k6 [label="CONCENTRATION\ndrop ANSEM -> +1.17%\ndrop ANSEM+CASHCAT -> +0.55%\n+LIT -> +0.36%", shape=box, color=red];
+  }
+
+  subgraph cluster_jev {
+    label="6. JEV conclave";
+    j1 [label="jev_decide\nreject 0.99\nshort/long/wide-stop each\ncontradicted on all 3 requirements", shape=diamond];
+    j2 [label="jev_noul: edge absent on ASTER tier 0.96\nmicrocap-concentrated 0.87\n21% = random selection 0.91\ntransfer microcap->liquid 0.04"];
+    j3 [label="jev_classify: structure IS a\nfailed bounce 0.95"];
+    jnote [label="structure real != expectancy transferable\nonly the 2nd decides a ticket", shape=box, style=dashed];
+  }
+
+  subgraph cluster_cand {
+    label="7. candidates built, both rejected";
+    c1 [label="SHORT lim 0.53563 TP 0.51303 SL 0.55446\nRR 0.83"];
+    c2 [label="LONG lim 0.52077 TP 0.54274 SL 0.50246\nRR 1.07"];
+    c1 -> c1x [label="tier test"]; c2 -> c1x;
+    c1x [label="NOT TAKEN", shape=box];
+  }
+
+  verdict [label="REJECTED\nno trade.toml\nrecap.md written", shape=box, style=bold];
+
+  read -> kl;
+  panel -> sgate;
+  s0 -> l1;
+  l4 -> h1;
+  h1y -> e1;
+  e4 -> k1; e4 -> k2; e4 -> k3; e4 -> k4; e4 -> k5; e4 -> k6;
+  k3 -> j1; k1 -> j1; k4 -> j1;
+  j1 -> j2; j2 -> j3; j3 -> jnote;
+  jnote -> c1; jnote -> c2;
+  c1x -> verdict;
+}

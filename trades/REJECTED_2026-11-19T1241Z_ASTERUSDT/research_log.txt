@@ -1,0 +1,92 @@
+THESIS
+ASTERUSDT 1h at 2026-11-19T12:41Z. Question the user asked: probe the Aster market for a
+good trade to take RIGHT NOW. This folder documents the one live signal that survived to
+the final test, and why it was still not placed.
+Candidate: failed_bounce SHORT, LIMIT 0.523907, TP 0.515186 (-1.66%), SL 0.532629
+(+1.66%), RR 1.00, expiry 2026-11-22. NEVER PLACED.
+Invalidation, fixed before measurement: the state must show (a) positive ABSOLUTE EV, not
+merely positive versus a control; (b) an edge distinguishable from a matched same-day
+control at p<0.05; (c) survive dropping any single symbol; (d) hold in both halves of the
+data. It failed (b) and (c) on the evidence that mattered.
+
+CHART READ
+No chart image was supplied this run, so stage 1 (vision trace) was unavailable. These
+graphpoints are Aster exchange 1h closes, NOT a trace of an image. Declared, not implied.
+Structure visible in the bars: 0.6013 high at 2026-11-17T12:00Z, a fall to 0.5294-0.5210,
+and the last 24h grinding sideways-to-lower in 0.5152-0.5334. Live close 0.521.
+
+DATA CHECKED
+- prices: Aster fapi klines. 78 perps x ~9000 hourly bars pulled this run
+  (artifacts/probe/fetch.py). 57 symbols excluded for dead bars; clean panel 21 symbols,
+  180,528 bars. ASTERUSDT 9000 bars, flat 0.0%, zero-volume 0.0%, median hourly quote
+  volume 1.75M.
+- news: none used. No news claim is made anywhere in this folder.
+- other assets: the 21-symbol clean panel is the design set.
+- forums, tokenomics: not used; not relevant to a 72-120h bracket.
+
+MEASUREMENTS (scripts: artifacts/probe/{states,states2,bt,grid,control,verdict,live}.py)
+Eight states were specified in code BEFORE any expectancy was measured. Every state was
+scored against a matched control: 3 random bars from the SAME symbol and SAME day with an
+IDENTICAL bracket geometry, which removes both the regime and the geometry as explanations.
+Episodes were deduplicated with a 120-bar cooldown; raw counts were massively overlapping
+(failed_bounce produced 1300 raw signals but only 36 independent episodes).
+
+  state                geometry          ep   sigEV%  ctlEV%   edge      p
+  oversold_reclaim     0.25/3.0/2.5/120  57   +0.28   -1.24   +1.52   0.431
+  overbought_reject    0.25/3.0/2.5/120  68   +2.08   -1.06   +3.15   0.041
+  failed_bounce        0.5/1.5/1.5/72    36   +1.48   +0.25   +1.23   0.487
+  failed_bounce        1.0/3.0/2.5/120   36   -2.29   -0.73   -1.57   0.635
+  squeeze_break        1.0/4.0/3.0/120  693   +0.01   +0.20   -0.19   0.224
+  trend_pullback       0.25/4.0/2.0/120 201   +0.54   +0.68   -0.14   0.834
+  failed_breakdown     1.0/4.0/3.0/72   548   -0.14   -1.26   +1.12   0.000
+  capit_continuation   0.25/3.0/2.5/120  25   -2.67   +4.67   -7.35   0.024
+  range_fade           1.0/4.0/3.0/120 1758   -0.08   -0.74   +0.66    n/a
+
+WHY EACH WAS REJECTED
+1. overbought_reject: edge +3.15 at p=0.041 looks like the find, but dropping BTWUSDT moves
+   EV from +2.08% to -0.50%. One thin symbol carries it. Rejected on drop-one.
+2. failed_breakdown: p=0.000, but only 8 of 21 symbols positive; dropping LITUSDT gives
+   -0.27%; and its first-half ABSOLUTE EV is negative at -0.18%. The p-value is against a
+   control, not evidence of a positive ticket.
+3. failed_bounce (the live candidate): both-halves positive (+0.77%/+3.36%) and drop-one
+   robust (+1.25% to +1.60% removing any symbol), but permutation p=0.487 and a month-block
+   95% CI of [-1.32,+4.08] on the signal EV. Symbol-weighted EV only +0.65% across 7
+   symbols; 19 of 33 episodes are BTWUSDT. The same state at a wider geometry is NEGATIVE
+   (-2.29%). ASTER's own history is 2 episodes (+2.44%, +7.62%) - n=2 is not evidence.
+4. range_fade: this is the shape of the journal's only two wins, and it does beat its
+   control (+0.66), but its ABSOLUTE EV is negative (-0.08%) in both halves. Beating a
+   control that loses more is not an edge.
+5. capit_continuation is genuinely bad (edge -7.35, p=0.024), not merely noise.
+
+DRIFT BASELINE (the reason a falling market flatters every short)
+From a random bar the mean forward return is +0.17% at 72h and +0.36% at 120h LONG, mirrored
+SHORT, while the MEDIAN is negative at every horizon (-0.50% at 72h). Any short-biased state
+will show a positive mean in this tape without carrying any information.
+
+LIVE SIGNALS AT THE 2026-11-19T11:00Z CLOSED BAR
+  ASTERUSDT     failed_bounce     SHORT  close 0.521      ATR 1.12%  medqv 1.75M
+  1000PEPEUSDT  squeeze_break     LONG   close 0.0039331  ATR 1.44%  medqv 15k
+  BTWUSDT       oversold_reclaim  LONG   close 0.5514     ATR 8.35%  medqv 24k
+PEPE's state edge is negative (-0.19, p=0.224) on a $15k/hour symbol. BTW's same-symbol
+history is -2.78% across 11 episodes and its entry sits 4.18% below spot on $24k/hour.
+Neither is placeable.
+
+HARNESS BUGS FOUND AND FIXED THIS RUN (recorded so the numbers above are auditable)
+- ATR was stored as a FRACTION of price but multiplied as a currency distance, making every
+  bracket microscopic and resolved by noise. This produced fake 0.0%-win clusters across
+  13 symbols before it was caught by hand-checking ETH episode outcomes.
+- A sign error in failed_bounce's give-back guard rejected every valid episode (0 signals).
+- A timestamp field error made the H1/H2 split land at epoch zero.
+All results reported here are post-fix.
+
+JEV
+jev_decide over four candidates returned reject_and_fix_book 0.61 (trade_none 0.38,
+trade_aster_short 0.01, trade_pepe_or_btw 0.00).
+jev_noul: "ASTER failed_bounce SHORT has positive absolute EV" 0.51 uncertain;
+"its +1.48% is distinguishable from the matched control" 0.08 unlikely;
+"PEPE squeeze_break has positive absolute EV" 0.06 unlikely;
+"no state survived control + drop-one + half-split simultaneously" 0.86 likely;
+"a positive edge versus control is sufficient to justify a trade" 0.04 unlikely.
+
+LINKS
+- Aster exchangeInfo / klines: https://fapi.asterdex.com/fapi/v1/

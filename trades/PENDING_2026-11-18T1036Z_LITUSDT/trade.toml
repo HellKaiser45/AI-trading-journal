@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "LITUSDT"
+side     = "LONG"
+
+[entry]
+type     = "LIMIT"
+price    = 2.83237
+
+[exit]
+tp       = 2.99802
+sl       = 2.63359
+
+[schedule]
+place_at  = 2026-11-18T10:40:00Z
+expire_at = 2026-11-25T10:40:00Z

@@ -1,0 +1,74 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname="monospace", fontsize=9];
+  edge [fontname="monospace", fontsize=8];
+
+  // Free-form record of the reasoning. No script reads this file.
+  // ZECUSDT 15m, live 947.52 (image) / 949.06 (Binance), 2026-11-18T09:41Z
+
+  subgraph cluster_1 {
+    label="1. CHART (vision only)";
+    read  [label="read off the image by eye:\npeak 1229.00 (10 Nov) -> cliff 1016.00\ngrind to 813.00 (15 Nov) -> recovery 962.00 (17 Nov)\nlive 947.52\nreplica 2h grid, 102 rows"];
+    shape [label="-37.9% bear leg\n+21.5% off the low\n68.8% up the 48h range\n-4.60% below the 120h high\nhigher lows 846->873->907->916->944"];
+    read -> shape;
+  }
+
+  subgraph cluster_2 {
+    label="2. STAGE-2 PATH (jev_decide)";
+    pathsel [label="fetch_candles 0.97\nafter every round:"];
+    read -> pathsel [style=dashed];
+  }
+
+  subgraph cluster_3 {
+    label="3. LEARNING PASS";
+    prior [label="11 LOSS / 2 WIN / -9.04% cum\n2 prior ZEC folders both REJECTED\ndominant failure: inferring direction\nfrom a post-flush recovery"];
+    flush [label="journal's only directional setup:\nflush>=20% in 12 bars + bounce 8-15%\n+ vol z>=2\nFIRES HERE? NO (dd120 only -4.60%)"];
+    pathsel -> prior; prior -> flush;
+  }
+
+  subgraph cluster_4 {
+    label="4. FIRST-HAND MEASUREMENT (67,128 1h bars)";
+    mono  [label="threshold monotonicity: PASS\n+0.41/+0.55/+0.53/+0.56/+0.61"];
+    mirror[label="mirror test, 53 episodes:\nSHORT 72h +0.45  LONG 72h -0.47\nLONG 24h +0.65  SHORT 24h -0.15"];
+    horiz [label="HORIZON STABILITY -- FAILS\ngap +0.69(8h) +0.74(16h) +0.36(24h)\n-0.51(48h) -0.81(72h) -0.99(96h)\nside flips between 24h and 48h"];
+    ci    [label="day-clustered CIs, 1500 reps:\nEVERY interval crosses zero"];
+    ctrl  [label="random hour, same 595 days:\nLONG +1.23% vs signal +0.53%\nLONG loses to a dart"];
+    scan  [label="384-cell geometry scan:\nbest LONG and best SHORT cells\npoint opposite; 74/384 pass\n= chance"];
+    flush -> mono; mono -> mirror; mirror -> horiz; horiz -> ci; ci -> ctrl; ctrl -> scan;
+  }
+
+  subgraph cluster_5 {
+    label="5. CONCLAVE (JEV)";
+    c1 [label="LONG  MKT 949.06 tp988.12 sl907.53"];
+    c2 [label="LONG  LIM 935.00 tp973.87 sl916.25"];
+    c3 [label="SHORT LIM 973.87 tp895.00 sl1000"];
+    c4 [label="SHORT MKT 949.06 tp873.00 sl974"];
+    c5 [label="LONG  MKT 949.06 tp1045.76 sl873"];
+    none [label="NONE", shape=diamond, style=filled, fillcolor="#dfe7d5"];
+    scan -> c1; scan -> c2; scan -> c3; scan -> c4; scan -> c5;
+    c1 -> none [label="contradicted x3"];
+    c2 -> none [label="contradicted x3"];
+    c5 -> none [label="contradicted x3"];
+    c3 -> none [label="req2 contradicted"];
+    c4 -> none [label="req2 contradicted"];
+    none [label="none  p=0.99", shape=diamond];
+  }
+
+  subgraph cluster_6 {
+    label="6. CONFIRMATION, different angles";
+    noul [label="jev_noul 8 props:\ndirection stable 24-120h -> 0.05\na LONG -> 0.04  a SHORT w/ CI -> 0.05\nEV vs beta -> 0.15"];
+    cls  [label="jev_classify:\nrepaired_recovery_chop 0.98\nfresh_capitulation 0.00"];
+    none -> noul; none -> cls;
+  }
+
+  out [label="REJECTED -- finalize.py --reject\nno trade.toml, no entry/TP/SL drawn", shape=diamond, style=filled, fillcolor="#c8d6f0"];
+  noul -> out; cls -> out;
+
+  // alternatives explicitly considered and why they lost
+  alt1 [label="wait for a retest of 801.52?", shape=plaintext, fontcolor="#666666"];
+  alt2 [label="take the SHORT because it beat\nthe random control?", shape=plaintext, fontcolor="#666666"];
+  alt3 [label="take the LONG because the\nhigher lows are intact?", shape=plaintext, fontcolor="#666666"];
+  out -> alt1 [style=dotted, dir=none];
+  out -> alt2 [style=dotted, dir=none];
+  out -> alt3 [style=dotted, dir=none];
+}
