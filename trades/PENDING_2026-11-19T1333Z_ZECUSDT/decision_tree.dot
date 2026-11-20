@@ -1,0 +1,39 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10, shape=box, style="rounded,filled", fillcolor="#161b22", fontcolor="#c9d1d9", color="#30363d"];
+  edge [fontname="monospace", fontsize=9, color="#8b949e", fontcolor="#8b949e"];
+
+  chart [label="Stage 1: Vision Read (ZECUSDT 1h Aster)\nLive: 943.84 @ 2026-11-19T13:23Z\nOct 21-Nov 7 Top: 1130-1372 (API 1118.8-1397.6)\nNov 10-15 Breakdown: -42.7% to 800.67 ($2.20B vol)\nNov 15-19 Compressing Triangle: 839.06-973.00\nHigher lows 839->846->891->894 vs Lower highs 973->970->960"];
+  jev_cls [label="jev_classify: Regime\npost_breakdown_consolidation_range (P=1.00, auto)", shape=diamond, fillcolor="#1f2937"];
+  jev_s2 [label="jev_decide: Stage 2 Search Strategy\ntargeted_parallel_search (P=1.00)", shape=diamond, fillcolor="#1f2937"];
+  s2_data [label="Stage 2: Dual-Source API & Catalyst Findings\nATR(14) 1h=14.50 (1.53%), 4h=32.91 (3.48%)\n24h VWAP=926.11 | Nov15 Recovery VWAP=911.90\nFunding=+0.0032%/8h | Basis=-0.06% | OI=$460M (-26% from peak)\n7d Rel Strength: ZEC -1.78% vs BTC -13.89%, XMR -13.22% (+11pp)\nCatalysts: Cypherpunk 341.8k ZEC, Grayscale $1M vs ZCSH -$52.8M outflows"];
+  jev_s2_done [label="jev_decide: Post-Round-1 Search Gate\nconclude_searches_move_to_learning_pass (P=1.00)", shape=diamond, fillcolor="#1f2937"];
+  s3_learn [label="Stage 3: Learning Pass (31 folders: 2W / 11L / 12EXP)\nWinning Template (WIN+1.26% ASTER, WIN+1.76% XRP):\n1. Fade multi-touch resistance shelf ~0.5-1.0% from spot\n2. SL outside entire measured overshoot envelope (973.00 max in 110h)\n3. TP at high-traffic interior level (922-926 tagged 44/72h), not extreme"];
+  jev_noul [label="jev_noul: Probabilistic Propositions\nP(48h range/mean-reversion in 891-973) = 0.83\nP(SHORT LIM 950->922/978 +EV) = 0.41\nP(LONG LIM 912-926->956/884 +EV) = 0.38\nP(MARKET @ 943.84 strong edge) = 0.04", shape=diamond, fillcolor="#1f2937"];
+
+  c1 [label="C1: SHORT LIMIT 950.00\nTP 922.00 (-2.95%) | SL 978.00 (+2.95%) | RR 1.00\n110h Rec: fill 0.81, TP|f 0.92, SL|f 0.00, EV +2.19%\n194h Post-Break: EV +0.65% | 878h 36d: EV +0.30%", fillcolor="#1b3224", color="#3fb950"];
+  c2 [label="C2: SHORT LIMIT 958.00\nTP 920.00 (-3.97%) | SL 982.00 (+2.51%) | RR 1.58\n110h Rec: EV +2.99% | 878h 36d: EV +0.26%\nLate-half signal EV: -0.22% (lower fill rate 14/72h)"];
+  c3 [label="C3: SHORT LIMIT 954.00\nTP 922.00 (-3.35%) | SL 980.00 (+2.73%) | RR 1.23\nMidpoint shelf alternative"];
+  c4 [label="C4: LONG LIMIT 912.00\nTP 955.00 (+4.71%) | SL 884.00 (-3.07%) | RR 1.53\n110h Rec: EV +1.65% | Late-half signal EV: +0.78%\nRejected: 878h 36d EV -0.49%, entry 3.37% away"];
+  c5 [label="C5: LONG LIMIT 926.00\nTP 958.00 (+3.46%) | SL 888.00 (-4.10%) | RR 0.84\nRejected: 878h 36d EV -0.71%"];
+  c6 [label="C6/C7: MARKET @ 943.84 (LONG or SHORT)\nRejected: Mid-triangle chop (jev_noul P=0.04)"];
+
+  conclave [label="Stage 4: JEV Conclave (3 Angles + Final Execution Gate)\nAngle 1 (6 active, no escape): C1 SHORT 950 (P=0.80), C2 SHORT 958 (P=0.19)\nAngle 2 (with escape_hatches): none (P=0.87), C1 SHORT 950 (P=0.07), C4 LONG 912 (P=0.05)\nAngle 3 (5 active, rel-strength framing): C1 SHORT 950 (P=0.49), C2 SHORT 958 (P=0.36), C3 SHORT 954 (P=0.15)\nFinal Execution Gate (per SKILL.md clean-trade rule): place_short_limit_950_tp922_sl978 (P=0.98)", shape=diamond, fillcolor="#2d2316", color="#d29922"];
+
+  final [label="FINAL TICKET (finalize.py)\nZECUSDT SHORT LIMIT @ 950.00\nTP 922.00 (+2.95%) | SL 978.00 (-2.95%)\nPlace: 2026-11-19T13:33:00Z | Expire: 2026-11-21T13:33:00Z", fillcolor="#1b3224", color="#3fb950"];
+
+  chart -> jev_cls -> jev_s2 -> s2_data -> jev_s2_done -> s3_learn -> jev_noul;
+  jev_noul -> c1;
+  jev_noul -> c2;
+  jev_noul -> c3;
+  jev_noul -> c4;
+  jev_noul -> c5;
+  jev_noul -> c6;
+  c1 -> conclave [color="#3fb950", label="Winner"];
+  c2 -> conclave [label="Runner-up"];
+  c3 -> conclave;
+  c4 -> conclave;
+  c5 -> conclave;
+  c6 -> conclave;
+  conclave -> final [color="#3fb950"];
+}

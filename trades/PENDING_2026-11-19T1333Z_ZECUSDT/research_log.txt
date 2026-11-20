@@ -1,0 +1,96 @@
+THESIS
+(what you expect, why, and what would invalidate it)
+
+Working read: ZEC is in a compressed recovery inside a larger downtrend. Three consecutive
+higher lows (839.06 -> 846.10 -> 891.14 -> 893.58) with price above both the 24h and the
+Nov15-anchored VWAP, funding near-flat, OI washed out 26% from the Oct 29 peak, and ZEC
+outperforming BTC/ETH/XMR by ~11pp over 7d. Counterweight: lower highs (973.00 -> 969.59),
+three rejections in the 960-975 shelf, and volume fading into the bounce (1.19B 24h vs
+2.20B on the Nov 14 flush).
+
+Invalidation:
+- Bull read dead on a 1h close < 891.14 (ladder + double bottom break).
+- Bear read dead on a 1h close > 959.64 with volume expansion, or acceptance > 973.00.
+- Dead-cat thesis dead on a close < 839.06.
+
+DATA CHECKED
+- news: NU7 live Nov 5-6 (blocks 75s->25s, cap unchanged, 60% fees to NSM); Arthur Hayes
+  "Four Horsemen" $1,800 ZEC target Nov 17; Cypherpunk treasury 341,858.75 ZEC (~2% of
+  supply) disclosed Nov 16; Grayscale $1M grant pledge Nov 10 + $400K already distributed;
+  Grayscale research: ZEC devs ~2x in 2yrs, 70% >1yr experience vs 58% industry;
+  NU7.1 draft (25s->20s). Drags: ZCSH -$52.8M net Nov 2-17 (Oct -$46.25M), ~1/5 of
+  cumulative inflows erased, Nov 17 flat; ZCG governance fight (98k ZEC proposal withdrawn).
+- prices: Binance fapi 1h/1m cross-checked against Aster fapi (agree <1 USD).
+  Oct21-Nov7 top: 1397.58 @ 2026-10-29T16:09Z; secondary 1387.98 @ 2026-11-06T12:00Z (lower high).
+  Nov10-15 breakdown: last high 1199.91 @ Nov10T15:02Z; $1,000 lost 2026-11-11T06:30Z (998.44);
+  capitulation low 800.67 @ 2026-11-14T21:18Z (-42.7% from top, on $2.20B daily volume).
+  Nov15-19 recovery: low 839.06 @ Nov15T01:45Z; Nov17 high 973.00 @ Nov17T23:12Z;
+  Nov18 high 969.59; Nov18-19 pullback low 891.14 @ Nov18T22:00Z; Nov19 low 893.58 @ Nov19T03:10Z;
+  Nov19 intraday high 959.64 @ Nov19T11:47Z; 13:23Z close 943.01; 13:33Z close 945.46.
+  ATR(14): 1h 14.50 (1.53%), 4h 32.91 (3.48%), 1d 106.49 (11.26%). Realized vol ~123% ann.
+  Funding +0.0032%/8h (6.4% ann mean); basis -0.06%; OI 484k ZEC / $460M; 24h vol $1.189B, +1.12%.
+- other assets: BTC 63,704 -0.58% 24h / -13.89% 7d. ETH 1,804.6 +0.53% / -12.17%.
+  XMR 505.05 -0.41% / -13.22%. ZEC 945.8 +1.12% / -1.78%. SOL 74.85 / -10.04%.
+  => ZEC outperforms by ~11pp; the bid is ZEC-specific, NOT a privacy-sector rotation (XMR -13%).
+  Crash drivers: Dems swept Nov 3 midterms; Nasdaq -5.5% Nov 5, Jensen Huang resigned Nov 12;
+  Oct CPI +0.4% m/m vs +0.3% fcast, +64bp Fed hikes priced; BTC ETF -$1.91B over 7 sessions;
+  MARA sold 13,597 BTC; MSTR out of MSCI Nov 30; stablecoin supply -$11.5B/30d; ~$2B liqs.
+- forums: not checked this pass (out of scope for this request).
+- tokenomics: 21M cap unchanged under NU7; circulating 17.02M; dev fund >$300M; 8% ZCG
+  issuance share still active pending governance resolution.
+
+LINKS
+- artifacts/research/ZECUSDT_2026-11-19_research.md  (full pack, incl. gaps section)
+- https://fapi.binance.com/fapi/v1/klines?symbol=ZECUSDT&interval=1h
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=ZECUSDT&interval=1h
+- https://coincentral.com/zcash-zec-price-rallies-9-as-nu7-switches-on-zcashs-fastest-blocks-yet
+- https://www.thecoinrepublic.com/2026/11/17/zcash-price-rallies-after-arthur-hayes-prediction-zec-to-1-8k
+- https://www.kucoin.com/news/flash/zcash-nears-1-000-as-grayscale-zcsh-fund-posts-52-8m-outflows-in-november
+- https://finance.biggo.com/news/0e48cfeb-35a3-4f65-8f36-7592deea4756
+- https://crypto.news/why-bitcoin-price-fell-62000
+- https://www.kucoin.com/blog/why-is-bitcoin-price-crashing-in-november-2026
+- https://incrypted.com/en/grayscale-to-allocate-1m-to-zcash-development-amid-capital-outflows-from-etfs
+
+OPEN ITEMS
+- ZCSH flows after Nov 17 (next Farside/SoSoValue print) — directional trigger.
+- Current size of the ~$860 liquidation cluster (Nov 14 snapshot only).
+- Market-wide OI $2.06B is second-hand via CoinGlass/KuCoin; not independently verified.
+- Orchard vulnerability patch status unconfirmed.
+- Spot vs perp split of the Nov 19 bid — futures only pulled.
+
+[2026-11-19T13:48Z] STAGE 3 LEARNING PASS (31 prior journal folders)
+- Journal record: 2 WIN (+1.26% ASTER, +1.76% XRP), 11 LOSS, 5 EXPIRED+/-%, 7 EXPIRED bare, 4 REJECTED, 2 PENDING.
+- Core winning template (WIN+1.26% ASTER 10-27 & WIN+1.76% XRP 10-25):
+  1. Fade a repeatedly tagged upper resistance shelf after a bounce.
+  2. Place SL outside the entire measured overshoot envelope (stop survival beats RR cosmetics; the 2 wins had average RR 1.46 vs 1.70 on the losses).
+  3. Place TP at a high-traffic interior level (tagged in >50% of recent hours), never on an unreached outer range extreme (lesson from EXPIRED+3.95% ASTER & EXPIRED+4.01% UNI).
+  4. Keep LIMIT entry within ~0.5-1.5% of live price so fill happens before the favourable move completes (lesson from EXPIRED+1.14% ZEC & EXPIRED+1.73% UNI).
+
+[2026-11-19T13:50Z] STAGE 4 QUANTITATIVE REPLAY & JEV CONCLAVE
+- Level tag count in last 72h (Aster/Binance 1h bars, Nov 16 14:00Z - Nov 19 13:00Z):
+  * High >= 950: 23/72h | High >= 955: 14/72h | High >= 960: 6/72h | High >= 970: 1/72h | High > 973.00: 0/110h (entire recovery envelope max = 973.00 Binance / 972.96 Aster).
+  * Low <= 925: 44/72h (24h VWAP = 926.11) | Low <= 920: 41/72h | Low <= 915: 29/72h (Nov 15 recovery VWAP = 911.90) | Low <= 895: 10/72h (double-bottom higher low = 891.14 / 893.58).
+- Candidate replay across regimes (48h horizon, deterministic fill model):
+  * C1 SHORT LIMIT 950.00 / TP 922.00 (-2.95%) / SL 978.00 (+2.95%, RR 1.00):
+    - 110h Recovery (Nov 15-19): P(fill)=0.81, P(TP|fill)=0.92, P(SL|fill)=0.00, EV/ticket=+2.19%, EV/fill=+2.72%.
+    - 194h Post-Breakdown (Nov 11-19): P(fill)=0.92, P(TP|fill)=0.62, P(SL|fill)=0.38, EV/ticket=+0.65%.
+    - 878h Full 36-Day Dataset (Oct 14-Nov 19): P(fill)=0.92, P(TP|fill)=0.55, P(SL|fill)=0.44, EV/ticket=+0.30%.
+    - Late-half upper-range bounce signals (n=90): P(fill)=0.93, P(TP|fill)=0.58, P(SL|fill)=0.42, EV/ticket=+0.46% (Early-half Oct 21-Nov 1 rally signals EV = -1.46%).
+  * C2 SHORT LIMIT 958.00 / TP 920.00 (-3.97%) / SL 982.00 (+2.51%, RR 1.58):
+    - 110h Recovery: P(fill)=0.79, P(TP|fill)=0.94, P(SL|fill)=0.00, EV/ticket=+2.99%.
+    - 878h Full Dataset: P(fill)=0.83, P(TP|fill)=0.43, P(SL|fill)=0.56, EV/ticket=+0.26%.
+    - Late-half upper-range bounce signals: EV/ticket=-0.22%.
+  * C3 LONG LIMIT 926.00 / TP 958.00 (+3.46%) / SL 888.00 (-4.10%, RR 0.84):
+    - 110h Recovery (relative): P(fill)=0.75, P(TP|fill)=0.72, EV/ticket=+1.16%.
+    - 878h Full Dataset: EV/ticket=-0.71%.
+  * C4 LONG LIMIT 912.00 / TP 955.00 (+4.71%) / SL 884.00 (-3.07%, RR 1.53):
+    - 110h Recovery (relative): P(fill)=0.64, P(TP|fill)=0.69, EV/ticket=+1.65%.
+    - Late-half upper-range bounce signals: EV/ticket=+0.78%.
+    - 878h Full Dataset: EV/ticket=-0.49%.
+- JEV Conclave results:
+  * jev_classify: post_breakdown_consolidation_range (1.00, auto).
+  * jev_noul: P(remain/mean-revert inside 891-973 over 48h) = 0.83; P(market order at 943.84 has strong edge) = 0.04; P(strict institutional no-trade threshold prefers waiting) = 0.90.
+  * jev_decide Angle 1 (6 active candidates, escape_hatches=false): short_lim_950_tp922_sl978 selected (P=0.80, conf=0.76), runner-up short_lim_958_tp920_sl982 (P=0.19).
+  * jev_decide Angle 2 (with escape_hatches=true): none (P=0.87), short_lim_950_tp922_sl978 (P=0.07), long_lim_912_tp955_sl884 (P=0.05).
+  * jev_decide Angle 3 (5 active candidates incl. 954 midpoint & wider-SL longs, escape_hatches=false): short_lim_950_tp922_sl978 selected (P=0.49), short_lim_958_tp920_sl982 (P=0.36), short_lim_954_tp922_sl980 (P=0.15).
+  * jev_decide Final Execution Decision (following SKILL.md rule not to let no_trade override viable opportunities and to output a clean trade): place_short_limit_950_tp922_sl978 selected (P=0.98, conf=0.96).
