@@ -10,9 +10,9 @@ it looks unnecessary.
 
 1. Chart analysis, vision only, as described above.
 2. Searches: news, context and, if the decision needs it, recent prices.
-3. Learning pass over the settled recaps you already have.
-4. Decision: direction, entry, TP, SL, expiry, and go or reject.
-5. Finalize: record the trade with `finalize.py`.
+3. Learning pass over settled recaps and active book exposure.
+4. Decision: Checkmate conclave across states of nature, order type (`MARKET`, `LIMIT`, `STOP`, `STOP_MARKET`), direction, entry, exits (`tp`, `sl`, `trail`), expiry, and go or reject.
+5. Finalize: record the trade(s) with `finalize.py`.
 6. Settle expired trades and write recaps with `resolve_expired.py`.
 
 ## Before pipeline
@@ -43,30 +43,44 @@ we determine if we command more searches or not.
 Because sometimes searches are purely a waste of time and tokens if the timeframe is small
 and we are confident on prediction based on the graph.
 
-## 3. Learning pass
-This is mandatory step.
-If in the journal you have already finished trades you must review them.
-Those trade were also made by you by this exact system. 
-You can read charts , charts_predictions as well as the recap for those trades.
-This is very important because you must learn from your past trades to enhance the
-precision and odds to provide a win for the user. 
+## 3. Learning pass & Active Book Audit
+This is a mandatory two-part step.
 
-## 4. Finalize
-Based on all the previous step, you gathered 3 sources of information:
+### 3A. Settled Trades Review
+If in the journal you have already finished trades you must review them.
+Those trades were also made by you by this exact system.
+You can read charts, `chart_prediction.svg`, and `recap.md` for those trades to internalize structural lessons:
+- **Adverse Selection & Sequence**: Notice why passive orders missed fills when the directional thesis was right, why passive orders filled into momentum when the thesis was wrong, and whether the favorable excursion had already printed before fill.
+- **Invalidation vs Noise**: Notice where stops sat inside normal volatility versus outside the genuine structural invalidation envelope, and where targets sat at high-traffic interior zones versus unreached outer extremes.
+- **No Rigid Templates**: Never hardcode fixed distances or mechanical rules from past trades; adapt dynamically to each asset's live volatility and regime.
+
+### 3B. Active Book & Correlation Audit
+Inspect active `PENDING` and `OPEN` folders in `trades/` (or run `stats.py`) to understand current directional exposure, asset-class concentration, and entry clustering before adding new trades. Avoid stacking identical one-way bets across correlated assets that can all miss together or all squeeze to stop-loss together.
+
+## 4. Checkmate Conclave (JEV)
+Based on all the previous steps, you gathered 4 sources of information:
 - graph with chart analysis
-- resarches
+- researches
 - past trade knowledge
-  
-You define trade based on those, you correct and refine the chart_prediction.svg at 
-this step.
-You run all the possibles scenarios you have against JEV with the necessary unbiaised, neutral context.
-The goal is to find the most profitable and probable outcome for a trade, by evaluating everything.
-You also must confirm your answer by using jev with different angles provided in context to see if the 
-outcome changes .
-This is a conclave so iterate until you find the best candidate possible. 
+- active book exposure (`PENDING` and `OPEN` trades)
+
+You refine `chart_prediction.svg` and evaluate candidate setups across the full set of market states:
+- **Immediate continuation** (price moves without a deep pullback)
+- **Retracement then continuation** (price tests an upper or lower structural shelf first)
+- **Structural breakout or reversal** (price breaks the shelf and squeezes the opposite way)
+
+Rather than defaulting to a single passive `LIMIT` order with static `TP`/`SL`, evaluate the full execution toolkit available on Aster DEX:
+- `MARKET`: immediate participation when waiting for a pullback risks missing the move entirely.
+- `LIMIT`: passive entry at a structural inflection level where retracement probability is high.
+- `STOP` / `STOP_MARKET`: conditional trigger entry on a breakout or momentum confirmation (`LONG` triggers when price breaks up through `price`; `SHORT` triggers when price breaks down through `price`), which never fills unless price moves in your direction and can also serve as a reversal hedge.
+- `TRAILING_STOP_MARKET` (`--trail` callback rate, with or without `--tp` and `--sl`): dynamic trailing exit to capture extended trend runs without capping upside prematurely.
+
+When appropriate—especially when scanning the market or balancing existing exposure—design **Checkmate combinations** (such as staggered entries, breakout `STOP_MARKET` paired with a fade `LIMIT`, sequential catch-and-flip levels, relative-strength dispersion pairs, or uncorrelated cross-asset legs across crypto, equities, and commodities) so that the book wins or remains protected across every state of nature.
+
+Run all candidate order types, single tickets, and multi-leg Checkmate combinations against JEV with unbiased, neutral context from multiple angles. Iterate in this conclave until JEV selects the highest-expectancy setup.
 
 ## 5. Finalize
-write the trade with `finalize.py`
+Write the trade(s) with `finalize.py` (creating a separate folder via `new_trade.py` for each leg if placing a multi-leg Checkmate combination).
 
 ## 6. Settle
 Check among the open trades if some are over (expiry). 
@@ -84,8 +98,8 @@ so don't do that.
 Or consider that the user don't want to lose a good opportunity. 
 
 ## Output
-The user doesn't want your explanation he just want a clean trade 
-so only output the trade nothing else.
+The user does not want explanations, commentary, narratives, or tables.
+Output ONLY the clean trade block(s) — nothing else.
 
 ## IMPORTANT
 - Do not create files that are not specified by the framework into the repo.
@@ -174,10 +188,10 @@ Renaming happens only through `set_status.py`, which is what keeps the folder na
 | --- | --- |
 | `IDEA` | exists only while a run is in progress |
 | `REJECTED` | decided not to trade; no `trade.toml` |
-| `PENDING` | order placed, not filled (LIMIT only) |
-| `OPEN` | position live (MARKET goes straight here) |
-| `WIN+X.XX%` | TP hit |
-| `LOSS-X.XX%` | SL hit |
+| `PENDING` | order placed, not filled (`LIMIT`, `STOP`, `STOP_MARKET`) |
+| `OPEN` | position live (`MARKET` goes straight here) |
+| `WIN+X.XX%` | TP or profitable trailing stop hit |
+| `LOSS-X.XX%` | SL or negative trailing stop hit |
 | `EXPIRED` | pending order never filled by `expire_at`; carries no % |
 | `EXPIRED+X.XX%` / `EXPIRED-X.XX%` | position still open at `expire_at`, closed at the expiry price (`+0.00%` at breakeven) |
 
@@ -191,9 +205,9 @@ IDEA    -> OPEN            (MARKET fills at placement)
 ```
 
 `set_status.py` rejects other transitions unless `--force`. IDEA to PENDING needs
-`entry.type = LIMIT`, IDEA to OPEN needs MARKET, and REJECTED folders must not contain
-`trade.toml`. Terminal folders (WIN*, LOSS*, EXPIRED*, REJECTED) are frozen: only
-`review.md` and `recap.md` may be added.
+`entry.type` in (`LIMIT`, `STOP`, `STOP_MARKET`), IDEA to OPEN needs `MARKET`, and REJECTED
+folders must not contain `trade.toml`. Terminal folders (WIN*, LOSS*, EXPIRED*, REJECTED)
+are frozen: only `review.md` and `recap.md` may be added.
 
 ## trade.toml
 
@@ -204,20 +218,26 @@ symbol   = "BTCUSDT"
 side     = "LONG"                # LONG | SHORT
 
 [entry]
-type     = "LIMIT"               # MARKET | LIMIT
-price    = 60000.0               # LIMIT only
+type     = "LIMIT"               # MARKET | LIMIT | STOP | STOP_MARKET
+price    = 60000.0               # required for LIMIT / STOP / STOP_MARKET; omitted for MARKET
 
 [exit]
-tp       = 62000.0               # optional
-sl       = 58500.0               # optional
+tp       = 62000.0               # optional if trail is set
+sl       = 58500.0               # required
+trail    = 1.5                   # optional TRAILING_STOP_MARKET callback rate in %
 
 [schedule]
 place_at  = 2026-10-19T09:00:00Z
 expire_at = 2026-10-20T21:00:00Z
+
+[checkmate]                      # optional checkmate combination metadata
+group    = "BTC-SOL-PAIR"
+role     = "PRIMARY"
 ```
 
-`--price` is required for LIMIT and forbidden for MARKET. Datetimes look like
-`2026-10-19T09:00:00Z`. Do not add keys.
+`--price` is required for `LIMIT`, `STOP`, and `STOP_MARKET`, and forbidden for `MARKET`.
+At least one of `--tp` or `--trail` is required alongside `--sl`. Datetimes look like
+`2026-10-19T09:00:00Z`.
 
 ## Fill model
 
@@ -225,13 +245,17 @@ Settlement is deterministic. `resolve_expired.py` applies one fill model to
 `outcome_candles.csv`.
 
 - Candles cover `place_at` to `expire_at`; the candle straddling `place_at` is skipped.
-- LIMIT fills at the limit price on the first candle that touches it (low <= price for
-  LONG, high >= price for SHORT). Never touched: PENDING becomes EXPIRED. MARKET fills
-  at the open of the first candle.
-- After the fill, TP and SL fill at their level on touch. A candle touching both is a
-  LOSS. In the candle where a LIMIT fills, only SL counts.
+- `LIMIT` fills at the limit price on the first candle that touches it (`low <= price` for
+  `LONG`, `high >= price` for `SHORT`).
+- `STOP` and `STOP_MARKET` trigger and fill at the stop price on the first candle that
+  reaches it in the breakout direction (`high >= price` for `LONG`, `low <= price` for `SHORT`).
+- Never touched: `PENDING` becomes `EXPIRED`. `MARKET` fills at the open of the first candle.
+- After the fill, `TP` and `SL` fill at their level on touch (and if `trail` is set, a
+  trailing stop tracks the favorable extreme after fill and triggers on a `trail%` pullback).
+  A candle touching both `SL` and `TP` is a `LOSS`. In the candle where a pending order fills,
+  only `SL` counts.
 - Neither touched: `EXPIRED±x.xx%` at the close of the last candle before `expire_at`.
-- A filled PENDING folder is renamed twice (PENDING to OPEN, then to the result).
+- A filled `PENDING` folder is renamed twice (`PENDING` to `OPEN`, then to the result).
 
 The model is all-or-nothing: no fees, no funding, no slippage, no partial fills.
 
@@ -253,7 +277,7 @@ All scripts are stdlib-only Python 3.8+. Run them from the repository root.
 
 ```
 scripts/new_trade.py [--root ROOT] SYMBOL
-scripts/finalize.py FOLDER (--reject REASON | --side S --type T [--price P] --tp X --sl Y --expire-at T [--place-at T])
+scripts/finalize.py FOLDER (--reject REASON | --side S --type T [--price P] [--tp X] --sl Y [--trail R] --expire-at T [--place-at T] [--group G] [--role R])
 scripts/resolve_expired.py [--root ROOT] (--list | FOLDER [--now T] [--dry-run])
 scripts/set_status.py [--root ROOT] FOLDER NEW_STATUS [--force]
 scripts/stats.py [--check] [ROOT]
@@ -273,7 +297,5 @@ does not describe.
 ## Out of scope
 
 - Live execution, order routing, broker connections, position management.
-- Portfolio sizing across trades, correlation between open trades, capital allocation.
+- Dollar capital allocation across accounts (directional correlation and state coverage across active `PENDING`/`OPEN` journal folders is evaluated during Stage 3B & Stage 4).
 - Tax, accounting and reporting formats.
-- Editing or improving the scripts. If a script is wrong, record the problem in
-  `research_log.txt` and stop.

@@ -15,6 +15,7 @@ TOML_HEADER = re.compile(r"^\[([A-Za-z_][A-Za-z0-9_]*)\]$")
 TOML_KEY = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$")
 NUMBER = re.compile(r"^[+-]?\d+(\.\d+)?$")
 DATETIME = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+ENTRY_TYPES = ("MARKET", "LIMIT", "STOP", "STOP_MARKET")
 COUNT_ORDER = ["IDEA", "REJECTED", "PENDING", "OPEN", "WIN", "LOSS", "EXPIRED_PCT", "EXPIRED"]
 COUNT_LABELS = {"EXPIRED_PCT": "EXPIRED+/-% (in sum)", "EXPIRED": "EXPIRED (bare, never filled)"}
 
@@ -88,22 +89,30 @@ def validate_trade(data):
     if side not in ("LONG", "SHORT"):
         raise TomlError("side must be LONG or SHORT")
     etype = get("entry", "type")
-    if etype not in ("MARKET", "LIMIT"):
-        raise TomlError("entry.type must be MARKET or LIMIT")
-    price = get("entry", "price", required=(etype == "LIMIT"))
+    if etype not in ENTRY_TYPES:
+        raise TomlError("entry.type must be one of %s" % ", ".join(ENTRY_TYPES))
+    price = get("entry", "price", required=(etype != "MARKET"))
     if price is not None and not isinstance(price, float):
         raise TomlError("entry.price must be a number")
     if etype == "MARKET" and price is not None:
         raise TomlError("MARKET entry must not have a price")
-    for key in ("tp", "sl"):
+    for key in ("tp", "sl", "trail"):
         v = get("exit", key, required=False)
         if v is not None and not isinstance(v, float):
             raise TomlError("exit.%s must be a number" % key)
+    trail = get("exit", "trail", required=False)
+    if trail is not None and trail <= 0:
+        raise TomlError("exit.trail must be positive")
     for key in ("place_at", "expire_at"):
         v = get("schedule", key)
         if not isinstance(v, str) or not DATETIME.match(v):
             raise TomlError("schedule.%s must be an unquoted UTC datetime" % key)
-    return {"symbol": symbol, "side": side, "etype": etype, "price": price}
+    group = get("checkmate", "group", required=False)
+    role = get("checkmate", "role", required=False)
+    return {
+        "symbol": symbol, "side": side, "etype": etype, "price": price,
+        "trail": trail, "group": group, "role": role,
+    }
 
 
 def parse_status(status):
@@ -153,12 +162,21 @@ def main(argv=None):
         if info is None:
             entry = "-"
             side = "-"
+            etype = "-"
         else:
             side = info["side"]
-            entry = "MKT" if info["etype"] == "MARKET" else "%.2f" % info["price"]
+            etype = info["etype"]
+            if etype == "MARKET":
+                entry = "MKT"
+            elif etype in ("STOP", "STOP_MARKET"):
+                entry = "STP %.2f" % info["price"]
+            else:
+                entry = "%.2f" % info["price"]
         rows.append({
-            "folder": name, "symbol": m.group("symbol"), "side": side, "entry": entry,
-            "status": m.group("status"), "kind": kind, "pct": pct,
+            "folder": name, "symbol": m.group("symbol"), "side": side, "etype": etype,
+            "entry": entry, "status": m.group("status"), "kind": kind, "pct": pct,
+            "group": info.get("group") if info else None,
+            "role": info.get("role") if info else None,
         })
 
     # Per-trade table
@@ -209,6 +227,21 @@ def main(argv=None):
         print("Per-symbol subtotals (terminal %):")
         for sym in sorted(per_symbol):
             print("  %-12s %s" % (sym, fmt_pct(per_symbol[sym])))
+
+    # Active book exposure summary (PENDING + OPEN)
+    active = [r for r in rows if r["kind"] in ("PENDING", "OPEN")]
+    if active:
+        longs = [r for r in active if r["side"] == "LONG"]
+        shorts = [r for r in active if r["side"] == "SHORT"]
+        print()
+        print("Active book exposure (PENDING + OPEN):")
+        print("  Total active: %d (%d LONG, %d SHORT)" % (len(active), len(longs), len(shorts)))
+        for r in active:
+            extra = ""
+            if r["group"] or r["role"]:
+                extra = " [%s]" % "/".join(x for x in (r["group"], r["role"]) if x)
+            print("  %-12s %-5s %-11s %-12s (%s)%s" % (
+                r["symbol"], r["side"], r["etype"], r["entry"], r["status"], extra))
 
     if args.check:
         problems = []

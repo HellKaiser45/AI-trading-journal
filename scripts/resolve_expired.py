@@ -7,7 +7,7 @@
 --list prints one line per expired PENDING/OPEN folder: what market data to fetch.
 FOLDER needs FOLDER/outcome_candles.csv (header time,open,high,low,close; UTC; any timeframe,
 the finer the better) covering place_at to expire_at. The script replays the fill model,
-renames the folder through set_status.py (PENDING -> OPEN -> result when a limit filled)
+renames the folder through set_status.py (PENDING -> OPEN -> result when a pending order filled)
 and writes review.md.
 '''
 import argparse
@@ -60,6 +60,7 @@ def load_trade(path):
         die('bad trade.toml in %s: %s' % (path, e))
     info['tp'] = d.get(('exit', 'tp'))
     info['sl'] = d.get(('exit', 'sl'))
+    info['trail'] = d.get(('exit', 'trail'))
     info['place_at'] = parse_time(d[('schedule', 'place_at')])
     info['expire_at'] = parse_time(d[('schedule', 'expire_at')])
     return info
@@ -100,7 +101,8 @@ def load_candles(path, t0, t1):
 def replay(info, candles):
     # candle = (time, open, high, low, close)
     up = info['side'] == 'LONG'
-    tp, sl, entry = info['tp'], info['sl'], info['price']
+    tp, sl, trail, entry = info['tp'], info['sl'], info.get('trail'), info['price']
+    etype = info['etype']
 
     def touches_tp(c):
         return tp is not None and ((c[2] >= tp) if up else (c[3] <= tp))
@@ -109,7 +111,7 @@ def replay(info, candles):
         return sl is not None and ((c[3] <= sl) if up else (c[2] >= sl))
 
     fill_i, fill_px, tp_from = 0, None, 0
-    if info['etype'] == 'LIMIT':
+    if etype == 'LIMIT':
         fill_i = None
         for i, c in enumerate(candles):
             if (c[3] <= entry) if up else (c[2] >= entry):
@@ -118,18 +120,36 @@ def replay(info, candles):
         if fill_i is None:
             return {'kind': 'EXPIRED', 'pct': 0.0}
         fill_px, tp_from = entry, fill_i + 1   # TP in the fill candle: order unknown, ignored
+    elif etype in ('STOP', 'STOP_MARKET'):
+        fill_i = None
+        for i, c in enumerate(candles):
+            if (c[2] >= entry) if up else (c[3] <= entry):
+                fill_i = i
+                break
+        if fill_i is None:
+            return {'kind': 'EXPIRED', 'pct': 0.0}
+        fill_px, tp_from = entry, fill_i + 1
     else:
         fill_px = candles[0][1]
 
     def done(kind, exit_px, i):
         p = (exit_px - fill_px) / fill_px * 100.0
-        return {'kind': kind, 'pct': p if up else -p, 'fill_i': fill_i, 'fill_px': fill_px,
+        signed = p if up else -p
+        if kind == 'TRAIL':
+            kind = 'WIN' if signed > 0 else 'LOSS'
+        return {'kind': kind, 'pct': signed, 'fill_i': fill_i, 'fill_px': fill_px,
                 'exit_i': i, 'exit_px': exit_px}
 
+    best_px = fill_px
     for i in range(fill_i, len(candles)):
         c = candles[i]
         if touches_sl(c):                       # SL first: a candle touching both is a LOSS
             return done('LOSS', sl, i)
+        if trail is not None and i >= tp_from:
+            trail_stop = best_px * (1.0 - trail / 100.0) if up else best_px * (1.0 + trail / 100.0)
+            if (c[3] <= trail_stop) if up else (c[2] >= trail_stop):
+                return done('TRAIL', trail_stop, i)
+            best_px = max(best_px, c[2]) if up else min(best_px, c[3])
         if i >= tp_from and touches_tp(c):
             return done('WIN', tp, i)
     return done('EXPIRED_PCT', candles[-1][4], len(candles) - 1)
@@ -165,9 +185,9 @@ def write_review(path, final, res, candles, step, info):
         lines.append('Exit: %s at %s (candle %s)' % (
             res['kind'], px(res['exit_px']), ts(candles[res['exit_i']][0])))
     else:
-        lines.append('Fill: the limit was never touched before expire_at')
-    lines += ['', 'Rules: limit fills at its price on touch; TP and SL fill at their level on touch;',
-              'a candle touching both is a LOSS; TP in the limit fill candle is ignored;',
+        lines.append('Fill: the %s order was never triggered before expire_at' % info['etype'].lower())
+    lines += ['', 'Rules: LIMIT/STOP/STOP_MARKET fills at its price on touch; TP and SL fill at their level on touch;',
+              'a candle touching both is a LOSS; TP in the pending fill candle is ignored;',
               'expiry price = close of the last candle before expire_at.']
     with open(os.path.join(path, 'review.md'), 'w', encoding='utf-8') as fh:
         fh.write(NL.join(lines) + NL)
@@ -215,13 +235,14 @@ def main():
     res = replay(info, candles)
     final = status_of(res)
     if m.group('status') == 'OPEN' and res['kind'] == 'EXPIRED':
-        die('journal says OPEN but the candles never reach the limit: check by hand')
+        die('journal says OPEN but the candles never reach the order price: check by hand')
     if a.dry_run:
         print('%s would become %s' % (name, final))
         return
     cur = name
     if m.group('status') == 'PENDING' and res['kind'] != 'EXPIRED':
-        cur = set_status(root, cur, 'OPEN', 'limit filled in candle %s' % ts(candles[res['fill_i']][0]))
+        cur = set_status(root, cur, 'OPEN', '%s filled in candle %s' % (
+            info['etype'].lower(), ts(candles[res['fill_i']][0])))
     notes = {'WIN': 'tp touched', 'LOSS': 'sl touched', 'EXPIRED_PCT': 'still open at expire_at',
              'EXPIRED': 'never filled by expire_at'}
     cur = set_status(root, cur, final, notes[res['kind']] + ' (resolve_expired.py)')

@@ -14,6 +14,7 @@ FOLDER_RE = re.compile(
     r"^(?P<status>WIN\+\d+\.\d{2}%|LOSS-\d+\.\d{2}%|EXPIRED[+-]\d+\.\d{2}%|IDEA|REJECTED|PENDING|OPEN|EXPIRED)"
     r"_(?P<dt>\d{4}-\d{2}-\d{2}T\d{4}Z)_(?P<symbol>[A-Z0-9]+)(?:-\d+)?$"
 )
+PENDING_TYPES = {'LIMIT', 'STOP', 'STOP_MARKET'}
 # State machine over status kinds (terminal kinds have no outgoing edges).
 ALLOWED = {
     "IDEA": {"REJECTED", "PENDING", "OPEN"},
@@ -36,10 +37,11 @@ def kind_of(status):
         return "EXPIRED_PCT"
     return status
 
+
 def entry_type(path):
     try:
         with open(os.path.join(path, 'trade.toml'), encoding='utf-8') as fh:
-            m = re.search(r'^[ ]*type[ ]*=[ ]*.(MARKET|LIMIT)', fh.read(), re.M)
+            m = re.search(r'^[ ]*type[ ]*=[ ]*.(MARKET|LIMIT|STOP_MARKET|STOP)\b', fh.read(), re.M)
     except OSError:
         return None
     return m.group(1) if m else None
@@ -84,10 +86,10 @@ def main():
         etype = entry_type(path)
         if etype is None:
             die('no valid trade.toml: use finalize.py, not set_status.py, to leave IDEA')
-        if new_status == 'PENDING' and etype != 'LIMIT':
-            die('PENDING needs entry.type = LIMIT (MARKET goes straight to OPEN)')
+        if new_status == 'PENDING' and etype not in PENDING_TYPES:
+            die('PENDING needs entry.type in (LIMIT, STOP, STOP_MARKET) (MARKET goes straight to OPEN)')
         if new_status == 'OPEN' and etype != 'MARKET':
-            die('IDEA -> OPEN needs entry.type = MARKET (LIMIT goes to PENDING)')
+            die('IDEA -> OPEN needs entry.type = MARKET (pending orders go to PENDING)')
     if new_status == 'REJECTED' and os.path.exists(os.path.join(path, 'trade.toml')):
         die('REJECTED folders must not contain trade.toml')
 
