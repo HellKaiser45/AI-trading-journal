@@ -1,0 +1,35 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10, shape=box, style="rounded,filled", fillcolor="#161b22", fontcolor="#c9d1d9", color="#30363d"];
+  edge [fontname="monospace", fontsize=9, color="#8b949e", fontcolor="#8b949e"];
+
+  chart [label="Stage 1: Vision Read (ETHUSDT 1h Aster)\nLive: 1653.29 @ 2026-11-21T11:46:28Z (+12.54 / +0.76%)\nMacro Downtrend: 2438.00 (Nov 5) -> 2150.00 (Nov 9) -> 2092.00 (Nov 11) -> 1966.00 (Nov 13) -> 1848.00 (Nov 16)\nBroken 5d Box (Nov 15-20): 1717.18-1848.00 -> Nov 20 15:00Z Breakdown ($153.4M vol) -> 1601.00 Close\nNov 20-21 Pre-Flush Base (6h): 1613.70-1631.26 -> Flush Low 1560.23 close (1535.54 wick) -> Rebound 1653.29"];
+  jev_s2 [label="jev_decide: Stage 2 Search Strategy\nparallel_market_data_and_existing_macro (P=1.00, conf=1.00)", shape=diamond, fillcolor="#1f2937"];
+  s2_data [label="Stage 2: Aster DEX OHLCV, VWAP, Orderbook & Macro/ETF Flow Context\n24h Vol: $1,008.08M (-5.33%) | Funding: +0.005171%/8h | OI: 88,420.65 ETH ($146.22M)\nVWAPs: 6h=1627.62, 12h=1597.10, 24h=1629.96, 48h=1678.42, 72h=1700.73, 5d=1731.26, 7d=1755.15\n11:30Z 15m Rejection Wick: 1671.52 ($17.44M vol, rejected to 1652.02) | 6h Overnight Base: 1613.70-1631.26\nUS Spot ETH ETFs: -$221.7M weekly net outflows (-$1.47B combined BTC+ETH) | $545M ETH 24h liquidations"];
+  jev_s2_done [label="jev_decide: Post-Pull Search Gate\nstop_searches_proceed_to_stage3 (P=1.00, conf=1.00)", shape=diamond, fillcolor="#1f2937"];
+  s3_learn [label="Stage 3: Learning Pass (35 folders, 29 terminal recaps)\nLOSS-1.08% ETHUSDT: Fade far edge of bounce block (1670.00 near 1671.52 wick & 1678.42 48h VWAP), not middle\nWIN+1.26% ASTER & WIN+1.76% XRP: Place SL outside 48h/72h VWAP envelope (SL 1712.00 > 1700.73 72h VWAP, 1.50x ATR)\nEXPIRED+4.01% UNIUSDT: Place TP at interior high-traffic base floor (1615.00 inside 1613.70-1620.57 base)\nLOSS-1.41% ETH & REJECTED ETH: Reject counter-trend LONG floor bids (negative EV across all 5 windows)"];
+  jev_noul [label="jev_noul: Forward 48h Propositions\nP(rejection at 1670.00-1678.42 & rotation to 1615.00-1597.10) = 0.83\nP(SHORT LIMIT 1670.00 fills in 48h) = 0.72 | P(SHORT 1665-1675 beats LONG 1618-1628) = 0.84\nP(TP 1615.00 before SL 1712.00 | SHORT fill 1670.00) = 0.81 (vs p_BE 0.433)\nP(SL 1712.00 above 72h VWAP 1700.73 beats tight stop <1700) = 0.66", shape=diamond, fillcolor="#1f2937"];
+
+  s1 [label="S1: SHORT LIMIT 1670.00 (+1.01%)\nTP 1615.00 (+3.29%) | SL 1712.00 (-2.51%) | RR 1.31 | 48h\nAnalogues (n=21): EV +1.00% (Pf 0.71, Ptp 0.53, Psl 0.20, EV|fill +1.40%)\n3d: EV +1.44% (Pf 0.54, Ptp 0.89, Psl 0.11, EV|fill +2.68%) | 5d: EV +1.43% (Pf 0.70, Ptp 0.71, Psl 0.17)\n10d: EV +1.28% (Pf 0.55, Ptp 0.79, Psl 0.14) | 40d: EV +0.67% (Pf 0.62, EV|fill +1.09%)", fillcolor="#1b3224", color="#3fb950"];
+  s6 [label="S6: SHORT LIMIT 1672.00 (+1.13%)\nTP 1610.00 (+3.71%) | SL 1715.00 (-2.57%) | RR 1.44 | 48h\nRejected: Deeper TP 1610.00 drops Analogues P(TP|fill) from 0.53 to 0.36 (EV +0.86% vs +1.00%)"];
+  s5 [label="S5: SHORT LIMIT 1665.00 (+0.71%)\nTP 1615.00 (+3.00%) | SL 1708.00 (-2.58%) | RR 1.16 | 48h\nRejected: Earlier entry inside bounce block lowers RR to 1.16 (below 1.25 floor) & SL buffer above 1700.73"];
+  s2 [label="S2: SHORT LIMIT 1675.00 (+1.31%)\nTP 1620.00 (+3.28%) | SL 1715.00 (-2.39%) | RR 1.37 | 48h\nRejected: Above today's 1671.52 wick high; 3d Pf drops to 0.39 & 10d Pf drops to 0.46"];
+  l1 [label="L1: LONG LIMIT 1628.00 (-1.53%)\nTP 1675.00 (+2.89%) | SL 1592.00 (-2.21%) | RR 1.31 | 48h\nRejected: Negative EV across all 5 windows (Analogues -0.12%, 3d -1.35%, 5d -0.27%, 10d -1.07%, 40d -0.72%)"];
+
+  conclave [label="Stage 4: JEV Conclave (3 Angles)\nAngle 1 (Price Geometry & Backtest): S1 1670.00 (P=0.86, conf=0.83) vs S6 1672.00 (P=0.10) vs S5 1665.00 (P=0.03)\nAngle 2 (Macro, Spot ETF Outflows & Perp Microstructure): S1 1670.00/TP 1615.00/SL 1712.00 (P=1.00, conf=1.00)\nAngle 3 (Adversarial Stress & Expiry Horizon): S1 48h (P=1.00, conf=1.00) over 36h/24h & 1675.00", shape=diamond, fillcolor="#2d2316", color="#d29922"];
+
+  final [label="FINAL TICKET (finalize.py)\nETHUSDT SHORT LIMIT @ 1670.00\nTP 1615.00 (+3.29%) | SL 1712.00 (-2.51%) | RR 1.31\nPlace: 2026-11-21T11:47:00Z | Expire: 2026-11-23T11:47:00Z", fillcolor="#1b3224", color="#3fb950"];
+
+  chart -> jev_s2 -> s2_data -> jev_s2_done -> s3_learn -> jev_noul;
+  jev_noul -> s1;
+  jev_noul -> s6;
+  jev_noul -> s5;
+  jev_noul -> s2;
+  jev_noul -> l1;
+  s1 -> conclave [color="#3fb950", label="Conclave Winner (P=0.86 / 1.00 / 1.00)"];
+  s6 -> conclave [label="Runner-up (P=0.10)"];
+  s5 -> conclave;
+  s2 -> conclave;
+  l1 -> conclave;
+  conclave -> final [color="#3fb950"];
+}

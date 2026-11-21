@@ -1,0 +1,109 @@
+THESIS
+(what you expect, why, and what would invalidate it)
+
+Working read: After holding a 5.5-day horizontal base at 565.10-599.52 (Nov 15 02:00Z - Nov 20 14:00Z),
+BNBUSDT broke down in two institutional liquidation legs: first at Nov 20 15:00Z ($2.25M 1h volume,
+569.78 -> 546.20, drifting to 531.16 at 19:00Z), followed by a 6-hour mid-drop consolidation ledge
+between 538.44 and 542.64 (Nov 20 21:00Z - Nov 21 02:00Z, six consecutive 1h highs at 542.64, 542.53,
+542.56, 541.52, 542.27, 540.26), and then a second cascade at Nov 21 03:00Z ($3.13M 1h volume,
+535.54 -> 515.30) that culminated in a capitulation wick to 503.60 at Nov 21 06:15Z (510.00 on the 1h
+close chart). From 503.60, BNBUSDT staged a +5.19% V-rebound to 529.74 (07:00Z), pulled back to form a
+higher low at 519.13 (08:30Z, holding above the 6h VWAP at 517.81), and is now coiling at 526.16
+(between the 12h VWAP at 521.42 and the 24h VWAP at 535.07). Fading a secondary squeeze into the
+Nov 20 19:00-21:00Z breakdown low shelf at 532.00 (+1.11% above spot, below the 24h VWAP 535.07)
+targets mean-reversion rotation back to the 6h VWAP magnet at 517.80 (+2.67%) with a stop at 545.00
+(-2.44%, RR 1.09), 2.36 points (+0.43%) above the entire 6-hour 542.64 pre-flush consolidation ledge.
+
+Invalidation:
+- Bearish post-breakdown supply thesis is invalidated on an intrabar reclaim above 542.64 (the 6-hour
+  Nov 20 21:00Z - Nov 21 02:00Z pre-flush ledge high); SL at 545.00 exits cleanly outside the entire
+  post-breakdown structure before any squeeze toward the 48h VWAP (548.87).
+- Downside continuation breaks the post-bounce digestion range on a sustained flush below 503.60.
+
+DATA CHECKED
+- news: Macro & cross-asset backdrop from Nov 15-20 research packs (`macro-fundamental-catalysts_2026-11-15_19.md`
+  and `nov20-catalysts_2026-11-20.md`): 97% CME FedWatch probability of a December Fed rate hike, 10-year
+  TIPS real yield at 2.86%, DXY at 103.8 (19-month high), -$2.89B November US spot BTC ETF net outflows,
+  and global tech/semiconductor equity selloff (KOSPI -5.21% circuit breaker, TrendForce 2027 NAND cut,
+  Nvidia CA AG subpoena) driving cross-asset liquidity raising across crypto and precious metals.
+- prices: Aster DEX fapi (`https://fapi.asterdex.com/fapi/v1/`) 1h (1,000 bars) and 15m (100 bars)
+  plus 24h ticker, premiumIndex, openInterest, and 50-level orderbook depth @ 2026-11-21T09:48Z.
+  * Live price: 526.16 on chart (525.76-526.26 API), Mark: 526.26, Index: 526.28.
+  * 24h stats: -7.869%, High 576.42, Low 503.60, Vol 33,877.47 BNB ($18.11M USDT).
+  * 1h ATR(14): 7.99 (1.52% of spot) | 1h ATR(24): 8.30 (1.58% of spot).
+  * Funding rate: 0.00000%/8h (neutral positioning; mark within 2 bps of index).
+  * Open Interest: 8,892.69 BNB (~$4.68M).
+  * Orderbook depth (50 levels): 1,984.39 BNB bids down to 525.32 vs 2,069.28 BNB asks up to 527.29.
+  * Key 1h/15m structural levels:
+    - Macro highs: 762.50 (Oct 28), 722.50 (Nov 5), 700.50 (Nov 8), 688.50 (Nov 11), 657.50 (Nov 13).
+    - Broken 5.5-day shelf (Nov 15 02:00Z - Nov 20 14:00Z): 565.10 low to 599.52 high.
+    - Leg 1 breakdown bar: Nov 20 15:00Z (O:569.78 H:571.21 L:546.20 C:546.74, Vol $2.25M), followed by
+      Nov 20 19:00-21:00Z lows at 531.16, 531.84, 532.50.
+    - 6-hour pre-flush consolidation ledge (Nov 20 21:00Z - Nov 21 02:00Z): highs 542.64, 542.53,
+      542.56, 541.52, 542.27, 540.26; lows 538.44-539.87.
+    - Leg 2 breakdown bar: Nov 21 03:00Z (O:535.54 H:535.54 L:515.30 C:518.18, Vol $3.13M).
+    - Capitulation wick: Nov 21 06:15Z 15m bar (O:506.93 H:510.96 L:503.60 C:510.61; 1h bar 06:00Z
+      O:510.48 H:527.57 L:503.60 C:526.26, Vol $1.42M).
+    - Initial rebound high & higher low: 529.74 (07:00Z high) and 519.13 (08:30Z pullback low).
+  * Multi-horizon VWAPs (1h volume-weighted):
+    - 6h VWAP: 517.81 | 12h VWAP: 521.42 | 24h VWAP: 535.07 | 48h VWAP: 548.87 | 72h VWAP: 554.09
+    - 120h (5d) VWAP: 560.89 | 168h (7d) VWAP: 571.10.
+- other assets: Aster DEX 24h comparison @ 2026-11-21T09:48Z:
+  BTCUSDT 57,968.9 (-5.94%, low 55,109.8), ETHUSDT 1,639.08 (-6.14%, low 1,535.54), SOLUSDT 68.08 (-5.60%,
+  low 64.84), XRPUSDT 0.8964 (-6.19%, low 0.8594), ZECUSDT 741.74 (-12.10%, low 679.66), XMRUSDT 461.68
+  (-3.50%, low 422.97), ASTERUSDT 0.4847 (-4.57%, low 0.4688).
+- forums: not checked (out of scope).
+- tokenomics: no discrete BNB unlock or hard-fork event inside the 48h window.
+
+LINKS
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=1000
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=BNBUSDT&interval=15m&limit=100
+- https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=BNBUSDT
+- https://fapi.asterdex.com/fapi/v1/premiumIndex?symbol=BNBUSDT
+- https://fapi.asterdex.com/fapi/v1/depth?symbol=BNBUSDT&limit=50
+- artifacts/research/nov20-catalysts_2026-11-20.md
+
+[2026-11-21T09:50Z] STAGE 3 LEARNING PASS (33 prior journal folders, incl. 2 settled BNBUSDT trades)
+- Prior BNBUSDT record:
+  1. EXPIRED_2026-10-30T0845Z_BNBUSDT: SHORT LIMIT 716.0 -> TP 694.0 / SL 734.0 (RR 1.22). After the
+     Oct 29-30 745->678.52 flush and V-rebound to 721.10, the short limit at 716 (+1.56% above 704.98
+     placement price) missed fill by 0.75% (window high 710.62) before price dropped to 693.40 (through TP).
+  2. EXPIRED_2026-11-13T1531Z_BNBUSDT: SHORT LIMIT 642.0 -> TP 588.0 / SL 686.0 (RR 1.23). Missed fill
+     by 0.42% (window high 639.29 printed 4.9h after placement) before price fell -10.35% to 566.12.
+- Cross-journal rules applied here:
+  1. Fix the BNBUSDT missed-fill pattern: place the SHORT limit entry inside +1.11% of spot (532.00,
+     directly at the Nov 20 19:00-21:00Z 531.16-532.50 breakdown shelf and below the 24h VWAP 535.07)
+     rather than +1.6% to +1.8% away, ensuring 3d/5d P(fill) >= 0.55-0.58 and post-flush analogue P(fill) = 0.69.
+  2. Place SL outside the entire 6-hour pre-flush supply ledge (542.64 highest wick -> SL 545.00, +2.36 pts
+     clear), cutting post-flush analogue stop-out rate in half from 0.22 (at 544.50) to 0.11 (at 545.00).
+  3. Place TP at the high-traffic interior 6h VWAP magnet (517.80 vs 6h VWAP 517.81 and 08:30Z higher low
+     519.13) rather than demanding a full retest of the 503.60 extreme wick (lesson from EXPIRED+4.01% UNIUSDT).
+
+[2026-11-21T09:52Z] STAGE 4 DETERMINISTIC REPLAY & JEV CONCLAVE
+- Deterministic 48h horizon backtest on Aster DEX 1,000 1h candles (`resolve_expired.py` fill model):
+  * G1 SHORT LIMIT 532.00 (+1.11%) / TP 517.80 (+2.67%) / SL 545.00 (-2.44%, RR 1.09):
+    - Post-Flush V-Bounce Analogues (n=13): P(fill)=0.69, P(TP|fill)=0.44, P(SL|fill)=0.11, EV/ticket=+0.66%, EV/fill=+0.96%
+    - 3d (72h):  P(fill)=0.58, P(TP|fill)=0.88, P(SL|fill)=0.00, EV/ticket=+1.46%
+    - 5d (120h): P(fill)=0.55, P(TP|fill)=0.64, P(SL|fill)=0.05, EV/ticket=+1.09%
+    - 10d (240h): P(fill)=0.43, P(TP|fill)=0.75, P(SL|fill)=0.04, EV/ticket=+0.89%
+    - 40d (960h): P(fill)=0.53, P(TP|fill)=0.39, P(SL|fill)=0.07, EV/ticket=+0.48%
+  * G2 SHORT LIMIT 532.50 (+1.20%) / TP 518.00 (+2.72%) / SL 545.00 (-2.35%, RR 1.16):
+    - Analogues: EV=+0.73% (Pf=0.69, Ptp=0.44, Psl=0.11, EV/fill=+1.05%) | 3d: EV=+1.30% (Pf=0.51, Ptp=0.86, Psl=0.00) | 5d: EV=+0.92% | 10d: EV=+0.77% | 40d: EV=+0.42%
+  * G3 SHORT LIMIT 531.50 (+1.01%) / TP 517.50 (+2.63%) / SL 544.50 (-2.45%, RR 1.08):
+    - Analogues: EV=+0.47% (Pf=0.69, Ptp=0.44, Psl=0.22) | 3d: EV=+1.58% (Pf=0.64, Ptp=0.89, Psl=0.00) | 5d: EV=+1.08% | 10d: EV=+0.97% | 40d: EV=+0.52%
+  * L1 LONG LIMIT 518.50 (-1.46%) / TP 534.50 (+3.09%) / SL 502.50 (-3.09%, RR 1.00):
+    - Analogues: EV=+1.13%, but Rolling 3d/5d/10d/40d EV are all negative (-0.88%, -0.18%, -1.18%, -0.20%).
+- JEV Conclave decisions:
+  * Stage 2 Search Gate (`jev_decide`): `exchange_and_context_parallel` selected (P=1.00, conf=1.00);
+    Post-Round-1 Gate selected `conclude_searches_now` (P=0.93, conf=0.86).
+  * Forward Propositions (`jev_noul`): P(48h post-flush range 503.60-544.50 holds) = 0.73; P(retest 517.50-519.13
+    support zone) = 0.66; P(test 531.50-533.50 resistance zone) = 0.56; P(TP 517.50-518.00 before SL 544.50-545.50
+    | SHORT fill at 531.50-533.00) = 0.76 (vs p_BE = 0.478); P(TP 534.50 before SL 502.50 | LONG fill at 518.50) = 0.49.
+  * Conclave Angle 1 — Empirical Expectancy & Price Geometry (`jev_decide`): SHORT family selected with P=1.00
+    (LONG L1 P=0.00; S1 531.50 P=0.62, S2 532.50 P=0.21, S3 533.00 P=0.17).
+  * Conclave Angle 2 — Adverse-Excursion & No-Fill Stress-Testing (`jev_decide`): `s2_short_53250_tp51800_sl54500`
+    (P=0.51) and `s1_short_53150_tp51750_sl54450` (P=0.49) identified the exact tradeoff between 531.50 fill rate
+    and 545.00 stop survival.
+  * Conclave Angle 3 — Fine Parameter Grid & Horizon Calibration (`jev_decide`): `g1_short_53200_tp51780_sl54500_48h`
+    selected (P=0.61) over `g2_short_53250_tp51800_sl54500_48h` (P=0.39), uniting the 545.00 stop protection
+    with the 532.00 high-fill entry and exact 517.80 6h-VWAP target over a 48h horizon.

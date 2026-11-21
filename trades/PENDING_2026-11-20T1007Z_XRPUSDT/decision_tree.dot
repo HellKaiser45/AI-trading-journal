@@ -1,0 +1,38 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10, shape=box, style="rounded,filled", fillcolor="#161b22", fontcolor="#c9d1d9", color="#30363d"];
+  edge [fontname="monospace", fontsize=9, color="#8b949e", fontcolor="#8b949e"];
+
+  chart [label="Stage 1: Vision Read (XRPUSDT 4h Aster)\nLive: 0.9599 @ 2026-11-20T10:06:09Z (-0.53%)\n45d Macro Downtrend: 1.5240 (Oct 5) -> 1.3910 (Oct 23) -> 1.3190 (Nov 9)\nNov 14 Capitulation Flush: 4h close 0.9136 (wick low 0.8921)\nNov 15-20 Base (130h): 10x defended floor 0.9420-0.9550 vs Lower highs 1.0070->0.9973->0.9726"];
+  jev_s2 [label="jev_decide: Stage 2 Search Strategy\nexchange_and_context_parallel (P=0.97, conf=0.96)", shape=diamond, fillcolor="#1f2937"];
+  s2_data [label="Stage 2: Aster DEX OHLCV, VWAP, Orderbook & Macro Context\n24h Vol: $32.56M | Funding: -0.00419%/8h | OI: 26.92M XRP ($25.83M)\nVWAP Cluster: 24h=0.9679, 48h=0.9708, 72h=0.9724, 5d=0.9672, 7d=0.9681\n130h Post-Flush Floor: 10 tests in 0.9420-0.9545, 0 prints <0.9420\nOrderbook: 2.49M XRP bids to 0.9500 (312k wall @ 0.9593)"];
+  jev_s2_done [label="jev_decide: Post-Round-1 Search Gate\nconclude_searches_now (P=1.00)", shape=diamond, fillcolor="#1f2937"];
+  s3_learn [label="Stage 3: Learning Pass (32 folders, incl. 3 XRPUSDT trades)\nWIN+1.76% XRPUSDT: SL outside measured structure + interior TP (MAE -0.53%)\nLOSS-1.30% & LOSS-0.55% XRPUSDT: tight SL inside volatility + TP 0.43% too far\nEXPIRED+4.01% UNIUSDT: size TP at high-traffic interior VWAP, not outer extreme"];
+  jev_noul [label="jev_noul: Forward 48h Propositions\nP(range 0.9420-1.0070 holds) = 0.82\nP(touch 0.9500-0.9525 floor) = 0.72 | P(touch 0.9679-0.9724 VWAP) = 0.73\nP(touch 0.9760-0.9850 upper shelf) = 0.48\nP(TP 0.9685-0.9705 before SL 0.9380 | LONG fill 0.9500-0.9525) = 0.83", shape=diamond, fillcolor="#1f2937"];
+
+  l1 [label="L1: LONG LIMIT 0.9500\nTP 0.9685 (+1.95%) | SL 0.9380 (-1.26%) | RR 1.54 | 48h\n3d: EV +1.29% (Pf 0.72, Ptp 0.85, Psl 0.00)\n5d: EV +1.62% (Pf 0.86, Ptp 0.94, Psl 0.00)\n7d: EV +1.48% | 10d (crash stress): EV +1.11% (Ptp 0.88, Psl 0.08)", fillcolor="#1b3224", color="#3fb950"];
+  l3 [label="L3: LONG LIMIT 0.9525\nTP 0.9685 (+1.68%) | SL 0.9380 (-1.52%) | RR 1.10\n5d: EV +1.51% | 10d: EV +0.98% (lower RR 1.10)"];
+  l2 [label="L2: LONG LIMIT 0.9500\nTP 0.9705 (+2.16%) | SL 0.9350 (-1.58%) | RR 1.37\n5d: EV +1.79% | 10d: EV +0.34% (TP 0.9705 missed 3x 0.9678-0.9687 bounces)"];
+  s4 [label="S4: SHORT LIMIT 0.9725\nTP 0.9520 (+2.11%) | SL 1.0090 (-3.75%) | RR 0.56\n5d: EV +1.93% | Rejected: RR 0.56 < 1.0 & 10d EV -0.58%"];
+  s5 [label="S5: SHORT LIMIT 0.9785\nTP 0.9540 (+2.50%) | SL 1.0090 (-3.12%) | RR 0.80\n5d: EV +2.21% | Rejected: P(fill) 0.48 & 10d EV -0.22%"];
+  s7 [label="S7: SHORT LIMIT 0.9930\nTP 0.9620 (+3.12%) | SL 1.0120 (-1.91%) | RR 1.63\n5d: EV +1.81% | Rejected: forward P(fill) < 0.35 & 10d Psl 0.56"];
+
+  conclave [label="Stage 4: JEV Conclave (3 Angles)\nAngle 1 (Empirical EV & Geometry): L1 LONG 0.9500 (P=0.81, conf=0.77)\nAngle 2 (Adverse Excursion & 10d Crash Stress): L1 LONG 0.9500 (P=1.00, conf=1.00)\nAngle 3 (Fine Grid & Horizon Calibration): G1 LONG 0.9500 -> TP 0.9685 / SL 0.9380 48h (P=1.00)", shape=diamond, fillcolor="#2d2316", color="#d29922"];
+
+  final [label="FINAL TICKET (finalize.py)\nXRPUSDT LONG LIMIT @ 0.9500\nTP 0.9685 (+1.95%) | SL 0.9380 (-1.26%) | RR 1.54\nPlace: 2026-11-20T10:07:00Z | Expire: 2026-11-22T10:07:00Z", fillcolor="#1b3224", color="#3fb950"];
+
+  chart -> jev_s2 -> s2_data -> jev_s2_done -> s3_learn -> jev_noul;
+  jev_noul -> l1;
+  jev_noul -> l3;
+  jev_noul -> l2;
+  jev_noul -> s4;
+  jev_noul -> s5;
+  jev_noul -> s7;
+  l1 -> conclave [color="#3fb950", label="Unanimous Winner"];
+  l3 -> conclave [label="Runner-up"];
+  l2 -> conclave;
+  s4 -> conclave;
+  s5 -> conclave;
+  s7 -> conclave;
+  conclave -> final [color="#3fb950"];
+}

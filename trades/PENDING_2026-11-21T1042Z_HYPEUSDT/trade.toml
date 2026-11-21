@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "HYPEUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "LIMIT"
+price    = 59.75
+
+[exit]
+tp       = 57.65
+sl       = 61.8
+
+[schedule]
+place_at  = 2026-11-21T10:42:00Z
+expire_at = 2026-11-23T10:42:00Z

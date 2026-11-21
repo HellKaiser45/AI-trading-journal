@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "ETHUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "LIMIT"
+price    = 1670.0
+
+[exit]
+tp       = 1615.0
+sl       = 1712.0
+
+[schedule]
+place_at  = 2026-11-21T11:47:00Z
+expire_at = 2026-11-23T11:47:00Z

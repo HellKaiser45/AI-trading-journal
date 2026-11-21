@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "ANTUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "LIMIT"
+price    = 87.95
+
+[exit]
+tp       = 86.0
+sl       = 89.55
+
+[schedule]
+place_at  = 2026-11-21T11:07:00Z
+expire_at = 2026-11-23T11:07:00Z

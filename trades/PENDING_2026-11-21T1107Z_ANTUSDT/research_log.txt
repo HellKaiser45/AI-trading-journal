@@ -1,0 +1,76 @@
+THESIS
+(what you expect, why, and what would invalidate it)
+
+Working read: Following Anthropic's Nov 19 Nasdaq IPO ($83.00 IPO price, $111.50 Nasdaq open / 115.31 peak on Aster DEX, $97.17 Day-1 close), ANTUSDT entered a clear post-IPO lower-high distribution trend: 110.50 (15m close peak Nov 19 16:30Z) -> 98.70 (19:30Z) -> 92.80 (Nov 20 01:30Z) -> 92.10 (Nov 20 15:15Z, 92.41 wick) -> 89.30 (Nov 20 23:30Z, 89.41 post-bottom wick) -> 88.32/88.28 (Nov 21 02:00Z & 10:00Z double-top). After testing and defending the $83.00 IPO underwriting floor during Friday's equity rout (83.73 at 13:00Z and 83.22 at 17:00Z on ANTUSDT; $83.05 Nasdaq cash low) and settling Friday's official 16:00 ET (21:00Z) Nasdaq session at $88.91, ANTUSDT has settled into a compressed 17.25-hour post-bottom consolidation range between 85.46-86.31 support and 87.88-88.32 local resistance (17.25h high 89.41). Spot (87.27 chart / 87.35 API) currently sits directly on the converged 3h/12h/24h VWAP cluster (87.355 / 87.215 / 87.186), while the 6h VWAP sits below at 86.693 and perp funding is strongly positive (+0.0253%/8h, +27.7% APR paid to shorts). Fading a weekend bounce into the multi-touch 87.88-88.32 intraday supply ledge at 87.95 (+0.78% above 87.27 spot, 5 cents below the 88.00 round number where 01:15-03:00Z and 10:15-10:45Z 15m candles topped out at 87.96-88.08) targets a mean-reversion rotation through the 6h VWAP (86.693) and 08:30Z higher low (86.31) down to 86.00 (+2.22%, comfortably above Saturday's 04:15-06:15Z triple-bottom at 85.46-85.55), with a stop at 89.55 (-1.82%, RR 1.22), +0.14 clear of the entire 17.25-hour post-bottom high (89.41) and +0.64 above Friday's $88.91 Nasdaq cash close.
+
+Invalidation:
+- Bearish post-IPO lower-high range thesis is invalidated on an intrabar reclaim above the 17.25-hour post-bottom high at 89.41 (Nov 20 20:45Z wick) and the 22:00-23:30Z ledge (89.20-89.27); SL at 89.55 exits cleanly outside the entire post-bottom structure.
+- Downside range floor breaks on a sustained flush below the 85.46-85.55 Saturday triple-bottom toward the 83.22-83.73 IPO underwriting floor.
+
+DATA CHECKED
+- news: Macro & fundamental catalyst dossier (`artifacts/research/nov21-catalysts_2026-11-21.md`):
+  * Anthropic (Nasdaq: ANT) priced its historic IPO at $83.00 on Nov 19, opened at $111.50, and closed Day 1 at $97.17.
+  * On Friday Nov 20, Reuters reported an SEC accounting investigation into Nvidia (NVDA closed $125.53, -14.01%; MU $594.51, -13.90%; QQQ $608.45, -5.67%; VIX 35.89, +26.20%). During the tech selloff, ANT cash shares dropped to an intraday low of $83.05 (defending the $83.00 IPO price) before closing Friday's official Nasdaq session at $88.91 (-8.50%).
+  * US cash equity markets are closed Saturday/Sunday; CME equity index futures reopen Sunday 23:00Z and US Nasdaq pre-market reopens Monday Nov 23 at 09:00Z (regular session 14:30Z). The 48h ticket expiry (2026-11-23T11:07:00Z) spans the weekend plus the first two hours of Monday US pre-market trading.
+- prices: Aster DEX fapi (`https://fapi.asterdex.com/fapi/v1/`) 15m (384 bars, full history since Nov 17 11:15Z) and 1h (97 bars) plus 24h ticker, premiumIndex, openInterest, and 50-level orderbook depth @ 2026-11-21T11:10Z.
+  * Live price: 87.27 on chart (87.35 API), Mark/Index: 87.3998.
+  * 24h stats: -4.179% (-3.81), High 92.41, Low 83.22, Vol 448,177.55 ANT ($39.06M USDT), 24h weightedAvgPrice 87.1611.
+  * Volatility: 15m ATR(14) = 0.443 (0.51% of spot) | 15m ATR(48) = 0.494 (0.57%) | 1h ATR(14) = 1.073 (1.23%) | 1h ATR(24) = 2.201 (2.52%).
+  * Funding rate: +0.025341%/8h (+27.7% APR; longs pay shorts).
+  * Open Interest: 22,635.72 ANT (~$1.98M USDT).
+  * Orderbook depth (50 levels): 4,800.93 ANT bids down to 86.75 vs 4,889.02 ANT asks up to 88.07.
+  * Multi-horizon VWAPs (15m volume-weighted):
+    - 3h VWAP: 87.355 | 6h VWAP: 86.693 | 12h VWAP: 87.215 | 24h VWAP: 87.186 | 48h VWAP: 95.147 | 72h VWAP: 95.326.
+    - Post-83.22 bottom (17.25h, 69 x 15m bars): Range [84.62, 89.41], VWAP = 87.231.
+    - Saturday UTC (11.25h, 45 x 15m bars): Range [85.46, 89.17], VWAP = 87.045.
+  * Key 15m/1h structural levels:
+    - IPO Day-1 peak: 115.31 wick / 110.50 15m close (Nov 19 16:30Z), followed by 94.20 flush (18:00Z) and 98.70 lower high (19:30Z).
+    - Nov 20 morning shelf & afternoon spike: 90.70-92.80 (00:00-11:30Z) and 92.41 bounce high (14:00-15:15Z).
+    - Nov 20 IPO underwriting defense lows: 83.73 (13:00Z 1h low / 84.50 15m close) and 83.22 (17:00Z 1h low / 83.30 15m close), followed by 84.62 post-bottom higher low (18:00Z).
+    - Friday evening / Nasdaq close resistance shelf: 89.41 (20:45Z high), $88.91 (official Nasdaq cash close), 89.20 (22:15Z), 89.27 (23:30Z), 89.17 (Nov 21 00:30Z).
+    - Saturday local supply ledge & double-top: 88.28 (01:00Z high), 88.32 (02:00Z high), 87.96 (03:00Z high), 88.28 (10:00Z high), 88.08 (10:15Z high), 87.90 (10:45Z 15m close).
+    - Saturday demand shelves: 86.31-86.53 higher-low shelf (08:15-09:15Z lows 86.33, 86.31, 86.53) aligned with 6h VWAP (86.693); 85.46-85.55 triple-bottom floor (04:15Z L:85.46, 04:30Z L:85.46, 05:45Z L:85.53, 06:15Z L:85.55).
+- other assets: Aster DEX equity & crypto perps @ 2026-11-21T11:10Z:
+  NVDAUSDT 128.85 (Fri close $125.53), MUUSD1 600.25 (Fri close $594.51), QQQUSDT 617.40 (Fri close $608.45), SKHYNIXUSD1 753.80, BTCUSDT 57,988.4, ETHUSDT 1,639.62, HYPEUSDT 58.551, BNBUSDT 526.16.
+- forums: not checked (out of scope).
+- tokenomics: corporate equity perpetual tracking Anthropic Class A shares (no token unlock schedule; IPO lock-up is standard 180 days).
+
+LINKS
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=ANTUSDT&interval=15m&limit=500
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=ANTUSDT&interval=1h&limit=500
+- https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=ANTUSDT
+- https://fapi.asterdex.com/fapi/v1/premiumIndex?symbol=ANTUSDT
+- https://fapi.asterdex.com/fapi/v1/depth?symbol=ANTUSDT&limit=50
+- artifacts/research/nov21-catalysts_2026-11-21.md
+
+[2026-11-21T11:11Z] STAGE 3 LEARNING PASS (35 prior journal folders, 29 terminal recaps reviewed)
+- Key rules applied from prior journal recaps:
+  1. WIN+1.26%_2026-10-27T0919Z_ASTERUSDT & WIN+1.76%_2026-10-25T0942Z_XRPUSDT: Place Stop-Loss outside the entire measured multi-hour swing envelope. Over the past 17.25 hours since the 83.22 bottom, every rally topped at or below 89.41 (89.41 at 20:45Z, 89.20 at 22:15Z, 89.27 at 23:30Z, 89.17 at 00:30Z, 88.32 at 02:00Z, 88.28 at 10:00Z). Placing SL at 89.55 (+0.14 above 89.41) yields a 0% stop-out rate across the entire 17.25-hour post-bottom regime.
+  2. EXPIRED_2026-10-30T0845Z_BNBUSDT, EXPIRED_2026-11-13T1531Z_BNBUSDT & EXPIRED_2026-11-01T1010Z_ASTERUSDT: Avoid placing limit entries so far from spot that compressed weekend volatility leaves them unfilled. While our coarse 1h market-scan earlier looked at a deep $84.00 IPO-floor bid (-3.75% below spot, 8.5x 15m ATR), 15m chart replay proves $84.00 had a 0.00 fill rate over the last 17.25 hours and `jev_noul` assigns only P=0.19 to price revisiting 83.22-84.00. Conversely, placing SHORT LIMIT at 87.95 (+0.78% above spot, 5 cents below the 88.00 round number inside the 87.88-88.32 multi-touch ledge) achieves Pf=1.00 on Fixed Post-Bottom, Pf=0.90 on Relative Last-24h, and Pf=0.77 on Relative Post-IPO.
+  3. EXPIRED+4.01%_2026-11-15T0924Z_UNIUSDT: Size TP inside the active oscillation envelope rather than demanding an unreached outer extreme. TP at 86.00 (+2.22%) sits below the 6h VWAP (86.693) and 08:30Z higher low (86.31) while leaving a 54-cent buffer above Saturday's 85.46 triple-bottom floor, achieving 97% TP conversion on Fixed Post-Bottom and 75% TP conversion on Relative Post-IPO.
+  4. LOSS-4.24%_2026-11-12T1116Z_ZECUSDT: Avoid counter-trend LONG limits (`L2 @ 85.75`) inside a steep multi-day lower-high downtrend; Relative Post-IPO simulation confirms `L2` suffers an 81% stop-out rate (`EV = -1.12%`).
+
+[2026-11-21T11:13Z] STAGE 4 DETERMINISTIC REPLAY & JEV CONCLAVE
+- Deterministic 15m backtest on Aster DEX 384 15m candles (`resolve_expired.py` fill model):
+  * S5a SHORT LIMIT 87.95 (+0.78%) / TP 86.00 (+2.22%) / SL 89.55 (-1.82%, RR 1.22, p_BE 0.451):
+    - Fixed Post-Bottom (17.25h, 8h hold): Pf=1.00, Ptp=0.97, Psl=0.00, EV/ticket=+2.18%, EV/fill=+2.18%
+    - Fixed Last-24h    (24h,  12h hold): Pf=1.00, Ptp=0.79, Psl=0.21, EV/ticket=+1.38%, EV/fill=+1.38%
+    - Rel   Post-Bottom (17.25h, 8h hold): Pf=0.46, Ptp=0.53, Psl=0.35, EV/ticket=+0.33%, EV/fill=+0.71%
+    - Rel   Last-24h    (24h,  12h hold): Pf=0.90, Ptp=0.63, Psl=0.37, EV/ticket=+0.64%, EV/fill=+0.72%
+    - Rel   Post-IPO    (42h, 16-48h hold): Pf=0.77, Ptp=0.75, Psl=0.25, EV/ticket=+0.94% to +1.09%, EV/fill=+1.22%
+  * S5c SHORT LIMIT 88.00 (+0.84%) / TP 86.10 (+2.16%) / SL 89.55 (-1.76%, RR 1.23, p_BE 0.449):
+    - Fixed Post-Bottom: EV=+1.99% (Pf=1.00, Ptp=0.89, Psl=0.00) | Fixed 24h: EV=+1.34% | Rel 24h: EV=+0.58% | Rel Post-IPO: EV=+0.84% to +0.97%
+  * S1a SHORT LIMIT 88.25 (+1.12%) / TP 86.10 (+2.44%) / SL 89.60 (-1.53%, RR 1.59, p_BE 0.386):
+    - Fixed Post-Bottom: EV=+2.15% (Pf=1.00, Ptp=0.78) | Fixed 24h: EV=+1.53% | Rel 24h: EV=+0.11% (Ptp=0.42) | Rel Post-IPO: EV=+0.68%
+  * S2b SHORT LIMIT 88.85 (+1.81%) / TP 86.50 (+2.64%) / SL 90.65 (-2.03%, RR 1.31, p_BE 0.434):
+    - Fixed Post-Bottom: EV=+1.67% (Pf=0.73, Ptp=0.74) | Fixed 24h: EV=+1.67% | Rel 24h: EV=+0.68% | Rel Post-IPO: EV=+0.44% (Pf=0.42)
+  * L2 LONG LIMIT 85.75 (-1.74%) / TP 88.25 (+2.92%) / SL 83.90 (-2.16%, RR 1.35):
+    - Fixed Post-Bottom: EV=+1.82% (Ptp=0.41) | Rel 24h: EV=-0.06% | Rel Post-IPO: EV=-1.12% (Psl=0.81)
+  * L4 LONG LIMIT 84.00 (-3.75%) / TP 87.65 (+4.35%) / SL 82.10 (-2.26%, RR 1.92):
+    - Fixed Post-Bottom: Pf=0.00 (EV=0.00%) | Rel Post-IPO: EV=-0.69% (Psl=0.75) | `jev_noul` Pf=0.19
+- JEV Conclave decisions:
+  * Stage 2 Search Gate (`jev_decide`): `exchange_and_existing_dossier` selected (P=1.00, conf=1.00); Post-Round-1 Gate selected `conclude_searches_now` (P=0.96, conf=0.92).
+  * Forward Propositions (`jev_noul`): P(range 83.22-90.50 holds) = 0.67; P(test 87.95-88.32 resistance) = 0.63; P(test 88.85-89.41 cash close) = 0.54; P(dip to 85.60-86.50 support) = 0.60; P(drop to 83.22-84.00 deep IPO floor) = 0.19; P(TP 86.00-86.50 before SL 89.55-90.65 | SHORT fill 87.95-88.85) = 0.69 (vs p_BE 0.451).
+  * Conclave Angle 1 — Empirical Expectancy, Regime Alignment & Price Geometry (`jev_decide`): `s5_short_8795_tp8600_sl8955` selected (P=0.72, conf=0.65) over `s1_short_8825_tp8610_sl8960` (P=0.26) and `s2b_short_8885_tp8650_sl9065` (P=0.02); LONG L2 and LONG L4 rejected (P=0.00).
+  * Conclave Angle 2 — Adverse-Excursion & No-Fill Risk Stress-Testing (`jev_decide`): `s5a_short_8795_tp8600_sl8955` selected (P=0.97, conf=0.96) over `s5c_short_8800_tp8610_sl8955` (P=0.03), `s1a` (P=0.00), and `s2b` (P=0.00).
+  * Conclave Angle 3 — Fine Parameter Grid & Expiry Horizon Calibration (`jev_decide`): `s5a_48h_8795_tp8600_sl8955` selected (P=1.00, conf=1.00) with a 48h window (`place_at 2026-11-21T11:07:00Z -> expire_at 2026-11-23T11:07:00Z`).

@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700">
+<rect width="1400" height="700" fill="#0d1117"/>
+<text x="80" y="24" fill="#c9d1d9" font-family="monospace" font-size="13">ETHUSDT 1h | SHORT LIMIT 1670.00 | TP 1615.00 (+3.29%) | SL 1712.00 (-2.51%) | RR 1.31 | P(fill) 0.70-0.72 | P(TP|fill) 0.79 (10d) / 0.81 (JEV)</text>
+<text x="1330" y="24" fill="#6e7681" font-family="monospace" font-size="11" text-anchor="end">Stage 4 JEV Conclave Forecast</text>
+<line x1="80.0" y1="660.0" x2="1330.0" y2="660.0" stroke="#1b2430"/>
+<text x="1336" y="663.0" fill="#7d8899" font-family="monospace" font-size="10">1480.00</text>
+<line x1="80.0" y1="636.2" x2="1330.0" y2="636.2" stroke="#1b2430"/>
+<text x="1336" y="639.2" fill="#7d8899" font-family="monospace" font-size="10">1520.00</text>
+<line x1="80.0" y1="612.3" x2="1330.0" y2="612.3" stroke="#1b2430"/>
+<text x="1336" y="615.3" fill="#7d8899" font-family="monospace" font-size="10">1560.00</text>
+<line x1="80.0" y1="588.5" x2="1330.0" y2="588.5" stroke="#1b2430"/>
+<text x="1336" y="591.5" fill="#7d8899" font-family="monospace" font-size="10">1600.00</text>
+<line x1="80.0" y1="564.6" x2="1330.0" y2="564.6" stroke="#1b2430"/>
+<text x="1336" y="567.6" fill="#7d8899" font-family="monospace" font-size="10">1640.00</text>
+<line x1="80.0" y1="540.8" x2="1330.0" y2="540.8" stroke="#1b2430"/>
+<text x="1336" y="543.8" fill="#7d8899" font-family="monospace" font-size="10">1680.00</text>
+<line x1="80.0" y1="516.9" x2="1330.0" y2="516.9" stroke="#1b2430"/>
+<text x="1336" y="519.9" fill="#7d8899" font-family="monospace" font-size="10">1720.00</text>
+<line x1="80.0" y1="493.1" x2="1330.0" y2="493.1" stroke="#1b2430"/>
+<text x="1336" y="496.1" fill="#7d8899" font-family="monospace" font-size="10">1760.00</text>
+<line x1="80.0" y1="469.2" x2="1330.0" y2="469.2" stroke="#1b2430"/>
+<text x="1336" y="472.2" fill="#7d8899" font-family="monospace" font-size="10">1800.00</text>
+<line x1="80.0" y1="445.4" x2="1330.0" y2="445.4" stroke="#1b2430"/>
+<text x="1336" y="448.4" fill="#7d8899" font-family="monospace" font-size="10">1840.00</text>
+<line x1="80.0" y1="421.5" x2="1330.0" y2="421.5" stroke="#1b2430"/>
+<text x="1336" y="424.5" fill="#7d8899" font-family="monospace" font-size="10">1880.00</text>
+<line x1="80.0" y1="397.7" x2="1330.0" y2="397.7" stroke="#1b2430"/>
+<text x="1336" y="400.7" fill="#7d8899" font-family="monospace" font-size="10">1920.00</text>
+<line x1="80.0" y1="373.8" x2="1330.0" y2="373.8" stroke="#1b2430"/>
+<text x="1336" y="376.8" fill="#7d8899" font-family="monospace" font-size="10">1960.00</text>
+<line x1="80.0" y1="350.0" x2="1330.0" y2="350.0" stroke="#1b2430"/>
+<text x="1336" y="353.0" fill="#7d8899" font-family="monospace" font-size="10">2000.00</text>
+<line x1="80.0" y1="326.2" x2="1330.0" y2="326.2" stroke="#1b2430"/>
+<text x="1336" y="329.2" fill="#7d8899" font-family="monospace" font-size="10">2040.00</text>
+<line x1="80.0" y1="302.3" x2="1330.0" y2="302.3" stroke="#1b2430"/>
+<text x="1336" y="305.3" fill="#7d8899" font-family="monospace" font-size="10">2080.00</text>
+<line x1="80.0" y1="278.5" x2="1330.0" y2="278.5" stroke="#1b2430"/>
+<text x="1336" y="281.5" fill="#7d8899" font-family="monospace" font-size="10">2120.00</text>
+<line x1="80.0" y1="254.6" x2="1330.0" y2="254.6" stroke="#1b2430"/>
+<text x="1336" y="257.6" fill="#7d8899" font-family="monospace" font-size="10">2160.00</text>
+<line x1="80.0" y1="230.8" x2="1330.0" y2="230.8" stroke="#1b2430"/>
+<text x="1336" y="233.8" fill="#7d8899" font-family="monospace" font-size="10">2200.00</text>
+<line x1="80.0" y1="206.9" x2="1330.0" y2="206.9" stroke="#1b2430"/>
+<text x="1336" y="209.9" fill="#7d8899" font-family="monospace" font-size="10">2240.00</text>
+<line x1="80.0" y1="183.1" x2="1330.0" y2="183.1" stroke="#1b2430"/>
+<text x="1336" y="186.1" fill="#7d8899" font-family="monospace" font-size="10">2280.00</text>
+<line x1="80.0" y1="159.2" x2="1330.0" y2="159.2" stroke="#1b2430"/>
+<text x="1336" y="162.2" fill="#7d8899" font-family="monospace" font-size="10">2320.00</text>
+<line x1="80.0" y1="135.4" x2="1330.0" y2="135.4" stroke="#1b2430"/>
+<text x="1336" y="138.4" fill="#7d8899" font-family="monospace" font-size="10">2360.00</text>
+<line x1="80.0" y1="111.5" x2="1330.0" y2="111.5" stroke="#1b2430"/>
+<text x="1336" y="114.5" fill="#7d8899" font-family="monospace" font-size="10">2400.00</text>
+<line x1="80.0" y1="87.7" x2="1330.0" y2="87.7" stroke="#1b2430"/>
+<text x="1336" y="90.7" fill="#7d8899" font-family="monospace" font-size="10">2440.00</text>
+<line x1="80.0" y1="63.8" x2="1330.0" y2="63.8" stroke="#1b2430"/>
+<text x="1336" y="66.8" fill="#7d8899" font-family="monospace" font-size="10">2480.00</text>
+<line x1="80.0" y1="40.0" x2="1330.0" y2="40.0" stroke="#1b2430"/>
+<text x="1336" y="43.0" fill="#7d8899" font-family="monospace" font-size="10">2520.00</text>
+<line x1="99.4" y1="40.0" x2="99.4" y2="660.0" stroke="#161d27"/>
+<text x="99.4" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">28</text>
+<line x1="145.8" y1="40.0" x2="145.8" y2="660.0" stroke="#161d27"/>
+<text x="145.8" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">29</text>
+<line x1="192.3" y1="40.0" x2="192.3" y2="660.0" stroke="#161d27"/>
+<text x="192.3" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">30</text>
+<line x1="238.7" y1="40.0" x2="238.7" y2="660.0" stroke="#161d27"/>
+<text x="238.7" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">31</text>
+<line x1="285.2" y1="40.0" x2="285.2" y2="660.0" stroke="#161d27"/>
+<text x="285.2" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">Nov</text>
+<line x1="331.6" y1="40.0" x2="331.6" y2="660.0" stroke="#161d27"/>
+<text x="331.6" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">2</text>
+<line x1="378.1" y1="40.0" x2="378.1" y2="660.0" stroke="#161d27"/>
+<text x="378.1" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">3</text>
+<line x1="424.5" y1="40.0" x2="424.5" y2="660.0" stroke="#161d27"/>
+<text x="424.5" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">4</text>
+<line x1="471.0" y1="40.0" x2="471.0" y2="660.0" stroke="#161d27"/>
+<text x="471.0" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">5</text>
+<line x1="517.5" y1="40.0" x2="517.5" y2="660.0" stroke="#161d27"/>
+<text x="517.5" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">6</text>
+<line x1="563.9" y1="40.0" x2="563.9" y2="660.0" stroke="#161d27"/>
+<text x="563.9" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">7</text>
+<line x1="610.4" y1="40.0" x2="610.4" y2="660.0" stroke="#161d27"/>
+<text x="610.4" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">8</text>
+<line x1="656.8" y1="40.0" x2="656.8" y2="660.0" stroke="#161d27"/>
+<text x="656.8" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">9</text>
+<line x1="703.3" y1="40.0" x2="703.3" y2="660.0" stroke="#161d27"/>
+<text x="703.3" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">10</text>
+<line x1="749.7" y1="40.0" x2="749.7" y2="660.0" stroke="#161d27"/>
+<text x="749.7" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">11</text>
+<line x1="796.2" y1="40.0" x2="796.2" y2="660.0" stroke="#161d27"/>
+<text x="796.2" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">12</text>
+<line x1="842.6" y1="40.0" x2="842.6" y2="660.0" stroke="#161d27"/>
+<text x="842.6" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">13</text>
+<line x1="889.1" y1="40.0" x2="889.1" y2="660.0" stroke="#161d27"/>
+<text x="889.1" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">14</text>
+<line x1="935.6" y1="40.0" x2="935.6" y2="660.0" stroke="#161d27"/>
+<text x="935.6" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">15</text>
+<line x1="982.0" y1="40.0" x2="982.0" y2="660.0" stroke="#161d27"/>
+<text x="982.0" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">16</text>
+<line x1="1028.5" y1="40.0" x2="1028.5" y2="660.0" stroke="#161d27"/>
+<text x="1028.5" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">17</text>
+<line x1="1074.9" y1="40.0" x2="1074.9" y2="660.0" stroke="#161d27"/>
+<text x="1074.9" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">18</text>
+<line x1="1121.4" y1="40.0" x2="1121.4" y2="660.0" stroke="#161d27"/>
+<text x="1121.4" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">19</text>
+<line x1="1167.8" y1="40.0" x2="1167.8" y2="660.0" stroke="#161d27"/>
+<text x="1167.8" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">20</text>
+<line x1="1214.3" y1="40.0" x2="1214.3" y2="660.0" stroke="#161d27"/>
+<text x="1214.3" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">21</text>
+<line x1="1260.7" y1="40.0" x2="1260.7" y2="660.0" stroke="#161d27"/>
+<text x="1260.7" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">22</text>
+<line x1="1307.2" y1="40.0" x2="1307.2" y2="660.0" stroke="#161d27"/>
+<text x="1307.2" y="680" fill="#7d8899" font-family="monospace" font-size="10" text-anchor="middle">23</text>
+<rect x="80.0" y="295.2" width="1250.0" height="48.9" fill="#ffb3b3" opacity="0.14" stroke="#ffb3b3" stroke-width="0.8"/>
+<text x="86.0" y="305.2" fill="#ffb3b3" font-family="monospace" font-size="9">2010.00-2092.00 Nov 10-12 distribution shelf</text>
+<rect x="80.0" y="440.6" width="1250.0" height="34.6" fill="#ffb3b3" opacity="0.14" stroke="#ffb3b3" stroke-width="0.8"/>
+<text x="86.0" y="450.6" fill="#ffb3b3" font-family="monospace" font-size="9">1790.00-1848.00 Broken 5-day consolidation cap (Nov 15-19)</text>
+<rect x="80.0" y="493.6" width="1250.0" height="25.0" fill="#ffb3b3" opacity="0.14" stroke="#ffb3b3" stroke-width="0.8"/>
+<text x="86.0" y="503.6" fill="#ffb3b3" font-family="monospace" font-size="9">1717.18-1759.12 Broken 5d floor (1717.18) & 5d/7d VWAP cluster (1731.26 / 1755.15)</text>
+<rect x="80.0" y="521.7" width="1250.0" height="6.7" fill="#ffb3b3" opacity="0.14" stroke="#ffb3b3" stroke-width="0.8"/>
+<text x="86.0" y="531.7" fill="#ffb3b3" font-family="monospace" font-size="9">1700.73-1712.00 72h VWAP (1700.73) & structural stop-loss envelope (SL 1712.00)</text>
+<rect x="80.0" y="541.7" width="1250.0" height="5.0" fill="#ffb3b3" opacity="0.14" stroke="#ffb3b3" stroke-width="0.8"/>
+<text x="86.0" y="551.7" fill="#ffb3b3" font-family="monospace" font-size="9">1670.00-1678.42 Nov 21 11:30Z rejection wick high (1671.52) & 48h VWAP (1678.42; Entry 1670.00)</text>
+<rect x="80.0" y="570.6" width="1250.0" height="9.7" fill="#b6e3b6" opacity="0.14" stroke="#b6e3b6" stroke-width="0.8"/>
+<text x="86.0" y="580.6" fill="#b6e3b6" font-family="monospace" font-size="9">1613.70-1629.96 6h/24h VWAPs (1627.62/1629.96) & 6-hour pre-flush base floor (1613.70-1617.49; TP 1615.00)</text>
+<rect x="80.0" y="587.9" width="1250.0" height="4.2" fill="#b6e3b6" opacity="0.14" stroke="#b6e3b6" stroke-width="0.8"/>
+<text x="86.0" y="597.9" fill="#b6e3b6" font-family="monospace" font-size="9">1593.93-1601.00 12h VWAP magnet (1597.10) & Friday Nov 20 20:00Z US equity close (1601.00)</text>
+<rect x="80.0" y="611.6" width="1250.0" height="15.2" fill="#b6e3b6" opacity="0.14" stroke="#b6e3b6" stroke-width="0.8"/>
+<text x="86.0" y="621.6" fill="#b6e3b6" font-family="monospace" font-size="9">1535.54-1561.12 Nov 21 04:00Z/06:15Z capitulation wicks (1535.54/1542.09) & 05:00Z close (1561.12)</text>
+<line x1="80.0" y1="528.4" x2="1330.0" y2="528.4" stroke="#8b949e" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="480.0" y="524.4" fill="#8b949e" font-family="monospace" font-size="9">72h VWAP 1700.73 (reclaim above 1712.00 invalidates post-breakdown cap)</text>
+<line x1="80.0" y1="626.9" x2="1330.0" y2="626.9" stroke="#8b949e" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="480.0" y="637.9" fill="#8b949e" font-family="monospace" font-size="9">Nov 21 capitulation flush low 1535.54</text>
+<line x1="80.0" y1="546.7" x2="1330.0" y2="546.7" stroke="#d29922" stroke-width="1.8"/>
+<text x="1324.0" y="542.7" fill="#d29922" font-family="monospace" font-size="11" text-anchor="end">ENTRY SHORT LIMIT 1670.00</text>
+<line x1="80.0" y1="579.5" x2="1330.0" y2="579.5" stroke="#3fb950" stroke-width="1.8"/>
+<text x="1324.0" y="591.5" fill="#3fb950" font-family="monospace" font-size="11" text-anchor="end">TP 1615.00 (+3.29%)</text>
+<line x1="80.0" y1="521.7" x2="1330.0" y2="521.7" stroke="#f85149" stroke-width="1.8"/>
+<text x="1324.0" y="517.7" fill="#f85149" font-family="monospace" font-size="11" text-anchor="end">SL 1712.00 (-2.51%)</text>
+<line x1="1237.1" y1="40.0" x2="1237.1" y2="660.0" stroke="#e6edf3" stroke-width="1.2" stroke-dasharray="2,2" opacity="0.8"/>
+<text x="1237.1" y="36" fill="#e6edf3" font-family="monospace" font-size="10" text-anchor="middle">NOW 1653.29</text>
+<line x1="1330.0" y1="40.0" x2="1330.0" y2="660.0" stroke="#e3b341" stroke-width="1" stroke-dasharray="1,4"/>
+<text x="1326.0" y="54" fill="#e3b341" font-family="monospace" font-size="10" text-anchor="end">EXPIRY +48h</text>
+<polyline points="80.0,144.3 87.7,140.2 91.6,141.3 95.5,136.6 99.4,141.3 107.1,130.6 114.8,138.4 118.7,127.0 126.5,142.5 134.2,141.3 138.1,128.2 145.8,133.0 149.7,152.1 157.4,144.3 165.2,148.5 172.9,131.8 180.7,154.5 184.5,189.0 188.4,184.3 192.3,233.2 196.1,196.2 203.9,211.7 211.6,199.8 219.4,209.3 227.1,202.2 234.9,208.1 238.7,204.5 246.5,199.8 254.2,203.9 261.9,196.2 269.7,198.0 277.4,193.8 285.2,196.2 292.9,192.6 300.7,186.7 308.4,190.2 316.1,186.7 323.9,191.4 331.6,183.1 339.4,165.2 347.1,178.3 354.9,173.5 362.6,184.3 370.3,198.6 378.1,199.8 385.8,195.0 393.6,202.2 401.3,186.7 409.1,191.4 416.8,172.3 424.5,175.9 432.3,180.7 440.0,202.2 447.8,162.8 455.5,154.5 459.4,159.2 463.3,90.1 471.0,100.8 474.9,88.9 482.6,96.0 490.4,102.0 494.2,98.4 498.1,123.5 502.0,196.2 505.8,190.2 509.7,211.7 517.5,203.9 525.2,214.1 532.9,206.9 540.7,214.1 548.4,209.3 556.2,211.7 563.9,203.9 571.7,205.7 579.4,199.8 587.1,203.3 594.9,206.9 602.6,209.3 610.4,205.7 618.1,209.3 625.8,204.5 633.6,210.5 641.3,206.9 645.2,211.7 649.1,271.3 656.8,260.6 664.6,270.1 668.4,292.8 676.2,276.1 683.9,261.8 691.7,274.9 699.4,270.1 703.3,277.3 711.0,274.9 718.8,295.2 722.6,286.8 730.4,339.3 738.1,317.8 745.9,315.4 749.7,309.5 757.5,317.8 765.2,311.8 773.0,316.6 780.7,295.2 788.4,308.3 796.2,317.8 803.9,308.3 811.7,325.0 819.4,322.6 827.2,344.0 834.9,336.9 842.6,338.1 846.5,387.0 850.4,402.5 858.1,378.6 865.9,370.3 873.6,392.9 881.4,377.4 889.1,394.1 893.0,390.5 900.7,418.6 908.5,403.7 916.2,410.8 923.9,454.3 927.8,444.2 935.6,502.0 939.4,484.1 943.3,509.8 947.2,458.5 954.9,475.2 962.6,446.6 970.4,462.1 978.1,447.8 982.0,465.7 989.7,450.2 997.5,458.5 1005.2,454.3 1013.0,470.4 1020.7,440.6 1028.5,457.3 1036.2,453.7 1043.9,459.7 1051.7,446.6 1059.4,452.5 1067.2,472.8 1071.0,450.2 1074.9,482.3 1082.7,466.8 1090.4,454.3 1098.1,464.5 1105.9,459.7 1113.6,474.0 1121.4,499.0 1129.1,488.3 1133.0,497.8 1140.7,476.4 1144.6,487.1 1152.3,465.7 1160.1,466.8 1164.0,460.9 1167.8,483.5 1171.7,496.7 1175.6,489.5 1179.4,512.2 1187.2,495.5 1191.1,503.8 1194.9,495.5 1198.8,501.4 1202.7,569.4 1206.5,577.7 1210.4,587.3 1214.3,583.7 1218.2,574.2 1222.0,599.2 1224.0,612.3 1225.9,611.1 1227.8,567.0 1229.8,573.0 1231.7,569.4 1233.6,564.6 1235.6,559.8 1237.1,556.7" fill="none" stroke="#4361ee" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1237.1,556.7 1239.4,552.7 1245.3,545.2 1253.0,555.1 1260.7,563.4 1268.5,570.6 1276.2,581.3 1284.0,574.2 1291.7,569.4 1299.4,575.3 1307.2,578.9 1314.9,577.7 1330.0,579.5" fill="none" stroke="#ff7a45" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray="6,3"/>
+<circle cx="1245.3" cy="546.7" r="3.5" fill="#d29922"/>
+<circle cx="1276.2" cy="579.5" r="3.5" fill="#3fb950"/>
+<rect x="80.0" y="40.0" width="1250.0" height="620.0" fill="none" stroke="#1b2430"/>
+</svg>

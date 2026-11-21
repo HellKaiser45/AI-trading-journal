@@ -1,0 +1,76 @@
+THESIS
+(what you expect, why, and what would invalidate it)
+
+Working read: After a three-week lower-high staircase from 2438.00 (Nov 5) -> 2150.00 (Nov 9) -> 2092.00 (Nov 11) -> 1966.00 (Nov 13) -> 1848.00 (Nov 16) and a 5-day consolidation box at 1717.18-1848.00 (Nov 15-20), ETHUSDT broke down in two major liquidation waves:
+1. Leg 1 (Nov 20 15:00-20:00Z, US equity-close liquidation cascade): broke below the 1717.18-1726.82 5-day box floor on a $153.38M 1h volume spike at 15:00Z (O:1742.46 H:1747.68 L:1648.15 C:1654.40) and extended to 1580.00 (19:00Z low) and 1601.00 (20:00Z US cash close), followed by a 6-hour pre-flush consolidation base between 1613.70 and 1631.26 (Nov 20 21:00Z - Nov 21 02:00Z).
+2. Leg 2 (Nov 21 03:00-06:15Z, Saturday thin-book capitulation flush): broke below the 1613.70-1615.60 overnight base floor on $95.06M (03:00Z) and $78.87M (04:00Z) 1h volume to a capitulation wick low at 1535.54 (04:00Z) and a secondary 15m retest wick at 1542.09 (06:15Z; 1560.23-1561.12 hourly closes).
+From 1535.54-1542.09, ETHUSDT staged a sharp V-rebound to 1656.76 (06:45Z), pulled back to establish a rising intraday floor at 1617.49 (08:30Z) -> 1626.27 (09:00Z) -> 1634.36 (10:00Z) -> 1638.70 (11:00Z), and at 11:30Z spiked on $17.44M 15m volume to 1671.52 (just below the 48h VWAP at 1678.42) where sellers immediately rejected price back to 1652.02-1653.29. Fading a secondary retest of the 1670.00-1678.42 resistance cluster at SHORT LIMIT 1670.00 (+1.01% above spot, 1.52 pts below today's 1671.52 rejection wick high and 8.42 pts below the 48h VWAP 1678.42) targets mean-reversion rotation back to the Nov 20-21 overnight base floor at TP 1615.00 (+3.29%, below the 6h/24h VWAPs at 1627.62/1629.96 and above the 12h VWAP at 1597.10) with a stop at SL 1712.00 (-2.51%, RR 1.31), placed 1.50x 1h ATR14 (42.00 pts) above entry and +11.27 pts clear above the 72h VWAP (1700.73).
+
+Invalidation:
+- Bearish post-breakdown supply thesis is invalidated on a sustained reclaim above the 72h VWAP (1700.73) and broken 5-day floor (1717.18); SL at 1712.00 exits cleanly outside the 48h/72h VWAP envelope before any squeeze back into the 5d VWAP (1731.26).
+- Downside continuation breaks the post-bounce digestion range on a sustained flush below the 1535.54-1542.09 capitulation double-bottom wicks.
+
+DATA CHECKED
+- news: Macro & crypto catalyst dossier (`artifacts/research/nov21-catalysts_2026-11-21.md`):
+  * Friday Nov 20 US equity rout triggered by Reuters report of an SEC accounting investigation into Nvidia (NVDA closed $125.53, -14.01%; SOX -10.73%; QQQ $608.45, -5.67%; S&P 500 -3.70% into correction; VIX 35.89, +26.20%) spilled into crypto at 16:00Z, liquidating $2.40B in futures ($545M in ETH futures alone, 92.6-94% longs).
+  * Institutional Spot ETF outflows: Week of Nov 16-20 recorded -$221.7M net outflows from US spot ETH ETFs and -$1.25B from spot BTC ETFs (combined -$1.47B weekly outflow; -$3.5B Nov MTD).
+  * Standing ETH supply overhang: ~197,000 ETH (~$346M) from the Oct 29 hack moved across 17 addresses in 16 minutes; Ethereum Glamsterdam Hoodi testnet is scheduled for the week of Dec 14 (outside our 48h window).
+  * Calendar inside 48h window (Nov 21 11:47Z -> Nov 23 11:47Z): no scheduled macro releases Saturday/Sunday; CME futures reopen Sunday 23:00Z; ticket expires Monday 11:47Z ahead of US S&P Global flash PMIs (14:45Z) and Wednesday Nov 25 Core PCE.
+- prices: Aster DEX fapi (`https://fapi.asterdex.com/fapi/v1/`) 1h (1,000 bars) and 15m (100 bars) plus 24h ticker, premiumIndex, openInterest, and 50-level orderbook depth @ 2026-11-21T11:48Z.
+  * Live price: 1653.29 on chart (1653.74 API), Mark: 1653.70, Index: 1653.72.
+  * 24h stats: -5.331%, High 1759.12, Low 1535.54, Vol 619,112.32 ETH ($1,008.08M USDT).
+  * 1h ATR(14): 27.87 (1.69% of spot) | 1h ATR(24): 32.57 (1.97% of spot).
+  * Funding rate: +0.005171%/8h (long leverage paying shorts again on the bounce).
+  * Open Interest: 88,420.65 ETH (~$146.22M).
+  * Orderbook depth (50 levels): 1,530.85 ETH bids down to 1651.90 vs 1,603.99 ETH asks up to 1654.19.
+  * Key 1h/15m structural levels:
+    - Macro highs: 2438.00 (Nov 5), 2150.00 (Nov 9), 2092.00 (Nov 11), 1966.00 (Nov 13), 1848.00 (Nov 16).
+    - Broken 5-day box (Nov 15-20): 1717.18-1726.82 floor to 1848.00 cap; Nov 20 14:00Z pre-breakdown high 1759.12.
+    - Leg 1 breakdown bars: Nov 20 15:00Z (O:1742.46 H:1747.68 L:1648.15 C:1654.40, Vol $153.38M), 16:00Z (O:1654.39 H:1659.50 L:1622.88 C:1644.92, Vol $89.06M), 19:00Z (O:1616.29 H:1618.00 L:1580.00 C:1607.24, Vol $81.07M), 20:00Z (C:1601.00, Vol $28.95M).
+    - 6-hour pre-flush consolidation base (Nov 20 21:00Z - Nov 21 02:00Z): highs 1631.26 (21:00Z), 1627.02 (22:00Z), 1628.47 (23:00Z), 1627.55 (00:00Z), 1628.22 (01:00Z), 1627.49 (02:00Z); lows 1613.70-1620.57.
+    - Leg 2 capitulation flush: Nov 21 03:00Z (O:1619.21 H:1619.73 L:1553.00 C:1571.64, Vol $95.06M), 04:00Z (O:1571.19 H:1573.00 L:1535.54 C:1560.23, Vol $78.87M), 05:00Z (O:1560.03 H:1574.32 L:1557.56 C:1561.12, Vol $29.77M), and 06:15Z 15m retest wick 1542.09 (06:00Z 1h bar O:1561.31 H:1656.76 L:1542.09 C:1639.00, Vol $70.84M).
+    - Post-flush higher-low staircase & 11:30Z rejection wick: 08:30Z pullback low 1617.49 -> 09:00Z low 1626.27 -> 10:00Z low 1634.36 -> 11:00Z low 1638.70 -> 11:30Z 15m impulse spike to 1671.52 ($17.44M vol, rejected to 1652.02).
+  * Multi-horizon VWAPs (1h volume-weighted):
+    - 6h VWAP: 1627.62 | 12h VWAP: 1597.10 | 24h VWAP: 1629.96 | 48h VWAP: 1678.42 | 72h VWAP: 1700.73
+    - 120h (5d) VWAP: 1731.26 | 168h (7d) VWAP: 1755.15.
+- other assets: Aster DEX 24h comparison @ 2026-11-21T11:48Z:
+  BTCUSDT 57,988.4 (low 55,109.8), SOLUSDT 68.18 (low 64.84), BNBUSDT 526.16 (low 503.60), HYPEUSDT 58.551 (low 55.818), ANTUSDT 87.27 (low 83.22).
+- forums: not checked (out of scope).
+- tokenomics: no discrete ETH unlock/upgrade inside the 48h window (Glamsterdam Hoodi testnet is week of Dec 14).
+
+LINKS
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=1000
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=ETHUSDT&interval=15m&limit=100
+- https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=ETHUSDT
+- https://fapi.asterdex.com/fapi/v1/premiumIndex?symbol=ETHUSDT
+- https://fapi.asterdex.com/fapi/v1/depth?symbol=ETHUSDT&limit=50
+- artifacts/research/nov21-catalysts_2026-11-21.md
+
+[2026-11-21T11:50Z] STAGE 3 LEARNING PASS (35 prior journal folders, 29 terminal recaps reviewed)
+- Direct ETHUSDT lessons & broader journal rules applied:
+  1. LOSS-1.08%_2026-10-18T1703Z_ETHUSDT ("Fade the far edge of a wide block, not its middle; measure the block's realised reach"): Today's post-capitulation bounce block spans from 1656.76 (06:45Z high) / 1659.50 (Nov 20 16:00Z high) up to 1671.52 (11:30Z rejection wick high) and 1678.42 (48h VWAP). Instead of fading the middle of the bounce at 1655-1660 with a tight 1.08% stop, we place SHORT LIMIT at 1670.00 (the upper edge of the realized 1671.52 reach, +1.01% above spot) and set SL at 1712.00 (-2.51%, 1.50x 1h ATR14 above entry, +33.58 pts above the 48h VWAP 1678.42 and +11.27 pts above the 72h VWAP 1700.73).
+  2. LOSS-1.41%_2026-11-05T0850Z_ETHUSDT & REJECTED_2026-11-14T0935Z_ETHUSDT: Buying a post-impulse floor or counter-trend "return to origin" in a multi-week downtrend when funding is positive (+0.0052%) and ETF outflows are negative (-$221.7M weekly) has negative expectancy across all 5 historical lookbacks (LONG LIMIT 1628.00 -> TP 1675.00 / SL 1592.00 yields EV = -0.12% on analogues, -1.35% on 3d, -0.27% on 5d, -1.07% on 10d, -0.72% on 40d).
+  3. WIN+1.26%_2026-10-27T0919Z_ASTERUSDT, WIN+1.76%_2026-10-25T0942Z_XRPUSDT & EXPIRED+4.01%_2026-11-15T0924Z_UNIUSDT: Size TP to a high-traffic interior rotation shelf rather than an extreme capitulation wick (1535.54). TP at 1615.00 (+3.29%, RR 1.31) sits inside the 6-hour Nov 20-21 overnight base floor (1613.70-1620.57) and the Nov 21 08:30Z higher-low support (1617.49), below the 6h/24h VWAPs (1627.62/1629.96) and 17.90 pts above the 12h VWAP (1597.10), achieving P(TP|fill) = 0.53 on analogues, 0.89 on 3d, 0.71 on 5d, and 0.79 on 10d.
+
+[2026-11-21T11:51Z] STAGE 4 DETERMINISTIC REPLAY & JEV CONCLAVE
+- Deterministic 48h horizon backtest on Aster DEX 1,000 1h candles (`resolve_expired.py` fill model):
+  * S1 SHORT LIMIT 1670.00 (+1.01%) / TP 1615.00 (+3.29%) / SL 1712.00 (-2.51%, RR 1.31, p_BE 0.433):
+    - Post-Flush Analogues (n=21): P(fill)=0.71, P(TP|fill)=0.53, P(SL|fill)=0.20, EV/ticket=+1.00%, EV/fill=+1.40%
+    - 3d (72h):   P(fill)=0.54, P(TP|fill)=0.89, P(SL|fill)=0.11, EV/ticket=+1.44%, EV/fill=+2.68%
+    - 5d (120h):  P(fill)=0.70, P(TP|fill)=0.71, P(SL|fill)=0.17, EV/ticket=+1.43%, EV/fill=+2.05%
+    - 10d (240h): P(fill)=0.55, P(TP|fill)=0.79, P(SL|fill)=0.14, EV/ticket=+1.28%, EV/fill=+2.33%
+    - 40d (950h): P(fill)=0.62, P(TP|fill)=0.43, P(SL|fill)=0.21, EV/ticket=+0.67%, EV/fill=+1.09%
+  * S2 SHORT LIMIT 1675.00 (+1.31%) / TP 1620.00 (+3.28%) / SL 1715.00 (-2.39%, RR 1.37):
+    - Analogues: EV=+0.82% (Pf=0.67, Ptp=0.43) | 3d: EV=+1.14% (Pf=0.39) | 5d: EV=+1.27% (Pf=0.61) | 10d: EV=+1.10% (Pf=0.46) | 40d: EV=+0.58%
+  * S5 SHORT LIMIT 1665.00 (+0.71%) / TP 1615.00 (+3.00%) / SL 1708.00 (-2.58%, RR 1.16):
+    - Analogues: EV=+1.11% (Pf=0.86, Ptp=0.56) | 3d: EV=+1.77% | 5d: EV=+1.41% | 10d: EV=+1.33% | 40d: EV=+0.73%
+  * S6 SHORT LIMIT 1672.00 (+1.13%) / TP 1610.00 (+3.71%) / SL 1715.00 (-2.57%, RR 1.44):
+    - Analogues: EV=+0.86% (Pf=0.67, Ptp=0.36) | 3d: EV=+1.73% | 5d: EV=+1.65% | 10d: EV=+1.39% | 40d: EV=+0.71%
+  * L1 LONG LIMIT 1628.00 (-1.53%) / TP 1675.00 (+2.89%) / SL 1592.00 (-2.21%, RR 1.31):
+    - Analogues: EV=-0.12% (Pf=0.81, Ptp=0.35, Psl=0.59) | 3d: EV=-1.35% | 5d: EV=-0.27% | 10d: EV=-1.07% | 40d: EV=-0.72%
+- JEV Conclave decisions:
+  * Stage 2 Search Gate (`jev_decide`): `parallel_market_data_and_existing_macro` selected (P=1.00, conf=1.00); Post-Pull Search Gate selected `stop_searches_proceed_to_stage3` (P=1.00, conf=1.00).
+  * Forward Propositions (`jev_noul`): P(rejection at 1670.00-1678.42 and rotation to 1615.00-1597.10) = 0.83; P(SHORT LIMIT 1670.00 fills in 48h) = 0.72; P(TP 1615.00 before SL 1712.00 | fill at 1670.00) = 0.81 (vs p_BE = 0.433); P(SHORT into 1665-1675 beats LONG at 1618-1628) = 0.84; P(SL 1712.00 above 72h VWAP beats tight stop <1700) = 0.66.
+  * Conclave Angle 1 — Pure Price Geometry & Historical Base-Rate Backtest (`jev_decide`): `short_limit_1670_tp1615_sl1712` selected (P=0.86, conf=0.83) over `short_limit_1672_tp1610_sl1715` (P=0.10), `short_limit_1665_tp1615_sl1708` (P=0.03), and `short_limit_1675_tp1620_sl1715` (P=0.01); LONG L1 and MARKET SHORT rejected (P=0.00).
+  * Conclave Angle 2 — Macro, Cross-Asset Liquidity, Spot ETF Outflows & Perp Microstructure (`jev_decide`): `short_limit_1670_tp1615_sl1712` selected (P=1.00, conf=1.00) over `short_limit_1672_tp1610_sl1715`, `short_limit_1665_tp1615_sl1708`, and `long_limit_1600_tp1652_sl1555`.
+  * Conclave Angle 3 — Adversarial Stress-Test, Expiry Horizon Sensitivity & Journal Failure-Mode Check (`jev_decide`): `short_48h_1670_tp1615_sl1712` selected (P=1.00, conf=1.00) over 36h/24h horizons and `1675.00` limit, confirming the 48h window (`expire_at 2026-11-23T11:47:00Z`) across the Sunday 23:00Z CME reopen.

@@ -1,0 +1,35 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10, shape=box, style="rounded,filled", fillcolor="#161b22", fontcolor="#c9d1d9", color="#30363d"];
+  edge [fontname="monospace", fontsize=9, color="#8b949e", fontcolor="#8b949e"];
+
+  chart [label="Stage 1: Vision Read (ANTUSDT 15m Aster)\nLive: 87.27 @ 2026-11-21T11:06:46Z (-0.04 / -0.05%)\nPost-IPO Lower-High Trend: 110.50 (Nov 19 16:30Z) -> 98.70 -> 92.80 -> 92.10 -> 89.30 -> 88.32/88.28\nNov 20 IPO Floor Defense: 84.50 (13:45Z) & 83.30 (17:45Z close / 83.22 wick) above $83.00 IPO price\nSaturday Range: 85.46-85.55 triple-bottom -> 86.31 higher low -> 87.88-88.32 multi-touch ceiling"];
+  jev_s2 [label="jev_decide: Stage 2 Search Strategy\nexchange_and_existing_dossier (P=1.00, conf=1.00)", shape=diamond, fillcolor="#1f2937"];
+  s2_data [label="Stage 2: Aster DEX 15m/1h OHLCV, VWAP, Orderbook & IPO/Nasdaq Cash-Close Context\n24h Vol: $39.06M (-4.18%) | Funding: +0.0253%/8h (+27.7% APR) | OI: 22,635.72 ANT ($1.98M)\nVWAPs: 3h=87.355, 6h=86.693, 12h=87.215, 24h=87.186, 48h=95.147 | 15m ATR(14)=0.443 (0.51%)\nFriday Nasdaq Official Close: $88.91 (Low $83.05) | 17.25h Post-Bottom Range: [84.62, 89.41]\nSaturday Supply Ledge: 87.88-88.32 (01:00-03:00Z & 10:00-10:45Z) | Floor: 85.46-85.55 & 86.31"];
+  jev_s2_done [label="jev_decide: Post-Round-1 Search Gate\nconclude_searches_now (P=0.96, conf=0.92)", shape=diamond, fillcolor="#1f2937"];
+  s3_learn [label="Stage 3: Learning Pass (35 folders, 29 terminal recaps)\nWIN+1.26% ASTER & WIN+1.76% XRP: SL outside full 17.25h post-bottom envelope (89.41 high -> SL 89.55)\nEXPIRED BNBUSDT & ASTERUSDT: Entry inside active weekend band below 88.00 round number (87.95)\nEXPIRED+4.01% UNIUSDT: TP at interior support shelf (86.00) below 6h VWAP (86.69) & above 85.46 floor"];
+  jev_noul [label="jev_noul: Forward 24h-48h Propositions\nP(range 83.22-90.50 holds) = 0.67\nP(test 87.95-88.32 resistance) = 0.63 | P(test 88.85-89.41 cash close) = 0.54\nP(dip to 85.60-86.50 support) = 0.60 | P(drop to 83.22-84.00 deep IPO floor) = 0.19\nP(TP 86.00-86.50 before SL 89.55-90.65 | SHORT fill 87.95-88.85) = 0.69 (vs p_BE 0.451)", shape=diamond, fillcolor="#1f2937"];
+
+  s5a [label="S5a: SHORT LIMIT 87.95 (+0.78%)\nTP 86.00 (+2.22%) | SL 89.55 (-1.82%) | RR 1.22 | 48h\nFixed Post-Bottom (17h): EV +2.18% (Pf 1.00, Ptp 0.97, Psl 0.00)\nFixed Last-24h: EV +1.38% (Pf 1.00, Ptp 0.79, Psl 0.21)\nRel Post-Bottom: EV +0.33% | Rel Last-24h: EV +0.64% (Pf 0.90, Ptp 0.63)\nRel Post-IPO (42h): EV +0.94% to +1.09% (Pf 0.77, Ptp 0.75)", fillcolor="#1b3224", color="#3fb950"];
+  s1a [label="S1a: SHORT LIMIT 88.25 (+1.12%)\nTP 86.10 (+2.44%) | SL 89.60 (-1.53%) | RR 1.59 | 48h\nFixed Post-Bottom: EV +2.15% (Pf 1.00, Ptp 0.78)\nRel Last-24h: EV +0.11% (Ptp drops 0.63->0.42) | Rel Post-IPO: EV +0.68%"];
+  s2b [label="S2b: SHORT LIMIT 88.85 (+1.81%)\nTP 86.50 (+2.64%) | SL 90.65 (-2.03%) | RR 1.31\nRejected: Fixed Post-Bottom Pf drops to 0.73 (0% fill Saturday) & Rel Post-IPO Pf=0.42"];
+  l2 [label="L2: LONG LIMIT 85.75 (-1.74%)\nTP 88.25 (+2.92%) | SL 83.90 (-2.16%) | RR 1.35\nRejected: Rel Last-24h EV -0.06% & Rel Post-IPO EV -1.12% (Psl=0.81)"];
+  l4 [label="L4: LONG LIMIT 84.00 (-3.75%)\nTP 87.65 (+4.35%) | SL 82.10 (-2.26%) | RR 1.92\nRejected: Fixed Post-Bottom Pf=0.00 (EV 0.00%), Rel Post-IPO EV -0.69%, jev_noul Pf=0.19"];
+
+  conclave [label="Stage 4: JEV Conclave (3 Angles)\nAngle 1 (Empirical EV & Regime): S5a 87.95 (P=0.72) vs S1a 88.25 (P=0.26) vs S2b 88.85 (P=0.02)\nAngle 2 (MAE & No-Fill Stress): S5a 87.95/TP 86.00/SL 89.55 (P=0.97) vs S5c 88.00/TP 86.10 (P=0.03)\nAngle 3 (Fine Grid & Horizon): S5a SHORT 87.95 -> TP 86.00 / SL 89.55 48h (P=1.00, conf=1.00)", shape=diamond, fillcolor="#2d2316", color="#d29922"];
+
+  final [label="FINAL TICKET (finalize.py)\nANTUSDT SHORT LIMIT @ 87.95\nTP 86.00 (+2.22%) | SL 89.55 (-1.82%) | RR 1.22\nPlace: 2026-11-21T11:07:00Z | Expire: 2026-11-23T11:07:00Z", fillcolor="#1b3224", color="#3fb950"];
+
+  chart -> jev_s2 -> s2_data -> jev_s2_done -> s3_learn -> jev_noul;
+  jev_noul -> s5a;
+  jev_noul -> s1a;
+  jev_noul -> s2b;
+  jev_noul -> l2;
+  jev_noul -> l4;
+  s5a -> conclave [color="#3fb950", label="Conclave Winner (P=0.72 / 0.97 / 1.00)"];
+  s1a -> conclave [label="Runner-up (P=0.26)"];
+  s2b -> conclave;
+  l2 -> conclave;
+  l4 -> conclave;
+  conclave -> final [color="#3fb950"];
+}

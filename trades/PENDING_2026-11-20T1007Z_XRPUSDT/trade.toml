@@ -1,0 +1,15 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "XRPUSDT"
+side     = "LONG"
+
+[entry]
+type     = "LIMIT"
+price    = 0.95
+
+[exit]
+tp       = 0.9685
+sl       = 0.938
+
+[schedule]
+place_at  = 2026-11-20T10:07:00Z
+expire_at = 2026-11-22T10:07:00Z

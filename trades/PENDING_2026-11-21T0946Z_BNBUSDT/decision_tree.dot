@@ -1,0 +1,35 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10, shape=box, style="rounded,filled", fillcolor="#161b22", fontcolor="#c9d1d9", color="#30363d"];
+  edge [fontname="monospace", fontsize=9, color="#8b949e", fontcolor="#8b949e"];
+
+  chart [label="Stage 1: Vision Read (BNBUSDT 1h Aster)\nLive: 526.16 @ 2026-11-21T09:45:08Z (+4.19 / +0.80%)\nMacro Downtrend: 762.50 (Oct 28) -> 722.50 (Nov 5) -> 688.50 (Nov 11)\nBroken 5.5d Shelf (Nov 15-20): 565.10-599.52\nNov 20-21 Pre-Flush Ledge (6h): 538.44-542.64 -> Flush Low 510.00 close (503.60 wick) -> Rebound 526.16"];
+  jev_s2 [label="jev_decide: Stage 2 Search Strategy\nexchange_and_context_parallel (P=1.00, conf=1.00)", shape=diamond, fillcolor="#1f2937"];
+  s2_data [label="Stage 2: Aster DEX OHLCV, VWAP, Orderbook & Cross-Asset Context\n24h Vol: $18.11M (-7.87%) | Funding: 0.00000%/8h | OI: 8,892.69 BNB ($4.68M)\nVWAPs: 6h=517.81, 12h=521.42, 24h=535.07, 48h=548.87, 72h=554.09, 5d=560.89\n6h Pre-Flush Ledge: 538.44-542.64 | Breakdown Low Shelf: 531.16-532.50\nPost-Bounce High: 529.74 (07:00Z) | Higher Low: 519.13 (08:30Z)"];
+  jev_s2_done [label="jev_decide: Post-Round-1 Search Gate\nconclude_searches_now (P=0.93, conf=0.86)", shape=diamond, fillcolor="#1f2937"];
+  s3_learn [label="Stage 3: Learning Pass (33 folders, incl. 2 settled BNBUSDT trades)\nEXPIRED_2026-10-30 & EXPIRED_2026-11-13 BNBUSDT: SHORT limits +1.56%/+1.69% missed fills by 0.75%/0.42%\nWIN+1.26% ASTER & WIN+1.76% XRP: SL outside full overshoot envelope + TP at interior high-traffic VWAP\nFix: Place SHORT entry at +1.11% (532.00) with SL 545.00 (+2.36 pts above 542.64 ledge) & TP 517.80 (6h VWAP)"];
+  jev_noul [label="jev_noul: Forward 48h Propositions\nP(range 503.60-544.50 holds) = 0.73\nP(retest 517.50-519.13 support) = 0.66 | P(test 531.50-533.50 resistance) = 0.56\nP(TP 517.50-518.00 before SL 544.50-545.50 | SHORT fill 531.50-533.00) = 0.76 (vs p_BE 0.478)\nP(TP 534.50 before SL 502.50 | LONG fill 518.50) = 0.49", shape=diamond, fillcolor="#1f2937"];
+
+  g1 [label="G1: SHORT LIMIT 532.00 (+1.11%)\nTP 517.80 (+2.67%) | SL 545.00 (-2.44%) | RR 1.09 | 48h\nAnalogues (n=13): EV +0.66% (Pf 0.69, Ptp 0.44, Psl 0.11, EV|fill +0.96%)\n3d: EV +1.46% (Pf 0.58, Ptp 0.88, Psl 0.00) | 5d: EV +1.09% (Pf 0.55, Ptp 0.64, Psl 0.05)\n10d: EV +0.89% (Pf 0.43, Ptp 0.75, Psl 0.04) | 40d: EV +0.48%", fillcolor="#1b3224", color="#3fb950"];
+  g2 [label="G2: SHORT LIMIT 532.50 (+1.20%)\nTP 518.00 (+2.72%) | SL 545.00 (-2.35%) | RR 1.16 | 48h\nAnalogues: EV +0.73% (Pf 0.69, Psl 0.11) | 3d: EV +1.30% (Pf 0.51, Psl 0.00)\n5d: EV +0.92% | 10d: EV +0.77% | 40d: EV +0.42%"];
+  g3 [label="G3: SHORT LIMIT 531.50 (+1.01%)\nTP 517.50 (+2.63%) | SL 544.50 (-2.45%) | RR 1.08 | 48h\n3d: EV +1.58% (Pf 0.64) | 5d: EV +1.08% | Rejected in Angle 3: Analogue Psl 0.22 vs 0.11 at SL 545.00"];
+  s4 [label="S4: SHORT LIMIT 534.50 (+1.59%)\nTP 518.50 (+2.99%) | SL 546.50 (-2.25%) | RR 1.33\nRejected: 3d Pf drops to 0.35 & repeats prior BNBUSDT missed-fill pattern"];
+  l1 [label="L1: LONG LIMIT 518.50 (-1.46%)\nTP 534.50 (+3.09%) | SL 502.50 (-3.09%) | RR 1.00\nRejected: Rolling 3d/5d/10d/40d EV all negative (-0.88%, -0.18%, -1.18%, -0.20%) & jev_noul P=0.49"];
+
+  conclave [label="Stage 4: JEV Conclave (3 Angles)\nAngle 1 (Empirical EV & Geometry): SHORT family P=1.00 (S1 531.50 P=0.62, S2 532.50 P=0.21, S3 533.00 P=0.17)\nAngle 2 (MAE Squeeze vs No-Fill Stress): S2 532.50/SL 545.00 (P=0.51) vs S1 531.50/SL 544.50 (P=0.49)\nAngle 3 (Fine Grid Synthesis & Horizon): G1 SHORT 532.00 -> TP 517.80 / SL 545.00 48h (P=0.61)", shape=diamond, fillcolor="#2d2316", color="#d29922"];
+
+  final [label="FINAL TICKET (finalize.py)\nBNBUSDT SHORT LIMIT @ 532.00\nTP 517.80 (+2.67%) | SL 545.00 (-2.44%) | RR 1.09\nPlace: 2026-11-21T09:46:00Z | Expire: 2026-11-23T09:46:00Z", fillcolor="#1b3224", color="#3fb950"];
+
+  chart -> jev_s2 -> s2_data -> jev_s2_done -> s3_learn -> jev_noul;
+  jev_noul -> g1;
+  jev_noul -> g2;
+  jev_noul -> g3;
+  jev_noul -> s4;
+  jev_noul -> l1;
+  g1 -> conclave [color="#3fb950", label="Conclave Winner (P=0.61)"];
+  g2 -> conclave [label="Runner-up (P=0.39)"];
+  g3 -> conclave;
+  s4 -> conclave;
+  l1 -> conclave;
+  conclave -> final [color="#3fb950"];
+}
