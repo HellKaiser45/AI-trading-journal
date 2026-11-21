@@ -54,33 +54,40 @@ You can read charts, `chart_prediction.svg`, and `recap.md` for those trades to 
 - **Invalidation vs Noise**: Notice where stops sat inside normal volatility versus outside the genuine structural invalidation envelope, and where targets sat at high-traffic interior zones versus unreached outer extremes.
 - **No Rigid Templates**: Never hardcode fixed distances or mechanical rules from past trades; adapt dynamically to each asset's live volatility and regime.
 
-### 3B. Active Book & Correlation Audit
-Inspect active `PENDING` and `OPEN` folders in `trades/` (or run `stats.py`) to understand current directional exposure, asset-class concentration, and entry clustering before adding new trades. Avoid stacking identical one-way bets across correlated assets that can all miss together or all squeeze to stop-loss together.
+### 3B. Active Book & Directional Balance Audit
+Inspect active `PENDING` and `OPEN` folders in `trades/` (or run `stats.py`) to measure current `LONG` versus `SHORT` exposure, asset-class concentration, and entry clustering before adding new trades.
+- **No One-Way Directional Stacking**: Never leave the book—or any set of proposed trades—leaning all in one direction (such as all shorts or all longs). If existing active trades lean one way, new setups must restore two-way balance.
 
-## 4. Checkmate Conclave (JEV)
+## 4. Two-Way Checkmate Conclave (JEV)
 Based on all the previous steps, you gathered 4 sources of information:
 - graph with chart analysis
 - researches
 - past trade knowledge
 - active book exposure (`PENDING` and `OPEN` trades)
 
-You refine `chart_prediction.svg` and evaluate candidate setups across the full set of market states:
-- **Immediate continuation** (price moves without a deep pullback)
-- **Retracement then continuation** (price tests an upper or lower structural shelf first)
-- **Structural breakout or reversal** (price breaks the shelf and squeezes the opposite way)
+You refine `chart_prediction.svg` and evaluate candidate setups across both directions (`PUMP` / upside breakout vs `DUMP` / downside breakdown). **You must never assume your primary directional guess is right.** Every trade proposal must be structured so that if the market moves violently in the opposite direction, an opposing leg or trigger captures that move:
 
-Rather than defaulting to a single passive `LIMIT` order with static `TP`/`SL`, evaluate the full execution toolkit available on Aster DEX:
-- `MARKET`: immediate participation when waiting for a pullback risks missing the move entirely.
-- `LIMIT`: passive entry at a structural inflection level where retracement probability is high.
-- `STOP` / `STOP_MARKET`: conditional trigger entry on a breakout or momentum confirmation (`LONG` triggers when price breaks up through `price`; `SHORT` triggers when price breaks down through `price`), which never fills unless price moves in your direction and can also serve as a reversal hedge.
-- `TRAILING_STOP_MARKET` (`--trail` callback rate, with or without `--tp` and `--sl`): dynamic trailing exit to capture extended trend runs without capping upside prematurely.
+1. **Single-Chart Two-Way Checkmate (Always Pair Opposite Sides)**:
+   When the user gives a single chart (unless it is specifically offsetting an existing opposite-side position in the active book), construct a **two-leg paired setup** (`LONG` + `SHORT`, recorded as two linked folders sharing a `--group` ID) or an asymmetric structure that covers both a pump and a dump:
+   - **Fade + Breakout Flip (`LIMIT` + `STOP_MARKET`)**: Pair a structural fade (`e.g., SHORT LIMIT` at resistance or `LONG LIMIT` at support) with an opposite-direction breakout trigger (`e.g., LONG STOP_MARKET` at/near the short's invalidation level, or `SHORT STOP_MARKET` at/near the long's invalidation level) using an asymmetric target or `TRAILING_STOP_MARKET` (`--trail`). If the fade works, the breakout trigger never fills; if the market squeezes through the level, the `STOP_MARKET` leg triggers into the breakout momentum and offsets or exceeds the stopped-out fade.
+   - **Two-Way Breakout Straddle (`LONG STOP_MARKET` + `SHORT STOP_MARKET`)**: When price is coiled inside an inflection range, bracket the structure with both a `LONG STOP_MARKET` above resistance and a `SHORT STOP_MARKET` below support (using trailing stops or asymmetric targets) so whichever way the market explodes, the winning breakout leg pays more than the opposite leg risks.
+   - **Sequential Catch-and-Flip (`SHORT` + Deep `LONG`)**: Pair an upper-shelf `SHORT` with a deep washout-floor `LONG` placed beyond the short's target so a full dump-and-rebound pays on both legs while a one-way dump is caught at the floor.
 
-When appropriate—especially when scanning the market or balancing existing exposure—design **Checkmate combinations** (such as staggered entries, breakout `STOP_MARKET` paired with a fade `LIMIT`, sequential catch-and-flip levels, relative-strength dispersion pairs, or uncorrelated cross-asset legs across crypto, equities, and commodities) so that the book wins or remains protected across every state of nature.
+2. **Multi-Asset Dispersion Checkmate (Market Scans & Portfolio Baskets)**:
+   When proposing multiple trades across the market, **enforce strict directional balance (`LONG` paired with `SHORT`)**:
+   - Pair shorts on structurally weak or catalyst-impaired instruments with longs on structurally strong relative-strength leaders or uncorrelated assets (across crypto, shares/semis, and commodities).
+   - Never output a one-way list of same-direction trades. If the market pumps, your `LONG` legs and `LONG STOP_MARKET` breakout triggers must profit; if the market dumps, your `SHORT` legs and `SHORT STOP_MARKET` breakdown triggers must profit.
 
-Run all candidate order types, single tickets, and multi-leg Checkmate combinations against JEV with unbiased, neutral context from multiple angles. Iterate in this conclave until JEV selects the highest-expectancy setup.
+3. **Full Execution Toolkit on Aster DEX**:
+   - `MARKET`: immediate participation when waiting for a pullback risks missing the move entirely.
+   - `LIMIT`: passive entry at a structural inflection level.
+   - `STOP` / `STOP_MARKET`: conditional trigger entry on a breakout or reversal confirmation (`LONG` triggers when price breaks up through `price`; `SHORT` triggers when price breaks down through `price`). Never fills unless price moves in that direction.
+   - `TRAILING_STOP_MARKET` (`--trail` callback rate, with or without `--tp` and `--sl`): dynamic trailing exit that lets the winning side of a Checkmate pair ride an extended pump or dump without capping upside prematurely.
+
+Run all candidate order types and paired Checkmate combinations against JEV with unbiased, neutral context from multiple angles. Verify in JEV that the proposed combination survives both a sudden market pump and a sudden market dump before finalizing.
 
 ## 5. Finalize
-Write the trade(s) with `finalize.py` (creating a separate folder via `new_trade.py` for each leg if placing a multi-leg Checkmate combination).
+Write the trade(s) with `finalize.py` (creating a separate folder via `new_trade.py` for each leg of a two-way Checkmate pair and linking them with `--group` and `--role`).
 
 ## 6. Settle
 Check among the open trades if some are over (expiry). 

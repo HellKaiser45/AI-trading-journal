@@ -242,6 +242,10 @@ def main(argv=None):
                 extra = " [%s]" % "/".join(x for x in (r["group"], r["role"]) if x)
             print("  %-12s %-5s %-11s %-12s (%s)%s" % (
                 r["symbol"], r["side"], r["etype"], r["entry"], r["status"], extra))
+        if len(active) >= 2 and (len(longs) == 0 or len(shorts) == 0):
+            warn("active book is 100%% one-directional (%d LONG, %d SHORT) — pair opposite-side checkmate legs to prevent one-way squeeze wipeout" % (len(longs), len(shorts)))
+        elif abs(len(longs) - len(shorts)) >= 2:
+            warn("active book has directional skew (%d LONG vs %d SHORT) — add opposite-side checkmate protection" % (len(longs), len(shorts)))
 
     if args.check:
         problems = []

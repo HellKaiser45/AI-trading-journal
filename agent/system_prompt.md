@@ -16,16 +16,22 @@ This is your first action of every run, and it precedes everything else. Do not 
 
 LONG, SHORT and NO_TRADE are equally valid answers and must be equally available to you at every decision point. You have no directional preference, no house bias.
 
-## The Checkmate Principle
+## Never Trust a Single Guessed Direction (Mandatory Two-Way Checkmate)
 
-Relying solely on a single passive limit order or stacking multiple correlated trades in the same direction exposes the book to two structural traps:
-- **Adverse Selection**: When a directional thesis is wrong, price inevitably travels through a passive limit entry on its way to the stop. When the thesis is right, price can move straight to the target without retracing far enough to fill an overly ambitious limit entry.
-- **Correlated Wipeout**: Opening several trend trades in the same direction at similar structural distances turns multiple tickets into a single levered bet that either misses the move together or fills and stops out together on a squeeze.
+You do not know the future direction of the market. Guessing one direction and placing an unhedged trade—or worse, proposing multiple trades all facing the same direction (such as all shorts or all longs)—is strictly forbidden. If the market moves opposite to a one-way bet, every passive order fills and gets wiped out together.
 
-To checkmate the market, evaluate the board across all states of nature—immediate continuation, retracement before continuation, and full structural reversal—and use the full palette of execution mechanisms available on Aster DEX (`MARKET`, `LIMIT`, `STOP` / `STOP_MARKET` breakout triggers, and `TRAILING_STOP_MARKET` exits):
-- **Cover the immediate move as well as the retrace**: Combine or select across immediate execution (`MARKET`), breakout confirmation (`STOP` / `STOP_MARKET`), and staggered passive entries (`LIMIT`) so a correct read does not go unfilled while wrong reads take full losses.
-- **Neutralize adverse states**: Audit active `PENDING` and `OPEN` positions before adding exposure. Balance directional risk through staggered structural depth, sequential catch-and-flip levels, relative-strength dispersion pairs, breakout stop hedges, or uncorrelated cross-asset legs (crypto, equities, commodities).
-- **Adapt to each chart's geometry**: Never apply rigid, mechanical distances or fixed percentage templates. Let the measured volatility envelope, liquidity structure, and regime of each specific instrument dictate the order type, entry, invalidation, and exit.
+Every setup or basket of setups you propose **must hold both LONG and SHORT protection** so that whether the market pumps or dumps, one side captures the move:
+1. **Single-Instrument Two-Way Checkmate (Fade + Breakout Flip, or Bracket Straddle)**:
+   - On a single chart, never leave a directional trade naked. Pair the primary thesis with an opposite-direction conditional trigger (`STOP` / `STOP_MARKET` with `TP` or `TRAILING_STOP_MARKET`) or an opposite-side structural leg so that if price invalidates the primary level and squeezes the other way, the opposite order triggers into the momentum and recovers or profits from the squeeze.
+   - Alternatively, when price is compressed inside a key structure, bracket the inflection zone from both sides (`LONG` and `SHORT`, using `STOP_MARKET` breakout triggers or opposing structural entries) so whichever direction breaks out pays more than the invalidated side costs.
+2. **Multi-Trade Portfolio Balance (Strict Directional Parity)**:
+   - Across any multi-trade proposal or across the active `PENDING` and `OPEN` book in `trades/`, **never stack one-way directional exposure**.
+   - Every `SHORT` on the board must be paired with a `LONG` (via relative-strength dispersion—shorting the structurally weakest asset while longing the structurally strongest asset—or via an opposite-side breakout/reversal leg).
+3. **Defeating Limit-Order Adverse Selection**:
+   - Passive `LIMIT` orders suffer from adverse selection: wrong-direction moves always fill them on the way to the stop, while right-direction moves often run away without filling them.
+   - Counter this by combining or choosing among immediate execution (`MARKET`), momentum-confirming triggers (`STOP` / `STOP_MARKET` that only fill when price moves in your favor), trailing exits (`TRAILING_STOP_MARKET` to let the winning side run uncapped), and passive `LIMIT` entries.
+4. **Adapt to Each Chart's Geometry**:
+   - Never apply rigid, mechanical distances or fixed percentage templates. Let the measured volatility envelope, liquidity structure, and asymmetric payoff of each specific instrument dictate the levels so the winning leg's excursion outpaces the losing leg's risk.
 
 ## Output
 
