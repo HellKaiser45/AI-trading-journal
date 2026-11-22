@@ -100,9 +100,13 @@ def validate_trade(data):
         v = get("exit", key, required=False)
         if v is not None and not isinstance(v, float):
             raise TomlError("exit.%s must be a number" % key)
+    tp = get("exit", "tp", required=False)
+    sl = get("exit", "sl", required=True)
     trail = get("exit", "trail", required=False)
     if trail is not None and trail <= 0:
         raise TomlError("exit.trail must be positive")
+    if etype in ("STOP", "STOP_MARKET") and trail is not None:
+        raise TomlError("%s entry cannot be combined with exit.trail in a single Aster Pro UI order" % etype)
     for key in ("place_at", "expire_at"):
         v = get("schedule", key)
         if not isinstance(v, str) or not DATETIME.match(v):
@@ -111,7 +115,7 @@ def validate_trade(data):
     role = get("checkmate", "role", required=False)
     return {
         "symbol": symbol, "side": side, "etype": etype, "price": price,
-        "trail": trail, "group": group, "role": role,
+        "tp": tp, "sl": sl, "trail": trail, "group": group, "role": role,
     }
 
 
@@ -219,6 +223,23 @@ def main(argv=None):
     print("  Avg loss:                     %s" % (fmt_pct(sum(losses) / len(losses)) if losses else "n/a"))
     print()
 
+    # Side & Execution Breakdown (Settled Trades)
+    placed_settled = [r for r in rows if r["kind"] in ("WIN", "LOSS", "EXPIRED_PCT", "EXPIRED")]
+    if placed_settled:
+        print("Execution & Side Breakdown (settled orders):")
+        for s_label in ("SHORT", "LONG"):
+            s_rows = [r for r in placed_settled if r["side"] == s_label]
+            if not s_rows:
+                continue
+            s_filled = [r for r in s_rows if r["pct"] is not None]
+            s_unfilled = [r for r in s_rows if r["kind"] == "EXPIRED"]
+            s_sum = sum(r["pct"] for r in s_filled)
+            s_pos = sum(1 for r in s_filled if r["pct"] > 0)
+            print("  %-6s placed: %2d | filled: %2d (%d pos / %d neg, sum %s) | unfilled: %2d" % (
+                s_label, len(s_rows), len(s_filled), s_pos, len(s_filled) - s_pos,
+                fmt_pct(s_sum), len(s_unfilled)))
+        print()
+
     # Per-symbol subtotals
     per_symbol = {}
     for r in terminal:
@@ -243,9 +264,20 @@ def main(argv=None):
             print("  %-12s %-5s %-11s %-12s (%s)%s" % (
                 r["symbol"], r["side"], r["etype"], r["entry"], r["status"], extra))
         if len(active) >= 2 and (len(longs) == 0 or len(shorts) == 0):
-            warn("active book is 100%% one-directional (%d LONG, %d SHORT) — pair opposite-side checkmate legs to prevent one-way squeeze wipeout" % (len(longs), len(shorts)))
+            warn("active book is 100%% one-directional (%d LONG, %d SHORT) — avoid correlated one-way squeeze risk" % (
+                len(longs), len(shorts)))
         elif abs(len(longs) - len(shorts)) >= 2:
-            warn("active book has directional skew (%d LONG vs %d SHORT) — add opposite-side checkmate protection" % (len(longs), len(shorts)))
+            warn("active book has directional skew (%d LONG vs %d SHORT) — check correlated exposure before adding same-side tickets" % (
+                len(longs), len(shorts)))
+        # Detect naive passive double-limit straddles on the same symbol
+        by_sym = {}
+        for r in active:
+            by_sym.setdefault(r["symbol"], []).append(r)
+        for sym, srows in sorted(by_sym.items()):
+            lim_long = any(x["etype"] == "LIMIT" and x["side"] == "LONG" for x in srows)
+            lim_short = any(x["etype"] == "LIMIT" and x["side"] == "SHORT" for x in srows)
+            if lim_long and lim_short:
+                warn("%s has both LONG LIMIT and SHORT LIMIT active (double-limit adverse-selection trap: trending moves fill only the loser)" % sym)
 
     if args.check:
         problems = []

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''finalize.py: the only legal way to end an agent run on an IDEA folder.
 
-  finalize.py FOLDER --side LONG|SHORT --type MARKET|LIMIT|STOP|STOP_MARKET [--price P] [--tp X] --sl Y [--trail R] --expire-at T [--place-at T] [--group G] [--role R]
+  finalize.py FOLDER --side LONG|SHORT --type MARKET|LIMIT|STOP|STOP_MARKET [--price P] [--ref-price R] [--tp X] --sl Y [--trail R] --expire-at T [--place-at T] [--group G] [--role R]
   finalize.py FOLDER --reject 'reason'
 
 Pure convenience: takes the decision as parameters (the AI decides, this script does not read or judge
@@ -63,6 +63,8 @@ def main():
     ap.add_argument('--side', type=str.upper, choices=['LONG', 'SHORT'])
     ap.add_argument('--type', dest='etype', type=str.upper, choices=list(ENTRY_TYPES))
     ap.add_argument('--price', type=float)
+    ap.add_argument('--ref-price', dest='ref_price', type=float,
+                    help='optional current market reference price for MARKET orders (validates TP/SL & prints %%)')
     ap.add_argument('--tp', type=float)
     ap.add_argument('--sl', type=float)
     ap.add_argument('--trail', type=float, help='TRAILING_STOP_MARKET callback rate in percent')
@@ -88,10 +90,12 @@ def main():
             die('missing exit target: provide --tp and/or --trail')
         if a.trail is not None and a.trail <= 0:
             die('--trail callback rate must be positive')
+        if a.etype in ('STOP', 'STOP_MARKET') and a.trail is not None:
+            die('%s cannot be combined with --trail in a single Aster Pro UI order (use --tp and --sl)' % a.etype)
         if a.etype != 'MARKET' and a.price is None:
             die('%s needs --price' % a.etype)
         if a.etype == 'MARKET' and a.price is not None:
-            die('MARKET must not have --price')
+            die('MARKET must not have --price (use --ref-price if you want percentage display)')
         now = datetime.datetime.now(datetime.timezone.utc)
         place_at = a.place_at or now.strftime('%Y-%m-%dT%H:%M:%SZ')
         for v in (place_at, a.expire_at):
@@ -103,10 +107,11 @@ def main():
         if a.tp is not None:
             if (a.sl >= a.tp) if up else (a.tp >= a.sl):
                 die('tp and sl are on the wrong sides of each other for a ' + a.side)
-        if a.price is not None:
-            if (a.sl >= a.price) if up else (a.price >= a.sl):
+        check_px = a.price if a.price is not None else a.ref_price
+        if check_px is not None:
+            if (a.sl >= check_px) if up else (check_px >= a.sl):
                 die('sl is on the wrong side of entry price for a ' + a.side)
-            if a.tp is not None and not ((a.sl < a.price < a.tp) if up else (a.tp < a.price < a.sl)):
+            if a.tp is not None and not ((a.sl < check_px < a.tp) if up else (a.tp < check_px < a.sl)):
                 die('entry price must sit between sl and tp')
         lines = ['# trade.toml: written by finalize.py, do not edit by hand',
                  'symbol   = ' + q(symbol), 'side     = ' + q(a.side), '',
@@ -148,17 +153,19 @@ def main():
     if status == 'REJECTED':
         out = ['%s  REJECTED' % symbol, 'Reason: ' + a.reject, 'Folder: ' + newname]
     else:
-        entry = '@ ' + num(a.price) if a.price is not None else '@ market'
+        ref = a.price if a.price is not None else a.ref_price
+        entry = '@ ' + num(a.price) if a.price is not None else (
+            '@ market (~%s)' % num(a.ref_price) if a.ref_price is not None else '@ market')
         out = ['%s  %s  %s %s' % (symbol, a.side, a.etype, entry)]
         sgn = 1 if up else -1
         parts = []
         if a.tp is not None:
-            if a.price is not None:
-                parts.append('TP %s (%+.2f%%)' % (num(a.tp), sgn * pct(a.tp, a.price)))
+            if ref is not None:
+                parts.append('TP %s (%+.2f%%)' % (num(a.tp), sgn * pct(a.tp, ref)))
             else:
                 parts.append('TP %s' % num(a.tp))
-        if a.price is not None:
-            parts.append('SL %s (%+.2f%%)' % (num(a.sl), sgn * pct(a.sl, a.price)))
+        if ref is not None:
+            parts.append('SL %s (%+.2f%%)' % (num(a.sl), sgn * pct(a.sl, ref)))
         else:
             parts.append('SL %s' % num(a.sl))
         if a.trail is not None:
