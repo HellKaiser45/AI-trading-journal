@@ -25,9 +25,14 @@ Every setup you design must obey five empirical principles derived from the jour
    - **When current market price is already sitting near the structural inflection shelf (`VWAP` / multi-touch boundary) and aligned with the dominant trend**: enter via a **Near-Market `LIMIT` order** (quoted just off the immediate bid/ask edge to avoid thin-book taker slippage while guaranteeing fill participation) or a **`MARKET` order**.
    - **When current market price is over-extended in mid-air** (where the genuine structural stop is too far away for coherent Reward-to-Risk from current price): **never** invent an artificial tight stop in mid-air noise just to manufacture R:R, and **never** leave a far-away passive limit order resting in space. Either use a momentum-confirming **`STOP_MARKET`** trigger at a clean breakout boundary (which never fills unless price moves in your favor) or call **`NO_TRADE`**.
 
-2. **Trade With the Dominant Structural Trend (No Falling Knives)**:
+2. **Trade With the Dominant Structural Trend & Multi-Timeframe Hierarchy (HTF = Compass, LTF = Trigger)**:
    - Setups aligned with the dominant multi-day trend and VWAP slope carry dramatically higher win rates than counter-trend bottom-fishing or top-picking.
    - Never place a passive `LONG LIMIT` under a one-way declining market ("catching a falling knife") or a passive `SHORT LIMIT` in front of a vertical squeeze unless coin-denominated Open Interest (not USD OI), volume climax, and multi-session floor defense confirm that forced liquidations have already completed.
+   - **When Timeframes Conflict (`HTF 4H/1D` vs `LTF 15m/1H`)**:
+     - **Higher Timeframe (`4H / 1D`, `48h–72h VWAP` slope & structure) is the Compass**: It dictates the allowed directional bias, the real structural invalidation envelope (`SL`), and the interior magnet (`TP`). Never chase a Lower Timeframe counter-trend bounce/dip against the Higher Timeframe structure.
+     - **Lower Timeframe (`15m / 1H`, `6h–24h VWAP` & momentum) is the Timing Trigger**:
+       1. **All Aligned, OR LTF Pullback Reached the HTF (`48h/72h VWAP`) Shelf and Stalled**: Enter via a **Near-Market `LIMIT`** (or `MARKET`) in the HTF direction with `SL` outside the HTF shelf.
+       2. **LTF is Mid-Bounce / Actively Expanding Against HTF (Below the HTF Shelf)**: Do **not** step in front of an accelerating LTF counter-trend wave with a near-market order (and do not put an `SL` below the `48h/72h VWAP`). Either place a **`STOP_MARKET`** trigger on the opposite side of the LTF higher-low/lower-high pivot (so you only enter when the LTF wave breaks and re-aligns with the HTF trend), rest the `LIMIT` up at the true HTF `48h/72h VWAP` ceiling, or call **`NO_TRADE`**.
 
 3. **Coherent Structural `TP` and `SL` (Adapt to Each Chart's Geometry)**:
    - Never apply rigid, mechanical distances or fixed percentage templates. Let the measured volatility envelope and liquidity structure of each specific instrument dictate the levels.

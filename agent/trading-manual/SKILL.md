@@ -49,9 +49,14 @@ This is a mandatory two-part step.
 
 ### 3A. Settled Trades Review & The 5 Empirical Guardrails
 Review settled `recap.md` files and enforce the journal's five empirical laws (without hardcoding rigid percentage templates—always scale to the specific instrument's live volatility and structure):
-1. **Trend-Alignment & Near-Market Execution Rule (Defeating Adverse Selection)**:
+1. **Trend-Alignment, Multi-Timeframe Hierarchy & Near-Market Execution Rule (Defeating Adverse Selection)**:
    - Historical journal data proves that passive `LIMIT` orders placed far from spot suffer severe adverse selection (`100%` fill rate on losing trades vs high missed-fill rate on winning trades), whereas **trend-aligned entries taken at or very close to current market price** (`Near-Market LIMIT` on the immediate bid/ask edge to avoid thin-book slippage, or `MARKET`) capture `~100%` of winning trend moves.
    - **Never catch falling knives**: Counter-trend passive `LONG LIMIT` bids placed into a one-way macro downtrend suffer `100%` adverse fill and low win rate. Only trade counter-trend reversals if coin-denominated OI, volume climax, and a defended multi-session floor confirm leverage has already flushed.
+   - **Multi-Timeframe Conflict Resolution (`HTF 4H/1D` = Compass, `LTF 15m/1H` = Trigger)**:
+     - **Higher Timeframe (`4H / 1D`, `48h–72h VWAP` slope & structure)** sets the directional bias and the true invalidation envelope (`SL`). Never chase a Lower Timeframe counter-trend impulse against the Higher Timeframe trend (`~34%` historical win rate).
+     - **Lower Timeframe (`15m / 1H`, `6h–24h VWAP` & candle momentum)** dictates **how and when** to enter in the HTF direction:
+       - **Case 1 (Timeframes Aligned, OR LTF Pullback Has Reached the HTF `48h–72h VWAP` Shelf and Stalled/Rejected)**: Enter via a **Near-Market `LIMIT`** (or `MARKET`) in the HTF direction with `SL` outside the HTF `48h–72h VWAP` / swing envelope (`66%–89%` historical win rate).
+       - **Case 2 (LTF is Mid-Bounce / Actively Accelerating Against HTF, Still Below the HTF `48h–72h VWAP` Shelf)**: Never step in front of an expanding LTF counter-trend wave with a near-market entry and a stop below the `48h–72h VWAP` (`38%–50%` win rate). Either (a) place a **`STOP_MARKET`** trigger below the LTF higher-low pivot (or above the LTF lower-high pivot for a long) so the order only triggers if and when the LTF structure breaks and re-aligns with the HTF trend, (b) anchor the `LIMIT` up at the true HTF `48h–72h VWAP` ceiling (with `SL` outside the 72h high), or (c) call **`NO_TRADE`**.
 2. **Structural Envelope Stop Rule (Never Inside Noise)**:
    - Place `SL` strictly **outside** the full multi-session overshoot and wick envelope (above the relevant multi-day VWAP and prior session high block for shorts; below the defended multi-session low for longs).
    - Even when entering via `MARKET` or a `Near-Market LIMIT` close to spot, **keep `SL` behind the real structural invalidation level**—never shift `SL` into mid-air noise just because entry is closer to spot.
