@@ -1,0 +1,19 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "UNIUSDT"
+side     = "LONG"
+
+[entry]
+type     = "STOP_MARKET"
+price    = 4.79
+
+[exit]
+tp       = 5.03
+sl       = 4.58
+
+[schedule]
+place_at  = 2026-11-22T11:00:00Z
+expire_at = 2026-11-24T11:00:00Z
+
+[checkmate]
+group    = "UNI-20261122-CHECKMATE"
+role     = "BREAKOUT_LONG"

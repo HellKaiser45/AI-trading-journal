@@ -10,8 +10,8 @@ it looks unnecessary.
 
 1. Chart analysis, vision only, as described below.
 2. Searches: news, on-chain/protocol data, derivatives positioning, macro catalysts, and recent prices.
-3. Learning pass over settled recaps and active book exposure.
-4. Decision: JEV conclave over trend alignment, execution mode (Near-Market `LIMIT`, `MARKET`, or `STOP_MARKET`), coherent structural `TP` and `SL`, Checkmate structure, expiry, and go or reject.
+3. Learning pass over settled recaps, pre-trade chart geometry (`HTF`, `LTF`, `Pos`, `Range`), and active book exposure.
+4. Decision: JEV conclave over trend alignment, execution mode (Near-Market `LIMIT`, `MARKET`, or `STOP_MARKET`), volatility-scaled structural `SL` and interior-scaled `TP`, Checkmate structure, expiry, and go or reject.
 5. Finalize: record the trade(s) with `finalize.py`.
 6. Settle expired trades and write recaps with `resolve_expired.py`.
 
@@ -32,8 +32,12 @@ do not trace the candles in code, and do not fit your read against exchange data
 - do not use commands to crop or else to read the image , it is loaded in your context anyway.
 - Just rewrite it from memory
 
-  Then do a thorough chart analysis to find the dominant multi-day trend, key supports, resistances, VWAP/consolidation shelves, and chart patterns. 
-  Then draw the chart_prediction.svg with those findings.
+  Then do a thorough chart analysis to find:
+  - the **Higher Timeframe (`HTF`, full visible multi-day chart) trend and slope**,
+  - the **Lower Timeframe (`LTF`, final quarter of the chart) momentum and slope**,
+  - the **Multi-Day Range Position (`Pos = (spot - low) / (high - low)`, from `0.00` at the chart floor to `1.00` at the chart ceiling)** and **total chart range span**,
+  - key supports, resistances, VWAP/consolidation shelves, and chart patterns.
+  Then draw the `chart_prediction.svg` with those findings.
 
 ## 2. Searches
 Define and approve what to search, why, and how (parallel, sequential, or mixed) using our decision engine JEV (`jev_decide` / `jev_screen` / `jev_verify`).
@@ -47,27 +51,32 @@ Screen external web text with `jev_screen` and verify factual claims with `jev_v
 ## 3. Learning pass & Active Book Audit
 This is a mandatory two-part step.
 
-### 3A. Settled Trades Review & The 5 Empirical Guardrails
-Review settled `recap.md` files and enforce the journal's five empirical laws (without hardcoding rigid percentage templates—always scale to the specific instrument's live volatility and structure):
-1. **Trend-Alignment, Multi-Timeframe Hierarchy & Near-Market Execution Rule (Defeating Adverse Selection)**:
-   - Historical journal data proves that passive `LIMIT` orders placed far from spot suffer severe adverse selection (`100%` fill rate on losing trades vs high missed-fill rate on winning trades), whereas **trend-aligned entries taken at or very close to current market price** (`Near-Market LIMIT` on the immediate bid/ask edge to avoid thin-book slippage, or `MARKET`) capture `~100%` of winning trend moves.
-   - **Never catch falling knives**: Counter-trend passive `LONG LIMIT` bids placed into a one-way macro downtrend suffer `100%` adverse fill and low win rate. Only trade counter-trend reversals if coin-denominated OI, volume climax, and a defended multi-session floor confirm leverage has already flushed.
-   - **Multi-Timeframe Conflict Resolution (`HTF 4H/1D` = Compass, `LTF 15m/1H` = Trigger)**:
-     - **Higher Timeframe (`4H / 1D`, `48h–72h VWAP` slope & structure)** sets the directional bias and the true invalidation envelope (`SL`). Never chase a Lower Timeframe counter-trend impulse against the Higher Timeframe trend (`~34%` historical win rate).
-     - **Lower Timeframe (`15m / 1H`, `6h–24h VWAP` & candle momentum)** dictates **how and when** to enter in the HTF direction:
-       - **Case 1 (Timeframes Aligned, OR LTF Pullback Has Reached the HTF `48h–72h VWAP` Shelf and Stalled/Rejected)**: Enter via a **Near-Market `LIMIT`** (or `MARKET`) in the HTF direction with `SL` outside the HTF `48h–72h VWAP` / swing envelope (`66%–89%` historical win rate).
-       - **Case 2 (LTF is Mid-Bounce / Actively Accelerating Against HTF, Still Below the HTF `48h–72h VWAP` Shelf)**: Never step in front of an expanding LTF counter-trend wave with a near-market entry and a stop below the `48h–72h VWAP` (`38%–50%` win rate). Either (a) place a **`STOP_MARKET`** trigger below the LTF higher-low pivot (or above the LTF lower-high pivot for a long) so the order only triggers if and when the LTF structure breaks and re-aligns with the HTF trend, (b) anchor the `LIMIT` up at the true HTF `48h–72h VWAP` ceiling (with `SL` outside the 72h high), or (c) call **`NO_TRADE`**.
-2. **Structural Envelope Stop Rule (Never Inside Noise)**:
-   - Place `SL` strictly **outside** the full multi-session overshoot and wick envelope (above the relevant multi-day VWAP and prior session high block for shorts; below the defended multi-session low for longs).
-   - Even when entering via `MARKET` or a `Near-Market LIMIT` close to spot, **keep `SL` behind the real structural invalidation level**—never shift `SL` into mid-air noise just because entry is closer to spot.
-   - If current market price is over-extended in mid-air so that the real structural `SL` is too far away for a coherent Reward-to-Risk relative to `TP`, **do not force a mid-air trade and do not leave a far-away passive limit order**: either call **`NO_TRADE`** or use a momentum-confirming **`STOP_MARKET`** breakout trigger.
-3. **Interior High-Traffic Target Rule**:
-   - Anchor `TP` at a high-traffic interior magnet (`12h/24h/72h VWAP`, Volume Point of Control, interior multi-touch shelf, or official cash-session settlement gap for equity/commodity perps), never at an unreached outer wick extreme that has already rejected price multiple times.
-4. **Sequence & Falsification Gate (`t_extreme < t_fill`, Market Control, Horizon Stability)**:
-   - Verify that the target excursion has not already printed and reversed prior to entry.
-   - When backtesting or simulating a setup on historical klines, verify that the edge holds under a near-market/market entry control (not just a limit-discount illusion), remains stable across `24h/48h/72h` horizons, and is not driven by a single outlier ticker.
-5. **Corporate Action, Split & Macro-Print Veto**:
-   - Never place or hold orders across an impending or fresh (`< 72h`) stock split or futures contract roll where historical klines mix pre- and post-adjustment prices, and never carry a tight stop into an imminent tier-1 macro release.
+### 3A. Settled Trades Review & The 5 Empirical Gain Multipliers
+Review settled `recap.md` files and enforce the journal's five backtest-proven gain multipliers (scaling all levels to the specific instrument's measured chart range and volatility structure):
+
+1. **Pre-Trade Range-Position Filter & The Falling-Knife Breakdown Flip (`Lever #1`)**:
+   - Compute the pre-trade geometry from `graphpoints.csv`: full-chart trend (`HTF`), final-quarter momentum (`LTF`), and range position (`Pos` in `[0.00, 1.00]`).
+   - **Never buy the top of a multi-day range (`LONG` when `Pos > 0.80`)**: Historical journal backtests prove that buying minor dips in the top quintile of a multi-day chart range results in `0%` wins and immediate mean-reversion losses.
+   - **Never catch a falling knife with a passive `LONG LIMIT`** when `HTF` and/or `LTF` are declining (`LTF < 0%` or `HTF` in a one-way downtrend), unless price has just completed a deep multi-day capitulation flush at the very bottom of the range (`Pos <= 0.05`) confirmed by coin-denominated OI washout, volume climax, and a wide multi-ATR envelope stop.
+   - **Flip Fragile Floors Into Breakdown `SHORT STOP_MARKET` Triggers (and Fragile Ceilings Into Breakout `LONG STOP_MARKET` Triggers)**: When an asset in an `HTF` downtrend is pressing on a weak support shelf (or rolling over from an exhausted `LTF` spike at the top of the range), do **not** place a passive `LONG LIMIT` at the support shelf. Instead, place a **`SHORT STOP_MARKET`** trigger just below that fragile support floor so you capture the breakdown cascade when the floor gives way (and symmetrically, place a **`LONG STOP_MARKET`** above a fragile resistance ceiling in an `HTF` uptrend).
+
+2. **Near-Market Execution on Aligned Trend Setups (`Lever #2 — Defeating Adverse Selection`)**:
+   - Historical journal data proves that passive `LIMIT` orders placed far from spot (`> 0.8%–6.0%` away) miss `~44%` of winning trend moves while still filling `100%` of losing moves.
+   - When `HTF` and `LTF` are aligned (or an `LTF` pullback has already stalled at the `HTF 48h–72h VWAP` shelf), quote your **`LIMIT` entry on the immediate bid/ask edge very close to spot** (or use `MARKET`) so you achieve `~100%` fill participation without paying thin-book taker slippage.
+
+3. **Multi-Timeframe Conflict Resolution via `STOP_MARKET` Re-Alignment Triggers (`Lever #3 — HTF = Compass, LTF = Trigger`)**:
+   - **Higher Timeframe (`4H / 1D`, `48h–72h VWAP` slope & structure)** sets the directional bias and the true invalidation envelope (`SL`). Never chase a Lower Timeframe counter-trend impulse against the Higher Timeframe trend.
+   - **When `LTF` Is Actively Expanding Against `HTF` (Counter-Bounce in Progress)**: If `HTF` is bearish but the final quarter of the chart (`LTF`) is actively ripping upward (or `HTF` is bullish and `LTF` is actively dumping), **never step in front of the accelerating `LTF` wave with a passive or near-market `LIMIT` order**. Instead, place a **`STOP_MARKET`** trigger in the `HTF` direction just beyond the `LTF` higher-low/lower-high pivot (just below spot for a short, or just above spot for a long). If the `LTF` counter-move keeps running against the `HTF` trend, your `STOP_MARKET` **never fills (`$0` loss)**; it only triggers the moment the `LTF` counter-bounce breaks down and re-aligns with the `HTF` trend.
+
+4. **Volatility-Scaled Structural Envelope Stop (`Lever #4 — Never Inside Noise`)**:
+   - Place `SL` strictly **outside** the full multi-session overshoot and wick envelope (above the `48h–72h VWAP` and prior session high block for shorts; below the defended multi-session low for longs).
+   - Size the stop distance proportionally to the instrument's measured multi-day chart range (`>= ~20%` of the visible 5-day chart range span) so normal intraday oscillations and macro prints cannot sweep it before the move develops.
+   - Even when entering via `MARKET` or a `Near-Market LIMIT` close to spot, **keep `SL` behind the real structural invalidation shelf**—never shift `SL` into mid-air noise just because entry is closer to spot. If current spot is too far from the structural `SL` for a coherent Reward-to-Risk, use a **`STOP_MARKET`** trigger or call **`NO_TRADE`**.
+
+5. **Interior Target Scaling (`0.70×–0.75×` of Outer Structure) & Full Multi-Session Horizon (`Lever #5`)**:
+   - **Interior Target Scaling (`TP`)**: Never place `TP` on an outer wick extreme that has already rejected price. Scale `TP` inward to **`~70%–75%` of the distance to the outer structural extreme** (anchoring at a high-traffic interior magnet such as the `12h/24h/72h VWAP`, Volume Point of Control, or official cash-session close benchmark). Across historical journal trades, interior target scaling converts near-miss `EXPIRED+%` give-backs into full `WIN`s.
+   - **Full Structural Hold Window & No Tight Trailing Choke**: Multi-day VWAP and trend continuation swings take `24h–48h` to complete. Give setups a full multi-session (`~48h`) expiry window and **do not attach tight early trailing stops (`1%–1.5%`)**, which historical backtests prove get shaken out by normal intraday noise long before `TP` is reached.
+   - **Falsification & Corporate-Action Gates**: Verify sequence (`t_extreme < t_fill`), market-entry control, horizon stability (`24h/48h/72h`), and veto any ticker within `72h` of a stock split or futures contract roll.
 
 ### 3B. Active Book & Correlation Audit
 Inspect active `PENDING` and `OPEN` folders in `trades/` (and run `python3 scripts/stats.py`) before finalizing any new setup:
@@ -76,29 +85,33 @@ Inspect active `PENDING` and `OPEN` folders in `trades/` (and run `python3 scrip
 
 ## 4. Decision & Checkmate Conclave (JEV)
 Based on all four sources of information:
-- chart geometry and dominant trend read
+- chart geometry (`HTF`, `LTF`, `Pos`, `Range`) and dominant trend read
 - multi-track research & falsification checks
-- settled trade intelligence (the 5 empirical guardrails)
+- settled trade intelligence (the 5 empirical gain multipliers)
 - active book exposure (`PENDING` and `OPEN` trades)
 
-Refine `chart_prediction.svg` and use JEV (`jev_decide`, `jev_classify`, `jev_rerank`, `jev_verify`) to select the optimal execution structure from the **four proven Aster Pro UI setups**:
+Refine `chart_prediction.svg` and use JEV (`jev_decide`, `jev_classify`, `jev_rerank`, `jev_verify`) to select the optimal execution structure from the **five proven Aster Pro UI setups**:
 
-1. **Setup A — High-Conviction Near-Market Trend Trade (`LIMIT` near spot or `MARKET`, with `TP` & `SL`)**:
-   - **When to use**: The chart has a clear dominant trend + VWAP slope, current spot is already near the structural inflection shelf (so a coherent structural `SL` outside the overshoot envelope and an interior magnet `TP` offer strong Reward-to-Risk right from current price), and the active book is not already stacked in that direction.
+1. **Setup A — High-Conviction Near-Market Trend Trade (`LIMIT` on bid/ask edge or `MARKET`, with `TP` & `SL`)**:
+   - **When to use**: `HTF` trend is clear, `LTF` is aligned (or has already stalled at the `HTF 48h–72h VWAP` shelf), and current spot sits near the structural inflection shelf so a volatility-scaled envelope `SL` and interior-scaled (`0.70×–0.75×`) `TP` offer strong Reward-to-Risk right from current price.
    - **How to execute**: Place a **Near-Market `LIMIT`** (quoted just off current spot on the bid/ask edge to prevent thin-book slippage while guaranteeing fill participation) or a **`MARKET`** order, with explicit structural `TP` and `SL`.
 
-2. **Setup B — Single-Chart Fade + Tight Breakout Flip (`LIMIT` + `STOP_MARKET` Pair)**:
+2. **Setup B — MTF Re-Alignment or Fragile-Floor Breakdown `STOP_MARKET` Trigger (`STOP_MARKET` with `TP` & `SL`)**:
+   - **When to use**: Either (a) `HTF` is trending down/up while `LTF` is actively counter-bouncing against `HTF`, OR (b) price is pressing a fragile, repeatedly tested support floor in a downtrend (or fragile resistance ceiling in an uptrend) where a passive counter-trend limit order would be catching a falling knife.
+   - **How to execute**: Place a **`STOP_MARKET`** trigger just beyond the `LTF` pivot or fragile support/resistance boundary in the `HTF`/breakout direction, with a volatility-scaled structural `SL` and an interior-scaled `TP`. If the level holds or the counter-bounce keeps running, the order never triggers (`$0` loss); if the floor/pivot breaks, you enter immediately with momentum confirmation.
+
+3. **Setup C — Single-Chart Fade + Tight Breakout Flip (`LIMIT` + `STOP_MARKET` Pair)**:
    - **When to use**: Price is testing a major structural resistance or support shelf where a rejection offers high R:R, but a breakout squeeze through the shelf is a genuine threat.
    - **How to execute**:
      - **Leg 1 (`LIMIT` with `TP/SL`)**: Fade the structural shelf with a tight invalidation `SL` placed just outside the shelf and an interior `TP` (`R:R >= 2:1`).
      - **Leg 2 (Opposite-Side `STOP_MARKET` with `TP/SL`)**: Place a `STOP_MARKET` order in the opposite direction triggered at Leg 1's exact `SL` price, with a tight `SL` back inside the shelf and a wide breakout `TP` (`R:R >= 2.5:1`).
      - **Payoff across states**: If the shelf holds, Leg 1 wins and Leg 2 never triggers (`$0`). If price blasts straight through the shelf on a squeeze, Leg 1 takes a small stop and Leg 2 immediately triggers into the breakout momentum to recover the stop and net a profit.
 
-3. **Setup C — Compressed-Coil Breakout Straddle (`LONG STOP_MARKET` + `SHORT STOP_MARKET` Pair)**:
+4. **Setup D — Compressed-Coil Breakout Straddle (`LONG STOP_MARKET` + `SHORT STOP_MARKET` Pair)**:
    - **When to use**: Price is tightly compressed inside a multi-session consolidation coil where directional bias is 50/50 (e.g., post-squeeze consolidation with falling coin-denominated OI), and clean air exists beyond both boundaries.
    - **How to execute**: Place a `LONG STOP_MARKET` just above the coil ceiling and a `SHORT STOP_MARKET` just below the coil floor, each with an asymmetric expansion `TP` and `SL` inside the coil. If price chops inside the range, neither triggers; whichever side breaks out only fills when momentum confirms.
 
-4. **Setup D — Cross-Asset or Relative-Strength Dispersion Pair (Market Scans & Portfolio Balancing)**:
+5. **Setup E — Cross-Asset or Relative-Strength Dispersion Pair (Market Scans & Portfolio Balancing)**:
    - **When to use**: When scanning the market for multiple opportunities or when adding a trade while the active book already carries directional exposure.
    - **How to execute**: Pair a trend-aligned `SHORT` on a structurally weak, catalyst-impaired asset (e.g., guidance-cut or regulatory-probed equity/crypto at resistance) with a trend-aligned `LONG` on an uncorrelated asset class (e.g., physical commodity with supply-side tailwinds, or an institutional IPO floor / relative-strength leader).
 
@@ -110,6 +123,7 @@ The user executes manually on the Aster Pro Web UI order panel (`Market` | `Limi
 
 ## 5. Finalize
 Write the trade(s) with `finalize.py` (creating a separate folder via `new_trade.py` for each leg of a paired setup and linking them with `--group` and `--role`).
+`finalize.py` automatically inspects `graphpoints.csv` against the journal's 5 empirical gain guardrails (emitting diagnostic warnings on `stderr` if a setup exhibits top-of-range long chasing, falling-knife passive bidding, counter-LTF passive limit stepping, far-from-spot limit chase, or an under-sized stop envelope) while printing only the clean BRIEF block on `stdout`.
 
 ## 6. Settle
 Check among the open trades if some are over (expiry). 
@@ -317,8 +331,10 @@ scripts/stats.py [--check] [ROOT]
 
 - `finalize.py` takes the decision as parameters, checks the numbers are coherent (TP
   and SL on the right sides of each other and of the entry, valid datetimes, expiry
-  after placement, Aster Pro UI order compatibility), writes `trade.toml`, renames the
-  folder, prints a BRIEF block. It reads no other file.
+  after placement, Aster Pro UI order compatibility), audits pre-trade `graphpoints.csv`
+  geometry against the 5 empirical gain guardrails (printing non-blocking warnings to
+  `stderr` if a guardrail is breached), writes `trade.toml`, renames the folder, and
+  prints a clean BRIEF block to `stdout`.
 - `resolve_expired.py` decides the outcome deterministically from `outcome_candles.csv`:
   it refuses candles that do not cover the whole window or have holes longer than 4
   steps; prefer 1m or 5m candles.

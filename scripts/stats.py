@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """stats.py — summarise trade folders in the journal (stdlib only, Python >= 3.8)."""
 import argparse
+import csv
+import datetime
 import os
 import re
 import sys
@@ -9,7 +11,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'trades'))
 FOLDER_RE = re.compile(
     r"^(?P<status>WIN\+\d+\.\d{2}%|LOSS-\d+\.\d{2}%|EXPIRED[+-]\d+\.\d{2}%|IDEA|REJECTED|PENDING|OPEN|EXPIRED)"
-    r"_(?P<dt>\d{4}-\d{2}-\d{2}T\d{4}Z)_(?P<symbol>[A-Z0-9]+)(?:-\d+)?$"
+    r"_(?P<dt>\d{4}-\d{2}-\d{2}T\d{4}Z)_(?P<symbol>[A-Z0-9]+)(?:-(\d+))?$"
 )
 TOML_HEADER = re.compile(r"^\[([A-Za-z_][A-Za-z0-9_]*)\]$")
 TOML_KEY = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$")
@@ -18,6 +20,7 @@ DATETIME = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
 ENTRY_TYPES = ("MARKET", "LIMIT", "STOP", "STOP_MARKET")
 COUNT_ORDER = ["IDEA", "REJECTED", "PENDING", "OPEN", "WIN", "LOSS", "EXPIRED_PCT", "EXPIRED"]
 COUNT_LABELS = {"EXPIRED_PCT": "EXPIRED+/-% (in sum)", "EXPIRED": "EXPIRED (bare, never filled)"}
+UTC = datetime.timezone.utc
 
 
 class TomlError(Exception):
@@ -115,7 +118,82 @@ def validate_trade(data):
     role = get("checkmate", "role", required=False)
     return {
         "symbol": symbol, "side": side, "etype": etype, "price": price,
-        "tp": tp, "sl": sl, "trail": trail, "group": group, "role": role,
+        "tp": tp, "sl": sl, "trail": trail,
+        "place_at": get("schedule", "place_at"),
+        "expire_at": get("schedule", "expire_at"),
+        "group": group, "role": role,
+    }
+
+
+def _parse_iso(s):
+    s = s.strip()
+    if s.isdigit():
+        v = int(s)
+        if v > 10 ** 11:
+            v //= 1000
+        return datetime.datetime.fromtimestamp(v, UTC)
+    d = datetime.datetime.fromisoformat(s.replace(" ", "T").replace("Z", "+00:00"))
+    return d.replace(tzinfo=UTC) if d.tzinfo is None else d.astimezone(UTC)
+
+
+def read_pretrade_geometry(folder_path, place_at_str=None):
+    """Extract pre-trade chart geometry (HTF trend, LTF momentum, range position, range span) from graphpoints.csv."""
+    gp_path = os.path.join(folder_path, "graphpoints.csv")
+    if not os.path.isfile(gp_path):
+        return None
+    cutoff = None
+    if place_at_str:
+        try:
+            cutoff = _parse_iso(place_at_str)
+        except Exception:
+            cutoff = None
+    if cutoff is None:
+        m = FOLDER_RE.match(os.path.basename(os.path.normpath(folder_path)))
+        if m:
+            dt_tok = m.group("dt")  # YYYY-MM-DDTHHMMZ
+            try:
+                cutoff = _parse_iso("%s:%s:00Z" % (dt_tok[:13], dt_tok[13:15]))
+            except Exception:
+                cutoff = None
+    pts = []
+    try:
+        with open(gp_path, encoding="utf-8") as fh:
+            lines = [ln for ln in fh if ln.strip() and not ln.lstrip().startswith("#")]
+        rd = csv.DictReader(lines)
+        for row in rd:
+            norm = {k.strip().lower().replace(" ", "_"): v for k, v in row.items() if k}
+            t_raw = norm.get("timestamp") or norm.get("time")
+            p_raw = norm.get("close_price") or norm.get("close") or norm.get("price")
+            if not t_raw or not p_raw:
+                continue
+            t = _parse_iso(t_raw)
+            p = float(p_raw)
+            if cutoff is None or t <= cutoff:
+                pts.append((t, p))
+    except Exception:
+        return None
+    if len(pts) < 4:
+        return None
+    pts.sort(key=lambda x: x[0])
+    prices = [x[1] for x in pts]
+    spot = prices[-1]
+    hi, lo = max(prices), min(prices)
+    if spot <= 0 or hi <= lo:
+        return None
+    htf_ret = (spot - prices[0]) / prices[0] * 100.0
+    q_idx = max(0, len(prices) - max(2, len(prices) // 4))
+    ltf_ret = (spot - prices[q_idx]) / prices[q_idx] * 100.0
+    pos = (spot - lo) / (hi - lo)
+    range_pct = (hi - lo) / spot * 100.0
+    return {
+        "spot": spot,
+        "high": hi,
+        "low": lo,
+        "htf_ret": htf_ret,
+        "ltf_ret": ltf_ret,
+        "pos": pos,
+        "range_pct": range_pct,
+        "n_points": len(pts),
     }
 
 
@@ -176,9 +254,11 @@ def main(argv=None):
                 entry = "STP %.2f" % info["price"]
             else:
                 entry = "%.2f" % info["price"]
+        geom = read_pretrade_geometry(path, info.get("place_at") if info else None)
         rows.append({
-            "folder": name, "symbol": m.group("symbol"), "side": side, "etype": etype,
+            "folder": name, "path": path, "symbol": m.group("symbol"), "side": side, "etype": etype,
             "entry": entry, "status": m.group("status"), "kind": kind, "pct": pct,
+            "info": info, "geom": geom,
             "group": info.get("group") if info else None,
             "role": info.get("role") if info else None,
         })
@@ -238,6 +318,32 @@ def main(argv=None):
             print("  %-6s placed: %2d | filled: %2d (%d pos / %d neg, sum %s) | unfilled: %2d" % (
                 s_label, len(s_rows), len(s_filled), s_pos, len(s_filled) - s_pos,
                 fmt_pct(s_sum), len(s_unfilled)))
+        # Pre-trade geometry cohort intelligence
+        aligned = []
+        knife_or_top = []
+        for r in placed_settled:
+            g = r["geom"]
+            if not g:
+                continue
+            if r["side"] == "LONG" and (g["pos"] > 0.80 or g["ltf_ret"] < 0.0 or g["htf_ret"] < -1.5):
+                if g["pos"] > 0.05:
+                    knife_or_top.append(r)
+                    continue
+            aligned.append(r)
+        if aligned or knife_or_top:
+            al_filled = [r for r in aligned if r["pct"] is not None]
+            kt_filled = [r for r in knife_or_top if r["pct"] is not None]
+            print("  Pre-trade geometry cohorts:")
+            if al_filled:
+                al_pos = sum(1 for r in al_filled if r["pct"] > 0)
+                print("    Trend/Capitulation-Aligned (%2d orders, %2d filled): %d pos / %d neg, sum %s" % (
+                    len(aligned), len(al_filled), al_pos, len(al_filled) - al_pos,
+                    fmt_pct(sum(r["pct"] for r in al_filled))))
+            if kt_filled:
+                kt_pos = sum(1 for r in kt_filled if r["pct"] > 0)
+                print("    Top-Chasing/Falling-Knife LONGs (%2d orders, %2d filled): %d pos / %d neg, sum %s" % (
+                    len(knife_or_top), len(kt_filled), kt_pos, len(kt_filled) - kt_pos,
+                    fmt_pct(sum(r["pct"] for r in kt_filled))))
         print()
 
     # Per-symbol subtotals

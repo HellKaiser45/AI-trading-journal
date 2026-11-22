@@ -1,0 +1,12 @@
+digraph DecisionTree {
+  rankdir=TB;
+  node [shape=box, fontname="monospace", fontsize=10];
+  root [label="UNIUSDT 1h @ 4.720 (2026-11-22T10:58:59Z)\n22h Compression Box [4.556, 4.784]\n6h/12h/24h/72h VWAP Cluster: 4.6484-4.6743\n120h VWAP: 4.7876 | 168h VWAP: 4.8471"];
+  book [label="Stage 3B Active Book Audit:\n4 Nov 21 SHORT limits active, 0 Nov 21-22 LONGs\nMandatory Two-Way Checkmate (LONG + SHORT)"];
+  jev [label="Stage 4 JEV Conclave (jev_decide P=1.00)\nCandidate A1: Two-Way STOP_MARKET Breakout Straddle\n5d EV = +3.790% (93.1% Win, 0.0% BothLoss)\n10d EV = +2.397% (79.7% Win, Pump +1.006%, Dump +2.984%)"];
+  leg1 [label="Leg 1 (This Folder): LONG STOP_MARKET @ 4.790\nTP 5.030 (+5.01%) | SL 4.580 (-4.38%) | RR 1.14\nTriggers only on upside breakout above 4.784/120h VWAP"];
+  leg2 [label="Companion Leg 2 (-2 Folder): SHORT STOP_MARKET @ 4.550\nTP 4.300 (+5.49%) | SL 4.750 (-4.40%) | RR 1.25\nTriggers only on downside breakdown below 4.556 floor"];
+  root -> book -> jev;
+  jev -> leg1;
+  jev -> leg2;
+}

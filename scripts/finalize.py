@@ -4,10 +4,10 @@
   finalize.py FOLDER --side LONG|SHORT --type MARKET|LIMIT|STOP|STOP_MARKET [--price P] [--ref-price R] [--tp X] --sl Y [--trail R] --expire-at T [--place-at T] [--group G] [--role R]
   finalize.py FOLDER --reject 'reason'
 
-Pure convenience: takes the decision as parameters (the AI decides, this script does not read or judge
-any file), checks the numbers are coherent, writes trade.toml (none for a rejection), then calls
-set_status.py so the folder becomes PENDING (LIMIT/STOP/STOP_MARKET), OPEN (MARKET) or REJECTED.
-Prints the BRIEF block.
+Takes the decision as parameters, checks the numbers are coherent, audits pre-trade graphpoints.csv
+geometry against the journal's 5 empirical gain guardrails (emitting non-blocking warnings on stderr),
+writes trade.toml (none for a rejection), then calls set_status.py so the folder becomes PENDING
+(LIMIT/STOP/STOP_MARKET), OPEN (MARKET) or REJECTED. Prints the BRIEF block on stdout.
 '''
 import argparse
 import datetime
@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'trades'))
 sys.path.insert(0, HERE)
 from set_status import FOLDER_RE  # noqa: E402
-from stats import ENTRY_TYPES, TomlError, read_trade_toml, validate_trade  # noqa: E402
+from stats import ENTRY_TYPES, TomlError, read_pretrade_geometry, read_trade_toml, validate_trade, warn  # noqa: E402
 
 NL = chr(10)
 DT_RE = re.compile(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$')
@@ -53,6 +53,52 @@ def resolve(root, folder):
     if not m or m.group('status') != 'IDEA':
         die('%s is not an IDEA folder' % name)
     return os.path.normpath(path), name, m.group('symbol')
+
+
+def audit_pretrade_guardrails(path, side, etype, entry_px, tp, sl, place_at):
+    """Emit non-blocking stderr warnings if the proposed ticket violates the 5 empirical gain multipliers."""
+    g = read_pretrade_geometry(path, place_at)
+    if not g:
+        return
+    spot = g['spot']
+    pos = g['pos']
+    htf = g['htf_ret']
+    ltf = g['ltf_ret']
+    rng = g['range_pct']
+    ref = entry_px if entry_px is not None else spot
+
+    # 1. Range-Position & Falling-Knife Filter
+    if side == 'LONG' and pos > 0.80 and etype == 'LIMIT':
+        warn('guardrail #1 (top-of-range LONG): pre-trade Pos=%.2f (>0.80 of chart range); '
+             'historical top-quintile LONG LIMITs had 0%% win rate — consider SHORT STOP_MARKET breakdown or wait' % pos)
+    if side == 'LONG' and etype in ('LIMIT', 'MARKET') and pos > 0.05 and (ltf < -0.5 or htf < -1.5):
+        warn('guardrail #1 (falling-knife LONG): HTF=%+.2f%%, LTF=%+.2f%%, Pos=%.2f; '
+             'counter-trend LONG LIMITs in declining trends suffer 100%% adverse fill — consider SHORT STOP_MARKET breakdown trigger' % (
+                 htf, ltf, pos))
+
+    # 2. Near-Market Limit Execution (anti-unfilled-chase)
+    if etype == 'LIMIT' and entry_px is not None and spot > 0:
+        dist_pct = abs(entry_px - spot) / spot * 100.0
+        if dist_pct > 1.50:
+            warn('guardrail #2 (far passive LIMIT): entry is %.2f%% away from pre-trade spot (%s vs %s); '
+                 'historical far limits missed ~44%% of winning trend moves — prefer near-market LIMIT (0.1%%-0.3%%) or STOP_MARKET' % (
+                     dist_pct, num(entry_px), num(spot)))
+
+    # 3. Multi-Timeframe Counter-Bounce Conflict
+    if side == 'SHORT' and etype in ('LIMIT', 'MARKET') and ltf > 1.50 and pos < 0.85:
+        warn('guardrail #3 (LTF counter-bounce in progress): LTF=%+.2f%% against SHORT bias; '
+             'stepping in front of an expanding LTF bounce with LIMIT risks early stop-out — consider SHORT STOP_MARKET below LTF pivot' % ltf)
+    if side == 'LONG' and etype in ('LIMIT', 'MARKET') and ltf < -1.50 and pos > 0.15:
+        warn('guardrail #3 (LTF down-impulse in progress): LTF=%+.2f%% against LONG bias; '
+             'consider LONG STOP_MARKET above LTF pivot instead of passive LIMIT' % ltf)
+
+    # 4. Volatility-Scaled Structural Envelope Stop
+    if ref > 0 and sl is not None:
+        sl_dist_pct = abs(sl - ref) / ref * 100.0
+        min_env = max(1.40, min(3.20, 0.15 * rng))
+        if sl_dist_pct < min_env:
+            warn('guardrail #4 (tight stop inside noise): SL distance is %.2f%% (chart 5d range is %.1f%%, recommended envelope >= %.2f%%); '
+                 'tight stops caused 4/4 historical short stop-outs before TP' % (sl_dist_pct, rng, min_env))
 
 
 def main():
@@ -113,6 +159,9 @@ def main():
                 die('sl is on the wrong side of entry price for a ' + a.side)
             if a.tp is not None and not ((a.sl < check_px < a.tp) if up else (a.tp < check_px < a.sl)):
                 die('entry price must sit between sl and tp')
+
+        audit_pretrade_guardrails(path, a.side, a.etype, check_px, a.tp, a.sl, place_at)
+
         lines = ['# trade.toml: written by finalize.py, do not edit by hand',
                  'symbol   = ' + q(symbol), 'side     = ' + q(a.side), '',
                  '[entry]', 'type     = ' + q(a.etype)]
