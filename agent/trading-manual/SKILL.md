@@ -41,10 +41,60 @@ do not trace the candles in code, and do not fit your read against exchange data
 
 ## 2. Searches
 Define and approve what to search, why, and how (parallel, sequential, or mixed) using our decision engine JEV (`jev_decide` / `jev_screen` / `jev_verify`).
-Unless the timeframe is ultra-short scalping with zero external dependency, gather multi-source evidence across:
-1. **Exchange Kline & VWAP Structure**: Multi-timeframe candles (`15m`, `1h`, `4h`), session/multi-day VWAPs (`12h`, `24h`, `48h`, `72h`, `7d`), ATR envelope, and official cash-session close benchmarks (for stock/ETF/commodity perps).
-2. **Derivatives Positioning & Liquidation Flow**: Funding rates, **coin-denominated Open Interest** (never rely on USD-denominated OI alone, which falls mechanically when price drops), and recent long vs short liquidation skew.
-3. **On-Chain / Fundamental / Corporate-Action Catalysts**: Protocol TVL/volume/fees (`DefiLlama` for DeFi tokens), regulatory or earnings catalysts, stock splits or futures contract roll dates, and scheduled tier-1 macro prints (FOMC, CPI, Core PCE).
+
+### 2A. The 5-Class Information Hierarchy & Initiate-vs-Veto Rule
+Separate every piece of research into five distinct classes:
+1. **Class 1 — Positioning & Price Geometry (Continuous, Highest Signal-to-Noise)**: Multi-timeframe klines (`15m`, `1h`, `4h`), session/multi-day VWAPs (`12h`, `24h`, `48h`, `72h`, `7d`), ATR envelope, official cash-session close benchmarks (for stock/ETF/commodity perps), funding rates, **coin-denominated Open Interest** (never rely on USD-denominated OI alone, which falls mechanically when price drops), 24h long vs short liquidation skew, and implied volatility (`Deribit DVOL`).
+2. **Class 2 — Scheduled Catalysts (Known Volatility Windows)**: Macroeconomic calendar prints (`US Core PCE`, `CPI`, `FOMC`, `NFP`, `PMI`, `EIA Crude Inventories`), earnings dates, stock splits, futures contract roll dates, and token unlocks.
+3. **Class 3 — Unscheduled Catalysts & Real-Time Wires**: Breaking regulatory actions, executive/board changes, geopolitical strikes, exchange notices, and primary SEC filings (`SEC EDGAR`).
+4. **Class 4 — Implied Crowd Probabilities**: Real-money prediction-market odds on discrete macro, geopolitical, and weekly price-bracket outcomes (`Polymarket`, `Kalshi`).
+5. **Class 5 — Structural & On-Chain Thesis**: Protocol TVL, DEX volume, fee/burn revenue (`DefiLlama`), and long-horizon mechanism/protocol research (`ethresear.ch`).
+
+**The Initiate-vs-Veto Rule**:
+- **Initiating & Level-Anchoring (`Classes 1 & 2`)**: Entry timing, order type (`Near-Market LIMIT`, `MARKET`, or `STOP_MARKET`), and structural `TP`/`SL` placement must always be anchored in **Class 1** price/positioning geometry and **Class 2** scheduled catalyst windows.
+- **Vetoing, Confirming & Sizing (`Classes 3, 4 & 5`)**: Headlines, crowd probabilities, and long-term thesis narratives must **never** be used to chase a counter-structural trade when Class 1 positioning contradicts them; use Classes 3–5 to **veto** dangerous setups (e.g., an unexpected CEO reinstatement or regulatory probe invalidating a thesis), **confirm** breakout triggers (`STOP_MARKET`), or **widen/select** the right Checkmate structure.
+
+### 2B. Chrome Browser Research Playbook (Use Real Chrome for JS/Cloudflare-Gated Terminals)
+Several high-value terminals (`Sharpe.ai`, `FinancialJuice`, `CryptoPanic`) block raw `curl` requests (`HTTP 403/429`) or serve empty client-rendered JS shells over raw HTTP, but render **100% free without login** inside the real Chrome browser tool. Use the Chrome browser with the following exact navigation and extraction rules alongside primary REST APIs (`fapi.asterdex.com`, `fapi.binance.com`, `api.llama.fi`, `efts.sec.gov`, `www.deribit.com/api/v2/public/get_volatility_index_data`, `api.elections.kalshi.com`):
+
+1. **`Sharpe.ai` (Cross-Venue Derivatives, Liquidations, OI Delta & RWA Stock/Commodity Perps — Natively Tracks `Aster`)**:
+   - *Why Chrome*: Raw HTTP gets `429` rate-limited; Chrome renders the full institutional terminal without login.
+   - *Navigation quirk*: Sidebar links collapse; always navigate directly via URL (`goto <url>` + `wait 3500`):
+     - `https://www.sharpe.ai/` — Cross-exchange funding rate matrix & APR carry table.
+     - `https://www.sharpe.ai/market-brief` — Global Crypto + RWA Open Interest, **24h Liquidations split by Longs vs Shorts** (identifies whether the tape is a long flush or a short squeeze), Fear & Greed Index, stablecoin supply delta, and average RSI.
+     - `https://www.sharpe.ai/open-interest` — Per-coin and per-exchange (`Aster`, `Binance`, `Bybit`, `Hyperliquid`, etc.) `1h`, `24h`, `7d`, and `30d` Open Interest changes.
+     - `https://www.sharpe.ai/rwa-perps` — Cross-venue RWA Stock, Semiconductor, ETF, and Commodity perpetuals (`NVDA`, `SKHYNIX`, `MU`, `SOXL`, `ANT`, `SPCX`, `QQQ`, `XAU`, `CL`) funding, carry APR, and OI comparison across `Aster` and peer venues.
+     - `https://www.sharpe.ai/positioning-risk` — Per-asset `0–10` **Short Pressure** and **Pump/Dump Risk** scores.
+
+2. **`FinancialJuice` (Real-Time Macro Squawk Wire & Economic Calendar)**:
+   - *URL*: `https://www.financialjuice.com/home` (`goto` + `wait 4000`).
+   - *DOM extraction quirk*: The page loads asynchronously. In `document.body.innerText`:
+     - **Characters `0–8,800`** contain the **Economic & Catalyst Calendar** (`Actual / Forecast / Previous` and exact UTC timestamps for `Core PCE`, `CPI`, `FOMC`, `GDP`, `PMI`, `EIA Crude`, holidays, and congressional testimonies).
+     - **Characters `8,800+`** contain the **Live Real-Time Squawk Wire** (`document.body.innerText.slice(8000, 16000)`).
+     - **Category Tab Filtering**: The feed tabs use `href="#"`, so switch tabs via JS `eval`:
+       - **Market-Moving Red Headlines Only**: `document.querySelector('a[data-feedid="10"]').click()`
+       - **Crypto Squawk Tab**: `document.querySelector('a[data-feedid="8"]').click()`
+
+3. **`Polymarket` (Real-Money Crowd Probabilities on Macro, Geopolitics & Weekly Crypto Levels)**:
+   - *Chrome URLs* (`goto` + `wait 3500`) or REST (`https://gamma-api.polymarket.com/events?limit=20&active=true&closed=false`):
+     - `https://polymarket.com/economy` — Fed rate decision probabilities (bps hike/cut/hold), inflation/recession odds, and tariff/rate paths.
+     - `https://polymarket.com/crypto` — Weekly and monthly BTC/ETH/SOL price-bracket touch probabilities (`↑` upper strike vs `↓` lower strike).
+     - `https://polymarket.com/` — Trending cross-market and geopolitical resolution odds (e.g., Strait of Hormuz shipping normalization, corporate/CEO catalysts).
+
+4. **`CryptoPanic` (Real-Time Crypto/Macro Aggregator & Per-Coin News Timeline)**:
+   - *Why Chrome*: Public REST API returns `403` without a key and raw HTML is an empty shell; Chrome renders the full live wire and X/Twitter institutional feed (`@solidintel_x`, `@watcherguru`, `@reutersbiz`) without login.
+   - *Navigation & Filter Rule*:
+     - Global latest wire: `https://cryptopanic.com/` (`wait 3500`).
+     - Per-coin dedicated timeline: `https://cryptopanic.com/news/<coin-slug>/` (e.g., `/news/zcash/`, `/news/uniswap/`, `/news/ethereum/`, `/news/solana/`).
+     - **Never use `?filter=hot` or `?filter=rising`**, which surface stale viral posts from days or weeks ago instead of today's breaking news.
+
+5. **`Hacker News` (Early Tech, AI & Semiconductor Catalysts)**:
+   - *Chrome URL*: `https://news.ycombinator.com/` or Algolia REST API (`https://hn.algolia.com/api/v1/search_by_date?query=<TERM>&tags=story`).
+   - *Use case*: Fastest early-warning signal for major tech, AI, semiconductor (`NVDA`, `AMD`, `MU`, `SKHYNIX`, `ANT`, `OPENAI`), cybersecurity, or regulatory stories; always cross-verify corporate headlines against primary IR/newsrooms or `SEC EDGAR` (`https://efts.sec.gov/LATEST/search-index?q=<TERM>`).
+
+6. **`ethresear.ch` (Structural Ethereum & DeFi Mechanism Thesis)**:
+   - *Chrome URL*: `https://ethresear.ch/` or JSON endpoint (`https://ethresear.ch/latest.json`).
+   - *Use case*: Class 5 long-horizon protocol/AMM/L2 architecture context; never use as a short-term trade trigger.
 
 Screen external web text with `jev_screen` and verify factual claims with `jev_verify` before logging them in `research_log.txt`.
 
