@@ -96,6 +96,21 @@ Several high-value terminals (`Sharpe.ai`, `FinancialJuice`, `CryptoPanic`) bloc
    - *Chrome URL*: `https://ethresear.ch/` or JSON endpoint (`https://ethresear.ch/latest.json`).
    - *Use case*: Class 5 long-horizon protocol/AMM/L2 architecture context; never use as a short-term trade trigger.
 
+7. **`DefiLlama` & On-Chain Capital Flow Playbook (Free REST APIs — Zero Key Required)**:
+   - **A. Chain Stablecoin Net Inflows/Outflows (Real Dollar Capital Flows — Replaces Paywalled `/bridges`)**:
+     - *Endpoint*: `https://stablecoins.llama.fi/stablecoincharts/<Chain>` (where `<Chain>` is `Ethereum`, `Base`, `Arbitrum`, `Optimism`, `BSC`, `Solana`, or `Hyperliquid%20L1`).
+     - *Why this is the #1 on-chain flow metric*: Because stablecoins are pegged to `$1.00`, 24h and 7d changes in `totalCirculatingUSD.peggedUSD` measure **true net dollar inflows and outflows** entering or leaving an ecosystem (unlike USD TVL, which fluctuates mechanically with token prices). Note: `bridges.llama.fi/bridges` returns `HTTP 402` (paid tier), so always use `stablecoincharts/<Chain>` for free cross-chain capital flow tracking.
+     - *Special edge for `HYPEUSDT`*: Querying `stablecoins.llama.fi/stablecoincharts/Hyperliquid%20L1` directly tracks the live USDC margin pool bridged into Hyperliquid.
+   - **B. Chain DEX Volume & Ecosystem Aggregation (`ETH Mainnet + L2s` vs `BSC` vs `Solana`)**:
+     - *Endpoint*: `https://api.llama.fi/overview/dexs/<Chain>` (`Ethereum`, `Base`, `Arbitrum`, `Optimism`, `BSC`, `Solana`).
+     - *Mandatory ETH + L2 Aggregation Rule*: Nearly half of Ethereum's DEX volume and DeFi activity executes on Layer-2s (`Base`, `Arbitrum`, `Optimism`). When evaluating `ETHUSDT` or Ethereum DeFi tokens (`UNIUSDT`, `AAVEUSDT`), **always sum `Ethereum Mainnet + Base + Arbitrum + Optimism`** stablecoin netflows and DEX volumes rather than looking at Mainnet in isolation, and compare that aggregate against `BSC` (`BNBUSDT`, `CAKEUSDT`, `ASTERUSDT`) and `Solana` (`SOLUSDT`) to identify relative-strength dispersion pairs (`Setup E`).
+   - **C. Direct Protocol Fee, Burn & Volume Velocity (`ASTER`, `HYPE`, `UNI`, `CAKE`, `AAVE`)**:
+     - *Endpoints*: `https://api.llama.fi/summary/fees/<protocol>` and `https://api.llama.fi/summary/dexs/<protocol>` (e.g., `aster`, `hyperliquid`, `uniswap`, `pancakeswap`, `aave`) or `https://api.llama.fi/protocol/<protocol>`.
+     - *Use case*: Tracks `total24h`, `total7d`, and `change_1d` fee generation and buyback/burn revenue velocity directly backing perp and DEX governance tokens.
+   - **D. The Two On-Chain Traps to Avoid**:
+     1. **Never Use Raw USD Chain TVL (`api.llama.fi/v2/historicalChainTvl/<Chain>`) as an Inflow/Outflow Signal**: Because most of Ethereum's TVL is denominated in `ETH` and most of BSC's TVL is denominated in `BNB`, a `-5%` token price drop causes USD TVL to fall `-5%` even when zero tokens left the chain (the exact same optical illusion as USD-denominated Open Interest). Always compute **Token-Denominated TVL (`TVL_USD / Native_Token_Price`)**—or use **Stablecoin Market Cap Delta**—to verify whether real tokens are entering or exiting DeFi contracts.
+     2. **Do Not Use DefiLlama "Bitcoin TVL" to Trade `BTCUSDT`**: DefiLlama's Bitcoin chain TVL only tracks wrapped/staking sub-protocols (`<0.25%` of BTC market cap). For `BTCUSDT`, measure capital inflows/outflows via **Daily US Spot BTC ETF Net Inflows/Outflows (`IBIT`, `FBTC`, etc.)**, **CEX BTC Reserve Netflows**, and **Global Stablecoin Supply Deltas** (sourced via `Sharpe.ai /market-brief`, `FinancialJuice`, and `CryptoPanic`).
+
 Screen external web text with `jev_screen` and verify factual claims with `jev_verify` before logging them in `research_log.txt`.
 
 ## 3. Learning pass & Active Book Audit
