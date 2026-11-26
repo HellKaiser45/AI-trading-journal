@@ -1,0 +1,9 @@
+digraph decision {
+  rankdir=TB;
+  node [shape=box, fontname="monospace", fontsize=10];
+  chart [label="Stage 1 Vision Read: ASTERUSDT 1h (2026-11-25T08:45Z)\nSpot=0.4797 | HTF=-25.05% | LTF=-2.60% | Pos=0.048 (Range 35.86%)\nPressing Nov 21-25 fragile floor (0.4715 / 0.4688) below all VWAPs"];
+  research [label="Stage 2 5-Class Research:\nClass 1: 12h VWAP 0.4823, 24h VWAP 0.4888, 72h VWAP 0.5036; OI 191M ASTER, Fund +0.0079%\nSharpe.ai: $138.5M Long Liqs (78.5%), Aster 7d OI -9.39%, DefiLlama TVL $734.9M->$708.4M\nClass 2: Today 14:30Z US Core PCE (3.2% exp) + GDP (3.5%) + Claims\nClass 3/4: BTC ETF -$232M outflow (6th day); Polymarket Dec Hike 94%, BTC $58k 67%"];
+  guardrails [label="Stage 3 Empirical Multipliers & Replay (120h / 240h):\n- Passive LONG LIMIT @ 0.4720 (falling knife): 5d EV -0.68%, 10d EV -1.60% (REJECT)\n- Near-Market SHORT LIMIT @ 0.4810 (into 0.4715 floor): 5d EV -1.36%, 10d EV -0.08% (REJECT)\n- Breakdown SHORT STOP_MARKET @ 0.4710 (Lever #1 fragile-floor flip):\n  5d EV +0.85% (P_fill=0.62, P_TP=0.47, P_SL=0.22), 10d EV +1.42% (P_fill=0.83, P_TP=0.65)"];
+  jev [label="Stage 4 JEV Conclave (jev_decide P=0.82 -> P=1.00):\nSelect Single Setup B Fragile-Floor Breakdown Trigger\nASTERUSDT SHORT STOP_MARKET @ 0.4710\nTP 0.4520 (+4.03%) | SL 0.4900 (-4.03%) | RR 1.00 | Exp 48h", shape=diamond];
+  chart -> research -> guardrails -> jev;
+}

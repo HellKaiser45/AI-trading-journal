@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700">
+<rect width="1400" height="700" fill="#0d1117"/>
+<text x="80" y="24" fill="#c9d1d9" font-family="monospace" font-size="13">ASTERUSDT 1h · SHORT STOP_MARKET @ 0.4710 · TP 0.4520 (+4.03%) / SL 0.4900 (-4.03%) · RR 1.00</text>
+<text x="1330" y="24" fill="#6e7681" font-family="monospace" font-size="11" text-anchor="end">Place 2026-11-25T08:46Z → Expire 2026-11-27T08:46Z</text>
+<line x1="80.0" y1="660.0" x2="1330.0" y2="660.0" stroke="#1b2430"/>
+<text x="1336" y="663.0" fill="#7d8899" font-family="monospace" font-size="10">0.4400</text>
+<line x1="80.0" y1="631.8" x2="1330.0" y2="631.8" stroke="#1b2430"/>
+<text x="1336" y="634.8" fill="#7d8899" font-family="monospace" font-size="10">0.4500</text>
+<line x1="80.0" y1="603.6" x2="1330.0" y2="603.6" stroke="#1b2430"/>
+<text x="1336" y="606.6" fill="#7d8899" font-family="monospace" font-size="10">0.4600</text>
+<line x1="80.0" y1="575.5" x2="1330.0" y2="575.5" stroke="#1b2430"/>
+<text x="1336" y="578.5" fill="#7d8899" font-family="monospace" font-size="10">0.4700</text>
+<line x1="80.0" y1="547.3" x2="1330.0" y2="547.3" stroke="#1b2430"/>
+<text x="1336" y="550.3" fill="#7d8899" font-family="monospace" font-size="10">0.4800</text>
+<line x1="80.0" y1="519.1" x2="1330.0" y2="519.1" stroke="#1b2430"/>
+<text x="1336" y="522.1" fill="#7d8899" font-family="monospace" font-size="10">0.4900</text>
+<line x1="80.0" y1="490.9" x2="1330.0" y2="490.9" stroke="#1b2430"/>
+<text x="1336" y="493.9" fill="#7d8899" font-family="monospace" font-size="10">0.5000</text>
+<line x1="80.0" y1="434.5" x2="1330.0" y2="434.5" stroke="#1b2430"/>
+<text x="1336" y="437.5" fill="#7d8899" font-family="monospace" font-size="10">0.5200</text>
+<line x1="80.0" y1="378.2" x2="1330.0" y2="378.2" stroke="#1b2430"/>
+<text x="1336" y="381.2" fill="#7d8899" font-family="monospace" font-size="10">0.5400</text>
+<line x1="80.0" y1="321.8" x2="1330.0" y2="321.8" stroke="#1b2430"/>
+<text x="1336" y="324.8" fill="#7d8899" font-family="monospace" font-size="10">0.5600</text>
+<line x1="80.0" y1="265.5" x2="1330.0" y2="265.5" stroke="#1b2430"/>
+<text x="1336" y="268.5" fill="#7d8899" font-family="monospace" font-size="10">0.5800</text>
+<line x1="80.0" y1="209.1" x2="1330.0" y2="209.1" stroke="#1b2430"/>
+<text x="1336" y="212.1" fill="#7d8899" font-family="monospace" font-size="10">0.6000</text>
+<line x1="80.0" y1="152.7" x2="1330.0" y2="152.7" stroke="#1b2430"/>
+<text x="1336" y="155.7" fill="#7d8899" font-family="monospace" font-size="10">0.6200</text>
+<line x1="80.0" y1="96.4" x2="1330.0" y2="96.4" stroke="#1b2430"/>
+<text x="1336" y="99.4" fill="#7d8899" font-family="monospace" font-size="10">0.6400</text>
+<line x1="80.0" y1="40.0" x2="1330.0" y2="40.0" stroke="#1b2430"/>
+<text x="1336" y="43.0" fill="#7d8899" font-family="monospace" font-size="10">0.6600</text>
+<rect x="80.0" y="480.8" width="1250.0" height="41.7" fill="#ff6b6b" fill-opacity="0.10"/>
+<text x="90" y="493.8" fill="#ff8787" font-family="monospace" font-size="10">Resistance / 24h-72h VWAP Shelf (0.4888 - 0.5036)</text>
+<rect x="80.0" y="557.4" width="1250.0" height="21.4" fill="#51cf66" fill-opacity="0.10"/>
+<text x="90" y="570.4" fill="#69db7c" font-family="monospace" font-size="10">Fragile Multi-Day Floor (0.4688 - 0.4764) → Breakdown Trigger Below 0.4710</text>
+<line x1="1239.6" y1="40.0" x2="1239.6" y2="660.0" stroke="#8b949e" stroke-width="1.2" stroke-dasharray="4,4"/>
+<text x="1233.6" y="56" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">NOW 11-25T08:46Z</text>
+<line x1="1330.0" y1="40.0" x2="1330.0" y2="660.0" stroke="#8b949e" stroke-width="1.2" stroke-dasharray="2,3"/>
+<text x="1324.0" y="70" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">EXP 11-27T08:46Z</text>
+<line x1="1239.6" y1="572.6" x2="1330.0" y2="572.6" stroke="#ffd43b" stroke-width="1.6" stroke-dasharray="none"/>
+<text x="1247.6" y="567.6" fill="#ffd43b" font-family="monospace" font-size="10">ENTRY SHORT STOP_MARKET 0.4710</text>
+<line x1="1239.6" y1="626.2" x2="1330.0" y2="626.2" stroke="#51cf66" stroke-width="1.6" stroke-dasharray="none"/>
+<text x="1247.6" y="621.2" fill="#51cf66" font-family="monospace" font-size="10">TP 0.4520 (+4.03%)</text>
+<line x1="1239.6" y1="519.1" x2="1330.0" y2="519.1" stroke="#ff6b6b" stroke-width="1.6" stroke-dasharray="5,3"/>
+<text x="1247.6" y="514.1" fill="#ff6b6b" font-family="monospace" font-size="10">SL 0.4900 (-4.03%) / Invalidation</text>
+<polyline points="80.0,96.4 87.5,86.5 95.1,99.7 102.6,95.0 110.1,126.0 117.7,111.9 125.2,138.6 132.7,127.4 140.2,154.1 147.8,321.8 155.3,448.6 162.8,529.0 170.4,482.5 177.9,503.6 185.4,485.3 193.0,520.5 200.5,421.9 208.0,417.6 215.5,433.1 223.1,409.2 230.6,412.0 238.1,419.0 245.7,393.7 253.2,405.0 260.7,383.8 268.3,355.6 275.8,350.0 283.3,120.3 290.8,440.2 298.4,421.9 305.9,474.0 313.4,369.7 321.0,348.6 328.5,358.5 336.0,343.0 343.6,361.3 351.1,371.1 358.6,375.4 366.1,358.5 373.7,314.8 381.2,323.2 388.7,289.4 396.3,296.5 403.8,289.4 411.3,295.0 418.9,285.2 426.4,262.6 433.9,266.9 441.4,242.9 449.0,258.4 456.5,251.4 464.0,216.1 471.6,219.0 479.1,244.3 486.6,248.5 494.2,203.5 501.7,293.6 509.2,293.6 516.7,371.1 524.3,378.2 531.8,333.1 539.3,266.9 546.9,272.5 554.4,244.3 561.9,259.8 569.5,299.3 577.0,343.0 584.5,335.9 592.0,340.1 599.6,333.1 607.1,338.7 614.6,334.5 622.2,357.0 629.7,330.3 637.2,333.1 644.8,361.3 652.3,375.4 659.8,403.5 667.3,407.8 674.9,396.5 682.4,406.4 689.9,396.5 697.5,410.6 705.0,412.0 712.5,414.8 720.1,431.7 727.6,430.3 735.1,437.4 742.7,459.9 750.2,461.3 757.7,448.6 765.2,474.0 772.8,444.4 780.3,467.0 787.8,482.5 795.4,493.7 802.9,482.5 810.4,485.3 818.0,462.7 825.5,478.2 833.0,489.5 840.5,482.5 848.1,510.6 855.6,481.0 863.1,490.9 870.7,478.2 878.2,486.7 885.7,486.7 893.3,571.2 900.8,565.6 908.3,537.4 915.8,557.1 923.4,527.5 930.9,551.5 938.4,547.3 946.0,507.8 953.5,516.3 961.0,512.0 968.6,516.3 976.1,512.0 983.6,526.1 991.1,517.7 998.7,514.9 1006.2,509.2 1013.7,462.7 1021.3,478.2 1028.8,474.0 1036.3,462.7 1043.9,482.5 1051.4,469.8 1058.9,486.7 1066.4,465.5 1074.0,451.5 1081.5,458.5 1089.0,454.3 1096.6,467.0 1104.1,455.7 1111.6,433.1 1119.2,431.7 1126.7,455.7 1134.2,450.0 1141.7,467.0 1149.3,471.2 1156.8,485.3 1164.3,478.2 1171.9,483.9 1179.4,492.3 1186.9,496.5 1194.5,520.5 1202.0,510.6 1209.5,513.5 1217.0,537.4 1224.6,544.5 1232.1,543.0 1239.6,548.1" fill="none" stroke="#4361ee" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="1239.6,548.1 1247.2,544.5 1254.7,562.8 1262.2,574.0 1269.8,585.3 1277.3,579.7 1284.8,596.6 1292.3,606.5 1299.9,616.3 1307.4,626.2 1314.9,619.1 1322.5,627.6 1330.0,626.2" fill="none" stroke="#ff922b" stroke-width="2.0" stroke-dasharray="5,3" stroke-linejoin="round"/>
+<rect x="80.0" y="40.0" width="1250.0" height="620.0" fill="none" stroke="#1b2430"/>
+</svg>

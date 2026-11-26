@@ -1,0 +1,32 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10, shape=box, style="rounded,filled", fillcolor="#161b22", fontcolor="#c9d1d9", color="#30363d"];
+  edge [fontname="monospace", fontsize=9, color="#8b949e", fontcolor="#8b949e"];
+
+  chart [label="Stage 1: Vision Read (ZECUSDT 1h Aster)\nLive: 794.40 @ 2026-11-23T10:53:12Z (175 points, Nov 9-23)\n14d Range: 690.00 - 1238.00 | HTF=-34.46% | LTF=-9.52% | Pos=0.1905\n44h Post-Flush Coil: 772.00-804.00\n09:00Z Wick to 816.00 Rejected Immediately to Close 795.60"];
+  jev_cls [label="jev_classify: Regime\npost_flush_compression_coil_in_htf_downtrend (P=1.00, auto)", shape=diamond, fillcolor="#1f2937"];
+  jev_s2 [label="jev_decide: Stage 2 Search Strategy\nparallel_multisource_stage2_search (P=1.00)", shape=diamond, fillcolor="#1f2937"];
+  s2_data [label="Stage 2: Multi-Source API & Catalyst Findings (jev_screen pass, jev_verify 5/5)\nVWAPs: 12h=793.12 | 24h=792.92 | 48h=784.68 | 72h=764.49 | 5d=828.03 | 7d=853.09\nATR(14): 15m=6.08 | 1h=12.12 (1.53%) | 4h=28.89 (3.64%)\nBinance Coin OI: 523.0k ZEC (Nov 21) -> 501.1k (Nov 22) -> 480.2k (-4.16% in 28h)\n24h Rel Weakness: ZEC -0.87% vs BTC +0.84%, ETH +0.75%, SOL +2.38%, XMR +2.79%\nCatalysts: ZCSH -$52.8M outflows; 50k ZEC poll Dec 1; US Flash PMIs today, Core PCE Nov 25"];
+  s3_learn [label="Stage 3: Learning Pass & Active Book Audit\n1. Near-Market Limit (+0.08% at 795.0) defeats 43.8% historical far-limit non-fill\n2. Volatility-Scaled Envelope SL at 822.0 (-3.40%, above 816.00 24h wick high)\n3. Interior Target Scaling (0.72x) at 765.0 (+3.77%, exact 72h VWAP 764.49)\n4. Active Book: 5 expired tickets ready to settle (leaves 2 LONG, 3 SHORT)"];
+  jev_noul [label="jev_noul: Probabilistic Propositions\nP(HTF downtrend dominates 44h coil) = 0.92\nP(LONG LIMIT 776 is negative-EV falling knife) = 0.93\nP(SHORT LIMIT 795->765/822 +EV across 24h/5d/10d) = 0.95\nP(SHORT STOP_MARKET 775->738/804 +EV) = 0.85", shape=diamond, fillcolor="#1f2937"];
+
+  c1 [label="C1 (Setup A): SHORT LIMIT @ 795.0\nTP 765.0 (+3.77%) | SL 822.0 (-3.40%) | RR 1.11\n24h EV: +0.84% | 5d EV: +1.42% (fill=0.93, TP|f=0.69)\n10d EV: +1.28% (fill=0.96, TP|f=0.66) | 0 Guardrail Warnings", fillcolor="#1b3224", color="#3fb950"];
+  c2 [label="C2 (Setup B): SHORT STOP_MARKET @ 775.0\nTP 738.0 (+4.77%) | SL 804.0 (-3.74%) | RR 1.28\n24h EV: +1.39% | 5d EV: +2.89% | 10d EV: +1.06%"];
+  c3 [label="C3 (Counter-Trend Long): LONG LIMIT @ 776.0\nTP 804.0 | SL 752.0\nRejected: 5d EV -1.68% (82% stop-out rate), violates Guardrail #1"];
+  c4 [label="C4 (Breakout Long): LONG STOP_MARKET @ 818.0\nTP 858.0 | SL 792.0\nRejected: 24h EV -0.78%, 5d EV -0.55%, 10d EV -0.49%"];
+
+  conclave [label="Stage 4: JEV Conclave (jev_decide + jev_rerank)\njev_decide: setup_a_near_market_short_limit_795 (P=0.91, confidence=0.88, 3/3 reqs)\njev_rerank: #1 short_limit_795_tp765_sl822 (relevance=0.96)", shape=diamond, fillcolor="#2d2316", color="#d29922"];
+
+  final [label="FINAL TICKET (finalize.py)\nZECUSDT SHORT LIMIT @ 795.0\nTP 765.0 (+3.77%) | SL 822.0 (-3.40%)\nPlace: 2026-11-23T10:54:00Z | Expire: 2026-11-25T10:54:00Z", fillcolor="#1b3224", color="#3fb950"];
+
+  chart -> jev_cls -> jev_s2 -> s2_data -> s3_learn -> jev_noul;
+  jev_noul -> c1;
+  jev_noul -> c2;
+  jev_noul -> c3;
+  jev_noul -> c4;
+  c1 -> conclave [color="#3fb950", label="Winner (P=0.91)"];
+  c2 -> conclave [label="Runner-up (P=0.09)"];
+  c3 -> conclave;
+  c4 -> conclave;
+  conclave -> final [color="#3fb950"];
+}

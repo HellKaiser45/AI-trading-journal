@@ -1,0 +1,15 @@
+THESIS
+ZECUSDT remains in a dominant Higher Timeframe (HTF) downtrend below its 5d VWAP (828.03) and 7d VWAP (853.09), with the 44-hour horizontal coil (772.00-804.00) showing repeated upper-wick rejections (804.91 on Nov 22 12:00Z and 816.00 on Nov 23 09:00Z that immediately closed back at 795.60) alongside falling coin-denominated Open Interest (-4.16% in 28h) and 24h relative weakness (-0.87% vs BTC +0.84%, ETH +0.75%, SOL +2.38%, XMR +2.79%). Entering a Near-Market SHORT LIMIT at 795.0 (+0.08% from 794.40 spot, right at the 09:00Z rejection close and 12h/24h VWAP 793.12) targets the interior 72h VWAP magnet at 765.0 (+3.77%, ~0.72x interior scaling above the 761.34 coil origin), while placing SL at 822.0 (-3.40%) outside the entire 816.00 24h wick envelope. Invalidated by a sustained break above 822.00.
+
+DATA CHECKED
+- news: [2026-11-23T10:55Z] Grayscale ZCSH trust recorded -$52.8M net outflows across Nov 2-17; Zcash community poll on removing 50,000 ZEC from the grants treasury closes Dec 1 02:59 UTC amid ZCG/Tachyon lockbox governance dispute. Cypherpunk Technologies holds 341,858.75 ZEC (~2% of circulating supply). Macro week ahead: Monday Nov 23 09:45 ET (14:45 UTC) US S&P Global Flash PMIs & HPE earnings; Tuesday Nov 24 10:00 ET US Consumer Confidence & Dell/Analog Devices earnings; Wednesday Nov 25 08:30 ET (13:30 UTC) US Core PCE Deflator (final core inflation print before Dec 9 FOMC).
+- prices: [2026-11-23T10:55Z] Aster DEX fapi/v1 ZECUSDT last=792.96 (chart read 794.40 at 10:53:12Z), 24h High=816.00, 24h Low=776.79, 24h Vol=$2.61M. VWAPs (1h): 12h=793.12, 24h=792.92, 48h=784.68, 72h=764.49, 120h(5d)=828.03, 168h(7d)=853.09. ATR(14): 15m=6.08, 1h=12.12, 4h=28.89. Pre-trade chart geometry (175 points, Nov 9-23): high=1238.00, low=690.00, HTF=-34.46%, LTF=-9.52%, Pos=0.1905, range_pct=68.98%.
+- other assets: [2026-11-23T10:55Z] 24h relative performance on Aster DEX: BTCUSDT 61,410.1 (+0.84%), ETHUSDT 1,723.82 (+0.75%), SOLUSDT 72.34 (+2.38%), XMRUSDT 503.95 (+2.79%), HYPEUSDT 64.00 (+2.55%), UNIUSDT 4.764 (+0.85%), ANTUSDT 92.61 (+2.63%), XAUUSD1 3,628.87 (+1.85%), CLUSD1 82.63 (-1.60%) vs ZECUSDT 792.96 (-0.87%).
+- forums: [2026-11-23T10:55Z] Zcash community governance forum poll on 50,000 ZEC grants treasury lockbox (closing Dec 1 02:59 UTC).
+- tokenomics: [2026-11-23T10:55Z] Binance Futures ZECUSDT coin-denominated Open Interest fell -4.16% over the last 28h from 501,062.9 ZEC ($385.57M on Nov 22 04:00Z) to 480,237.6 ZEC ($378.78M on Nov 23 08:00Z), and is down -8.18% from the Nov 21 08:00Z capitulation peak (523,001.4 ZEC). Aster OI = 6,625.2 ZEC. Funding is flat/neutral (Binance +0.0056%/8h, flipped -0.0010% at 00:00Z; Aster +0.0100%).
+
+LINKS
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=ZECUSDT&interval=1h&limit=240
+- https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=ZECUSDT
+- https://fapi.binance.com/futures/data/openInterestHist?symbol=ZECUSDT&period=4h&limit=30
+- https://fapi.binance.com/fapi/v1/fundingRate?symbol=ZECUSDT&limit=10

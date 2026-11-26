@@ -1,0 +1,29 @@
+THESIS
+ZECUSDT on the 4H Aster chart (spot C=746.64, O=756.00, H=762.40, L=739.08, -1.35% at 2026-11-24T09:37:17Z) is in a dominant multi-week HTF downtrend (HTF_ret = -36.51% from 1176.00 to 746.64; LTF_ret = -20.57% from 940.00 to 746.64; Pos = 0.0836 of the 690-1362 chart range). Yesterday's short-squeeze spike to 902.40 (2026-11-23 14:00 UTC) was completely rejected, and price has now broken below the 780-804 44h consolidation shelf and sits below all key VWAPs: 12h VWAP (761.61), 72h VWAP (795.75), 48h VWAP (808.41), 24h VWAP (814.13), 5d VWAP (818.79), and 7d VWAP (843.98). Expect continuation lower toward the interior 708.00-715.00 post-capitulation demand zone (~72% interior target scaling toward the 679.66-690.00 Nov 21 capitulation floor) unless price reclaims the 12h VWAP (761.61) and the broken 777.89-790.47 24h breakdown shelf.
+
+DATA CHECKED
+- [2026-11-24T09:40Z] Class 1 Positioning & Price Geometry (Aster DEX & Binance Futures REST):
+  * Aster DEX ZECUSDT (`https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=ZECUSDT`, `/klines`, `/premiumIndex`, `/openInterest`): Last = 747.66-749.36 (4H chart screenshot C = 746.64, O = 756.00, H = 762.40, L = 739.08), 24h High = 902.40 (2026-11-23 14:00Z), 24h Low = 739.08 (2026-11-24 09:00Z), 24h Change = -6.76%, 24h Quote Volume = $7.55M, Mark = 750.11, Index = 750.50, Funding = +0.006307%, Aster Coin OI = 5,841.881 ZEC.
+  * Aster ZECUSDT Multi-Timeframe VWAPs & ATR: 12h VWAP = 761.61 (12h High = 790.47, Low = 739.08); 24h VWAP = 814.13; 48h VWAP = 808.41; 72h VWAP = 795.75; 120h (5d) VWAP = 818.79 (5d High = 959.29, Low = 679.66); 168h (7d) VWAP = 843.98 (7d High = 972.96, Low = 679.66). 1h ATR(14) = 14.87; 4h ATR(14) = 35.10.
+  * Binance Futures ZECUSDT (`https://fapi.binance.com/futures/data/openInterestHist?symbol=ZECUSDT&period=1h&limit=48`, `/globalLongShortAccountRatio`, `/topLongShortPositionRatio`): 24h Vol = $1.897B, 24h Change = -6.74%. Coin-denominated Open Interest fell -6.04% over 24h (from 477,622.8 ZEC to 448,752.0 ZEC, $338.61M) and -6.99% over 48h (from 482,499.6 ZEC; -6.22% from 24h peak 478,523.2 ZEC), confirming the Nov 23 spike to 902.40 was a short-covering unwind rather than new institutional long build. Top Trader Position L/S Ratio remains 1.6338 (62.03% Long vs 37.97% Short), leaving top accounts vulnerable to further long unwinds, while Global Account L/S Ratio is 0.9608 (49.00% Long / 51.00% Short).
+  * Deribit BTC DVOL (`https://www.deribit.com/api/v2/public/get_volatility_index_data`): 53.35 (up from 51.70 24h ago; 7d range 43.07-68.00).
+- [2026-11-24T09:41Z] Class 2 Scheduled Catalysts:
+  * Wednesday, 2026-11-25 14:30 UTC: US October Core PCE Price Index (Forecast 3.2% YoY / 0.3% MoM), US Q3 GDP 2nd Estimate, Initial Jobless Claims, EIA Crude Oil Inventories (16:30 UTC), and Fed Beige Book (20:00 UTC) ahead of Thursday Nov 26 US Thanksgiving Market Holiday and Dec 9 FOMC.
+- [2026-11-24T09:41Z] Class 3 Unscheduled Wires & Cross-Asset Context (Google News RSS, HN Algolia, Aster 24h Snapshot):
+  * While NVDAUSD1 (+16.68% to 158.81) and MUUSD1 (+6.85% to 681.28) held gains from Monday's Nvidia CEO Jensen Huang reinstatement, crypto completely faded the Monday bounce: BTCUSDT dropped from 64,570.00 to 60,158.90 (-2.25%), ETHUSDT dropped from 1,844.39 to 1,689.44 (-2.06%), SOLUSDT dropped from 78.44 to 70.95 (-1.92%), and ZECUSDT is the weakest major liquid crypto perp (-6.76% over 24h from 902.40 high to 746.64-749.36).
+  * Headlines verified via `jev_screen` (pass, substance 0.98) & `jev_verify`: Bloomberg ("Bitcoin Fails to Hold Nvidia Bump With Crypto Headwinds in Focus", Tue Nov 24 07:11 GMT); Yahoo Finance ("Crypto Market Today, Nov. 23: Bitcoin Sits Out Wall Street's Historic Rally as $1.8 Billion ETF Exodus Weighs on Prices"); BeInCrypto ("Two Signals Are Lining Up Against Zcash Heading Into December", Tue Nov 24 05:09 GMT); CoinMarketCap ("Zcash Surges 3.80% on ETF News, Relief Rally, Short Squeeze", Mon Nov 23 21:04 GMT — subsequently faded 100%).
+- [2026-11-24T09:41Z] Class 4 Implied Crowd Probabilities (Polymarket `gamma-api`):
+  * `Fed Decision in December?` ($4.16M 24h vol): `No change` = 3.9% (`No` = 96.1%), `25 bps decrease` = 0.25%, `50+ bps decrease` = 0.15% (market implies ~94% probability of a December rate hike).
+  * `Bitcoin above ___ on November 24?` ($643K 24h vol): Above $58,000 = 92.75%, reflecting BTC testing the $59,425-$60,158 zone today.
+- [2026-11-24T09:41Z] What could not be accessed directly:
+  * Chrome Browser MCP extension returned `No browser is connected` in this container environment; used primary REST APIs (`fapi.asterdex.com`, `fapi.binance.com`, `deribit.com`, `gamma-api.polymarket.com`, `hn.algolia.com`, `ethresear.ch/latest.json`) and Google News RSS XML feeds instead.
+
+LINKS
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=ZECUSDT&interval=4h&limit=100
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=ZECUSDT&interval=1h&limit=240
+- https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=ZECUSDT
+- https://fapi.binance.com/futures/data/openInterestHist?symbol=ZECUSDT&period=1h&limit=48
+- https://fapi.binance.com/futures/data/topLongShortPositionRatio?symbol=ZECUSDT&period=1h&limit=24
+- https://www.deribit.com/api/v2/public/get_volatility_index_data?currency=BTC
+- https://gamma-api.polymarket.com/events?limit=25&active=true&closed=false&order=volume24hr&ascending=false
+- https://news.google.com/rss/search?q=Zcash+OR+ZEC+crypto&hl=en-US&gl=US&ceid=US:en

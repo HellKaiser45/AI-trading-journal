@@ -1,0 +1,19 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "ZECUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "STOP_MARKET"
+price    = 738.5
+
+[exit]
+tp       = 705.0
+sl       = 772.0
+
+[schedule]
+place_at  = 2026-11-24T09:38:00Z
+expire_at = 2026-11-26T09:38:00Z
+
+[checkmate]
+group    = "ZEC-20261124-BREAKDOWN"
+role     = "FRAGILE_FLOOR_BREAKDOWN_SHORT"

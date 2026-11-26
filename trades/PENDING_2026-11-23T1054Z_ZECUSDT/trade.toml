@@ -1,0 +1,19 @@
+# trade.toml: written by finalize.py, do not edit by hand
+symbol   = "ZECUSDT"
+side     = "SHORT"
+
+[entry]
+type     = "LIMIT"
+price    = 795.0
+
+[exit]
+tp       = 765.0
+sl       = 822.0
+
+[schedule]
+place_at  = 2026-11-23T10:54:00Z
+expire_at = 2026-11-25T10:54:00Z
+
+[checkmate]
+group    = "ZEC-20261123-NEAR-MARKET"
+role     = "NEAR_MARKET_TREND_SHORT"

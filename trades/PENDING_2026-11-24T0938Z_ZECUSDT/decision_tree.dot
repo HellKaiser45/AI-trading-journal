@@ -1,0 +1,27 @@
+digraph decision {
+  rankdir=TB;
+  node [fontname="monospace", fontsize=10, shape=box, style="rounded,filled", fillcolor="#161b22", fontcolor="#c9d1d9", color="#30363d"];
+  edge [fontname="monospace", fontsize=9, color="#8b949e", fontcolor="#8b949e"];
+
+  chart [label="Stage 1: 4H ZECUSDT Vision Read (2026-11-24T09:37:17Z)\nO=756.00 H=762.40 L=739.08 C=746.64 (-1.35%)\nHTF_ret=-36.51% (1176->746.64) | LTF_ret=-17.77% (940->746.64)\nPos=0.0843 of 690-1362 range | Nov 23 902.40 spike 100% rejected"];
+
+  research [label="Stage 2: 5-Class Research & Positioning\n12h VWAP=761.61 | 72h VWAP=795.75 | 24h VWAP=814.13\nBinance Coin OI=-6.04% (24h) to 448,752 ZEC ($338.6M)\nTop Trader Position L/S=1.6338 (62.03% Longs trapped)\nDeribit DVOL=53.35 | Wed Nov 25 US Core PCE (94% Dec Fed hike)"];
+
+  learning [label="Stage 3: Learning Pass & Active Book Audit\nLever #1: Fragile 739.08 floor in HTF downtrend -> flip to SHORT STOP_MARKET\nLever #4: Volatility-scaled SL outside 12h VWAP (761.61) & 05:00Z high (771.19)\nLever #5: 0.72x interior target scaling at 705.00 above 679.66-690.00 floor\nYesterday's ZEC SHORT LIMIT 795->TP 765 already hit TP at 02:00Z today"];
+
+  jev_conclave [label="Stage 4: JEV Conclave (jev_decide P=0.98)\nSelected: setup_b_short_stop_market_738_50", shape=diamond, fillcolor="#1f2937", color="#d29922"];
+
+  cand_b [label="SELECTED: Setup B Breakdown SHORT STOP_MARKET @ 738.50\nTP 705.00 (+4.54%) | SL 772.00 (-4.54%) | RR 1.00 | 48h Expiry\n5d EV=+1.167% (P(fill)=0.90, P(TP|fill)=0.60, P(SL|fill)=0.32)\n10d EV=+0.704% (P(fill)=0.93, P(TP|fill)=0.56) | Zero adverse selection", fillcolor="#0d2818", color="#3fb950"];
+
+  cand_a [label="REJECTED: Near-Market SHORT LIMIT @ 748.50\n5d EV=+0.048% (48.4% TP vs 51.6% SL)\nInferior to waiting for 739.08 floor breakdown confirmation", fillcolor="#2d1215", color="#f85149"];
+
+  cand_c [label="REJECTED: Far SHORT LIMIT @ 758.00 (12h VWAP)\n5d EV=-1.317% (P(TP|fill)=0.19, P(SL|fill)=0.79)\nSuffers severe limit-order adverse selection", fillcolor="#2d1215", color="#f85149"];
+
+  cand_d [label="REJECTED: Counter-Trend LONG LIMIT @ 739.00\n5d EV=-0.559% (P(SL|fill)=0.65)\nViolates Lever #1 falling-knife filter", fillcolor="#2d1215", color="#f85149"];
+
+  chart -> research -> learning -> jev_conclave;
+  jev_conclave -> cand_b [label="P=0.98"];
+  jev_conclave -> cand_a [label="P=0.01"];
+  jev_conclave -> cand_c [label="P=0.00"];
+  jev_conclave -> cand_d [label="P=0.00"];
+}

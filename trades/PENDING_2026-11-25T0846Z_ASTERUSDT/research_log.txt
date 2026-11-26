@@ -1,0 +1,48 @@
+THESIS
+(what you expect, why, and what would invalidate it)
+
+DATA CHECKED
+- news:
+- prices:
+- other assets:
+- forums:
+- tokenomics:
+
+LINKS
+-
+
+[2026-11-25T08:48:00Z] STAGE 1 & 2 RESEARCH DOSSIER — ASTERUSDT (1H CHART)
+THESIS
+- Pre-trade chart geometry (from graphpoints.csv, Nov 14 14:00Z to Nov 25 08:45Z): Spot = 0.4797 (live 0.4801), HTF 11-day trend = -25.05% (high 0.6435 -> low 0.4715), LTF final-quarter momentum = -2.60% (sliding off the Nov 23 0.5210 lower-high peak), Multi-day Range Position Pos = 0.048 (bottom 4.8% of the 11-day range, Range span = 35.86%).
+- Why SHORT STOP_MARKET @ 0.4710 (Setup B — Fragile-Floor Breakdown Trigger, Lever #1):
+  1. ASTERUSDT is in a persistent HTF & LTF downtrend, trading below its 12h VWAP (0.4823), 24h VWAP (0.4888), 48h VWAP (0.5023), 72h VWAP (0.5036), and 7d VWAP (0.5071), while pressing repeatedly against the Nov 21-25 fragile floor (0.4715 chart line low / 0.4688 wick low).
+  2. Deterministic 5d (120h) and 10d (240h) historical replay on ASTERUSDT 1h klines proves that placing a passive LONG LIMIT at 0.4720 (catching the falling knife) has deeply negative EV (5d EV = -0.68%, 10d EV = -1.60% with 80% stop-out rate), and shorting immediately via LIMIT at 0.4810 right on top of the un-broken 0.4715 floor also has negative EV (5d EV = -1.36%, 10d EV = -0.08%).
+  3. By contrast, placing a breakdown SHORT STOP_MARKET @ 0.4710 (just below the 0.4715 multi-day line-chart floor, with SL 0.4900 [-4.03%] above the 24h VWAP 0.4888 and 10h coil high 0.4849, and interior-scaled TP 0.4520 [+4.03%], RR = 1.00) yields positive absolute EV across both windows: 5d Replay EV = +0.85% (P(fill)=0.62, P(TP|fill)=0.47, P(SL|fill)=0.22) and 10d Replay EV = +1.42% (P(fill)=0.83, P(TP|fill)=0.65, P(SL|fill)=0.26). If the 0.4715 floor holds and rebounds, the STOP_MARKET never triggers ($0 loss).
+
+DATA CHECKED (5-CLASS HIERARCHY)
+- Class 1 (Positioning & Price Geometry — fapi.asterdex.com & Sharpe.ai, 2026-11-25T08:47Z):
+  * ASTERUSDT 24h Ticker: Last = 0.4803 (-4.04% 24h), High = 0.5016, Low = 0.4764, 24h Quote Volume = $13.33M (27.28M ASTER).
+  * VWAPs & ATR: 12h VWAP = 0.4823, 24h VWAP = 0.4888, 48h VWAP = 0.5023, 72h VWAP = 0.5036, 7d VWAP = 0.5071; 1h ATR(14) = 0.0049 (1.03%), 4h ATR(14) = 0.0105 (2.19%).
+  * Coin-Denominated Open Interest & Funding: ASTERUSDT perp OI = 190,999,913.73 ASTER (~$91.7M); last funding rate = +0.0079% (longs still paying positive funding despite price sitting at the bottom 4.8% of the 11d range, confirming long leverage has not flushed).
+  * Sharpe.ai Global & Venue Positioning: Global OI = $63.25B (-2.14% 24h); 24h Liquidations = $176.52M dominated by long liquidations ($138.53M longs [78.5%] vs $37.99M shorts [21.5%]); Fear & Greed = 13 (Extreme Fear); Stablecoin supply = $286.59B (-1.28% 7d). Aster venue total OI fell -9.39% (-$108.02M) over 7d to $1.04B (Crypto $815.05M, RWA $227.75M).
+- Class 2 (Scheduled Catalysts — FinancialJuice Economic Calendar, 2026-11-25T08:48Z):
+  * Today (2026-11-25 at 14:30 UTC) is the pre-Thanksgiving US tier-1 macro release cluster: US Core PCE Price Index YoY (Forecast 3.2%, Prev 3.1%), Core PCE MoM (0.3%), US GDP QoQ 2nd Estimate (3.5%, Prev 3.4%), Initial Jobless Claims (200k), Durable Goods (0.7%); followed by EIA Crude Oil Inventories (16:30 UTC), US 7-Year Note Auction (19:00 UTC), and Fed Beige Book (20:00 UTC). Tomorrow (Nov 26) is the US Thanksgiving Holiday.
+- Class 3 (Unscheduled Wires — FinancialJuice Squawk & CryptoPanic, 2026-11-25T08:48Z):
+  * FinancialJuice Asia/Europe Wrap: MSCI Asia Pacific fell -2.1% (South Korea -6.3%, Taiwan -4.8%), Nasdaq 100 futures -1.4%, S&P 500 futures -0.8%, USD stronger across all G10 peers.
+  * CryptoPanic / SoSoValue: US spot Bitcoin ETFs recorded -$232M net outflow on Nov 24 (6th consecutive day of net outflows); spot Ethereum ETFs recorded -$64.02M net outflow.
+- Class 4 (Implied Crowd Probabilities — Polymarket, 2026-11-25T08:49Z):
+  * Fed December Decision: 25 bps rate hike priced at 94% ($57M vol); 0 Fed rate cuts in 2026 at 98% ($56M vol).
+  * Weekly Crypto Strike Odds (Nov 23-29): BTC touching $58,000 priced at 67% vs $62,000 at 45%.
+- Class 5 (On-Chain Protocol Thesis — DefiLlama API, 2026-11-25T08:47Z):
+  * Aster DEX total TVL declined steadily over the past 72h from $734.93M (Nov 22) -> $725.84M (Nov 23) -> $725.33M (Nov 24) -> $708.43M (Nov 25, -3.6% in 72h).
+
+LINKS
+- https://fapi.asterdex.com/fapi/v1/ticker/24hr?symbol=ASTERUSDT
+- https://fapi.asterdex.com/fapi/v1/klines?symbol=ASTERUSDT&interval=1h&limit=260
+- https://api.llama.fi/protocol/aster
+- https://www.sharpe.ai/market-brief
+- https://www.sharpe.ai/open-interest
+- https://www.financialjuice.com/home
+- https://cryptopanic.com/
+- https://polymarket.com/economy
+- https://polymarket.com/crypto
